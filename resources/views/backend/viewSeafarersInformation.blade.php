@@ -50,10 +50,17 @@
                             <!-- /.card-header -->
 
                             <div class="card-body">
+                                {{-- Form Respone --}}
+                                @include('backend.component.flush')
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
                                             <th>S.No</th>
+                                            <th>Year</th>
+                                            <th>Month</th>
+                                            <th>Port Type</th>
+                                            <th>Port Name</th>
+                                            <th>State Board</th>
                                             <th>Total Seafarers</th>
                                             <th>Woman Seafarer</th>
                                             <th>Action</th>
@@ -61,15 +68,32 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($getData as $value)
+                                            @php
+                                                $portCat = \App\Models\PortCategory::where('id', $value['port_type'])
+                                                    ->select('category_name')
+                                                    ->first();
+                                                $portName = \App\Models\Port::where('id', $value['port_id'])
+                                                    ->select('port_name')
+                                                    ->first();
+                                                $stateboard = \App\Models\StateBoard::where('id', $value['state_board'])
+                                                    ->select('name')
+                                                    ->first();
+
+                                                $numericMonth = $value['select_month'];
+                                                $monthName = \Carbon\Carbon::create()
+                                                    ->month($numericMonth)
+                                                    ->format('F');
+                                            @endphp
                                             <tr>
                                                 <td>{{ $loop->index + 1 }}</td>
+                                                <td>{{ $value['select_year'] }}</td>
+                                                <td>{{ $monthName }}</td>
+                                                <td>{{ $portCat->category_name }}</td>
+                                                <td>{{ $portName->port_name }}</td>
+                                                <td>{{ $stateboard ? $stateboard->name : 'N/A' }}</td>
                                                 <td>{{ $value['total_seafarers'] }}</td>
                                                 <td>{{ $value['woman_seafarer'] }}</td>
-                                                <td><a href="javascript:void(0)" class="edit-data" data-toggle="modal"
-                                                        data-target="#editmodal-xl" data-dataid="{{ $value['id'] }}"
-                                                        data-selectMonth="{{ $value['select_month'] }}"
-                                                        data-totalseafarers="{{ $value['total_seafarers'] }}"
-                                                        data-womanseafarer="{{ $value['woman_seafarer'] }}">
+                                                <td><a href="{{ route('editSeafarersInformation', $value['id']) }}">
                                                         <i class="far fa-edit" aria-hidden="true"></i>
                                                     </a></td>
                                             </tr>
@@ -78,6 +102,11 @@
                                     <tfoot>
                                         <tr>
                                             <th>S.No</th>
+                                            <th>Year</th>
+                                            <th>Month</th>
+                                            <th>Port Type</th>
+                                            <th>Port Name</th>
+                                            <th>State Board</th>
                                             <th>Total Seafarers</th>
                                             <th>Woman Seafarer</th>
                                             <th>Action</th>
@@ -100,111 +129,6 @@
     <!-- /.content-wrapper -->
 
     <!-- MODAL -->
-    <!--  -->
-    <div class="modal fade" id="editmodal-xl">
-        <div class="modal-dialog modal-xl modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Edit Detials</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <!-- form start -->
-                    <section class="content">
-                        <form>
-                            <div class="container-fluid">
-
-                                <div class="row">
-                                    <input type="hidden" class="form-control editupdatedby" id=""
-                                        value="{{ Auth::user()->id }}" name="updated_by">
-                                    <input type="hidden" name="userId" id="editdataid" class="form-control editdataid">
-
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="editselectmonth">Month <span style="color: red;">*</span></label>
-                                            <select name="select_month" id="editselectmonth"
-                                                class="form-control editselectmonth @error('select_month') is-invalid @enderror">
-                                                <option value="">--Select Month--</option>
-
-                                                {{-- Loop to generate options --}}
-                                                @foreach (range(1, 12) as $monthNumber)
-                                                    @php
-                                                        $month = date('F', mktime(0, 0, 0, $monthNumber, 1));
-                                                    @endphp
-                                                    <option value="{{ $monthNumber }}"
-                                                        {{ old('select_month', date('n')) == $monthNumber ? 'selected' : '' }}>
-                                                        {{ $month }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-
-                                            @error('select_month')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="edittotalseafarers">Total Seafarers</label>
-                                            {{-- <select
-                                                class="form-control edittotalseafarers @error('total_seafarers') is-invalid @enderror"
-                                                name="total_seafarers" id="edittotalseafarers">
-                                                <option value=''>---Select--</option>
-                                                <option value='1'>Major</option>
-                                                <option value='2'>Non Major</option>
-                                            </select> --}}
-                                            <input type="text" class="form-control edittotalseafarers @error('total_seafarers') is-invalid @enderror"
-                                            id="edittotalseafarers" placeholder="Enter Total Seafarers" name="total_seafarers"
-                                            value="{{ old('total_seafarers') }}">
-                                            @error('total_seafarers')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="editwomanseafarer">Woman Seafarer</label>
-                                            <input type="text"
-                                                class="form-control editwomanseafarer @error('woman_seafarer') is-invalid @enderror"
-                                                id="editwomanseafarer" placeholder="Enter Woman Seafarer" name="woman_seafarer"
-                                                value="{{ old('woman_seafarer') }}">
-                                            @error('woman_seafarer')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                </div>
-                                {{-- <div class="d-flex pb-2 justify-content-center align-items-center">
-                                <button type="submit" class="btn btn-primary waves-effect waves-light"
-                                    id="">Add
-                                    Records</button>
-                            </div> --}}
-
-                                <div class="modal-footer justify-content-between">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary editbtn-submit">Save changes</button>
-                                </div>
-                            </div>
-                        </form>
-                    </section>
-                </div>
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-    </div>
     <!-- /.modal -->
 @endsection
 
@@ -247,80 +171,6 @@
                 "info": true,
                 "autoWidth": false,
                 "responsive": true,
-            });
-        });
-    </script>
-
-    <script>
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-        // Use event delegation to capture the click event
-        $(document).on("click", ".edit-data", function(e) {
-            e.preventDefault();
-            var dataid = $(this).data('dataid');
-            // alert(dataid);
-
-            $.ajax({
-                type: 'GET',
-                url: '/edit-seafarers-information/' + dataid,
-                dataType: 'json',
-                success: function(data) {
-                    if (data) {
-                        console.log(data);
-
-                        // Populate the modal form fields with user data
-                        $('#editdataid').val(data.id);
-                        $('#editwomanseafarer').val(data.woman_seafarer);
-                        $('#edittotalseafarers').val(data.total_seafarers);
-                        // Update the selected options in dropdowns
-                        $('#editselectmonth').find('option[value="' + data.select_month + '"]').prop(
-                            'selected',
-                            true);
-                    } else {
-                        // Handle the case where data is not available or not in the expected format
-                        console.error('Invalid data received from the server.');
-                    }
-                },
-                error: function(xhr, status, error) {
-                    // Handle AJAX errors if needed
-                    console.error('AJAX Request Failed:', status, error);
-                }
-            });
-        });
-
-        $(".editbtn-submit").click(function(e) {
-            e.preventDefault();
-
-            var dataid = $('.editdataid').val();
-            var total_seafarers = $('.edittotalseafarers').val();
-            var woman_seafarer = $(".editwomanseafarer").val();
-            var select_month = $('.editselectmonth').val();
-            var updated_by = $('.editupdatedby').val();
-
-            $.ajax({
-                type: 'POST',
-                url: "{{ route('saveSeafarersInformation') }}",
-                data: {
-                    _token: $('meta[name="csrf-token"]').attr('content'),
-                    id: dataid,
-                    total_seafarers: total_seafarers,
-                    woman_seafarer: woman_seafarer,
-                    select_month: select_month,
-                    updated_by: updated_by,
-                },
-                success: function(data) {
-                    if (data.success == true && $.isEmptyObject(data.error)) {
-                        setTimeout(function() {
-                            location.reload();
-                        }, 1000);
-                    } else {
-                        printErrorMsg(data.error);
-                    }
-                },
             });
         });
     </script>

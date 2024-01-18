@@ -13,7 +13,11 @@ return new class extends Migration
     {
         Schema::create('seafarers_information', function (Blueprint $table) {
             $table->id();
+            $table->text('select_year')->default(0);
             $table->text('select_month')->default(0);
+            $table->text('port_type')->default(0);
+            $table->text('state_board')->default(0);
+            $table->text('port_id')->default(0);
             $table->text('total_seafarers')->default(0);
             $table->text('woman_seafarer')->default(0);
             $table->text('created_by')->default(0)->comment('Users ID');

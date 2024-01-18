@@ -2,6 +2,14 @@
 
 @section('css')
     <!-- DataTables -->
+    <style>
+        hr {
+            margin-top: 1;
+            margin-bottom: 1;
+            border: 0;
+            border-top: 1px solid rgba(0, 0, 0, .1);
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -36,7 +44,8 @@
                         {{-- Form Respone --}}
                         @include('backend.component.flush')
 
-                        <form method="POST" action="{{ route('updateEmploymentDockLabourBoardsMajorPort', $editData->id) }}"
+                        <form method="POST"
+                            action="{{ route('updateEmploymentDockLabourBoardsMajorPort', $editData->id) }}"
                             enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
@@ -141,7 +150,8 @@
                                         <select class="form-control @error('state_board') is-invalid @enderror"
                                             name="state_board" id="state_board" value="{{ old('state_board') }}">
                                             <option value="{{ $editData->state_board }}" selected>
-                                                {{ $stateboard['name'] }}</option>
+                                                {{ $stateboard['name'] ?? 'N/A' }}
+                                            </option>
                                         </select>
                                         @error('state_board')
                                             <span class="invalid-feedback" role="alert">
@@ -172,6 +182,9 @@
                             </div>
 
                             {{-- DLB Employment --}}
+                            <hr style="height:3px;border-width:0;color:gray;background-color:gray;">
+                            <h4 style="text-align: center;">DLB Employment</h4>
+                            <hr style="height:3px;border-width:0;color:gray;background-color:gray;">
                             <div class="row">
                                 <div class="col-md-2">
                                     <div class="form-group">
@@ -242,6 +255,9 @@
                             </div>
 
                             {{-- Dock Workers --}}
+                            <hr style="height:3px;border-width:0;color:gray;background-color:gray;">
+                            <h4 style="text-align: center;">Dock Workers</h4>
+                            <hr style="height:3px;border-width:0;color:gray;background-color:gray;">
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">

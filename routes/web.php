@@ -152,7 +152,7 @@ Route::get('view-seafarers-information', [App\Http\Controllers\Backend\FormContr
 Route::get('add-seafarers-information', [App\Http\Controllers\Backend\FormController::class, 'addSeafarersInformation'])->name('addSeafarersInformation');
 Route::post('save-seafarers-information', [App\Http\Controllers\Backend\FormController::class, 'saveSeafarersInformation'])->name('saveSeafarersInformation');
 Route::get('edit-seafarers-information/{id?}', [App\Http\Controllers\Backend\FormController::class, 'editSeafarersInformation'])->name('editSeafarersInformation');
-Route::get('update-seafarers-information/{id?}', [App\Http\Controllers\Backend\FormController::class, 'updateSeafarersInformation'])->name('updateSeafarersInformation');
+Route::put('update-seafarers-information/{id?}', [App\Http\Controllers\Backend\FormController::class, 'updateSeafarersInformation'])->name('updateSeafarersInformation');
 
 // Employment Major Ports employment-major-ports EmploymentMajorPorts
 Route::get('view-employment-major-ports', [App\Http\Controllers\Backend\FormController::class, 'viewEmploymentMajorPorts'])->name('viewEmploymentMajorPorts');

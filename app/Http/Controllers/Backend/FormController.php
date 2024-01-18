@@ -569,7 +569,7 @@ class FormController extends Controller
     // ****************************************************************
     // ****************************************************************
     /**
-     * Display the view for view Direct Port Entry Delivery Related Containers.
+     * Display the view for view Berth Related Information.
      *
      * @return \Illuminate\Contracts\View\View
      */
@@ -619,26 +619,32 @@ class FormController extends Controller
             // dd($request->all());
             // Validation rules
             $rules = [
-                'select_month' => 'required',
-                'select_year' => 'required',
+                'select_year' => 'required|numeric',
+                'select_month' => 'required|numeric|between:1,12',
                 'port_type' => 'required',
                 'port_id' => 'required',
                 'state_board' => 'required',
-                'containers' => 'required',
-                'direct_port_entry_of_teu' => 'required',
-                'direct_port_delivery' => 'required',
+                'containers' => 'required|numeric',
+                'direct_port_entry_of_teu' => 'required|numeric',
+                'direct_port_delivery' => 'required|numeric',
             ];
 
             // Custom error messages
             $customMessages = [
                 'port_type.required' => 'The port type field is required.',
                 'port_id.required' => 'The port name field is required.',
-                'select_year.required' => 'The year selection field is required.',
-                'select_month.required' => 'The month selection field is required.',
                 'state_board.required' => 'The state board field is required.',
+                'select_month.required' => 'The month selection field is required.',
+                'select_year.required' => 'The year selection field is required.',
+                'select_year.numeric' => 'The year must be a numeric value.',
+                'select_month.numeric' => 'The month must be a numeric value.',
+                'select_month.between' => 'The month must be between 1 and 12.',
+                'containers.required' => 'The containers field is required.',
                 'containers.required' => 'The containers field is required.',
                 'direct_port_entry_of_teu.required' => 'The direct port entry of teu field is required.',
+                'direct_port_entry_of_teu.numeric' => 'The direct port entry of teu field must be a numeric value.',
                 'direct_port_delivery.required' => 'The direct port delivery field is required.',
+                'direct_port_delivery.numeric' => 'The direct port delivery field must be a numeric value.',
             ];
 
             // Validate the request data
@@ -649,6 +655,19 @@ class FormController extends Controller
                 return redirect()->back()
                     ->withErrors($validator)  // Flash the validation errors to the session
                     ->withInput();  // Flash the input data to the session
+            }
+
+            // Check if a record with the specified year and month already exists
+            $recordExists = DirectPortEntryDeliveryRelatedContainers::where('select_year', $request->input('select_year'))
+                ->where('select_month', $request->input('select_month'))
+                ->exists();
+
+            // If record exists, notify the user and redirect back
+            if ($recordExists) {
+                // Map numeric month value to month name using DateTime
+                $monthName = DateTime::createFromFormat('!m', $request->input('select_month'))->format('F');
+                $message = 'A record with the selected ' . $request->input('select_year') . ' and selected ' . $monthName . ' already exists.';
+                return redirect()->back()->with('warning', $message);
             }
 
             // If 'id' is set in the request, update the existing record, else create a new record
@@ -667,10 +686,10 @@ class FormController extends Controller
             // Check if the Create was successful
             if ($createdResponse) {
                 // If the operation was successful
-                return redirect()->back()->with('success', 'Record Created successfully');
+                return redirect()->route('viewDirectPortEntryDeliveryRelatedContainers')->with('success', 'Record Created successfully');
             } else {
                 // If the operation was unsuccessful
-                return redirect()->back()->with('error', 'Failed to Created record');
+                return redirect()->route('viewDirectPortEntryDeliveryRelatedContainers')->with('error', 'Failed to Created record');
             }
         } catch (\Exception $e) {
             // Log the error for further investigation
@@ -718,26 +737,32 @@ class FormController extends Controller
     {
         // Validation rules
         $rules = [
-            'select_month' => 'required',
-            'select_year' => 'required',
+            'select_year' => 'required|numeric',
+            'select_month' => 'required|numeric|between:1,12',
             'port_type' => 'required',
             'port_id' => 'required',
             'state_board' => 'required',
-            'containers' => 'required',
-            'direct_port_entry_of_teu' => 'required',
-            'direct_port_delivery' => 'required',
+            'containers' => 'required|numeric',
+            'direct_port_entry_of_teu' => 'required|numeric',
+            'direct_port_delivery' => 'required|numeric',
         ];
 
         // Custom error messages
         $customMessages = [
             'port_type.required' => 'The port type field is required.',
             'port_id.required' => 'The port name field is required.',
-            'select_year.required' => 'The year selection field is required.',
-            'select_month.required' => 'The month selection field is required.',
             'state_board.required' => 'The state board field is required.',
+            'select_month.required' => 'The month selection field is required.',
+            'select_year.required' => 'The year selection field is required.',
+            'select_year.numeric' => 'The year must be a numeric value.',
+            'select_month.numeric' => 'The month must be a numeric value.',
+            'select_month.between' => 'The month must be between 1 and 12.',
+            'containers.required' => 'The containers field is required.',
             'containers.required' => 'The containers field is required.',
             'direct_port_entry_of_teu.required' => 'The direct port entry of teu field is required.',
+            'direct_port_entry_of_teu.numeric' => 'The direct port entry of teu field must be a numeric value.',
             'direct_port_delivery.required' => 'The direct port delivery field is required.',
+            'direct_port_delivery.numeric' => 'The direct port delivery field must be a numeric value.',
         ];
 
         // Validate the request data
@@ -767,10 +792,10 @@ class FormController extends Controller
         // Check if the update was successful
         if ($editResponse) {
             // If the operation was successful
-            return redirect()->back()->with('success', 'Record updated successfully');
+            return redirect()->route('viewDirectPortEntryDeliveryRelatedContainers')->with('success', 'Record updated successfully');
         } else {
             // If the operation was unsuccessful
-            return redirect()->back()->with('error', 'Failed to update record');
+            return redirect()->route('viewDirectPortEntryDeliveryRelatedContainers')->with('error', 'Failed to update record');
         }
     }
     // ****************************************************************
@@ -1097,34 +1122,6 @@ class FormController extends Controller
                 // If the operation was unsuccessful
                 return redirect()->back()->with('error', 'Failed to Created record');
             }
-            // if ($request->has('id')) {
-            //     // dd($request->all());
-            //     $editResponse = NationalWaterwaysInformation::where('id', $request->input('id'))->update([
-            //         'select_month' => $request->input('select_month'),
-            //         'state_board' => $request->input('state_board'),
-            //         'select_year' => $request->input('select_year'),
-            //         'port_type' => $request->input('port_type'),
-            //         'port_id' => $request->input('port_id'),
-            //         'national_waterway_no' => $request->input('national_waterway_no'),
-            //         'length_km' => $request->input('length_km'),
-            //         'details_of_waterways' => $request->input('details_of_waterways'),
-            //         'cargo_moved' => $request->input('cargo_moved'),
-            //         'updated_by' => $request->input('updated_by'),
-            //     ]);
-
-            //     // Check if the update was successful
-            //     if ($editResponse) {
-            //         // If the operation was successful
-            //         session()->flash('success', 'Record updated successfully');
-            //         return response()->json(['success' => true]);
-            //     } else {
-            //         // If the operation was unsuccessful
-            //         session()->flash('error', 'Failed to update record');
-            //         return response()->json(['success' => false]);
-            //     }
-            // } else {
-
-            // }
         } catch (\Exception $e) {
             // Log the error for further investigation
             Log::error('Error in saveNationalWaterwaysInformation method: ' . $e->getMessage());
@@ -1497,16 +1494,29 @@ class FormController extends Controller
         try {
             // Validation rules
             $rules = [
-                'select_month' => 'required',
-                'total_seafarers' => 'required',
-                'woman_seafarer' => 'required',
+                'select_year' => 'required|numeric',
+                'select_month' => 'required|numeric|between:1,12',
+                'port_type' => 'required',
+                'port_id' => 'required',
+                'state_board' => 'required',
+                'total_seafarers' => 'required|numeric',
+                'woman_seafarer' => 'required|numeric',
             ];
 
             // Custom error messages
             $customMessages = [
                 'select_month.required' => 'The month selection field is required.',
+                'select_year.required' => 'The year selection field is required.',
+                'select_year.numeric' => 'The year must be a numeric value.',
+                'select_month.numeric' => 'The month must be a numeric value.',
+                'select_month.between' => 'The month must be between 1 and 12.',
+                'port_type.required' => 'The port type field is required.',
+                'port_id.required' => 'The port name field is required.',
+                'state_board.required' => 'The state board field is required.',
                 'total_seafarers.required' => 'The total seafarers field is required.',
                 'woman_seafarer.required' => 'The woman seafarer field is required.',
+                'total_seafarers.numeric' => 'The total seafarers be a numeric value.',
+                'woman_seafarer.numeric' => 'The woman seafarer be a numeric value.',
             ];
 
             // Validate the request data
@@ -1519,6 +1529,38 @@ class FormController extends Controller
                     ->withInput();  // Flash the input data to the session
             }
 
+            // Check if a record with the specified year and month already exists
+            $recordExists = SeafarersInformation::where('select_year', $request->input('select_year'))
+                ->where('select_month', $request->input('select_month'))
+                ->exists();
+
+            // If record exists, notify the user and redirect back
+            if ($recordExists) {
+                // Map numeric month value to month name using DateTime
+                $monthName = DateTime::createFromFormat('!m', $request->input('select_month'))->format('F');
+                $message = 'A record with the selected ' . $request->input('select_year') . ' and selected ' . $monthName . ' already exists.';
+                return redirect()->back()->with('warning', $message);
+            }
+
+            $createdResponse = SeafarersInformation::create([
+                'select_month' => $request->input('select_month'),
+                'state_board' => $request->input('state_board'),
+                'select_year' => $request->input('select_year'),
+                'port_type' => $request->input('port_type'),
+                'port_id' => $request->input('port_id'),
+                'total_seafarers' => $request->input('total_seafarers'),
+                'woman_seafarer' => $request->input('woman_seafarer'),
+                'created_by' => $request->input('created_by'),
+            ]);
+
+            // Check if the Create was successful
+            if ($createdResponse) {
+                // If the operation was successful
+                return redirect()->route('viewSeafarersInformation')->with('success', 'Record Created successfully');
+            } else {
+                // If the operation was unsuccessful
+                return redirect()->route('viewSeafarersInformation')->with('error', 'Failed to Created record');
+            }
             // If 'id' is set in the request, update the existing record, else create a new record
             if ($request->has('id')) {
                 // dd($request->all());
@@ -1540,21 +1582,6 @@ class FormController extends Controller
                     return response()->json(['success' => false]);
                 }
             } else {
-                $createdResponse = SeafarersInformation::create([
-                    'select_month' => $request->input('select_month'),
-                    'total_seafarers' => $request->input('total_seafarers'),
-                    'woman_seafarer' => $request->input('woman_seafarer'),
-                    'created_by' => $request->input('created_by'),
-                ]);
-
-                // Check if the Create was successful
-                if ($createdResponse) {
-                    // If the operation was successful
-                    return redirect()->back()->with('success', 'Record Created successfully');
-                } else {
-                    // If the operation was unsuccessful
-                    return redirect()->back()->with('error', 'Failed to Created record');
-                }
             }
         } catch (\Exception $e) {
             // Log the error for further investigation
@@ -1578,13 +1605,82 @@ class FormController extends Controller
             $editData = SeafarersInformation::findOrFail($id);
             // dd($editData);
             // Return the edit data in a JSON response
-            return response()->json($editData);
+            return view('backend.editSeafarersInformation')->with([
+                'editData' => $editData,
+            ]);
+            // return response()->json($editData);
         } catch (\Exception $e) {
             // Log the error for further investigation
             Log::error('Error in editSeafarersInformation method: ' . $e->getMessage());
 
             // Return an error response with a 422 status code
             return response()->json(['error' => 'Error retrieving Edit data. ' . $e->getMessage()], 422);
+        }
+    }
+    /**
+     * Retrieve user data for editing.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param int $id The ID of the user to be edited
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function updateSeafarersInformation(Request $request, $id)
+    {
+        // Validation rules
+        $rules = [
+            'select_year' => 'required|numeric',
+            'select_month' => 'required|numeric|between:1,12',
+            'port_type' => 'required',
+            'port_id' => 'required',
+            'state_board' => 'required',
+            'total_seafarers' => 'required|numeric',
+            'woman_seafarer' => 'required|numeric',
+        ];
+
+        // Custom error messages
+        $customMessages = [
+            'select_month.required' => 'The month selection field is required.',
+            'select_year.required' => 'The year selection field is required.',
+            'select_year.numeric' => 'The year must be a numeric value.',
+            'select_month.numeric' => 'The month must be a numeric value.',
+            'select_month.between' => 'The month must be between 1 and 12.',
+            'port_type.required' => 'The port type field is required.',
+            'port_id.required' => 'The port name field is required.',
+            'state_board.required' => 'The state board field is required.',
+            'total_seafarers.required' => 'The total seafarers field is required.',
+            'woman_seafarer.required' => 'The woman seafarer field is required.',
+            'total_seafarers.numeric' => 'The total seafarers be a numeric value.',
+            'woman_seafarer.numeric' => 'The woman seafarer be a numeric value.',
+        ];
+
+        // Validate the request data
+        $validator = Validator::make($request->all(), $rules, $customMessages);
+
+        // Check for validation failure
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)  // Flash the validation errors to the session
+                ->withInput();  // Flash the input data to the session
+        }
+        $editResponse = SeafarersInformation::find($id);
+
+        $editResponse->update([
+            'select_month' => $request->input('select_month'),
+            'state_board' => $request->input('state_board'),
+            'select_year' => $request->input('select_year'),
+            'port_type' => $request->input('port_type'),
+            'port_id' => $request->input('port_id'),
+            'total_seafarers' => $request->input('total_seafarers'),
+            'woman_seafarer' => $request->input('woman_seafarer'),
+            'updated_by' => $request->input('updated_by'),
+        ]);
+
+        if ($editResponse) {
+            // If the operation was successful
+            return redirect()->route('viewSeafarersInformation')->with('success', 'Record updated successfully');
+        } else {
+            // If the operation was unsuccessful
+            return redirect()->route('viewSeafarersInformation')->with('error', 'Failed to update record');
         }
     }
     // ****************************************************************
@@ -1640,26 +1736,27 @@ class FormController extends Controller
         try {
             // Validation rules
             $rules = [
-                'select_year' => 'required',
-                'select_month' => 'required',
+                'select_year' => 'required|numeric',
+                'select_month' => 'required|numeric|between:1,12',
                 'port_type' => 'required',
                 'state_board' => 'required',
                 'port_id' => 'required',
-                'class_1' => 'required',
-                'class_2' => 'required',
-                'class_3' => 'required',
-                'class_4' => 'required',
-                'class_5' => 'required',
-                'class_6' => 'required',
-                'class_7' => 'required',
-                'shore_wrk' => 'required',
-                'casual_work' => 'required',
-                'total' => 'required',
+                'class_1' => 'required|numeric',
+                'class_2' => 'required|numeric',
+                'class_3' => 'required|numeric',
+                'class_4' => 'required|numeric',
+                'class_5' => 'required|numeric',
+                'class_6' => 'required|numeric',
+                'class_7' => 'required|numeric',
+                'shore_wrk' => 'required|numeric',
+                'casual_work' => 'required|numeric',
+                'total' => 'required|numeric',
             ];
 
             // Custom error messages
             $customMessages = [
                 'select_month.required' => 'The month selection field is required.',
+                'select_year.required' => 'The year selection field is required.',
                 'port_type.required' => 'The port type field is required.',
                 'state_board.required' => 'The state board field is required.',
                 'port_id.required' => 'The port Name field is required.',
@@ -1673,6 +1770,19 @@ class FormController extends Controller
                 'shore_wrk.required' => 'The shore work field is required.',
                 'casual_work.required' => 'The casual work field is required.',
                 'total.required' => 'The total field is required.',
+                'class_1.numeric' => 'The class 1 field must be a numeric value.',
+                'class_2.numeric' => 'The class 2 field must be a numeric value.',
+                'class_3.numeric' => 'The class 3 field must be a numeric value.',
+                'class_4.numeric' => 'The class 4 field must be a numeric value.',
+                'class_5.numeric' => 'The class 5 field must be a numeric value.',
+                'class_6.numeric' => 'The class 6 field must be a numeric value.',
+                'class_7.numeric' => 'The class 7 field must be a numeric value.',
+                'shore_wrk.numeric' => 'The shore work field must be a numeric value.',
+                'casual_work.numeric' => 'The casual work field must be a numeric value.',
+                'total.numeric' => 'The total field must be a numeric value.',
+                'select_year.numeric' => 'The year must be a numeric value.',
+                'select_month.numeric' => 'The month must be a numeric value.',
+                'select_month.between' => 'The month must be between 1 and 12.',
             ];
 
             // Validate the request data
@@ -1683,6 +1793,19 @@ class FormController extends Controller
                 return redirect()->back()
                     ->withErrors($validator)  // Flash the validation errors to the session
                     ->withInput();  // Flash the input data to the session
+            }
+
+            // Check if a record with the specified year and month already exists
+            $recordExists = EmploymentMajorPort::where('select_year', $request->input('select_year'))
+                ->where('select_month', $request->input('select_month'))
+                ->exists();
+
+            // If record exists, notify the user and redirect back
+            if ($recordExists) {
+                // Map numeric month value to month name using DateTime
+                $monthName = DateTime::createFromFormat('!m', $request->input('select_month'))->format('F');
+                $message = 'A record with the selected ' . $request->input('select_year') . ' and selected ' . $monthName . ' already exists.';
+                return redirect()->back()->with('warning', $message);
             }
 
             $createdResponse = EmploymentMajorPort::create([
@@ -1707,10 +1830,10 @@ class FormController extends Controller
             // Check if the Create was successful
             if ($createdResponse) {
                 // If the operation was successful
-                return redirect()->back()->with('success', 'Record Created successfully');
+                return redirect()->route('viewEmploymentMajorPorts')->with('success', 'Record Created successfully');
             } else {
                 // If the operation was unsuccessful
-                return redirect()->back()->with('error', 'Failed to Created record');
+                return redirect()->route('viewEmploymentMajorPorts')->with('error', 'Failed to Created record');
             }
         } catch (\Exception $e) {
             // Log the error for further investigation
@@ -1757,26 +1880,27 @@ class FormController extends Controller
     {
         // Validation rules
         $rules = [
-            'select_year' => 'required',
-            'select_month' => 'required',
+            'select_year' => 'required|numeric',
+            'select_month' => 'required|numeric|between:1,12',
             'port_type' => 'required',
             'state_board' => 'required',
             'port_id' => 'required',
-            'class_1' => 'required',
-            'class_2' => 'required',
-            'class_3' => 'required',
-            'class_4' => 'required',
-            'class_5' => 'required',
-            'class_6' => 'required',
-            'class_7' => 'required',
-            'shore_wrk' => 'required',
-            'casual_work' => 'required',
-            'total' => 'required',
+            'class_1' => 'required|numeric',
+            'class_2' => 'required|numeric',
+            'class_3' => 'required|numeric',
+            'class_4' => 'required|numeric',
+            'class_5' => 'required|numeric',
+            'class_6' => 'required|numeric',
+            'class_7' => 'required|numeric',
+            'shore_wrk' => 'required|numeric',
+            'casual_work' => 'required|numeric',
+            'total' => 'required|numeric',
         ];
 
         // Custom error messages
         $customMessages = [
             'select_month.required' => 'The month selection field is required.',
+            'select_year.required' => 'The year selection field is required.',
             'port_type.required' => 'The port type field is required.',
             'state_board.required' => 'The state board field is required.',
             'port_id.required' => 'The port Name field is required.',
@@ -1790,6 +1914,19 @@ class FormController extends Controller
             'shore_wrk.required' => 'The shore work field is required.',
             'casual_work.required' => 'The casual work field is required.',
             'total.required' => 'The total field is required.',
+            'class_1.numeric' => 'The class 1 field must be a numeric value.',
+            'class_2.numeric' => 'The class 2 field must be a numeric value.',
+            'class_3.numeric' => 'The class 3 field must be a numeric value.',
+            'class_4.numeric' => 'The class 4 field must be a numeric value.',
+            'class_5.numeric' => 'The class 5 field must be a numeric value.',
+            'class_6.numeric' => 'The class 6 field must be a numeric value.',
+            'class_7.numeric' => 'The class 7 field must be a numeric value.',
+            'shore_wrk.numeric' => 'The shore work field must be a numeric value.',
+            'casual_work.numeric' => 'The casual work field must be a numeric value.',
+            'total.numeric' => 'The total field must be a numeric value.',
+            'select_year.numeric' => 'The year must be a numeric value.',
+            'select_month.numeric' => 'The month must be a numeric value.',
+            'select_month.between' => 'The month must be between 1 and 12.',
         ];
 
         // Validate the request data
@@ -1825,10 +1962,10 @@ class FormController extends Controller
         // Check if the update was successful
         if ($editResponse) {
             // If the operation was successful
-            return redirect()->back()->with('success', 'Record updated successfully');
+            return redirect()->route('viewEmploymentMajorPorts')->with('success', 'Record updated successfully');
         } else {
             // If the operation was unsuccessful
-            return redirect()->back()->with('error', 'Failed to update record');
+            return redirect()->route('viewEmploymentMajorPorts')->with('error', 'Failed to update record');
         }
     }
     // ****************************************************************
@@ -1884,21 +2021,21 @@ class FormController extends Controller
         try {
             // Validation rules
             $rules = [
-                'select_year' => 'required',
-                'select_month' => 'required',
+                'select_year' => 'required|numeric',
+                'select_month' => 'required|numeric|between:1,12',
                 'port_type' => 'required',
                 'state_board' => 'required',
                 'port_id' => 'required',
-                'class_1' => 'required',
-                'class_2' => 'required',
-                'class_3' => 'required',
-                'class_4' => 'required',
-                'total' => 'required',
-                'registered' => 'required',
-                'listed' => 'required',
-                'others' => 'required',
-                'dwtotal' => 'required',
-                'grandTotal' => 'required',
+                'class_1' => 'required|numeric',
+                'class_2' => 'required|numeric',
+                'class_3' => 'required|numeric',
+                'class_4' => 'required|numeric',
+                'total' => 'required|numeric',
+                'registered' => 'required|numeric',
+                'listed' => 'required|numeric',
+                'others' => 'required|numeric',
+                'dwtotal' => 'required|numeric',
+                'grandTotal' => 'required|numeric',
             ];
 
             // Custom error messages
@@ -1917,6 +2054,20 @@ class FormController extends Controller
                 'others.required' => 'The others field is required.',
                 'dwtotal.required' => 'The Dock Workers Total field is required.',
                 'grandTotal.required' => 'The Grand Total field is required.',
+                'class_1.required' => 'The class 1 field must be a numeric value.',
+                'class_2.required' => 'The class 2 field must be a numeric value.',
+                'class_3.required' => 'The class 3 field must be a numeric value.',
+                'class_4.required' => 'The class 4 field must be a numeric value.',
+                'total.required' => 'The DLB Employment Total field must be a numeric value.',
+                'registered.required' => 'The registered field must be a numeric value.',
+                'listed.required' => 'The listed field must be a numeric value.',
+                'others.required' => 'The others field must be a numeric value.',
+                'dwtotal.required' => 'The Dock Workers Total field must be a numeric value.',
+                'grandTotal.required' => 'The Grand Total field is required.',
+                'select_year.numeric' => 'The year must be a numeric value.',
+                'select_month.numeric' => 'The month must be a numeric value.',
+                'select_month.between' => 'The month must be between 1 and 12.',
+
             ];
 
             // Validate the request data
@@ -1927,6 +2078,19 @@ class FormController extends Controller
                 return redirect()->back()
                     ->withErrors($validator)  // Flash the validation errors to the session
                     ->withInput();  // Flash the input data to the session
+            }
+
+            // Check if a record with the specified year and month already exists
+            $recordExists = EmploymentDockLabourBoardsMajorPort::where('select_year', $request->input('select_year'))
+                ->where('select_month', $request->input('select_month'))
+                ->exists();
+
+            // If record exists, notify the user and redirect back
+            if ($recordExists) {
+                // Map numeric month value to month name using DateTime
+                $monthName = DateTime::createFromFormat('!m', $request->input('select_month'))->format('F');
+                $message = 'A record with the selected ' . $request->input('select_year') . ' and selected ' . $monthName . ' already exists.';
+                return redirect()->back()->with('warning', $message);
             }
 
             $createdResponse = EmploymentDockLabourBoardsMajorPort::create([
@@ -1951,10 +2115,10 @@ class FormController extends Controller
             // Check if the Create was successful
             if ($createdResponse) {
                 // If the operation was successful
-                return redirect()->back()->with('success', 'Record Created successfully');
+                return redirect()->route('viewEmploymentDockLabourBoardsMajorPort')->with('success', 'Record Created successfully');
             } else {
                 // If the operation was unsuccessful
-                return redirect()->back()->with('error', 'Failed to Created record');
+                return redirect()->route('viewEmploymentDockLabourBoardsMajorPort')->with('error', 'Failed to Created record');
             }
         } catch (\Exception $e) {
             // Log the error for further investigation
@@ -2001,21 +2165,21 @@ class FormController extends Controller
     {
         // Validation rules
         $rules = [
-            'select_year' => 'required',
-            'select_month' => 'required',
+            'select_year' => 'required|numeric',
+            'select_month' => 'required|numeric|between:1,12',
             'port_type' => 'required',
             'state_board' => 'required',
             'port_id' => 'required',
-            'class_1' => 'required',
-            'class_2' => 'required',
-            'class_3' => 'required',
-            'class_4' => 'required',
-            'total' => 'required',
-            'registered' => 'required',
-            'listed' => 'required',
-            'others' => 'required',
-            'dwtotal' => 'required',
-            'grandTotal' => 'required',
+            'class_1' => 'required|numeric',
+            'class_2' => 'required|numeric',
+            'class_3' => 'required|numeric',
+            'class_4' => 'required|numeric',
+            'total' => 'required|numeric',
+            'registered' => 'required|numeric',
+            'listed' => 'required|numeric',
+            'others' => 'required|numeric',
+            'dwtotal' => 'required|numeric',
+            'grandTotal' => 'required|numeric',
         ];
 
         // Custom error messages
@@ -2034,6 +2198,20 @@ class FormController extends Controller
             'others.required' => 'The others field is required.',
             'dwtotal.required' => 'The Dock Workers Total field is required.',
             'grandTotal.required' => 'The Grand Total field is required.',
+            'class_1.required' => 'The class 1 field must be a numeric value.',
+            'class_2.required' => 'The class 2 field must be a numeric value.',
+            'class_3.required' => 'The class 3 field must be a numeric value.',
+            'class_4.required' => 'The class 4 field must be a numeric value.',
+            'total.required' => 'The DLB Employment Total field must be a numeric value.',
+            'registered.required' => 'The registered field must be a numeric value.',
+            'listed.required' => 'The listed field must be a numeric value.',
+            'others.required' => 'The others field must be a numeric value.',
+            'dwtotal.required' => 'The Dock Workers Total field must be a numeric value.',
+            'grandTotal.required' => 'The Grand Total field is required.',
+            'select_year.numeric' => 'The year must be a numeric value.',
+            'select_month.numeric' => 'The month must be a numeric value.',
+            'select_month.between' => 'The month must be between 1 and 12.',
+
         ];
 
         // Validate the request data
@@ -2069,10 +2247,10 @@ class FormController extends Controller
         // Check if the update was successful
         if ($editResponse) {
             // If the operation was successful
-            return redirect()->back()->with('success', 'Record updated successfully');
+            return redirect()->route('viewEmploymentDockLabourBoardsMajorPort')->with('success', 'Record updated successfully');
         } else {
             // If the operation was unsuccessful
-            return redirect()->back()->with('error', 'Failed to update record');
+            return redirect()->route('viewEmploymentDockLabourBoardsMajorPort')->with('error', 'Failed to update record');
         }
     }
 }

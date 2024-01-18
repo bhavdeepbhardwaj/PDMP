@@ -13,6 +13,10 @@ class SeafarersInformation extends Model
 
     protected $fillable = [
         'select_month',
+        'select_year',
+        'port_type',
+        'port_id',
+        'state_board',
         'total_seafarers',
         'woman_seafarer',
         'created_by',

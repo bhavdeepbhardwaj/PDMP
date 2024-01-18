@@ -2,6 +2,14 @@
 
 @section('css')
     <!-- DataTables -->
+    <style>
+        hr {
+            margin-top: 0;
+            margin-bottom: 0;
+            border: 0;
+            border-top: 1px solid rgba(0, 0, 0, .1);
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -113,7 +121,7 @@
                                     $portName = \App\Models\Port::where('id', $editData['port_id'])
                                         ->select('port_name')
                                         ->first();
-                                        // dd($editData['port_id']);
+                                    // dd($editData['port_id']);
                                     $stateboard = \App\Models\StateBoard::where('id', $editData['state_board'])
                                         ->select('name')
                                         ->first();
@@ -141,7 +149,8 @@
                                         <select class="form-control @error('state_board') is-invalid @enderror"
                                             name="state_board" id="state_board" value="{{ old('state_board') }}">
                                             <option value="{{ $editData->state_board }}" selected>
-                                                {{ $stateboard['name'] }}</option>
+                                                {{ $stateboard['name'] ?? 'N/A' }}
+                                            </option>
                                         </select>
                                         @error('state_board')
                                             <span class="invalid-feedback" role="alert">
@@ -172,6 +181,9 @@
                             </div>
 
                             {{-- Officer Class 1 --}}
+                            <hr style="height:5px;border-width:0;color:gray;background-color:gray;">
+                            <h2 style="text-align: center;">Officers</h2>
+                            <hr style="height:5px;border-width:0;color:gray;background-color:gray;">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -202,6 +214,9 @@
                             </div>
 
                             {{-- Non-Cargo Handling Workers --}}
+                            <hr style="height:5px;border-width:0;color:gray;background-color:gray;">
+                            <h2 style="text-align: center;">Non-Cargo Handling Workers</h2>
+                            <hr style="height:5px;border-width:0;color:gray;background-color:gray;">
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
@@ -245,6 +260,9 @@
                             </div>
 
                             {{-- Cargo Handling Workers Other than Shore Workers --}}
+                            <hr style="height:5px;border-width:0;color:gray;background-color:gray;">
+                            <h2 style="text-align: center;">Cargo Handling Workers</h2>
+                            <hr style="height:5px;border-width:0;color:gray;background-color:gray;">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">

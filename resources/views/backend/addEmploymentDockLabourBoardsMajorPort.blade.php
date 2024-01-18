@@ -2,6 +2,14 @@
 
 @section('css')
     <!-- DataTables -->
+    <style>
+        hr {
+            margin-top: 1;
+            margin-bottom: 1;
+            border: 0;
+            border-top: 1px solid rgba(0, 0, 0, .1);
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -36,7 +44,8 @@
                         {{-- Form Respone --}}
                         @include('backend.component.flush')
 
-                        <form method="POST" action="{{ route('saveEmploymentDockLabourBoardsMajorPort') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('saveEmploymentDockLabourBoardsMajorPort') }}"
+                            enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <input type="hidden" class="form-control" id="createdBy" value="{{ Auth::user()->id }}"
@@ -151,6 +160,9 @@
                             </div>
 
                             {{-- DLB Employment --}}
+                            <hr style="height:3px;border-width:0;color:gray;background-color:gray;">
+                            <h4 style="text-align: center;">DLB Employment</h4>
+                            <hr style="height:3px;border-width:0;color:gray;background-color:gray;">
                             <div class="row">
                                 <div class="col-md-2">
                                     <div class="form-group">
@@ -206,7 +218,8 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="total">DLB Employment Total <span style="color: red;">*</span></label>
+                                        <label for="total">DLB Employment Total <span
+                                                style="color: red;">*</span></label>
                                         <input type="text" class="form-control @error('total') is-invalid @enderror"
                                             name="total" id="total" value="{{ old('total') }}"
                                             placeholder="Total">
@@ -220,11 +233,15 @@
                             </div>
 
                             {{-- Dock Workers --}}
+                            <hr style="height:3px;border-width:0;color:gray;background-color:gray;">
+                            <h4 style="text-align: center;">Dock Workers</h4>
+                            <hr style="height:3px;border-width:0;color:gray;background-color:gray;">
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="registered">Registered <span style="color: red;">*</span></label>
-                                        <input type="text" class="form-control @error('registered') is-invalid @enderror"
+                                        <input type="text"
+                                            class="form-control @error('registered') is-invalid @enderror"
                                             name="registered" id="registered" value="{{ old('registered') }}"
                                             placeholder="Registered">
                                         @error('registered')
@@ -262,7 +279,8 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="dwtotal">Dock Workers Total <span style="color: red;">*</span></label>
+                                        <label for="dwtotal">Dock Workers Total <span
+                                                style="color: red;">*</span></label>
                                         <input type="text" class="form-control @error('dwtotal') is-invalid @enderror"
                                             name="dwtotal" id="dwtotal" value="{{ old('dwtotal') }}"
                                             placeholder="Dock Workers Total">

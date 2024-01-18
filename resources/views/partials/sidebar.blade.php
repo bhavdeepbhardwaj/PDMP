@@ -3,7 +3,7 @@
     <a href="" class="brand-link">
         <img src="{{ asset('backend/images/emblem.png ') }}" alt="Emblem Of India"
             class="brand-image img-circle elevation-3" style="opacity: .8; background: #fff;">
-        <span class="brand-text font-weight-light "><b>CAPEX</b></span>
+        <span class="brand-text font-weight-light "><b>PDMP 2.0 </b></span>
     </a>
     <!-- Sidebar -->
     <div class="sidebar">
