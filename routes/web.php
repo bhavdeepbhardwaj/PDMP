@@ -42,35 +42,16 @@ Route::group(['prefix' => 'portal', 'middleware' => ['auth', 'user-access', 'rol
     Route::get('port', [App\Http\Controllers\Backend\PortController::class, 'portList'])->name('port');
     Route::get('port-category', [App\Http\Controllers\Backend\PortCategoryController::class, 'portCategoryList'])->name('port-category');
 
-    // Budget Estimate Routes
-    Route::get('add-budget-estimate', [BudgetEstimateController::class, 'addBudgetEstimateList'])->name('add-budget-estimate');
-    Route::get('view-budget-estimate', [BudgetEstimateController::class, 'viewBudgetEstimateList'])->name('view-budget-estimate');
-    Route::get('be-monthly-exp-add', [BudgetEstimateController::class, 'beMonthlyExpAdd'])->name('be-monthly-exp-add');
-    Route::get('view-be-monthly-exp', [BudgetEstimateController::class, 'viewBeMonthlyExpList'])->name('view-be-monthly-exp');
-    Route::get('be-report', [BudgetEstimateController::class, 'beReportList'])->name('be-report');
-
-    // Revised Estimate Routes
-    Route::get('add-revised-estimate', [RevisedEstimateController::class, 'addRevisedBudgetEstimateList'])->name('add-revised-estimate');
-    Route::get('view-revised-estimate', [RevisedEstimateController::class, 'viewRevisedBudgetEstimateList'])->name('view-revised-estimate');
-    Route::get('re-monthly-exp-add', [RevisedEstimateController::class, 'reMonthlyExpAdd'])->name('re-monthly-exp-add');
-    Route::get('view-re-monthly-exp', [RevisedEstimateController::class, 'viewReMonthlyExpList'])->name('view-re-monthly-exp');
-    Route::get('re-report', [RevisedEstimateController::class, 'reReportList'])->name('re-report');
+    Route::get('view-major-non-major-port-capacity', [App\Http\Controllers\Backend\FormController::class, 'viewMajorNonMajorPortCapacity'])->name('view-major-non-major-port-capacity');
+    Route::get('view-berth-related-information', [App\Http\Controllers\Backend\FormController::class, 'viewBerthRelatedInformation'])->name('view-berth-related-information');
+    Route::get('view-direct-port-entry-delivery-related-containers', [App\Http\Controllers\Backend\FormController::class, 'saveDirectPortEntryDeliveryRelatedContainers'])->name('view-direct-port-entry-delivery-related-containers');
+    Route::get('view-cruise-tourism', [App\Http\Controllers\Backend\FormController::class, 'viewCruiseTourism'])->name('view-cruise-tourism');
+    Route::get('view-national-waterways-information', [App\Http\Controllers\Backend\FormController::class, 'viewNationalWaterwaysInformation'])->name('view-national-waterways-information');
+    Route::get('view-indian-tonnage', [App\Http\Controllers\Backend\FormController::class, 'viewIndianTonnage'])->name('view-indian-tonnage');
+    Route::get('view-seafarers-information', [App\Http\Controllers\Backend\FormController::class, 'viewSeafarersInformation'])->name('view-seafarers-information');
+    Route::get('view-employment-major-ports', [App\Http\Controllers\Backend\FormController::class, 'viewEmploymentMajorPorts'])->name('view-employment-major-ports');
+    Route::get('view-employment-dock-labour-boards-major-port', [App\Http\Controllers\Backend\FormController::class, 'viewEmploymentDockLabourBoardsMajorPort'])->name('view-employment-dock-labour-boards-major-port');
 });
-
-// Other Routes Budget Estimate
-Route::post('be-create', [BudgetEstimateController::class, 'beCreate'])->name('backend.be-create');
-Route::post('beMonthlyExpCreate', [BudgetEstimateController::class, 'beMonthlyExpCreate'])->name('backend.beMonthlyExpCreate');
-Route::post('/update-status', [BudgetEstimateController::class, 'updateStatus']);
-Route::post('beMonthlyExpCreateEdit/{id?}', [BudgetEstimateController::class, 'beMonthlyExpCreateEdit']);
-Route::post('/be-edit-updated-monthly', [BudgetEstimateController::class, 'beEditUpdatedMonthly']);
-Route::get('be-export', [BudgetEstimateController::class, 'beExport'])->name('export');
-
-// Other Routes Revised Estimate
-Route::post('re-create', [RevisedEstimateController::class, 'reCreate'])->name('backend.re-create');
-Route::post('reMonthlyExpCreate', [RevisedEstimateController::class, 'reMonthlyExpCreate'])->name('backend.reMonthlyExpCreate');
-Route::post('/update-status-re', [RevisedEstimateController::class, 'reUpdateStatus']);
-Route::post('reMonthlyExpCreateEdit/{id?}', [RevisedEstimateController::class, 'reMonthlyExpCreateEdit']);
-Route::post('/re-edit-updated-monthly', [RevisedEstimateController::class, 'reEditUpdatedMonthly']);
 
 // User Routes create User
 Route::post('usercreate', [UserController::class, 'createUser'])->name('user.create');
@@ -105,7 +86,6 @@ Route::post('/get-ports', [FormController::class, 'getPorts']);
 
 
 // MAJOR/NON MAJOR PORTS AND CAPACITIES.
-Route::get('view-major-non-major-port-capacity', [App\Http\Controllers\Backend\FormController::class, 'viewMajorNonMajorPortCapacity'])->name('viewMajorNonMajorPortCapacity');
 Route::get('add-major-non-major-port-capacity', [App\Http\Controllers\Backend\FormController::class, 'addMajorNonMajorPortCapacity'])->name('addMajorNonMajorPortCapacity');
 Route::post('save-major-non-major-port-capacity', [App\Http\Controllers\Backend\FormController::class, 'saveMajorNonMajorPortCapacity'])->name('saveMajorNonMajorPortCapacity');
 Route::get('edit-major-non-major-port-capacity/{id}', [App\Http\Controllers\Backend\FormController::class, 'editMajorNonMajorPortCapacity'])->name('editMajorNonMajorPortCapacity');
@@ -113,56 +93,48 @@ Route::put('update-major-non-major-port-capacity/{id}', [App\Http\Controllers\Ba
 
 
 // Berth Related Information berth-related-information
-Route::get('view-berth-related-information', [App\Http\Controllers\Backend\FormController::class, 'viewBerthRelatedInformation'])->name('viewBerthRelatedInformation');
 Route::get('add-berth-related-information', [App\Http\Controllers\Backend\FormController::class, 'addBerthRelatedInformation'])->name('addBerthRelatedInformation');
 Route::post('save-berth-related-information', [App\Http\Controllers\Backend\FormController::class, 'saveBerthRelatedInformation'])->name('saveBerthRelatedInformation');
 Route::get('edit-berth-related-information/{id?}', [App\Http\Controllers\Backend\FormController::class, 'editBerthRelatedInformation'])->name('editBerthRelatedInformation');
 Route::put('update-berth-related-information/{id}', [App\Http\Controllers\Backend\FormController::class, 'updateBerthRelatedInformation'])->name('updateBerthRelatedInformation');
 
 // Direct Port Entry Delivery Related Containers direct-port-entry-delivery-related-containers
-Route::get('view-direct-port-entry-delivery-related-containers', [App\Http\Controllers\Backend\FormController::class, 'viewDirectPortEntryDeliveryRelatedContainers'])->name('viewDirectPortEntryDeliveryRelatedContainers');
 Route::get('add-direct-port-entry-delivery-related-containers', [App\Http\Controllers\Backend\FormController::class, 'addDirectPortEntryDeliveryRelatedContainers'])->name('addDirectPortEntryDeliveryRelatedContainers');
 Route::post('save-direct-port-entry-delivery-related-containers', [App\Http\Controllers\Backend\FormController::class, 'saveDirectPortEntryDeliveryRelatedContainers'])->name('saveDirectPortEntryDeliveryRelatedContainers');
 Route::get('edit-direct-port-entry-delivery-related-containers/{id?}', [App\Http\Controllers\Backend\FormController::class, 'editDirectPortEntryDeliveryRelatedContainers'])->name('editDirectPortEntryDeliveryRelatedContainers');
 Route::put('update-direct-port-entry-delivery-related-containers/{id}', [App\Http\Controllers\Backend\FormController::class, 'updateDirectPortEntryDeliveryRelatedContainers'])->name('updateDirectPortEntryDeliveryRelatedContainers');
 
 // Cruise Tourism cruise-tourism
-Route::get('view-cruise-tourism', [App\Http\Controllers\Backend\FormController::class, 'viewCruiseTourism'])->name('viewCruiseTourism');
 Route::get('add-cruise-tourism', [App\Http\Controllers\Backend\FormController::class, 'addCruiseTourism'])->name('addCruiseTourism');
 Route::post('save-cruise-tourism', [App\Http\Controllers\Backend\FormController::class, 'saveCruiseTourism'])->name('saveCruiseTourism');
 Route::get('edit-cruise-tourism/{id?}', [App\Http\Controllers\Backend\FormController::class, 'editCruiseTourism'])->name('editCruiseTourism');
 Route::put('update-cruise-tourism/{id?}', [App\Http\Controllers\Backend\FormController::class, 'updateCruiseTourism'])->name('updateCruiseTourism');
 
 // National Waterways Information national-waterways-information NationalWaterwaysInformation
-Route::get('view-national-waterways-information', [App\Http\Controllers\Backend\FormController::class, 'viewNationalWaterwaysInformation'])->name('viewNationalWaterwaysInformation');
 Route::get('add-national-waterways-information', [App\Http\Controllers\Backend\FormController::class, 'addNationalWaterwaysInformation'])->name('addNationalWaterwaysInformation');
 Route::post('save-national-waterways-information', [App\Http\Controllers\Backend\FormController::class, 'saveNationalWaterwaysInformation'])->name('saveNationalWaterwaysInformation');
 Route::get('edit-national-waterways-information/{id?}', [App\Http\Controllers\Backend\FormController::class, 'editNationalWaterwaysInformation'])->name('editNationalWaterwaysInformation');
 Route::put('update-national-waterways-information/{id?}', [App\Http\Controllers\Backend\FormController::class, 'updateNationalWaterwaysInformation'])->name('updateNationalWaterwaysInformation');
 
 // Indian Tonnage indian-tonnage IndianTonnage
-Route::get('view-indian-tonnage', [App\Http\Controllers\Backend\FormController::class, 'viewIndianTonnage'])->name('viewIndianTonnage');
 Route::get('add-indian-tonnage', [App\Http\Controllers\Backend\FormController::class, 'addIndianTonnage'])->name('addIndianTonnage');
 Route::post('save-indian-tonnage', [App\Http\Controllers\Backend\FormController::class, 'saveIndianTonnage'])->name('saveIndianTonnage');
 Route::get('edit-indian-tonnage/{id?}', [App\Http\Controllers\Backend\FormController::class, 'editIndianTonnage'])->name('editIndianTonnage');
 Route::put('update-indian-tonnage/{id?}', [App\Http\Controllers\Backend\FormController::class, 'updateIndianTonnage'])->name('updateIndianTonnage');
 
 // Seafarers Information seafarers-information SeafarersInformation
-Route::get('view-seafarers-information', [App\Http\Controllers\Backend\FormController::class, 'viewSeafarersInformation'])->name('viewSeafarersInformation');
 Route::get('add-seafarers-information', [App\Http\Controllers\Backend\FormController::class, 'addSeafarersInformation'])->name('addSeafarersInformation');
 Route::post('save-seafarers-information', [App\Http\Controllers\Backend\FormController::class, 'saveSeafarersInformation'])->name('saveSeafarersInformation');
 Route::get('edit-seafarers-information/{id?}', [App\Http\Controllers\Backend\FormController::class, 'editSeafarersInformation'])->name('editSeafarersInformation');
 Route::put('update-seafarers-information/{id?}', [App\Http\Controllers\Backend\FormController::class, 'updateSeafarersInformation'])->name('updateSeafarersInformation');
 
 // Employment Major Ports employment-major-ports EmploymentMajorPorts
-Route::get('view-employment-major-ports', [App\Http\Controllers\Backend\FormController::class, 'viewEmploymentMajorPorts'])->name('viewEmploymentMajorPorts');
 Route::get('add-employment-major-ports', [App\Http\Controllers\Backend\FormController::class, 'addEmploymentMajorPorts'])->name('addEmploymentMajorPorts');
 Route::post('save-employment-major-ports', [App\Http\Controllers\Backend\FormController::class, 'saveEmploymentMajorPorts'])->name('saveEmploymentMajorPorts');
 Route::get('edit-employment-major-ports/{id}', [App\Http\Controllers\Backend\FormController::class, 'editEmploymentMajorPorts'])->name('editEmploymentMajorPorts');
 Route::put('update-employment-major-ports/{id}', [App\Http\Controllers\Backend\FormController::class, 'updateEmploymentMajorPorts'])->name('updateEmploymentMajorPorts');
 
 // Employment Dock Labour Boards Major Port employment-dock-labour-boards-major-port EmploymentDockLabourBoardsMajorPort
-Route::get('view-employment-dock-labour-boards-major-port', [App\Http\Controllers\Backend\FormController::class, 'viewEmploymentDockLabourBoardsMajorPort'])->name('viewEmploymentDockLabourBoardsMajorPort');
 Route::get('add-employment-dock-labour-boards-major-port', [App\Http\Controllers\Backend\FormController::class, 'addEmploymentDockLabourBoardsMajorPort'])->name('addEmploymentDockLabourBoardsMajorPort');
 Route::post('save-employment-dock-labour-boards-major-port', [App\Http\Controllers\Backend\FormController::class, 'saveEmploymentDockLabourBoardsMajorPort'])->name('saveEmploymentDockLabourBoardsMajorPort');
 Route::get('edit-employment-dock-labour-boards-major-port/{id}', [App\Http\Controllers\Backend\FormController::class, 'editEmploymentDockLabourBoardsMajorPort'])->name('editEmploymentDockLabourBoardsMajorPort');

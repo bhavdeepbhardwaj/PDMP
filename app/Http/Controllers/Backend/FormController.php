@@ -195,10 +195,10 @@ class FormController extends Controller
             // Check if the Create was successful
             if ($createdResponse) {
                 // If the operation was successful
-                return redirect()->route('viewMajorNonMajorPortCapacity')->with('success', 'Record Created successfully');
+                return redirect()->route('backend.view-major-non-major-port-capacity')->with('success', 'Record Created successfully');
             } else {
                 // If the operation was unsuccessful
-                return redirect()->route('viewMajorNonMajorPortCapacity')->with('error', 'Failed to Created record');
+                return redirect()->route('backend.view-major-non-major-port-capacity')->with('error', 'Failed to Created record');
             }
         } catch (\Exception $e) {
             // Log the error for further investigation
@@ -295,10 +295,10 @@ class FormController extends Controller
         // Check if the update was successful
         if ($editResponse) {
             // If the operation was successful
-            return redirect()->route('viewMajorNonMajorPortCapacity')->with('success', 'Record updated successfully');
+            return redirect()->route('backend.view-major-non-major-port-capacity')->with('success', 'Record updated successfully');
         } else {
             // If the operation was unsuccessful
-            return redirect()->route('viewMajorNonMajorPortCapacity')->with('error', 'Failed to update record');
+            return redirect()->route('backend.view-major-non-major-port-capacity')->with('error', 'Failed to update record');
         }
     }
     // ******************************************************
@@ -437,10 +437,10 @@ class FormController extends Controller
             // Check if the Create was successful
             if ($createdResponse) {
                 // If the operation was successful
-                return redirect()->route('viewBerthRelatedInformation')->with('success', 'Record Created successfully');
+                return redirect()->route('backend.view-berth-related-information')->with('success', 'Record Created successfully');
             } else {
                 // If the operation was unsuccessful
-                return redirect()->route('viewBerthRelatedInformation')->with('error', 'Failed to Created record');
+                return redirect()->route('backend.view-berth-related-information')->with('error', 'Failed to Created record');
             }
         } catch (\Exception $e) {
             // Log the error for further investigation
@@ -558,10 +558,10 @@ class FormController extends Controller
         // Check if the update was successful
         if ($editResponse) {
             // If the operation was successful
-            return redirect()->route('viewBerthRelatedInformation')->with('success', 'Record updated successfully');
+            return redirect()->route('backend.view-berth-related-information')->with('success', 'Record updated successfully');
         } else {
             // If the operation was unsuccessful
-            return redirect()->route('viewBerthRelatedInformation')->with('error', 'Failed to update record');
+            return redirect()->route('backend.view-berth-related-information')->with('error', 'Failed to update record');
         }
     }
     // ****************************************************************
@@ -686,10 +686,10 @@ class FormController extends Controller
             // Check if the Create was successful
             if ($createdResponse) {
                 // If the operation was successful
-                return redirect()->route('viewDirectPortEntryDeliveryRelatedContainers')->with('success', 'Record Created successfully');
+                return redirect()->route('backend.view-direct-port-entry-delivery-related-containers')->with('success', 'Record Created successfully');
             } else {
                 // If the operation was unsuccessful
-                return redirect()->route('viewDirectPortEntryDeliveryRelatedContainers')->with('error', 'Failed to Created record');
+                return redirect()->route('backend.view-direct-port-entry-delivery-related-containers')->with('error', 'Failed to Created record');
             }
         } catch (\Exception $e) {
             // Log the error for further investigation
@@ -792,10 +792,10 @@ class FormController extends Controller
         // Check if the update was successful
         if ($editResponse) {
             // If the operation was successful
-            return redirect()->route('viewDirectPortEntryDeliveryRelatedContainers')->with('success', 'Record updated successfully');
+            return redirect()->route('backend.view-direct-port-entry-delivery-related-containers')->with('success', 'Record updated successfully');
         } else {
             // If the operation was unsuccessful
-            return redirect()->route('viewDirectPortEntryDeliveryRelatedContainers')->with('error', 'Failed to update record');
+            return redirect()->route('backend.view-direct-port-entry-delivery-related-containers')->with('error', 'Failed to update record');
         }
     }
     // ****************************************************************
@@ -924,10 +924,10 @@ class FormController extends Controller
             // Check if the Create was successful
             if ($createdResponse) {
                 // If the operation was successful
-                return redirect()->route('viewCruiseTourism')->with('success', 'Record Created successfully');
+                return redirect()->route('backend.view-cruise-tourism')->with('success', 'Record Created successfully');
             } else {
                 // If the operation was unsuccessful
-                return redirect()->route('viewCruiseTourism')->with('error', 'Failed to Created record');
+                return redirect()->route('backend.view-cruise-tourism')->with('error', 'Failed to Created record');
             }
         } catch (\Exception $e) {
             // Log the error for further investigation
@@ -1034,10 +1034,10 @@ class FormController extends Controller
         // Check if the update was successful
         if ($editResponse) {
             // If the operation was successful
-            return redirect()->route('viewCruiseTourism')->with('success', 'Record updated successfully');
+            return redirect()->route('backend.view-cruise-tourism')->with('success', 'Record updated successfully');
         } else {
             // If the operation was unsuccessful
-            return redirect()->route('viewCruiseTourism')->with('error', 'Failed to update record');
+            return redirect()->route('backend.view-cruise-tourism')->with('error', 'Failed to update record');
         }
     }
     // ****************************************************************
@@ -1164,10 +1164,10 @@ class FormController extends Controller
             // Check if the Create was successful
             if ($createdResponse) {
                 // If the operation was successful
-                return redirect()->route('viewNationalWaterwaysInformation')->with('success', 'Record Created successfully');
+                return redirect()->route('backend.view-national-waterways-information')->with('success', 'Record Created successfully');
             } else {
                 // If the operation was unsuccessful
-                return redirect()->route('viewNationalWaterwaysInformation')->with('error', 'Failed to Created record');
+                return redirect()->route('backend.view-national-waterways-information')->with('error', 'Failed to Created record');
             }
         } catch (\Exception $e) {
             // Log the error for further investigation
@@ -1274,10 +1274,10 @@ class FormController extends Controller
         // Check if the update was successful
         if ($editResponse) {
             // If the operation was successful
-            return redirect()->route('viewNationalWaterwaysInformation')->with('success', 'Record updated successfully');
+            return redirect()->route('backend.view-national-waterways-information')->with('success', 'Record updated successfully');
         } else {
             // If the operation was unsuccessful
-            return redirect()->route('viewNationalWaterwaysInformation')->with('error', 'Failed to update record');
+            return redirect()->route('backend.view-national-waterways-information')->with('error', 'Failed to update record');
         }
     }
     // ****************************************************************
@@ -1403,10 +1403,10 @@ class FormController extends Controller
             // Check if the Create was successful
             if ($createdResponse) {
                 // If the operation was successful
-                return redirect()->route('viewIndianTonnage')->with('success', 'Record Created successfully');
+                return redirect()->route('backend.view-indian-tonnage')->with('success', 'Record Created successfully');
             } else {
                 // If the operation was unsuccessful
-                return redirect()->route('viewIndianTonnage')->with('error', 'Failed to Created record');
+                return redirect()->route('backend.view-indian-tonnage')->with('error', 'Failed to Created record');
             }
         } catch (\Exception $e) {
             // Log the error for further investigation
@@ -1513,10 +1513,10 @@ class FormController extends Controller
         // Check if the update was successful
         if ($editResponse) {
             // If the operation was successful
-            return redirect()->route('viewIndianTonnage')->with('success', 'Record updated successfully');
+            return redirect()->route('backend.view-indian-tonnage')->with('success', 'Record updated successfully');
         } else {
             // If the operation was unsuccessful
-            return redirect()->route('viewIndianTonnage')->with('error', 'Failed to update record');
+            return redirect()->route('backend.view-indian-tonnage')->with('error', 'Failed to update record');
         }
     }
     // ****************************************************************
@@ -1634,32 +1634,10 @@ class FormController extends Controller
             // Check if the Create was successful
             if ($createdResponse) {
                 // If the operation was successful
-                return redirect()->route('viewSeafarersInformation')->with('success', 'Record Created successfully');
+                return redirect()->route('backend.view-seafarers-information')->with('success', 'Record Created successfully');
             } else {
                 // If the operation was unsuccessful
-                return redirect()->route('viewSeafarersInformation')->with('error', 'Failed to Created record');
-            }
-            // If 'id' is set in the request, update the existing record, else create a new record
-            if ($request->has('id')) {
-                // dd($request->all());
-                $editResponse = SeafarersInformation::where('id', $request->input('id'))->update([
-                    'select_month' => $request->input('select_month'),
-                    'total_seafarers' => $request->input('total_seafarers'),
-                    'woman_seafarer' => $request->input('woman_seafarer'),
-                    'updated_by' => $request->input('updated_by'),
-                ]);
-
-                // Check if the update was successful
-                if ($editResponse) {
-                    // If the operation was successful
-                    session()->flash('success', 'Record updated successfully');
-                    return response()->json(['success' => true]);
-                } else {
-                    // If the operation was unsuccessful
-                    session()->flash('error', 'Failed to update record');
-                    return response()->json(['success' => false]);
-                }
-            } else {
+                return redirect()->route('backend.view-seafarers-information')->with('error', 'Failed to Created record');
             }
         } catch (\Exception $e) {
             // Log the error for further investigation
@@ -1755,10 +1733,10 @@ class FormController extends Controller
 
         if ($editResponse) {
             // If the operation was successful
-            return redirect()->route('viewSeafarersInformation')->with('success', 'Record updated successfully');
+            return redirect()->route('backend.view-seafarers-information')->with('success', 'Record updated successfully');
         } else {
             // If the operation was unsuccessful
-            return redirect()->route('viewSeafarersInformation')->with('error', 'Failed to update record');
+            return redirect()->route('backend.view-seafarers-information')->with('error', 'Failed to update record');
         }
     }
     // ****************************************************************
@@ -1908,10 +1886,10 @@ class FormController extends Controller
             // Check if the Create was successful
             if ($createdResponse) {
                 // If the operation was successful
-                return redirect()->route('viewEmploymentMajorPorts')->with('success', 'Record Created successfully');
+                return redirect()->route('backend.view-employment-major-ports')->with('success', 'Record Created successfully');
             } else {
                 // If the operation was unsuccessful
-                return redirect()->route('viewEmploymentMajorPorts')->with('error', 'Failed to Created record');
+                return redirect()->route('backend.view-employment-major-ports')->with('error', 'Failed to Created record');
             }
         } catch (\Exception $e) {
             // Log the error for further investigation
@@ -2040,10 +2018,10 @@ class FormController extends Controller
         // Check if the update was successful
         if ($editResponse) {
             // If the operation was successful
-            return redirect()->route('viewEmploymentMajorPorts')->with('success', 'Record updated successfully');
+            return redirect()->route('backend.view-employment-major-ports')->with('success', 'Record updated successfully');
         } else {
             // If the operation was unsuccessful
-            return redirect()->route('viewEmploymentMajorPorts')->with('error', 'Failed to update record');
+            return redirect()->route('backend.view-employment-major-ports')->with('error', 'Failed to update record');
         }
     }
     // ****************************************************************
@@ -2193,10 +2171,10 @@ class FormController extends Controller
             // Check if the Create was successful
             if ($createdResponse) {
                 // If the operation was successful
-                return redirect()->route('viewEmploymentDockLabourBoardsMajorPort')->with('success', 'Record Created successfully');
+                return redirect()->route('backend.view-employment-dock-labour-boards-major-port')->with('success', 'Record Created successfully');
             } else {
                 // If the operation was unsuccessful
-                return redirect()->route('viewEmploymentDockLabourBoardsMajorPort')->with('error', 'Failed to Created record');
+                return redirect()->route('backend.view-employment-dock-labour-boards-major-port')->with('error', 'Failed to Created record');
             }
         } catch (\Exception $e) {
             // Log the error for further investigation
@@ -2325,10 +2303,10 @@ class FormController extends Controller
         // Check if the update was successful
         if ($editResponse) {
             // If the operation was successful
-            return redirect()->route('viewEmploymentDockLabourBoardsMajorPort')->with('success', 'Record updated successfully');
+            return redirect()->route('backend.view-employment-dock-labour-boards-major-port')->with('success', 'Record updated successfully');
         } else {
             // If the operation was unsuccessful
-            return redirect()->route('viewEmploymentDockLabourBoardsMajorPort')->with('error', 'Failed to update record');
+            return redirect()->route('backend.view-employment-dock-labour-boards-major-port')->with('error', 'Failed to update record');
         }
     }
 }

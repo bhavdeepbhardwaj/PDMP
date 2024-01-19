@@ -88,136 +88,82 @@ class IconWithPanelTableSeeder extends Seeder
         IconWithPanel::create([
             'parent_id' => '0',
             'module' => 'mod_9',
-            'module_name' => 'BE',
-            'url' => 'budget-estimate',
-            'mod_list_name' => 'budget-estimate',
+            'module_name' => 'Major Non Major Ports and Capacities',
+            'url' => 'view-major-non-major-port-capacity',
+            'mod_list_name' => 'view-major-non-major-port-capacity',
             'icon' => 'fa-ship',
         ]);
 
         IconWithPanel::create([
-            'parent_id' => '9',
+            'parent_id' => '0',
             'module' => 'mod_10',
-            'module_name' => 'Add BE',
-            'url' => 'add-budget-estimate',
-            'mod_list_name' => 'add-budget-estimate',
+            'module_name' => 'Berth Related Information',
+            'url' => 'view-berth-related-information',
+            'mod_list_name' => 'view-berth-related-information',
             'icon' => 'fa-ship',
         ]);
 
         IconWithPanel::create([
-            'parent_id' => '9',
+            'parent_id' => '0',
             'module' => 'mod_11',
-            'module_name' => 'View BE',
-            'url' => 'view-budget-estimate',
-            'mod_list_name' => 'view-budget-estimate',
+            'module_name' => 'Direct Port Entry Delivery Related Containers',
+            'url' => 'view-direct-port-entry-delivery-related-containers',
+            'mod_list_name' => 'view-direct-port-entry-delivery-related-containers',
             'icon' => 'fa-ship',
         ]);
 
         IconWithPanel::create([
             'parent_id' => '0',
             'module' => 'mod_12',
-            'module_name' => 'RE',
-            'url' => 'revised-estimate',
-            'mod_list_name' => 'revised-estimate',
+            'module_name' => 'Employment Major Ports',
+            'url' => 'view-employment-major-ports',
+            'mod_list_name' => 'view-employment-major-ports',
             'icon' => 'fa-ship',
         ]);
 
         IconWithPanel::create([
-            'parent_id' => '12',
+            'parent_id' => '0',
             'module' => 'mod_13',
-            'module_name' => 'Add RE',
-            'url' => 'add-revised-estimate',
-            'mod_list_name' => 'add-revised-estimate',
+            'module_name' => 'Employment Dock Labour Boards Major Port',
+            'url' => 'view-employment-dock-labour-boards-major-port',
+            'mod_list_name' => 'view-employment-dock-labour-boards-major-port',
             'icon' => 'fa-ship',
         ]);
 
         IconWithPanel::create([
-            'parent_id' => '12',
+            'parent_id' => '0',
             'module' => 'mod_14',
-            'module_name' => 'View RE',
+            'module_name' => 'Cruise Tourism',
             'url' => 'view-revised-estimate',
-            'mod_list_name' => 'add-revised-estimate',
+            'mod_list_name' => 'view-cruise-tourism',
             'icon' => 'fa-ship',
         ]);
 
         IconWithPanel::create([
             'parent_id' => '0',
             'module' => 'mod_15',
-            'module_name' => 'Monthly Exp',
-            'url' => 'monthly-exp',
-            'mod_list_name' => 'monthly-exp',
+            'module_name' => 'National Waterways Information',
+            'url' => 'view-national-waterways-information',
+            'mod_list_name' => 'view-national-waterways-information',
             'icon' => 'fa-ship',
         ]);
 
         IconWithPanel::create([
-            'parent_id' => '15',
+            'parent_id' => '0',
             'module' => 'mod_16',
-            'module_name' => 'View BE Monthly Exp',
-            'url' => 'view-be-monthly-exp',
-            'mod_list_name' => 'view-be-monthly-exp',
+            'module_name' => 'Indian Tonnage',
+            'url' => 'view-indian-tonnage',
+            'mod_list_name' => 'view-indian-tonnage',
             'icon' => 'fa-ship',
         ]);
 
         IconWithPanel::create([
-            'parent_id' => '15',
+            'parent_id' => '0',
             'module' => 'mod_17',
-            'module_name' => 'View RE Monthly Exp',
-            'url' => 'view-re-monthly-exp',
-            'mod_list_name' => 'view-re-monthly-exp',
+            'module_name' => 'Seafarers Information',
+            'url' => 'view-seafarers-information',
+            'mod_list_name' => 'view-seafarers-information',
             'icon' => 'fa-ship',
-        ]);
-
-        IconWithPanel::create([
-            'parent_id' => '0',
-            'module' => 'mod_18',
-            'module_name' => 'Monthly Exp Add',
-            'url' => 'monthly-exp-add',
-            'mod_list_name' => 'monthly-exp-add',
-            'icon' => 'fa-clipboard',
-        ]);
-
-        IconWithPanel::create([
-            'parent_id' => '18',
-            'module' => 'mod_19',
-            'module_name' => 'BE Monthly Exp App',
-            'url' => 'be-monthly-exp-add',
-            'mod_list_name' => 'be-monthly-exp-add',
-            'icon' => 'fa-clipboard',
-        ]);
-
-        IconWithPanel::create([
-            'parent_id' => '18',
-            'module' => 'mod_20',
-            'module_name' => 'RE Monthly Exp App',
-            'url' => 're-monthly-exp-add',
-            'mod_list_name' => 're-monthly-exp-add',
-            'icon' => 'fa-clipboard',
-        ]);
-
-        IconWithPanel::create([
-            'parent_id' => '0',
-            'module' => 'mod_21',
-            'module_name' => 'Report',
-            'url' => 'report',
-            'mod_list_name' => 'report',
-            'icon' => 'fa-clipboard',
-        ]);
-
-        IconWithPanel::create([
-            'parent_id' => '21',
-            'module' => 'mod_22',
-            'module_name' => 'BE Report',
-            'url' => 'be-report',
-            'mod_list_name' => 'be-report',
-            'icon' => 'fa-clipboard',
-        ]);
-
-        IconWithPanel::create([
-            'parent_id' => '21',
-            'module' => 'mod_23',
-            'module_name' => 'RE Report',
-            'url' => 're-report',
-            'mod_list_name' => 're-report',
-            'icon' => 'fa-clipboard',
         ]);
     }
 }

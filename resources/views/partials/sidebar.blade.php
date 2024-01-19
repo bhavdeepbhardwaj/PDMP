@@ -26,8 +26,10 @@
 
                 @foreach ($panelDataByRole as $key => $value)
                     <li class="nav-item">
+                        {{-- {{ dd($panelDataByRole) }} --}}
                         @if (!in_array($value['module_name'], ['Report', 'Monthly Exp', 'BE', 'RE', 'Monthly Exp Add']))
                             <a href="{{ route('backend.' . $value['url']) }}" class="nav-link">
+                                {{-- <a href="{{ route('backend.view-major-non-major-port-capacity') }}" class="nav-link"> --}}
                                 <i class="nav-icon fas {{ $value['icon'] }}"></i>
                                 <p>
                                     {{ $value['module_name'] }}
@@ -58,7 +60,7 @@
 
                     </li>
                 @endforeach
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a href="{{ route('viewMajorNonMajorPortCapacity') }}" class="nav-link">
                         <i class="nav-icon fas fa-user-shield"></i>
                         <p>MNM Ports & Capacities</p>
@@ -111,7 +113,7 @@
                         <i class="nav-icon fas fa-user-shield"></i>
                         <p>Seafarers Information</p>
                     </a>
-                </li>
+                </li> --}}
                 <li class="nav-item">
                     <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i class="nav-icon fas fa-user-shield"></i>
