@@ -44,7 +44,7 @@ Route::group(['prefix' => 'portal', 'middleware' => ['auth', 'user-access', 'rol
 
     Route::get('view-major-non-major-port-capacity', [App\Http\Controllers\Backend\FormController::class, 'viewMajorNonMajorPortCapacity'])->name('view-major-non-major-port-capacity');
     Route::get('view-berth-related-information', [App\Http\Controllers\Backend\FormController::class, 'viewBerthRelatedInformation'])->name('view-berth-related-information');
-    Route::get('view-direct-port-entry-delivery-related-containers', [App\Http\Controllers\Backend\FormController::class, 'saveDirectPortEntryDeliveryRelatedContainers'])->name('view-direct-port-entry-delivery-related-containers');
+    Route::get('view-direct-port-entry-delivery-related-containers', [App\Http\Controllers\Backend\FormController::class, 'viewDirectPortEntryDeliveryRelatedContainers'])->name('view-direct-port-entry-delivery-related-containers');
     Route::get('view-cruise-tourism', [App\Http\Controllers\Backend\FormController::class, 'viewCruiseTourism'])->name('view-cruise-tourism');
     Route::get('view-national-waterways-information', [App\Http\Controllers\Backend\FormController::class, 'viewNationalWaterwaysInformation'])->name('view-national-waterways-information');
     Route::get('view-indian-tonnage', [App\Http\Controllers\Backend\FormController::class, 'viewIndianTonnage'])->name('view-indian-tonnage');

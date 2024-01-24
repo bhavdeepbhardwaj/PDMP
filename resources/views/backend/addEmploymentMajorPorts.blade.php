@@ -166,7 +166,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="class_1">Class 1 <span style="color: red;">*</span></label>
+                                        <label for="class_1">Class I <span style="color: red;">*</span></label>
                                         <input type="text" class="form-control @error('class_1') is-invalid @enderror"
                                             name="class_1" id="class_1" value="{{ old('class_1') }}"
                                             placeholder="Officer Class 1">
@@ -179,7 +179,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="class_2">Class 2 <span style="color: red;">*</span></label>
+                                        <label for="class_2">Class II <span style="color: red;">*</span></label>
                                         <input type="text" class="form-control @error('class_2') is-invalid @enderror"
                                             name="class_2" id="class_2" value="{{ old('class_2') }}"
                                             placeholder="Officer Class 2">
@@ -199,7 +199,7 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="class_3">Class 3 <span style="color: red;">*</span></label>
+                                        <label for="class_3">Class IIII <span style="color: red;">*</span></label>
                                         <input type="text" class="form-control @error('class_3') is-invalid @enderror"
                                             name="class_3" id="class_3" value="{{ old('class_3') }}"
                                             placeholder="Officer Class 3">
@@ -212,7 +212,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="class_4">Class 4 <span style="color: red;">*</span></label>
+                                        <label for="class_4">Class IV <span style="color: red;">*</span></label>
                                         <input type="text" class="form-control @error('class_4') is-invalid @enderror"
                                             name="class_4" id="class_4" value="{{ old('class_4') }}"
                                             placeholder="Officer Class 4">
@@ -225,7 +225,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="class_5">Class 5 <span style="color: red;">*</span></label>
+                                        <label for="class_5">Other <span style="color: red;">*</span></label>
                                         <input type="text" class="form-control @error('class_5') is-invalid @enderror"
                                             name="class_5" id="class_5" value="{{ old('class_5') }}"
                                             placeholder="Officer Class 5">
@@ -245,7 +245,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="class_6">Class 6 <span style="color: red;">*</span></label>
+                                        <label for="class_6">Class III <span style="color: red;">*</span></label>
                                         <input type="text" class="form-control @error('class_6') is-invalid @enderror"
                                             name="class_6" id="class_6" value="{{ old('class_6') }}"
                                             placeholder="Officer Class 6">
@@ -258,7 +258,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="class_7">Class 7 <span style="color: red;">*</span></label>
+                                        <label for="class_7">Class IV <span style="color: red;">*</span></label>
                                         <input type="text" class="form-control @error('class_7') is-invalid @enderror"
                                             name="class_7" id="class_7" value="{{ old('class_7') }}"
                                             placeholder="Officer Class 7">
