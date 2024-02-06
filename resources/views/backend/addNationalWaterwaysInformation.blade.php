@@ -103,49 +103,6 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="port_type">Port Type <span style="color: red;">*</span></label>
-                                        <select class="form-control @error('port_type') is-invalid @enderror"
-                                            name="port_type" id="port_type">
-                                        </select>
-                                        @error('port_type')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4" id="startBoard_div">
-                                    <div class="form-group">
-                                        <label for="state_board">State Board <span style="color: red;">*</span></label>
-                                        <select class="form-control @error('state_board') is-invalid @enderror"
-                                            name="state_board" id="state_board" value="{{ old('state_board') }}">
-                                            <option value='' selected disabled>All State</option>
-                                        </select>
-                                        @error('state_board')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="port_name">Port Name <span style="color: red;">*</span></label>
-                                        <select class="form-control @error('port_id') is-invalid @enderror" name="port_id"
-                                            id="port_name" value="{{ old('port_id') }}">
-                                            <option value='' selected disabled>All Port</option>
-                                        </select>
-                                        @error('port_id')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
 
                                 <div class="col-md-4">
                                     <div class="form-group">
@@ -178,7 +135,7 @@
 
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="details_of_waterways">Details of Waterways</label>
+                                        <label for="details_of_waterways">Details of Waterways (River Name)</label>
                                         <input type="text"
                                             class="form-control @error('details_of_waterways') is-invalid @enderror"
                                             id="details_of_waterways" placeholder="Enter Details of Waterways"
@@ -193,10 +150,10 @@
 
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="cargo_moved">Cargo Moved (000 Tonnes)</label>
+                                        <label for="cargo_moved">Cargo Moved (Lakh Tonnes)</label>
                                         <input type="text"
                                             class="form-control @error('cargo_moved') is-invalid @enderror" id="cargo_moved"
-                                            placeholder="Enter Cargo Moved (000 Tonnes)" name="cargo_moved"
+                                            placeholder="Enter Cargo Moved (Lakh Tonnes)" name="cargo_moved"
                                             value="{{ old('cargo_moved') }}">
                                         @error('cargo_moved')
                                             <span class="invalid-feedback" role="alert">
@@ -226,5 +183,4 @@
 
 @section('js')
     <!-- jQuery -->
-    <script src="{{ asset('backend/js/port.js') }}"></script>
 @endsection

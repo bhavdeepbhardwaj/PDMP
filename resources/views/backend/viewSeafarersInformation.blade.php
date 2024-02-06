@@ -58,9 +58,6 @@
                                             <th>S.No</th>
                                             <th>Year</th>
                                             <th>Month</th>
-                                            <th>Port Type</th>
-                                            <th>Port Name</th>
-                                            <th>State Board</th>
                                             <th>Total Seafarers</th>
                                             <th>Woman Seafarer</th>
                                             <th>Action</th>
@@ -69,15 +66,6 @@
                                     <tbody>
                                         @foreach ($getData as $value)
                                             @php
-                                                $portCat = \App\Models\PortCategory::where('id', $value['port_type'])
-                                                    ->select('category_name')
-                                                    ->first();
-                                                $portName = \App\Models\Port::where('id', $value['port_id'])
-                                                    ->select('port_name')
-                                                    ->first();
-                                                $stateboard = \App\Models\StateBoard::where('id', $value['state_board'])
-                                                    ->select('name')
-                                                    ->first();
 
                                                 $numericMonth = $value['select_month'];
                                                 $monthName = \Carbon\Carbon::create()
@@ -88,9 +76,6 @@
                                                 <td>{{ $loop->index + 1 }}</td>
                                                 <td>{{ $value['select_year'] }}</td>
                                                 <td>{{ $monthName }}</td>
-                                                <td>{{ $portCat->category_name }}</td>
-                                                <td>{{ $portName->port_name }}</td>
-                                                <td>{{ $stateboard ? $stateboard->name : 'N/A' }}</td>
                                                 <td>{{ $value['total_seafarers'] }}</td>
                                                 <td>{{ $value['woman_seafarer'] }}</td>
                                                 <td><a href="{{ route('editSeafarersInformation', $value['id']) }}">
@@ -104,9 +89,6 @@
                                             <th>S.No</th>
                                             <th>Year</th>
                                             <th>Month</th>
-                                            <th>Port Type</th>
-                                            <th>Port Name</th>
-                                            <th>State Board</th>
                                             <th>Total Seafarers</th>
                                             <th>Woman Seafarer</th>
                                             <th>Action</th>

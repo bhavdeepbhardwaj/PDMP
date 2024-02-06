@@ -50,6 +50,8 @@ class UserController extends Controller
             return view('backend.error')->with('error', 'An error occurred: ' . $e->getMessage());
         }
     }
+    //
+
 
     /**
      * Create or update a user based on the provided request data.

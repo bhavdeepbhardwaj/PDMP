@@ -62,12 +62,12 @@
                                             <th>State Board</th>
                                             <th>Port Name</th>
                                             <th>Type of Berth</th>
-                                            <th>No Of Berth</th>
+                                            <th>Total No of Berth</th>
                                             <th>Public</th>
                                             <th>PPP</th>
-                                            <th>Designed Depth</th>
-                                            <th>Permissible Draft</th>
-                                            <th>Avg Total Draft</th>
+                                            <th>Designed / Depth (in meters)</th>
+                                            <th>Permissible Draft (in meters)</th>
+                                            <th>Avg Total Draft (in meters)</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -93,7 +93,7 @@
                                                 <td>{{ $value['select_year'] }}</td>
                                                 <td>{{ $monthName }}</td>
                                                 <td>{{ $portCat->category_name }}</td>
-                                                <td>{{ $stateboard ? $stateboard->name : 'N/A' }}</td>
+                                                <td>{{ $stateboard ? $stateboard->name : '' }}</td>
                                                 <td>{{ $portName->port_name }}</td>
                                                 <td>{{ $value['type_of_berth'] }}</td>
                                                 <td>{{ $value['no_of_berth'] }}</td>
@@ -117,12 +117,12 @@
                                             <th>State Board</th>
                                             <th>Port Name</th>
                                             <th>Type of Berth</th>
-                                            <th>No Of Berth</th>
+                                            <th>Total No of Berth</th>
                                             <th>Public</th>
                                             <th>PPP</th>
-                                            <th>Designed Depth</th>
-                                            <th>Permissible Draft</th>
-                                            <th>Avg Total Draft</th>
+                                            <th>Designed / Depth (in meters)</th>
+                                            <th>Permissible Draft (in meters)</th>
+                                            <th>Avg Total Draft (in meters)</th>
                                             <th>Action</th>
                                         </tr>
                                     </tfoot>

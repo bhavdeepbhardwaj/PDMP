@@ -14,9 +14,11 @@
         table.dataTable>thead .sorting:after {
             display: none;
         }
+
         table.dataTable>thead .sorting:before {
             display: none;
         }
+
         table.dataTable>thead>tr>th:not(.sorting_disabled) {
             padding-right: 0;
         }
@@ -71,11 +73,10 @@
                                             <th rowspan="2">Year</th>
                                             <th rowspan="2">Month</th>
                                             <th rowspan="2">Port Type</th>
-                                            <th rowspan="2">State Board</th>
                                             <th rowspan="2">Port Name</th>
-                                            <th colspan="2">Officers</th>
-                                            <th colspan="3">Non-Cargo Handling Workers</th>
-                                            <th colspan="2">Cargo Handling Workers</th>
+                                            <th colspan="2">Number Of Officers</th>
+                                            <th colspan="3">Number Of Non-Cargo Handling Workers</th>
+                                            <th colspan="2">Number Of Cargo Handling Workers</th>
                                             <th rowspan="2">Shore Worker</th>
                                             <th rowspan="2">Casual Worker</th>
                                             <th rowspan="2">Total</th>
@@ -100,9 +101,6 @@
                                                 $portName = \App\Models\Port::where('id', $value['id'])
                                                     ->select('port_name')
                                                     ->first();
-                                                $stateboard = \App\Models\StateBoard::where('id', $value['state_board'])
-                                                    ->select('name')
-                                                    ->first();
                                                 $numericMonth = $value['select_month'];
                                                 $monthName = \Carbon\Carbon::create()
                                                     ->month($numericMonth)
@@ -113,7 +111,6 @@
                                                 <td>{{ $value['select_year'] }}</td>
                                                 <td>{{ $monthName }}</td>
                                                 <td>{{ $portCat->category_name }}</td>
-                                                <td>{{ $stateboard ? $stateboard->name : 'N/A' }}</td>
                                                 <td>{{ $portName->port_name }}</td>
                                                 <td>{{ $value['class_1'] }}</td>
                                                 <td>{{ $value['class_2'] }}</td>
@@ -137,7 +134,6 @@
                                             <th>Year</th>
                                             <th>Month</th>
                                             <th>Port Type</th>
-                                            <th>State Board</th>
                                             <th>Port Name</th>
                                             <th>Class I</th>
                                             <th>Class II</th>

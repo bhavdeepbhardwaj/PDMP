@@ -1095,22 +1095,16 @@ class FormController extends Controller
             $rules = [
                 'select_year' => 'required|numeric',
                 'select_month' => 'required|numeric|between:1,12',
-                'port_type' => 'required',
-                'port_id' => 'required',
-                'state_board' => 'required',
                 'national_waterway_no' => 'required|numeric',
                 'length_km' => 'required|numeric',
-                'details_of_waterways' => 'required|numeric',
+                'details_of_waterways' => 'required',
                 'cargo_moved' => 'required|numeric',
             ];
 
             // Custom error messages
             $customMessages = [
-                'port_type.required' => 'The port type field is required.',
-                'port_id.required' => 'The port name field is required.',
                 'select_year.required' => 'The year selection field is required.',
                 'select_month.required' => 'The month selection field is required.',
-                'state_board.required' => 'The state board field is required.',
                 'national_waterway_no.required' => 'The national waterway number field is required.',
                 'length_km.required' => 'The length in kilometers field is required.',
                 'details_of_waterways.required' => 'The details of waterways field is required.',
@@ -1120,7 +1114,7 @@ class FormController extends Controller
                 'select_month.between' => 'The month must be between 1 and 12.',
                 'national_waterway_no.numeric' => 'The national waterway number field must be a numeric value.',
                 'length_km.numeric' => 'The length in kilometers field must be a numeric value.',
-                'details_of_waterways.numeric' => 'The details of waterways field must be a numeric value.',
+                // 'details_of_waterways.numeric' => 'The details of waterways field must be a numeric value.',
                 'cargo_moved.numeric' => 'The cargo moved field must be a numeric value.',
             ];
 
@@ -1150,10 +1144,7 @@ class FormController extends Controller
             // If 'id' is set in the request, update the existing record, else create a new record
             $createdResponse = NationalWaterwaysInformation::create([
                 'select_month' => $request->input('select_month'),
-                'state_board' => $request->input('state_board'),
                 'select_year' => $request->input('select_year'),
-                'port_type' => $request->input('port_type'),
-                'port_id' => $request->input('port_id'),
                 'national_waterway_no' => $request->input('national_waterway_no'),
                 'length_km' => $request->input('length_km'),
                 'details_of_waterways' => $request->input('details_of_waterways'),
@@ -1217,22 +1208,16 @@ class FormController extends Controller
         $rules = [
             'select_year' => 'required|numeric',
             'select_month' => 'required|numeric|between:1,12',
-            'port_type' => 'required',
-            'port_id' => 'required',
-            'state_board' => 'required',
             'national_waterway_no' => 'required|numeric',
             'length_km' => 'required|numeric',
-            'details_of_waterways' => 'required|numeric',
+            'details_of_waterways' => 'required',
             'cargo_moved' => 'required|numeric',
         ];
 
         // Custom error messages
         $customMessages = [
-            'port_type.required' => 'The port type field is required.',
-            'port_id.required' => 'The port name field is required.',
             'select_year.required' => 'The year selection field is required.',
             'select_month.required' => 'The month selection field is required.',
-            'state_board.required' => 'The state board field is required.',
             'national_waterway_no.required' => 'The national waterway number field is required.',
             'length_km.required' => 'The length in kilometers field is required.',
             'details_of_waterways.required' => 'The details of waterways field is required.',
@@ -1242,7 +1227,7 @@ class FormController extends Controller
             'select_month.between' => 'The month must be between 1 and 12.',
             'national_waterway_no.numeric' => 'The national waterway number field must be a numeric value.',
             'length_km.numeric' => 'The length in kilometers field must be a numeric value.',
-            'details_of_waterways.numeric' => 'The details of waterways field must be a numeric value.',
+            // 'details_of_waterways.numeric' => 'The details of waterways field must be a numeric value.',
             'cargo_moved.numeric' => 'The cargo moved field must be a numeric value.',
         ];
 
@@ -1260,10 +1245,7 @@ class FormController extends Controller
 
         $editResponse->update([
             'select_month' => $request->input('select_month'),
-            'state_board' => $request->input('state_board'),
             'select_year' => $request->input('select_year'),
-            'port_type' => $request->input('port_type'),
-            'port_id' => $request->input('port_id'),
             'national_waterway_no' => $request->input('national_waterway_no'),
             'length_km' => $request->input('length_km'),
             'details_of_waterways' => $request->input('details_of_waterways'),
@@ -1335,9 +1317,6 @@ class FormController extends Controller
             $rules = [
                 'select_year' => 'required|numeric',
                 'select_month' => 'required|numeric|between:1,12',
-                'port_type' => 'required',
-                'port_id' => 'required',
-                'state_board' => 'required',
                 'trade' => 'required',
                 'no_of_ships' => 'required|numeric',
                 'gross_tonnage' => 'required|numeric',
@@ -1346,11 +1325,8 @@ class FormController extends Controller
 
             // Custom error messages
             $customMessages = [
-                'port_type.required' => 'The port type field is required.',
-                'port_id.required' => 'The port name field is required.',
                 'select_year.required' => 'The year selection field is required.',
                 'select_month.required' => 'The month selection field is required.',
-                'state_board.required' => 'The state board field is required.',
                 'trade.required' => 'The trade field is required.',
                 'no_of_ships.required' => 'The number of ships field is required.',
                 'gross_tonnage.required' => 'The gross tonnage field is required.',
@@ -1389,10 +1365,7 @@ class FormController extends Controller
             // If 'id' is set in the request, update the existing record, else create a new record
             $createdResponse = IndianTonnage::create([
                 'select_month' => $request->input('select_month'),
-                'state_board' => $request->input('state_board'),
                 'select_year' => $request->input('select_year'),
-                'port_type' => $request->input('port_type'),
-                'port_id' => $request->input('port_id'),
                 'trade' => $request->input('trade'),
                 'no_of_ships' => $request->input('no_of_ships'),
                 'gross_tonnage' => $request->input('gross_tonnage'),
@@ -1456,9 +1429,6 @@ class FormController extends Controller
         $rules = [
             'select_year' => 'required|numeric',
             'select_month' => 'required|numeric|between:1,12',
-            'port_type' => 'required',
-            'port_id' => 'required',
-            'state_board' => 'required',
             'trade' => 'required',
             'no_of_ships' => 'required|numeric',
             'gross_tonnage' => 'required|numeric',
@@ -1467,11 +1437,8 @@ class FormController extends Controller
 
         // Custom error messages
         $customMessages = [
-            'port_type.required' => 'The port type field is required.',
-            'port_id.required' => 'The port name field is required.',
             'select_year.required' => 'The year selection field is required.',
             'select_month.required' => 'The month selection field is required.',
-            'state_board.required' => 'The state board field is required.',
             'trade.required' => 'The trade field is required.',
             'no_of_ships.required' => 'The number of ships field is required.',
             'gross_tonnage.required' => 'The gross tonnage field is required.',
@@ -1499,10 +1466,7 @@ class FormController extends Controller
 
         $editResponse->update([
             'select_month' => $request->input('select_month'),
-            'state_board' => $request->input('state_board'),
             'select_year' => $request->input('select_year'),
-            'port_type' => $request->input('port_type'),
-            'port_id' => $request->input('port_id'),
             'trade' => $request->input('trade'),
             'no_of_ships' => $request->input('no_of_ships'),
             'gross_tonnage' => $request->input('gross_tonnage'),
@@ -1574,9 +1538,6 @@ class FormController extends Controller
             $rules = [
                 'select_year' => 'required|numeric',
                 'select_month' => 'required|numeric|between:1,12',
-                'port_type' => 'required',
-                'port_id' => 'required',
-                'state_board' => 'required',
                 'total_seafarers' => 'required|numeric',
                 'woman_seafarer' => 'required|numeric',
             ];
@@ -1588,9 +1549,6 @@ class FormController extends Controller
                 'select_year.numeric' => 'The year must be a numeric value.',
                 'select_month.numeric' => 'The month must be a numeric value.',
                 'select_month.between' => 'The month must be between 1 and 12.',
-                'port_type.required' => 'The port type field is required.',
-                'port_id.required' => 'The port name field is required.',
-                'state_board.required' => 'The state board field is required.',
                 'total_seafarers.required' => 'The total seafarers field is required.',
                 'woman_seafarer.required' => 'The woman seafarer field is required.',
                 'total_seafarers.numeric' => 'The total seafarers be a numeric value.',
@@ -1622,10 +1580,7 @@ class FormController extends Controller
 
             $createdResponse = SeafarersInformation::create([
                 'select_month' => $request->input('select_month'),
-                'state_board' => $request->input('state_board'),
                 'select_year' => $request->input('select_year'),
-                'port_type' => $request->input('port_type'),
-                'port_id' => $request->input('port_id'),
                 'total_seafarers' => $request->input('total_seafarers'),
                 'woman_seafarer' => $request->input('woman_seafarer'),
                 'created_by' => $request->input('created_by'),
@@ -1686,9 +1641,6 @@ class FormController extends Controller
         $rules = [
             'select_year' => 'required|numeric',
             'select_month' => 'required|numeric|between:1,12',
-            'port_type' => 'required',
-            'port_id' => 'required',
-            'state_board' => 'required',
             'total_seafarers' => 'required|numeric',
             'woman_seafarer' => 'required|numeric',
         ];
@@ -1700,9 +1652,6 @@ class FormController extends Controller
             'select_year.numeric' => 'The year must be a numeric value.',
             'select_month.numeric' => 'The month must be a numeric value.',
             'select_month.between' => 'The month must be between 1 and 12.',
-            'port_type.required' => 'The port type field is required.',
-            'port_id.required' => 'The port name field is required.',
-            'state_board.required' => 'The state board field is required.',
             'total_seafarers.required' => 'The total seafarers field is required.',
             'woman_seafarer.required' => 'The woman seafarer field is required.',
             'total_seafarers.numeric' => 'The total seafarers be a numeric value.',
@@ -1722,10 +1671,7 @@ class FormController extends Controller
 
         $editResponse->update([
             'select_month' => $request->input('select_month'),
-            'state_board' => $request->input('state_board'),
             'select_year' => $request->input('select_year'),
-            'port_type' => $request->input('port_type'),
-            'port_id' => $request->input('port_id'),
             'total_seafarers' => $request->input('total_seafarers'),
             'woman_seafarer' => $request->input('woman_seafarer'),
             'updated_by' => $request->input('updated_by'),
@@ -1795,7 +1741,6 @@ class FormController extends Controller
                 'select_year' => 'required|numeric',
                 'select_month' => 'required|numeric|between:1,12',
                 'port_type' => 'required',
-                'state_board' => 'required',
                 'port_id' => 'required',
                 'class_1' => 'required|numeric',
                 'class_2' => 'required|numeric',
@@ -1814,7 +1759,6 @@ class FormController extends Controller
                 'select_month.required' => 'The month selection field is required.',
                 'select_year.required' => 'The year selection field is required.',
                 'port_type.required' => 'The port type field is required.',
-                'state_board.required' => 'The state board field is required.',
                 'port_id.required' => 'The port Name field is required.',
                 'class_1.required' => 'The class 1 field is required.',
                 'class_2.required' => 'The class 2 field is required.',
@@ -1868,7 +1812,6 @@ class FormController extends Controller
                 'select_year' => $request->input('select_year'),
                 'select_month' => $request->input('select_month'),
                 'port_type' => $request->input('port_type'),
-                'state_board' => $request->input('state_board'),
                 'port_id' => $request->input('port_id'),
                 'class_1' => $request->input('class_1'),
                 'class_2' => $request->input('class_2'),
@@ -1939,7 +1882,6 @@ class FormController extends Controller
             'select_year' => 'required|numeric',
             'select_month' => 'required|numeric|between:1,12',
             'port_type' => 'required',
-            'state_board' => 'required',
             'port_id' => 'required',
             'class_1' => 'required|numeric',
             'class_2' => 'required|numeric',
@@ -1958,7 +1900,6 @@ class FormController extends Controller
             'select_month.required' => 'The month selection field is required.',
             'select_year.required' => 'The year selection field is required.',
             'port_type.required' => 'The port type field is required.',
-            'state_board.required' => 'The state board field is required.',
             'port_id.required' => 'The port Name field is required.',
             'class_1.required' => 'The class 1 field is required.',
             'class_2.required' => 'The class 2 field is required.',
@@ -2001,7 +1942,6 @@ class FormController extends Controller
             'select_year' => $request->input('select_year'),
             'select_month' => $request->input('select_month'),
             'port_type' => $request->input('port_type'),
-            'state_board' => $request->input('state_board'),
             'port_id' => $request->input('port_id'),
             'class_1' => $request->input('class_1'),
             'class_2' => $request->input('class_2'),
@@ -2066,6 +2006,20 @@ class FormController extends Controller
             return response()->json(['error' => 'An error occurred: ' . $e->getMessage()]);
         }
     }
+    //
+    /**
+     * Get specific port types based on their IDs.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function dataPortTypes()
+    {
+        // Retrieve port types with IDs 1 and 2 from the database
+        $portTypes = PortCategory::whereIn('id', [1])->get();
+
+        // Return the port types as a JSON response
+        return response()->json(['portTypes' => $portTypes]);
+    }
     /**
      * Save Employment Dock Labour Boards Major Port
      *
@@ -2075,12 +2029,13 @@ class FormController extends Controller
     public function saveEmploymentDockLabourBoardsMajorPort(Request $request)
     {
         try {
+            // dd($request->all());
             // Validation rules
             $rules = [
                 'select_year' => 'required|numeric',
                 'select_month' => 'required|numeric|between:1,12',
                 'port_type' => 'required',
-                'state_board' => 'required',
+                // 'state_board' => 'required',
                 'port_id' => 'required',
                 'class_1' => 'required|numeric',
                 'class_2' => 'required|numeric',
@@ -2098,7 +2053,7 @@ class FormController extends Controller
             $customMessages = [
                 'select_month.required' => 'The month selection field is required.',
                 'port_type.required' => 'The port type field is required.',
-                'state_board.required' => 'The state board field is required.',
+                // 'state_board.required' => 'The state board field is required.',
                 'port_id.required' => 'The port Name field is required.',
                 'class_1.required' => 'The class 1 field is required.',
                 'class_2.required' => 'The class 2 field is required.',
@@ -2153,7 +2108,7 @@ class FormController extends Controller
                 'select_year' => $request->input('select_year'),
                 'select_month' => $request->input('select_month'),
                 'port_type' => $request->input('port_type'),
-                'state_board' => $request->input('state_board'),
+                // 'state_board' => $request->input('state_board'),
                 'port_id' => $request->input('port_id'),
                 'class_1' => $request->input('class_1'),
                 'class_2' => $request->input('class_2'),
@@ -2224,7 +2179,7 @@ class FormController extends Controller
             'select_year' => 'required|numeric',
             'select_month' => 'required|numeric|between:1,12',
             'port_type' => 'required',
-            'state_board' => 'required',
+            // 'state_board' => 'required',
             'port_id' => 'required',
             'class_1' => 'required|numeric',
             'class_2' => 'required|numeric',
@@ -2242,7 +2197,7 @@ class FormController extends Controller
         $customMessages = [
             'select_month.required' => 'The month selection field is required.',
             'port_type.required' => 'The port type field is required.',
-            'state_board.required' => 'The state board field is required.',
+            // 'state_board.required' => 'The state board field is required.',
             'port_id.required' => 'The port Name field is required.',
             'class_1.required' => 'The class 1 field is required.',
             'class_2.required' => 'The class 2 field is required.',
@@ -2286,7 +2241,7 @@ class FormController extends Controller
             'select_year' => $request->input('select_year'),
             'select_month' => $request->input('select_month'),
             'port_type' => $request->input('port_type'),
-            'state_board' => $request->input('state_board'),
+            // 'state_board' => $request->input('state_board'),
             'port_id' => $request->input('port_id'),
             'class_1' => $request->input('class_1'),
             'class_2' => $request->input('class_2'),

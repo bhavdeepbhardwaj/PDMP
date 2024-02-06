@@ -64,7 +64,7 @@
                                             <th>No of Cruise Terminals</th>
                                             <th>Total Cruise Calls</th>
                                             <th>No of Cruise Passengers</th>
-                                            <th>Cruise Berth Charges</th>
+                                            <th>Cruise Berth Charges (In Rupees)</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -90,7 +90,7 @@
                                                 <td>{{ $value['select_year'] }}</td>
                                                 <td>{{ $monthName }}</td>
                                                 <td>{{ $portCat->category_name }}</td>
-                                                <td>{{ $stateboard ? $stateboard->name : 'N/A' }}</td>
+                                                <td>{{ $stateboard ? $stateboard->name : '' }}</td>
                                                 <td>{{ $portName->port_name }}</td>
                                                 <td>{{ $value['no_of_cruise_terminals'] }}</td>
                                                 <td>{{ $value['total_cruise_calls'] }}</td>

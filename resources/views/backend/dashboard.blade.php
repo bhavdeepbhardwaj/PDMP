@@ -46,9 +46,9 @@
                         <!-- small box -->
                         <div class="small-box bg-info">
                             <div class="inner">
-                                <h3>15000000</h3>
+                                <h3>13234</h3>
 
-                                <p>Budget Estimate Monthly</p>
+                                <p>Total Port</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-bag"></i>
@@ -62,9 +62,9 @@
                         <!-- small box -->
                         <div class="small-box bg-success">
                             <div class="inner">
-                                <h3>534435</h3>
+                                <h3>6</h3>
 
-                                <p>Revised Estimate Monthly</p>
+                                <p>Port Category</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-stats-bars"></i>
@@ -96,7 +96,7 @@
                             <div class="inner">
                                 <h3>65</h3>
 
-                                <p>Budget Estimate Monthly Pending</p>
+                                <p>National Waterways Information</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-pie-graph"></i>

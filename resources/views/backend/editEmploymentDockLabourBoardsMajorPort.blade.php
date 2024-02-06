@@ -123,9 +123,6 @@
                                         ->select('port_name')
                                         ->first();
                                     // dd($editData['port_id']);
-                                    $stateboard = \App\Models\StateBoard::where('id', $editData['state_board'])
-                                        ->select('name')
-                                        ->first();
                                 @endphp
                                 <div class="col-md-4">
                                     <div class="form-group">
@@ -137,23 +134,6 @@
                                             </option>
                                         </select>
                                         @error('port_type')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4" id="startBoard_div">
-                                    <div class="form-group">
-                                        <label for="state_board">State Board <span style="color: red;">*</span></label>
-                                        <select class="form-control @error('state_board') is-invalid @enderror"
-                                            name="state_board" id="state_board" value="{{ old('state_board') }}">
-                                            <option value="{{ $editData->state_board }}" selected>
-                                                {{ $stateboard['name'] ?? 'N/A' }}
-                                            </option>
-                                        </select>
-                                        @error('state_board')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -354,4 +334,68 @@
 @section('js')
     <!-- jQuery -->
     {{-- <script src="{{ asset('backend/js/port.js') }}"></script> --}}
+    {{-- <script>
+        // Function to calculate and display the grand total
+        function calculateGrandTotal() {
+            var class1 = parseFloat(document.getElementById('class_1').value) || 0;
+            var class2 = parseFloat(document.getElementById('class_2').value) || 0;
+            var class3 = parseFloat(document.getElementById('class_3').value) || 0;
+            var class4 = parseFloat(document.getElementById('class_4').value) || 0;
+            var total = parseFloat(document.getElementById('total').value) || 0;
+            var registered = parseFloat(document.getElementById('registered').value) || 0;
+            var listed = parseFloat(document.getElementById('listed').value) || 0;
+            var others = parseFloat(document.getElementById('others').value) || 0;
+            var dwtotal = parseFloat(document.getElementById('dwtotal').value) || 0;
+
+            // Calculate the grand total
+            var grandTotal = class1 + class2 + class3 + class4 + total + registered + listed + others + dwtotal;
+
+            // Display the grand total in the 'grandTotal' input field
+            document.getElementById('grandTotal').value = grandTotal;
+        }
+
+        // Attach the calculateGrandTotal function to the 'keyup' event of each input field
+        document.querySelectorAll('input').forEach(function(input) {
+            input.addEventListener('keyup', calculateGrandTotal);
+        });
+    </script> --}}
+
+    <script>
+        // Function to calculate and display the grand total
+        function calculateGrandTotal() {
+            var class1 = parseFloat(document.getElementById('class_1').value) || 0;
+            var class2 = parseFloat(document.getElementById('class_2').value) || 0;
+            var class3 = parseFloat(document.getElementById('class_3').value) || 0;
+            var class4 = parseFloat(document.getElementById('class_4').value) || 0;
+            var total = parseFloat(document.getElementById('total').value) || 0;
+            var registered = parseFloat(document.getElementById('registered').value) || 0;
+            var listed = parseFloat(document.getElementById('listed').value) || 0;
+            var others = parseFloat(document.getElementById('others').value) || 0;
+            var dwtotal = parseFloat(document.getElementById('dwtotal').value) || 0;
+
+            // Calculate the DLB Employment Total
+            var total = class1 + class2 + class3 + class4;
+
+            // Display the grand total in the 'grandTotal' input field
+            document.getElementById('total').value = total;
+
+            // Calculate the Dock Workers Total
+            var dwtotal = registered + listed + others;
+
+            // Display the grand total in the 'grandTotal' input field
+            document.getElementById('dwtotal').value = dwtotal;
+
+            // Calculate the grand total
+            // var grandTotal = class1 + class2 + class3 + class4 + total + registered + listed + others + dwtotal;
+            var grandTotal = total + dwtotal;
+
+            // Display the grand total in the 'grandTotal' input field
+            document.getElementById('grandTotal').value = grandTotal;
+        }
+
+        // Attach the calculateGrandTotal function to the 'keyup' event of each input field
+        document.querySelectorAll('input').forEach(function(input) {
+            input.addEventListener('keyup', calculateGrandTotal);
+        });
+    </script>
 @endsection

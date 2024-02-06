@@ -189,10 +189,10 @@
 
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="capacity">Capacity ( IN MILLION METRIC TONNES) <span
+                                        <label for="capacity">Capacity (In Million Metric Tons) <span
                                                 style="color: red;">*</span></label>
                                         <input type="text" class="form-control @error('capacity') is-invalid @enderror"
-                                            id="capacity" placeholder="Enter Capacity" name="capacity"
+                                            id="capacity" placeholder="Enter Capacity (In Million Metric Tons)" name="capacity"
                                             value="{{ old('capacity') }}">
                                         @error('capacity')
                                             <span class="invalid-feedback" role="alert">

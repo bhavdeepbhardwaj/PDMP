@@ -134,7 +134,7 @@ class IconWithPanelTableSeeder extends Seeder
             'parent_id' => '0',
             'module' => 'mod_14',
             'module_name' => 'Cruise Tourism',
-            'url' => 'view-revised-estimate',
+            'url' => 'view-cruise-tourism',
             'mod_list_name' => 'view-cruise-tourism',
             'icon' => 'fa-ship',
         ]);

@@ -105,70 +105,7 @@
 
                             </div>
 
-                            @php
-                                $portCat = \App\Models\PortCategory::where('id', $editData['port_type'])
-                                    ->select('category_name')
-                                    ->first();
-                                $portName = \App\Models\Port::where('id', $editData['port_id'])
-                                    ->select('port_name')
-                                    ->first();
-                                // dd($editData['port_id']);
-                                $stateboard = \App\Models\StateBoard::where('id', $editData['state_board'])
-                                    ->select('name')
-                                    ->first();
-                            @endphp
-
                             <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="port_type">Port Type</label>
-                                        <select class="form-control @error('port_type') is-invalid @enderror"
-                                            name="port_type" id="port_type">
-                                            <option value="{{ $editData->port_type }}" selected>
-                                                {{ $portCat['category_name'] }}
-                                            </option>
-                                        </select>
-                                        @error('port_type')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4" id="startBoard_div">
-                                    <div class="form-group">
-                                        <label for="state_board">State Board <span style="color: red;">*</span></label>
-                                        <select class="form-control @error('state_board') is-invalid @enderror"
-                                            name="state_board" id="state_board" value="{{ old('state_board') }}">
-                                            <option value="{{ $editData->state_board }}" selected>
-                                                {{ $stateboard['name'] ?? 'N/A' }}
-                                            </option>
-                                        </select>
-                                        @error('state_board')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="port_name">Port Name <span style="color: red;">*</span></label>
-                                        <select class="form-control @error('port_id') is-invalid @enderror" name="port_id"
-                                            id="port_name" value="{{ old('port_id') }}">
-                                            <option value="{{ $editData['port_id'] }}" selected>
-                                                {{ $portName['port_name'] }}
-                                            </option>
-                                        </select>
-                                        @error('port_id')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
 
                                 <div class="col-md-4">
                                     <div class="form-group">

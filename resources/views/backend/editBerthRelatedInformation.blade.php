@@ -197,10 +197,10 @@
 
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="no_of_berth">No of Berth <span style="color: red;">*</span></label>
+                                        <label for="no_of_berth">Total No of Berth <span style="color: red;">*</span></label>
                                         <input type="text"
                                             class="form-control @error('no_of_berth') is-invalid @enderror" id="no_of_berth"
-                                            placeholder="Enter No of Berth" name="no_of_berth"
+                                            placeholder="Enter Total No of Berth" name="no_of_berth"
                                             value="{{ $editData['no_of_berth'] }}">
                                         @error('no_of_berth')
                                             <span class="invalid-feedback" role="alert">

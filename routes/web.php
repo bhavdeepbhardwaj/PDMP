@@ -1,13 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Backend\FormController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\DepartmentController;
-use App\Http\Controllers\Backend\BudgetEstimateController;
-use App\Http\Controllers\Backend\FormController;
-use App\Http\Controllers\Backend\RevisedEstimateController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +51,11 @@ Route::group(['prefix' => 'portal', 'middleware' => ['auth', 'user-access', 'rol
     Route::get('view-employment-major-ports', [App\Http\Controllers\Backend\FormController::class, 'viewEmploymentMajorPorts'])->name('view-employment-major-ports');
     Route::get('view-employment-dock-labour-boards-major-port', [App\Http\Controllers\Backend\FormController::class, 'viewEmploymentDockLabourBoardsMajorPort'])->name('view-employment-dock-labour-boards-major-port');
 });
+
+// Module Route Add
+Route::get('add-module', [App\Http\Controllers\Backend\ModuleController::class, 'addModule'])->name('addModule');
+Route::get('edit-module', [App\Http\Controllers\Backend\ModuleController::class, 'editModule'])->name('editModule');
+
 
 // User Routes create User
 Route::post('usercreate', [UserController::class, 'createUser'])->name('user.create');
@@ -136,6 +140,7 @@ Route::put('update-employment-major-ports/{id}', [App\Http\Controllers\Backend\F
 
 // Employment Dock Labour Boards Major Port employment-dock-labour-boards-major-port EmploymentDockLabourBoardsMajorPort
 Route::get('add-employment-dock-labour-boards-major-port', [App\Http\Controllers\Backend\FormController::class, 'addEmploymentDockLabourBoardsMajorPort'])->name('addEmploymentDockLabourBoardsMajorPort');
+Route::get('/data-get-port-types', [FormController::class, 'dataPortTypes']);
 Route::post('save-employment-dock-labour-boards-major-port', [App\Http\Controllers\Backend\FormController::class, 'saveEmploymentDockLabourBoardsMajorPort'])->name('saveEmploymentDockLabourBoardsMajorPort');
 Route::get('edit-employment-dock-labour-boards-major-port/{id}', [App\Http\Controllers\Backend\FormController::class, 'editEmploymentDockLabourBoardsMajorPort'])->name('editEmploymentDockLabourBoardsMajorPort');
 Route::put('update-employment-dock-labour-boards-major-port/{id}', [App\Http\Controllers\Backend\FormController::class, 'updateEmploymentDockLabourBoardsMajorPort'])->name('updateEmploymentDockLabourBoardsMajorPort');

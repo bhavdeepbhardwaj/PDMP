@@ -217,10 +217,10 @@
 
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="cruise_berth_charges">Cruise Berth Charges</label>
+                                        <label for="cruise_berth_charges">Cruise Berth Charges (In Rupees)</label>
                                         <input type="text"
                                             class="form-control @error('cruise_berth_charges') is-invalid @enderror"
-                                            id="cruise_berth_charges" placeholder="Enter Cruise Berth Charges"
+                                            id="cruise_berth_charges" placeholder="Enter Cruise Berth Charges In Rupees"
                                             name="cruise_berth_charges" value="{{ $editData['cruise_berth_charges'] }}">
                                         @error('cruise_berth_charges')
                                             <span class="invalid-feedback" role="alert">

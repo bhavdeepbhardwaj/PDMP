@@ -38,6 +38,10 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">Module Role Access Data</h3>
+                                <div class="float-right">
+                                    <a href="{{ route('addModule') }}" class="btn btn-primary">
+                                        <i class="fas fa-plus"></i> Add</a>
+                                </div>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -79,19 +83,18 @@
                                                     @endforeach
                                                 </td>
                                                 <td>
-                                                    @if($permissionData->create == 1)
-                                                    <span class="badge badge-success">Create</span>
+                                                    @if ($permissionData->create == 1)
+                                                        <span class="badge badge-success">Create</span>
                                                     @endif
-                                                    @if($permissionData->edit == 1)
-                                                    <span class="badge badge-info">Edit</span>
+                                                    @if ($permissionData->edit == 1)
+                                                        <span class="badge badge-info">Edit</span>
                                                     @endif
-                                                    @if($permissionData->deleted == 1)
-                                                    <span class="badge badge-danger">Deleted</span>
+                                                    @if ($permissionData->deleted == 1)
+                                                        <span class="badge badge-danger">Deleted</span>
                                                     @endif
                                                 </td>
                                                 <td class="">
-                                                    <a href="javascript:void(0)" data-toggle="modal"
-                                                        data-target="#editmodal-xl" class="edit-user"
+                                                    <a href="{{ route('editModule') }}" class="edit-user"
                                                         data-UserId="{{ $value['id'] }}"><i class="far fa-edit"
                                                             aria-hidden="true"></i></a>
                                                 </td>

@@ -122,9 +122,6 @@
                                         ->select('port_name')
                                         ->first();
                                     // dd($editData['port_id']);
-                                    $stateboard = \App\Models\StateBoard::where('id', $editData['state_board'])
-                                        ->select('name')
-                                        ->first();
                                 @endphp
                                 <div class="col-md-4">
                                     <div class="form-group">
@@ -136,23 +133,6 @@
                                             </option>
                                         </select>
                                         @error('port_type')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4" id="startBoard_div">
-                                    <div class="form-group">
-                                        <label for="state_board">State Board <span style="color: red;">*</span></label>
-                                        <select class="form-control @error('state_board') is-invalid @enderror"
-                                            name="state_board" id="state_board" value="{{ old('state_board') }}">
-                                            <option value="{{ $editData->state_board }}" selected>
-                                                {{ $stateboard['name'] ?? 'N/A' }}
-                                            </option>
-                                        </select>
-                                        @error('state_board')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -182,7 +162,7 @@
 
                             {{-- Officer Class 1 --}}
                             <hr style="height:3px;border-width:0;color:gray;background-color:gray;">
-                            <h4 style="text-align: center;">Officers</h4>
+                            <h4 style="text-align: center;">Number Of Officers</h4>
                             <hr style="height:3px;border-width:0;color:gray;background-color:gray;">
                             <div class="row">
                                 <div class="col-md-6">
@@ -190,7 +170,7 @@
                                         <label for="class_1">Class I <span style="color: red;">*</span></label>
                                         <input type="text" class="form-control @error('class_1') is-invalid @enderror"
                                             name="class_1" id="class_1" value="{{ $editData->class_1 }}"
-                                            placeholder="Officer Class 1">
+                                            placeholder="Number Of Officers Class I">
                                         @error('class_1')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -203,7 +183,7 @@
                                         <label for="class_2">Class II <span style="color: red;">*</span></label>
                                         <input type="text" class="form-control @error('class_2') is-invalid @enderror"
                                             name="class_2" id="class_2" value="{{ $editData->class_2 }}"
-                                            placeholder="Officer Class 2">
+                                            placeholder="Number Of Officers Class II">
                                         @error('class_2')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -215,7 +195,7 @@
 
                             {{-- Non-Cargo Handling Workers --}}
                             <hr style="height:3px;border-width:0;color:gray;background-color:gray;">
-                            <h4 style="text-align: center;">Non-Cargo Handling Workers</h4>
+                            <h4 style="text-align: center;">Number Of Non-Cargo Handling Workers</h4>
                             <hr style="height:3px;border-width:0;color:gray;background-color:gray;">
                             <div class="row">
                                 <div class="col-md-4">
@@ -223,7 +203,7 @@
                                         <label for="class_3">Class IIII <span style="color: red;">*</span></label>
                                         <input type="text" class="form-control @error('class_3') is-invalid @enderror"
                                             name="class_3" id="class_3" value="{{ $editData->class_3 }}"
-                                            placeholder="Officer Class 3">
+                                            placeholder="Number Of Non-Cargo Handling Workers Class IIII">
                                         @error('class_3')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -236,7 +216,7 @@
                                         <label for="class_4">Class IV <span style="color: red;">*</span></label>
                                         <input type="text" class="form-control @error('class_4') is-invalid @enderror"
                                             name="class_4" id="class_4" value="{{ $editData->class_4 }}"
-                                            placeholder="Officer Class 4">
+                                            placeholder="Number Of Non-Cargo Handling Workers Class IV">
                                         @error('class_4')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -249,7 +229,7 @@
                                         <label for="class_5">Other <span style="color: red;">*</span></label>
                                         <input type="text" class="form-control @error('class_5') is-invalid @enderror"
                                             name="class_5" id="class_5" value="{{ $editData->class_5 }}"
-                                            placeholder="Officer Class 5">
+                                            placeholder="Other">
                                         @error('class_5')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -261,7 +241,7 @@
 
                             {{-- Cargo Handling Workers Other than Shore Workers --}}
                             <hr style="height:3px;border-width:0;color:gray;background-color:gray;">
-                            <h4 style="text-align: center;">Cargo Handling Workers</h4>
+                            <h4 style="text-align: center;">Number Of Cargo Handling Workers</h4>
                             <hr style="height:3px;border-width:0;color:gray;background-color:gray;">
                             <div class="row">
                                 <div class="col-md-6">
@@ -269,7 +249,7 @@
                                         <label for="class_6">Class III <span style="color: red;">*</span></label>
                                         <input type="text" class="form-control @error('class_6') is-invalid @enderror"
                                             name="class_6" id="class_6" value="{{ $editData->class_6 }}"
-                                            placeholder="Officer Class 6">
+                                            placeholder="Number Of Cargo Handling Workers Class III">
                                         @error('class_6')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -282,7 +262,7 @@
                                         <label for="class_7">Class IV <span style="color: red;">*</span></label>
                                         <input type="text" class="form-control @error('class_7') is-invalid @enderror"
                                             name="class_7" id="class_7" value="{{ $editData->class_7 }}"
-                                            placeholder="Officer Class 7">
+                                            placeholder="Number Of Cargo Handling Workers Class IV">
                                         @error('class_7')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -300,7 +280,7 @@
                                         <input type="text"
                                             class="form-control @error('shore_wrk') is-invalid @enderror"
                                             name="shore_wrk" id="shore_wrk" value="{{ $editData->shore_wrk }}"
-                                            placeholder="Shore Worker">
+                                            placeholder="Number Shore Worker">
                                         @error('shore_wrk')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -314,7 +294,7 @@
                                         <input type="text"
                                             class="form-control @error('casual_work') is-invalid @enderror"
                                             name="casual_work" id="casual_work" value="{{ $editData->casual_work }}"
-                                            placeholder="Casual Worker">
+                                            placeholder="Number Casual Worker">
                                         @error('casual_work')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -358,4 +338,29 @@
 @section('js')
     <!-- jQuery -->
     {{-- <script src="{{ asset('backend/js/port.js') }}"></script> --}}
+    <script>
+        // Function to calculate and display the total
+        function calculateTotal() {
+            var class1 = parseFloat(document.getElementById('class_1').value) || 0;
+            var class2 = parseFloat(document.getElementById('class_2').value) || 0;
+            var class3 = parseFloat(document.getElementById('class_3').value) || 0;
+            var class4 = parseFloat(document.getElementById('class_4').value) || 0;
+            var class5 = parseFloat(document.getElementById('class_5').value) || 0;
+            var class6 = parseFloat(document.getElementById('class_6').value) || 0;
+            var class7 = parseFloat(document.getElementById('class_7').value) || 0;
+            var shore_wrk = parseFloat(document.getElementById('shore_wrk').value) || 0;
+            var casual_work = parseFloat(document.getElementById('casual_work').value) || 0;
+
+            // Calculate the total
+            var total = class1 + class2 + class3 + class4 + class5 + class6 + class7 + shore_wrk + casual_work;
+
+            // Display the total in the 'total' input field
+            document.getElementById('total').value = total;
+        }
+
+        // Attach the calculateTotal function to the 'keyup' event of each input field
+        document.querySelectorAll('input').forEach(function(input) {
+            input.addEventListener('keyup', calculateTotal);
+        });
+    </script>
 @endsection

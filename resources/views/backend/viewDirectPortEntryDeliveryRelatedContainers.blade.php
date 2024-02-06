@@ -19,12 +19,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Direct Port Entry Delivery Related Containers</h1>
+                        <h1>Direct Port Entry / Delivery Related Containers</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Direct Port Entry Delivery Related Containers</li>
+                            <li class="breadcrumb-item active">Direct Port Entry / Delivery Related Containers</li>
                         </ol>
                     </div>
                 </div>
@@ -90,7 +90,7 @@
                                                 <td>{{ $value['select_year'] }}</td>
                                                 <td>{{ $monthName }}</td>
                                                 <td>{{ $portCat->category_name }}</td>
-                                                <td>{{ $stateboard ? $stateboard->name : 'N/A' }}</td>
+                                                <td>{{ $stateboard ? $stateboard->name : '' }}</td>
                                                 <td>{{ $portName->port_name }}</td>
                                                 <td>{{ $value['containers'] }}</td>
                                                 <td>{{ $value['direct_port_entry_of_teu'] }}</td>

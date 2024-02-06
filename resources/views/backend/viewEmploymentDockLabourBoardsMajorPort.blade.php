@@ -71,10 +71,9 @@
                                             <th rowspan="2">Year</th>
                                             <th rowspan="2">Month</th>
                                             <th rowspan="2">Port Type</th>
-                                            <th rowspan="2">State Board</th>
                                             <th rowspan="2">Port Name</th>
-                                            <th colspan="5">DLB Employment</th>
-                                            <th colspan="4">Dock Workers</th>
+                                            <th colspan="5">Number of DLB Employment</th>
+                                            <th colspan="4">Number of Dock Workers</th>
                                             <th rowspan="2">Grand Total</th>
                                             <th rowspan="2">Action</th>
                                         </tr>
@@ -83,7 +82,7 @@
                                             <th>Class II</th>
                                             <th>Class IIII</th>
                                             <th>Class IV</th>
-                                            <th>Total</th>
+                                            <th>DLB Employment Total</th>
                                             <th>Registered</th>
                                             <th>Listed</th>
                                             <th>Others</th>
@@ -99,9 +98,7 @@
                                                 $portName = \App\Models\Port::where('id', $value['id'])
                                                     ->select('port_name')
                                                     ->first();
-                                                $stateboard = \App\Models\StateBoard::where('id', $value['state_board'])
-                                                    ->select('name')
-                                                    ->first();
+
                                                 $numericMonth = $value['select_month'];
                                                 $monthName = \Carbon\Carbon::create()
                                                     ->month($numericMonth)
@@ -112,7 +109,6 @@
                                                 <td>{{ $value['select_year'] }}</td>
                                                 <td>{{ $monthName }}</td>
                                                 <td>{{ $portCat->category_name }}</td>
-                                                <td>{{ $stateboard ? $stateboard->name : 'N/A' }}</td>
                                                 <td>{{ $portName->port_name }}</td>
                                                 <td>{{ $value['class_1'] }}</td>
                                                 <td>{{ $value['class_2'] }}</td>
@@ -137,7 +133,6 @@
                                             <th>Year</th>
                                             <th>Month</th>
                                             <th>Port Type</th>
-                                            <th>State Board</th>
                                             <th>Port Name</th>
                                             <th>Class 1</th>
                                             <th>Class 2</th>

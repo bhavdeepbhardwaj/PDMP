@@ -59,10 +59,10 @@
                                             <th>Year</th>
                                             <th>Month</th>
                                             <th>Port Type</th>
-                                            <th>Port Name</th>
                                             <th>State Board</th>
+                                            <th>Port Name</th>
                                             <th>Operational</th>
-                                            <th>Capacity ( IN MILLION METRIC TONNES)</th>
+                                            <th>Capacity (In Million Metric Tons)</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -89,8 +89,8 @@
                                                 <td>{{ $value['select_year'] }}</td>
                                                 <td>{{ $monthName }}</td>
                                                 <td>{{ $portCat->category_name }}</td>
+                                                <td>{{ $stateboard ? $stateboard->name : '' }}</td>
                                                 <td>{{ $portName->port_name }}</td>
-                                                <td>{{ $stateboard ? $stateboard->name : 'N/A' }}</td>
                                                 <td>{{ $value['operational'] }}</td>
                                                 <td>{{ $value['capacity'] }}</td>
                                                 <td>
@@ -107,10 +107,10 @@
                                             <th>Year</th>
                                             <th>Month</th>
                                             <th>Port Type</th>
-                                            <th>Port Name</th>
                                             <th>State Board</th>
+                                            <th>Port Name</th>
                                             <th>Operational</th>
-                                            <th>Capacity ( IN MILLION METRIC TONNES)</th>
+                                            <th>Capacity (In Million Metric Tons)</th>
                                             <th>Action</th>
                                         </tr>
                                     </tfoot>
