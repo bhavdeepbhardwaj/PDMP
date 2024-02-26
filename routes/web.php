@@ -36,6 +36,7 @@ Route::group(['prefix' => 'portal', 'middleware' => ['auth', 'user-access', 'rol
     Route::get('icon-with-panels', [App\Http\Controllers\Backend\DashboardController::class, 'iconWithPanelsList'])->name('icon-with-panels');
     Route::get('department', [App\Http\Controllers\Backend\DepartmentController::class, 'departmentList'])->name('department');
     Route::get('profile', [App\Http\Controllers\Backend\DashboardController::class, 'profile'])->name('profile');
+    // Route::get('user', [App\Http\Controllers\Backend\UserController::class, 'userList'])->name('user');
     Route::get('user', [App\Http\Controllers\Backend\UserController::class, 'userList'])->name('user');
     Route::get('role', [App\Http\Controllers\Backend\RoleController::class, 'roleList'])->name('role');
     Route::get('port', [App\Http\Controllers\Backend\PortController::class, 'portList'])->name('port');
@@ -60,6 +61,12 @@ Route::get('edit-module', [App\Http\Controllers\Backend\ModuleController::class,
 // User Routes create User
 Route::post('usercreate', [UserController::class, 'createUser'])->name('user.create');
 Route::get('useredit/{id?}', [UserController::class, 'editUser'])->name('user.edit');
+
+Route::get('add-user', [UserController::class, 'addUser'])->name('addUser');
+Route::post('save-user', [App\Http\Controllers\Backend\UserController::class, 'saveUser'])->name('saveUser');
+Route::get('edit-user/{id}', [App\Http\Controllers\Backend\UserController::class, 'editUser'])->name('editUser');
+Route::put('update-user/{id}', [App\Http\Controllers\Backend\UserController::class, 'updateUser'])->name('updateUser');
+
 
 // Department Created Route
 Route::post('departmentcreate', [DepartmentController::class, 'createDepartment'])->name('department.create');

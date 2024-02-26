@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('dep_id')->nullable();
             $table->tinyInteger('status')->default(0);
             $table->text('created_by')->default(0)->comment('Create User ID');
+            $table->text('updated_by')->default(0)->comment('Admin ID');
             $table->tinyInteger('is_deleted')->default(0)->comment('Soft Deleted');
             $table->rememberToken();
             $table->timestamps();

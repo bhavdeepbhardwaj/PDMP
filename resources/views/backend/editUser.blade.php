@@ -36,11 +36,38 @@
                         {{-- Form Respone --}}
                         @include('backend.component.flush')
 
-                        <form method="POST" action="{{ route('saveUser') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('updateUser', $editData->id) }}"
+                            enctype="multipart/form-data">
                             @csrf
+                            @method('PUT')
+
+                            @php
+                                // PortCategory
+                                $portCat = \App\Models\PortCategory::where('id', $editData['port_type'])
+                                    ->select('category_name')
+                                    ->first();
+                                // Port
+                                $portName = \App\Models\Port::where('id', $editData['port_id'])
+                                    ->select('port_name')
+                                    ->first();
+                                // dd($editData['port_id']);
+                                // Role
+                                $roleName = \App\Models\Role::where('id', $editData['role_id'])
+                                    ->select('role_name')
+                                    ->first();
+                                // Department
+                                $depName = \App\Models\Department::where('id', $editData['dep_id'])
+                                    ->select('name')
+                                    ->first();
+                                // Report
+                                // $reportList = User::where('is_deleted', 0)->whereIn('role_id', [1, 2])->get()->toArray();
+                                $repName = \App\Models\User::where('report_to', $editData['report_to'])
+                                    ->select('name')
+                                    ->first();
+                            @endphp
                             <div class="row">
                                 <input type="hidden" class="form-control" id="createdBy" value="{{ Auth::user()->id }}"
-                                    name="created_by">
+                                    name="updated_by">
 
                                 <div class="col-md-6">
                                     {{-- Add the form tag with an id for easier selection --}}
@@ -48,7 +75,7 @@
                                         <label for="name">Name <span style="color: red;">*</span></label>
                                         <input type="text" class="form-control @error('name') is-invalid @enderror"
                                             id="name" placeholder="Enter Name" name="name"
-                                            value="{{ old('name') }}">
+                                            value="{{ $editData['name'] }}">
                                         @error('name')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -63,7 +90,7 @@
                                         <label for="email">Email <span style="color: red;">*</span></label>
                                         <input type="email" class="form-control @error('email') is-invalid @enderror"
                                             name="email" id="email" placeholder="Enter Email"
-                                            value="{{ old('email') }}">
+                                            value="{{ $editData['email'] }}">
                                         @error('email')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -77,12 +104,10 @@
                                     <div class="form-group">
                                         <label for="role_id">Position / Role <span style="color: red;">*</span></label>
                                         <select class="form-control @error('role_id') is-invalid @enderror" name="role_id"
-                                            id="role_id" value="{{ old('role_id') }}">
-                                            <option value=''>---Select--</option>
-                                            @foreach ($roleId as $value)
-                                                <option value="{{ $value->id }}">{{ $value->role_name }}
-                                                </option>
-                                            @endforeach
+                                            id="role_id">
+                                            <option value="{{ $editData['role_id'] }}" selected>
+                                                {{ $roleName['role_name'] }}
+                                            </option>
                                         </select>
                                         @error('role_id')
                                             <span class="invalid-feedback" role="alert">
@@ -97,12 +122,10 @@
                                     <div class="form-group">
                                         <label for="dep_id">Office / Department <span style="color: red;">*</span></label>
                                         <select class="form-control @error('dep_id') is-invalid @enderror" name="dep_id"
-                                            id="dep_id" value="{{ old('dep_id') }}">
-                                            <option value=''>---Select--</option>
-                                            @foreach ($depID as $dep)
-                                                <option value="{{ $dep->id }}">{{ $dep->name }}
-                                                </option>
-                                            @endforeach
+                                            id="dep_id">
+                                            <option value="{{ $editData['dep_id'] }}" selected>
+                                                {{ $depName['name'] }}
+                                            </option>
                                         </select>
                                         @error('dep_id')
                                             <span class="invalid-feedback" role="alert">
@@ -117,12 +140,10 @@
                                     <div class="form-group">
                                         <label for="port_type">Port Type <span style="color: red;">*</span></label>
                                         <select class="form-control @error('port_type') is-invalid @enderror"
-                                            name="port_type" id="port_type" value="{{ old('port_type') }}">
-                                            <option value=''>---Select--</option>
-                                            @foreach ($portCatName as $key => $value)
-                                                <option value="{{ $value['id'] }}">
-                                                    {{ $value['category_name'] }}</option>
-                                            @endforeach
+                                            name="port_type" id="port_type">
+                                            <option value="{{ $editData['port_type'] }}" selected>
+                                                {{ $portCat['category_name'] }}
+                                            </option>
                                         </select>
                                         @error('port_type')
                                             <span class="invalid-feedback" role="alert">
@@ -136,9 +157,11 @@
                                     {{-- Add the form tag with an id for easier selection --}}
                                     <div class="form-group" id="showPortName">
                                         <label for="port_id">Port <span style="color: red;">*</span></label>
-                                        <select class="form-control @error('port_id') is-invalid @enderror" name="port_id[]"
+                                        <select class="form-control @error('port_id') is-invalid @enderror" name="port_id"
                                             id="port_id">
-                                            <option value=''>---Select--</option>
+                                            <option value="{{ $editData['port_id'] }}" selected>
+                                                {{ $portName['port_name'] }}
+                                            </option>
                                         </select>
                                         @error('port_id')
                                             <span class="invalid-feedback" role="alert">
@@ -153,12 +176,11 @@
                                     <div class="form-group">
                                         <label for="report_to">Report Officer <span style="color: red;">*</span></label>
                                         <select class="form-control @error('report_to') is-invalid @enderror"
-                                            name="report_to" id="report_to" value="{{ old('report_to') }}">
-                                            <option value=''>---Select--</option>
-                                            @foreach ($reportList as $key => $value)
-                                                <option value="{{ $value['id'] }}">{{ $value['name'] }}
-                                                </option>
-                                            @endforeach
+                                            name="report_to" id="report_to">
+                                            <option value="" disabled>Select Report Officer</option>
+                                            <option value="{{ $editData['report_to'] }}" selected>
+                                                {{ $repName['name'] }}</option>
+                                            {{-- Add options dynamically if needed --}}
                                         </select>
                                         @error('report_to')
                                             <span class="invalid-feedback" role="alert">
@@ -173,10 +195,11 @@
                                     <div class="form-group">
                                         <label for="status">Status <span style="color: red;">*</span></label>
                                         <select class="form-control @error('status') is-invalid @enderror" name="status"
-                                            id="status" value="{{ old('status') }}">
-                                            <option value=''>---Select--</option>
-                                            <option value="1">Active</option>
-                                            <option value="0">Inactive</option>
+                                            id="status">
+                                            <option value="1" {{ $editData['status'] == 1 ? 'selected' : '' }}>Active
+                                            </option>
+                                            <option value="0" {{ $editData['status'] == 0 ? 'selected' : '' }}>
+                                                Inactive</option>
                                         </select>
                                         @error('status')
                                             <span class="invalid-feedback" role="alert">

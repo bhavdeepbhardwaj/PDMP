@@ -117,7 +117,33 @@ class DashboardController extends Controller
     }
 
     public function blankPage()
+
     {
-        return view('backend.blank');
+         // Fetch user list where is_deleted is 0
+         $userList = User::where('is_deleted', 0)->get()->toArray();
+
+         // Fetch Report Officer list where is_deleted is 0 and role ID is 1,3
+         $reportList = User::where('is_deleted', 0)->whereIn('role_id', [1, 2])->get()->toArray();
+
+         // Fetch department IDs that are not deleted
+         $depID = Department::where('is_deleted', 0)->get();
+
+         // Fetch all ports that are not deleted
+         $portName = Port::where('is_deleted', 0)->get();
+
+         // Fetch port category names and IDs that are not deleted
+         $portCatName = PortCategory::select('category_name', 'id')->where('is_deleted', 0)->get()->toArray();
+
+         // Fetch all roles
+         $roleId = Role::get();
+
+        return view('backend.blank', [
+            'userList' => $userList,
+            'depID' => $depID,
+            'roleId' => $roleId,
+            'portName' => $portName,
+            'portCatName' => $portCatName,
+            'reportList' => $reportList,
+        ]);
     }
 }
