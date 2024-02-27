@@ -69,7 +69,7 @@ class UserController extends Controller
             $userList = User::where('is_deleted', 0)->get()->toArray();
 
             // Fetch Report Officer list where is_deleted is 0 and role ID is 1,3
-            $reportList = User::where('is_deleted', 0)->whereIn('role_id', [1, 2])->get()->toArray();
+            $reportList = User::where('is_deleted', 0)->whereIn('role_id', [1, 2,3,4])->get()->toArray();
 
             // Fetch department IDs that are not deleted
             $depID = Department::where('is_deleted', 0)->get();
@@ -107,6 +107,7 @@ class UserController extends Controller
     public function saveUser(Request $request)
     {
         try {
+            // dd($request->all());
             // Validation rules
             $rules = [
                 'name' => 'required|regex:/^[A-Za-z\s]+$/',
@@ -114,6 +115,7 @@ class UserController extends Controller
                 'dep_id' => 'required',
                 'email' => ['required', 'email', new AllowedEmailDomain(['gmail.com', 'gov.in'])],
                 'port_type' => 'required',
+                'state_board' => 'required',
                 'port_id' => 'required',
                 'report_to' => 'required',
                 'status' => 'required',
@@ -130,6 +132,7 @@ class UserController extends Controller
                 'status.required' => 'The status field is required.',
                 'port_id.required' => 'The port field is required.',
                 'port_type.required' => 'The porttype field is required.',
+                'state_board.required' => 'The state board field is required.',
                 'dep_id.required' => 'The department field is required.',
                 'report_to.required' => 'The report Officer field is required.',
             ];
@@ -158,6 +161,7 @@ class UserController extends Controller
                 'report_to' => $request->input('report_to'),
                 'port_id' => $portIdImp,
                 'port_type' => $request->input('port_type'),
+                'state_board' => $request->input('state_board'),
                 'password' => bcrypt('123456'), // Secure password hashing
                 'username' => $username[0],
             ]);
@@ -225,6 +229,7 @@ class UserController extends Controller
                 'dep_id' => 'required',
                 'email' => ['required', 'email', new AllowedEmailDomain(['gmail.com', 'gov.in'])],
                 'port_type' => 'required',
+                'state_board' => 'required',
                 'port_id' => 'required',
                 'report_to' => 'required',
                 'status' => 'required',
@@ -240,6 +245,7 @@ class UserController extends Controller
                 'status.required' => 'The status field is required.',
                 'port_id.required' => 'The port field is required.',
                 'port_type.required' => 'The porttype field is required.',
+                'state_board.required' => 'The state board field is required.',
                 'dep_id.required' => 'The department field is required.',
                 'report_to.required' => 'The report Officer field is required.',
             ];
@@ -267,6 +273,7 @@ class UserController extends Controller
                 'report_to' => $request->input('report_to'),
                 'port_id' => $request->input('port_id'),
                 'port_type' => $request->input('port_type'),
+                'state_board' => $request->input('state_board'),
                 'updated_by' => $request->input('updated_by'),
             ]);
 

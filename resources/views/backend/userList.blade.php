@@ -43,7 +43,7 @@
                             <div class="card-header">
                                 <h3 class="card-title">User Management</h3>
                                 <div class="float-right">
-                                    <a href="{{ route('addUser') }}" class="btn btn-primary">
+                                    <a href="{{ route('backend.addUser') }}" class="btn btn-primary">
                                         <i class="fas fa-plus"></i> Add User
                                     </a>
                                 </div>
@@ -63,7 +63,7 @@
                                             <th>Username</th>
                                             <th>Status (Active / Inactive)</th>
                                             <th>Created</th>
-                                            <th>Updated</th>
+                                            {{-- <th>Updated</th> --}}
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -86,7 +86,7 @@
                                                 <td>{{ $value['email'] }}</td>
                                                 <td>{{ $value['username'] }}</td>
                                                 <td>
-                                                    @if ($value['is_deleted'] == '0')
+                                                    @if ($value['status'] == 1)
                                                         <span class="badge badge-primary">Active</span>
                                                     @else
                                                         <span class="badge badge-danger">Inactive</span>
@@ -94,10 +94,10 @@
                                                 </td>
                                                 <td>{{ date('jS \of F Y h:i:s A', strtotime($value['created_at'])) }}
                                                 </td>
-                                                <td>{{ date('jS \of F Y h:i:s A', strtotime($value['updated_at'])) }}
-                                                </td>
+                                                {{-- <td>{{ date('jS \of F Y h:i:s A', strtotime($value['updated_at'])) }}
+                                                </td> --}}
                                                 <td class="">
-                                                    <a href="{{ route('editUser', $value['id']) }}" class="edit-user"><i
+                                                    <a href="{{ route('backend.editUser', $value['id']) }}" class="edit-user"><i
                                                             class="far fa-edit" aria-hidden="true"></i></a>
                                                 </td>
                                             </tr>
@@ -113,7 +113,7 @@
                                             <th>Username</th>
                                             <th>Status (Active / Inactive)</th>
                                             <th>Created</th>
-                                            <th>Updated</th>
+                                            {{-- <th>Updated</th> --}}
                                             <th>Action</th>
                                         </tr>
                                     </tfoot>

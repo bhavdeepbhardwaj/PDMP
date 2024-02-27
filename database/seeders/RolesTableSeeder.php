@@ -19,13 +19,23 @@ class RolesTableSeeder extends Seeder
         ]);
 
         Role::create([
-            'role_name' => 'Port nodal office (Admin)',
-            'role_slug' => 'portnodaloffice',
+            'role_name' => 'Ministry of Admin (Admin)',
+            'role_slug' => 'ministryofadmin',
         ]);
 
         Role::create([
-            'role_name' => 'Port Data entry officer (User)',
-            'role_slug' => 'portdataentryofficer',
+            'role_name' => 'DG Shipping (Admin)',
+            'role_slug' => 'dgshipping',
+        ]);
+
+        Role::create([
+            'role_name' => 'IWAI (Admin)',
+            'role_slug' => 'iwai',
+        ]);
+
+        Role::create([
+            'role_name' => 'User',
+            'role_slug' => 'user',
         ]);
 
         Role::create([

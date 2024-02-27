@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->default(0);
             $table->text('port_type')->default(0);
+            $table->text('state_board')->default(0);
             $table->text('port_id')->default(0);
             $table->text('report_to')->default(0);
             $table->string('email')->unique();

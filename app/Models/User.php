@@ -27,6 +27,8 @@ class User extends Authenticatable
         'status',
         'port_id',
         'port_type',
+        'report_to',
+        'state_board',
         'updated_by',
     ];
 

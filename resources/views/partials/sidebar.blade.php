@@ -45,7 +45,7 @@
                                 </p>
                             </a>
                         @endif
-                        @if (isset($value['submodule']))
+                        {{-- @if (isset($value['submodule']))
                             <ul class="nav nav-treeview">
                                 @foreach ($value['submodule'] as $subModKey => $subModVal)
                                     <li class="nav-item">
@@ -56,7 +56,7 @@
                                     </li>
                                 @endforeach
                             </ul>
-                        @endif
+                        @endif --}}
 
                     </li>
                 @endforeach
