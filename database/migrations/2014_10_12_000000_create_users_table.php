@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('state_board')->default(0);
             $table->text('port_id')->default(0);
             $table->text('report_to')->default(0);
+            $table->text('extra_module')->default(0);
             $table->string('email')->unique();
             $table->string('username')->nullable();
             $table->timestamp('email_verified_at')->nullable();

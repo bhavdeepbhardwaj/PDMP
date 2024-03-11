@@ -63,7 +63,7 @@
                                 // $reportList = User::where('is_deleted', 0)->whereIn('role_id', [1, 2])->get()->toArray();
                                 // $repName = \App\Models\User::where('id', [1,2,3,4])
                                 $reportList = \App\Models\User::where('id', $editData['report_to'])
-                                    ->select('name','id')
+                                    ->select('name', 'id')
                                     ->get();
                                 // dd($editData['report_to']);
                             @endphp
@@ -138,40 +138,40 @@
                                 </div>
 
                                 <!--<div class="col-md-6">
-                                                {{-- Add the form tag with an id for easier selection --}}
-                                                <div class="form-group">
-                                                    <label for="port_type">Port Type <span style="color: red;">*</span></label>
-                                                    <select class="form-control @error('port_type') is-invalid @enderror"
-                                                        name="port_type" id="port_type">
-                                                        <option value="{{ $editData['port_type'] }}" selected>
-                                                            {{ $portCat['category_name'] }}
-                                                        </option>
-                                                    </select>
-                                                    @error('port_type')
+                                                    {{-- Add the form tag with an id for easier selection --}}
+                                                    <div class="form-group">
+                                                        <label for="port_type">Port Type <span style="color: red;">*</span></label>
+                                                        <select class="form-control @error('port_type') is-invalid @enderror"
+                                                            name="port_type" id="port_type">
+                                                            <option value="{{ $editData['port_type'] }}" selected>
+                                                                {{ $portCat['category_name'] }}
+                                                            </option>
+                                                        </select>
+                                                        @error('port_type')
         <span class="invalid-feedback" role="alert">
-                                                                        <strong>{{ $message }}</strong>
-                                                                    </span>
+                                                                                <strong>{{ $message }}</strong>
+                                                                            </span>
     @enderror
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                            <div class="col-md-6">
-                                                {{-- Add the form tag with an id for easier selection --}}
-                                                <div class="form-group" id="showPortName">
-                                                    <label for="port_id">Port <span style="color: red;">*</span></label>
-                                                    <select class="form-control @error('port_id') is-invalid @enderror" name="port_id"
-                                                        id="port_id">
-                                                        <option value="{{ $editData['port_id'] }}" selected>
-                                                            {{ $portName['port_name'] }}
-                                                        </option>
-                                                    </select>
-                                                    @error('port_id')
+                                                <div class="col-md-6">
+                                                    {{-- Add the form tag with an id for easier selection --}}
+                                                    <div class="form-group" id="showPortName">
+                                                        <label for="port_id">Port <span style="color: red;">*</span></label>
+                                                        <select class="form-control @error('port_id') is-invalid @enderror" name="port_id"
+                                                            id="port_id">
+                                                            <option value="{{ $editData['port_id'] }}" selected>
+                                                                {{ $portName['port_name'] }}
+                                                            </option>
+                                                        </select>
+                                                        @error('port_id')
         <span class="invalid-feedback" role="alert">
-                                                                        <strong>{{ $message }}</strong>
-                                                                    </span>
+                                                                                <strong>{{ $message }}</strong>
+                                                                            </span>
     @enderror
-                                                </div>
-                                            </div> -->
+                                                    </div>
+                                                </div> -->
 
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -262,6 +262,31 @@
                                         @enderror
                                     </div>
                                 </div>
+
+                                <div class="col-md-6">
+                                    {{-- Add the form tag with an id for easier selection --}}
+                                    <div class="form-group">
+                                        <label for="extra_module">Extra Module <span style="color: red;">*</span></label>
+
+                                        <select class="form-control" style="width: 100%;" name="extra_module[]"
+                                            id="extra_module" multiple>
+                                            <option value=''>---Select--</option>
+                                            @foreach ($moduleList as $mname)
+                                                <option value="{{ $mname['id'] }}"
+                                                    @if (in_array($mname['id'], $implodeExtMod)) selected @endif>
+                                                    {{ $mname['module_name'] }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+
+                                        @error('extra_module')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
                             </div>
 
                             <div class="d-flex pb-2 justify-content-center align-items-center">

@@ -20,17 +20,25 @@ class RolePermission
     {
         // Check if the user is authenticated
         if (Auth::check()) {
-            $roleId = Auth::user()->role_id;
+            $roleId[] = Auth::user()->role_id;
             $url = $request->segment(2);
 
             // Find the module associated with the current URL segment
             $getModule = IconWithPanel::where('url', $url)->first();
 
+            // dd(Auth::user()->extra_module);
+            if(Auth::user()->extra_module != 0){
+                $expExtraMod = explode(',',Auth::user()->extra_module);
+                // dd($expExtraMod);
+                $roleId = array_merge($roleId,$expExtraMod);
+                // dd($moduleIdArr);
+            }
+
             if (isset($getModule)) {
                 // Check if the user's role has permission to access this module
-                $moduleCheck = Modules::where('role_id', $roleId)
+                $moduleCheck = Modules::whereIn('role_id', $roleId)
                     ->whereRaw('FIND_IN_SET("' . $getModule->id . '", module_id)')
-                    ->first();
+                    ->get();
 
                 if (isset($moduleCheck)) {
                     return $next($request);

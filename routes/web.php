@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\FormController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\DepartmentController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -158,3 +159,39 @@ Route::get('edit-employment-dock-labour-boards-major-port/{id}', [App\Http\Contr
 Route::put('update-employment-dock-labour-boards-major-port/{id}', [App\Http\Controllers\Backend\FormController::class, 'updateEmploymentDockLabourBoardsMajorPort'])->name('updateEmploymentDockLabourBoardsMajorPort');
 
 Route::get('blank-page', [DashboardController::class, 'blankPage'])->name('backend.blankPage');
+
+
+// Optimize
+Route::get('/Optimize', function () {
+    // Config Cache & Clear
+    $configcache = Artisan::call('config:cache');
+    $configclear = Artisan::call('config:clear');
+    // Cache Clear
+    $cacheclear = Artisan::call('cache:clear');
+    // Route Cache & Clear
+    $routeclear = Artisan::call('route:clear');
+    $routecache = Artisan::call('route:cache');
+    // View Clear
+    $viewclear = Artisan::call('view:clear');
+    $viewcache = Artisan::call('view:cache');
+
+    echo "Optimize ...!<br>";
+    // return redirect()->back()->with("success", "Optimize ...!");
+});
+
+// // // Migrate Fresh Table
+// Route::get('/re-migrate', function () {
+//     // Migrate Fresh Table
+//     $migrate = Artisan::call('migrate:fresh');
+//     echo "Migrate Fresh...!<br>";
+// });
+
+// // Seeder
+// Route::get('/db-seed', function () {
+//     // php artisan db:seed
+//     $dbseed = Artisan::call('db:seed');
+
+//     echo "DB Seed!<br>";
+// });
+
+// Route::get('phpinfo', fn () => phpinfo());

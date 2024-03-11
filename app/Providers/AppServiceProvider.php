@@ -29,12 +29,18 @@ class AppServiceProvider extends ServiceProvider
             //...with this variable
             // $view->with('cart', $cart );
             // dd(Auth::user()->id);
-            $notModArr=['13'];
             if(isset(Auth::user()->role_id)){
             $role_id = Auth::user()->role_id;
             $module = Modules::where('role_id', $role_id)->select('module_id')->first();
             // dd($module);
             $moduleIdArr = explode(',', $module->module_id);
+            // dd(Auth::user()->extra_module);
+            if(Auth::user()->extra_module != 0){
+                $expExtraMod = explode(',',Auth::user()->extra_module);
+                // dd($expExtraMod);
+                $moduleIdArr = array_merge($moduleIdArr,$expExtraMod);
+                // dd($moduleIdArr);
+            }
             // $panelDataByRole = IconWithPanel::where('parent_id',0)->whereIn('id', $moduleIdArr)->whereNotIn('id', $notModArr)->get()->toArray();
             $panelDataByRole = IconWithPanel::where('parent_id',0)->whereIn('id', $moduleIdArr)->get()->toArray();
             // dd($panelDataByRole);

@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Models\CruiseTourism;
 use App\Models\IndianTonnage;
 use App\Models\MNMPortCapacity;
+use Illuminate\Support\Facades\Auth;
 use App\Models\EmploymentMajorPort;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
@@ -1275,7 +1276,7 @@ class FormController extends Controller
     {
         try {
             // Fetch Indian Tonnage that are not deleted
-            $getData = IndianTonnage::where('is_deleted', 0)->get()->toArray();
+            $getData = IndianTonnage::where('is_deleted', 0)->where('created_by', Auth::user()->id)->get()->toArray();
             // Return the view with data
             return view('backend.viewIndianTonnage', ['getData' => $getData]);
         } catch (\Exception $e) {

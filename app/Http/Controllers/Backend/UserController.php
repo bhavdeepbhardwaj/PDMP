@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Department;
+use App\Models\IconWithPanel;
 use App\Models\Port;
 use App\Models\PortCategory;
 use App\Models\Role;
@@ -41,6 +42,7 @@ class UserController extends Controller
             // Fetch all roles
             $roleId = Role::get();
 
+
             // Return the view with user list and related data
             return view('backend.userList', [
                 'userList' => $userList,
@@ -69,7 +71,7 @@ class UserController extends Controller
             $userList = User::where('is_deleted', 0)->get()->toArray();
 
             // Fetch Report Officer list where is_deleted is 0 and role ID is 1,3
-            $reportList = User::where('is_deleted', 0)->whereIn('role_id', [1, 2,3,4])->get()->toArray();
+            $reportList = User::where('is_deleted', 0)->whereIn('role_id', [1, 2, 3, 4])->get()->toArray();
 
             // Fetch department IDs that are not deleted
             $depID = Department::where('is_deleted', 0)->get();
@@ -83,6 +85,8 @@ class UserController extends Controller
             // Fetch all roles
             $roleId = Role::get();
 
+            $moduleList = IconWithPanel::get()->toArray();
+
             // Return the view for adding a new user with necessary data
             return view('backend.addUser', [
                 'userList' => $userList,
@@ -91,6 +95,7 @@ class UserController extends Controller
                 'portName' => $portName,
                 'portCatName' => $portCatName,
                 'reportList' => $reportList,
+                'moduleList' => $moduleList,
             ]);
         } catch (\Exception $e) {
             // Return an error response
@@ -119,6 +124,7 @@ class UserController extends Controller
                 'port_id' => 'required',
                 'report_to' => 'required',
                 'status' => 'required',
+                // 'extra_module' => 'required',
                 'created_by' => 'required',
             ];
 
@@ -135,6 +141,7 @@ class UserController extends Controller
                 'state_board.required' => 'The state board field is required.',
                 'dep_id.required' => 'The department field is required.',
                 'report_to.required' => 'The report Officer field is required.',
+                // 'extra_module.required' => 'The extra module field is required.',
             ];
 
             // Validate the request data
@@ -149,7 +156,14 @@ class UserController extends Controller
 
             $portIdImp = implode(',', $request->input('port_id'));
             $username = explode('@', $request->input('email'));
+            $extraModule = '0'; // Set a default value
 
+            // Check if 'extra_module' input exists and is not empty
+            if ($request->has('extra_module') && !empty($request->input('extra_module'))) {
+                // 'extra_module' input exists and is not empty, implode the array
+                $extraModule = implode(',', $request->input('extra_module'));
+            }
+            // dd($request->all(),$request->input('extra_module'));
             // Create a new user record
             $createdResponse = User::create([
                 'name' => $request->input('name'),
@@ -164,8 +178,9 @@ class UserController extends Controller
                 'state_board' => $request->input('state_board'),
                 'password' => bcrypt('123456'), // Secure password hashing
                 'username' => $username[0],
+                'extra_module' => $extraModule
             ]);
-
+            // dd($createdResponse);
             // Check if the create operation was successful
             if ($createdResponse) {
                 // If successful, redirect to the user list page
@@ -195,10 +210,25 @@ class UserController extends Controller
         try {
             // Use findOrFail to retrieve the edit data by ID; it automatically handles the 404 case
             $editData = User::findOrFail($id);
+            $implodeExtMod = []; // Initialize an empty array
+
+            // Check if $editData->extra_module is not empty
+            if (!empty($editData->extra_module)) {
+                // Explode the string into an array and then implode it
+                $implodeExtMod = explode(',', $editData->extra_module);
+            } else {
+                // If $editData->extra_module is empty, set $implodeExtMod to contain only '0'
+                $implodeExtMod[] = '0';
+            }
+
+            $moduleList = IconWithPanel::get()->toArray();
+            // dd($implodeExtMod);
 
             // Return the view with the edit data
             return view('backend.editUser')->with([
                 'editData' => $editData,
+                'moduleList' => $moduleList,
+                'implodeExtMod' => $implodeExtMod
             ]);
 
             // Alternatively, you can return the edit data in a JSON response
@@ -233,6 +263,7 @@ class UserController extends Controller
                 'port_id' => 'required',
                 'report_to' => 'required',
                 'status' => 'required',
+                // 'extra_module' => 'required',
             ];
 
             // Custom validation messages
@@ -248,6 +279,7 @@ class UserController extends Controller
                 'state_board.required' => 'The state board field is required.',
                 'dep_id.required' => 'The department field is required.',
                 'report_to.required' => 'The report Officer field is required.',
+                // 'extra_module.required' => 'The extra module field is required.',
             ];
 
             // Validate the request data
@@ -258,6 +290,12 @@ class UserController extends Controller
                 return redirect()->back()
                     ->withErrors($validator)  // Flash the validation errors to the session
                     ->withInput();  // Flash the input data to the session
+            }
+
+            // Check if 'extra_module' input exists and is not empty
+            if ($request->has('extra_module') && !empty($request->input('extra_module'))) {
+                // 'extra_module' input exists and is not empty, implode the array
+                $extraModule = implode(',', $request->input('extra_module'));
             }
 
             // Find the user by ID
@@ -275,6 +313,8 @@ class UserController extends Controller
                 'port_type' => $request->input('port_type'),
                 'state_board' => $request->input('state_board'),
                 'updated_by' => $request->input('updated_by'),
+                'extra_module' => $extraModule,
+
             ]);
 
             // Check if the update was successful
