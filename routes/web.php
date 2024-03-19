@@ -179,19 +179,19 @@ Route::get('/Optimize', function () {
     // return redirect()->back()->with("success", "Optimize ...!");
 });
 
-// // // Migrate Fresh Table
-// Route::get('/re-migrate', function () {
-//     // Migrate Fresh Table
-//     $migrate = Artisan::call('migrate:fresh');
-//     echo "Migrate Fresh...!<br>";
-// });
+// Migrate Fresh Table
+Route::get('/re-migrate', function () {
+    // Migrate Fresh Table
+    $migrate = Artisan::call('migrate:fresh');
+    echo "Migrate Fresh...!<br>";
+});
 
 // // Seeder
-// Route::get('/db-seed', function () {
-//     // php artisan db:seed
-//     $dbseed = Artisan::call('db:seed');
+Route::get('/db-seed', function () {
+    // php artisan db:seed
+    $dbseed = Artisan::call('db:seed');
 
-//     echo "DB Seed!<br>";
-// });
+    echo "DB Seed!<br>";
+});
 
-// Route::get('phpinfo', fn () => phpinfo());
+Route::get('phpinfo', fn () => phpinfo());
