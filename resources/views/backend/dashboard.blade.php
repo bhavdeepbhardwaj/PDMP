@@ -29,63 +29,61 @@
         <section class="content">
             <div class="container-fluid">
                 @if (Auth::check() && Auth::user()->role_id == '1')
+                    <div class="row">
+                        <div class="col-lg-3 col-6">
+                            <!-- small box -->
+                            <div class="small-box bg-info">
+                                <div class="inner">
+                                    <h3>13234</h3>
 
-                <div class="row">
-                    <div class="col-lg-3 col-6">
-                        <!-- small box -->
-                        <div class="small-box bg-info">
-                            <div class="inner">
-                                <h3>13234</h3>
-
-                                <p>Total Port</p>
+                                    <p>Total Port</p>
+                                </div>
+                                <a href="{{ route('backend.port') }}" class="small-box-footer">More info <i
+                                        class="fas fa-arrow-circle-right"></i></a>
                             </div>
-                            <a href="{{ route('backend.port') }}" class="small-box-footer">More info <i
-                                    class="fas fa-arrow-circle-right"></i></a>
                         </div>
-                    </div>
-                    <!-- ./col -->
-                    <div class="col-lg-3 col-6">
-                        <!-- small box -->
-                        <div class="small-box bg-success">
-                            <div class="inner">
-                                <h3>6</h3>
-                                <p>Port Category</p>
+                        <!-- ./col -->
+                        <div class="col-lg-3 col-6">
+                            <!-- small box -->
+                            <div class="small-box bg-success">
+                                <div class="inner">
+                                    <h3>6</h3>
+                                    <p>Port Category</p>
+                                </div>
+                                <a href="{{ route('backend.port-category') }}" class="small-box-footer">More info <i
+                                        class="fas fa-arrow-circle-right"></i></a>
                             </div>
-                            <a href="{{ route('backend.port-category') }}" class="small-box-footer">More info <i
-                                    class="fas fa-arrow-circle-right"></i></a>
                         </div>
-                    </div>
-                    <!-- ./col -->
-                    <div class="col-lg-3 col-6">
-                        <!-- small box -->
-                        <div class="small-box bg-warning">
-                            <div class="inner">
-                                <h3>443</h3>
-                                <p>Employee Registrations</p>
+                        <!-- ./col -->
+                        <div class="col-lg-3 col-6">
+                            <!-- small box -->
+                            <div class="small-box bg-warning">
+                                <div class="inner">
+                                    <h3>443</h3>
+                                    <p>Employee Registrations</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-person-add"></i>
+                                </div>
+                                <a href="{{ route('backend.user') }}" class="small-box-footer">More info <i
+                                        class="fas fa-arrow-circle-right"></i></a>
                             </div>
-                            <div class="icon">
-                                <i class="ion ion-person-add"></i>
-                            </div>
-                            <a href="{{ route('backend.user') }}" class="small-box-footer">More info <i
-                                    class="fas fa-arrow-circle-right"></i></a>
                         </div>
-                    </div>
-                    <!-- ./col -->
-                    <div class="col-lg-3 col-6">
-                        <!-- small box -->
-                        <div class="small-box bg-danger">
-                            <div class="inner">
-                                <h3>65</h3>
-                                <p>National Waterways Information</p>
+                        <!-- ./col -->
+                        <div class="col-lg-3 col-6">
+                            <!-- small box -->
+                            <div class="small-box bg-danger">
+                                <div class="inner">
+                                    <h3>65</h3>
+                                    <p>National Waterways Information</p>
+                                </div>
+                                <a href="{{ route('backend.view-national-waterways-information') }}"
+                                    class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
-                            <a href="{{ route('backend.view-national-waterways-information') }}" class="small-box-footer">More info <i
-                                    class="fas fa-arrow-circle-right"></i></a>
                         </div>
+                        <!-- ./col -->
                     </div>
-                    <!-- ./col -->
-                </div>
                 @else
-
                 @endif
                 <div class="row">
                     <div class="col-md-12">
@@ -104,8 +102,8 @@
                                                 <h3>46484723</h3>
                                                 <p>Total Cargo Overview</p>
                                             </div>
-                                            <a href="#" class="small-box-footer">More info <i
-                                                    class="fas fa-arrow-circle-right"></i></a>
+                                            <a href="/Cargo-Overview-Data-Report-For-All-Port-Major" class="small-box-footer">More
+                                                info <i class="fas fa-arrow-circle-right"></i></a>
                                         </div>
                                     </div>
                                     <!-- ./col -->
@@ -116,8 +114,8 @@
                                                 <h3>35611623</h3>
                                                 <p>Total Overseas Cargo Data</p>
                                             </div>
-                                            <a href="#" class="small-box-footer">More info <i
-                                                    class="fas fa-arrow-circle-right"></i></a>
+                                            <a href="/Cargo-Overview-Data-Report-For-All-Port-Major" class="small-box-footer">More
+                                                info <i class="fas fa-arrow-circle-right"></i></a>
                                         </div>
                                     </div>
                                     <!-- ./col -->
@@ -128,8 +126,8 @@
                                                 <h3>10875100</h3>
                                                 <p>Total Coastal Cargo Data</p>
                                             </div>
-                                            <a href="#" class="small-box-footer">More info <i
-                                                    class="fas fa-arrow-circle-right"></i></a>
+                                            <a href="/Cargo-Overview-Data-Report-For-All-Port-Major" class="small-box-footer">More
+                                                info <i class="fas fa-arrow-circle-right"></i></a>
                                         </div>
                                     </div>
                                     <!-- ./col -->
@@ -161,7 +159,7 @@
                                                 <h3>61929059</h3>
                                                 <p>Total Cargo Overview</p>
                                             </div>
-                                            <a href="#" class="small-box-footer">More info <i
+                                            <a href="/Cargo-Overview-Data-Report-For-All-Port-Non-Major" class="small-box-footer">More info <i
                                                     class="fas fa-arrow-circle-right"></i></a>
                                         </div>
                                     </div>
@@ -173,7 +171,7 @@
                                                 <h3>49686484</h3>
                                                 <p>Total Overseas Cargo Data</p>
                                             </div>
-                                            <a href="#" class="small-box-footer">More info <i
+                                            <a href="/Cargo-Overview-Data-Report-For-All-Port-Non-Major" class="small-box-footer">More info <i
                                                     class="fas fa-arrow-circle-right"></i></a>
                                         </div>
                                     </div>
@@ -185,7 +183,7 @@
                                                 <h3>443</h3>
                                                 <p>Coastal Commodities Data</p>
                                             </div>
-                                            <a href="#" class="small-box-footer">More info <i
+                                            <a href="/Cargo-Overview-Data-Report-For-All-Port-Non-Major" class="small-box-footer">More info <i
                                                     class="fas fa-arrow-circle-right"></i></a>
                                         </div>
                                     </div>

@@ -160,6 +160,12 @@ Route::put('update-employment-dock-labour-boards-major-port/{id}', [App\Http\Con
 
 Route::get('blank-page', [DashboardController::class, 'blankPage'])->name('backend.blankPage');
 
+Route::get('Cargo-Overview-Data-Report-For-All-Port-Major', [DashboardController::class, 'getCargoOverviewDataReportForAllPortMajor'])->name('backend.getCargoOverviewDataReportForAllPortMajor');
+Route::get('view-Cargo-Overview-Data-Report-For-All-Port-Major', [DashboardController::class, 'viewGetCargoOverviewDataReportForAllPortMajor'])->name('backend.viewGetCargoOverviewDataReportForAllPortMajor');
+
+Route::get('Cargo-Overview-Data-Report-For-All-Port-Non-Major', [DashboardController::class, 'getCargoOverviewDataReportForAllPortNonMajor'])->name('backend.getCargoOverviewDataReportForAllPortNonMajor');
+Route::get('view-Cargo-Overview-Data-Report-For-All-Port-Non-Major', [DashboardController::class, 'viewGetCargoOverviewDataReportForAllPortNonMajor'])->name('backend.viewGetCargoOverviewDataReportForAllPortNonMajor');
+
 
 // Optimize
 Route::get('/Optimize', function () {

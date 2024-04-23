@@ -162,4 +162,30 @@ class DashboardController extends Controller
 
         return response()->json($uniqueData);
     }
+
+
+    // Cargo Overview Data For All Port Major
+
+    public function getCargoOverviewDataReportForAllPortMajor() {
+        return view('backend.getCargoOverviewDataReportForAllPortMajor',);
+    }
+
+    // viewGetCargoOverviewDataReportForAllPortage Major
+
+    public function viewGetCargoOverviewDataReportForAllPortMajor() {
+        return view('backend.viewGetCargoOverviewDataReportForAllPortMajor',);
+    }
+
+
+    // Cargo Overview Data For All Port
+
+    public function getCargoOverviewDataReportForAllPortNonMajor() {
+        return view('backend.getCargoOverviewDataReportForAllPortNonMajor',);
+    }
+
+    // viewGetCargoOverviewDataReportForAllPortage
+
+    public function viewGetCargoOverviewDataReportForAllPortNonMajor() {
+        return view('backend.viewGetCargoOverviewDataReportForAllPortNonMajor',);
+    }
 }
