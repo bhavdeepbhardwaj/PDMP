@@ -7,6 +7,7 @@ use App\Models\BEMonthlyAdd;
 use App\Models\BudgetEstimate;
 use App\Models\Department;
 use App\Models\IconWithPanel;
+use App\Models\IndianTonnage;
 use App\Models\Modules;
 use App\Models\Port;
 use App\Models\PortCategory;
@@ -145,5 +146,20 @@ class DashboardController extends Controller
             'portCatName' => $portCatName,
             'reportList' => $reportList,
         ]);
+    }
+
+
+    public function getData()
+    {
+        $uniqueTrades = IndianTonnage::distinct()->pluck('trade');
+
+        $uniqueData = [];
+
+        foreach ($uniqueTrades as $trade) {
+            $sum = IndianTonnage::where('trade', $trade)->sum('no_of_ships');
+            $uniqueData[$trade] = $sum;
+        }
+
+        return response()->json($uniqueData);
     }
 }

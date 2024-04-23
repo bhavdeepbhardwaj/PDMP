@@ -195,3 +195,7 @@ Route::get('/db-seed', function () {
 });
 
 Route::get('phpinfo', fn () => phpinfo());
+
+
+Route::get('/chart-data', [App\Http\Controllers\Backend\DashboardController::class, 'getData']);
+

@@ -28,85 +28,80 @@
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
-                {{-- <div class="row">
-                <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-info">
-                        <div class="inner">
-                            <h3>13234</h3>
+                @if (Auth::check() && Auth::user()->role_id == '1')
 
-                            <p>Total Port</p>
-                        </div>
-                        <div class="icon">
-                            <i class="ion ion-bag"></i>
-                        </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-                <!-- ./col -->
-                <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-success">
-                        <div class="inner">
-                            <h3>6</h3>
+                <div class="row">
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-info">
+                            <div class="inner">
+                                <h3>13234</h3>
 
-                            <p>Port Category</p>
+                                <p>Total Port</p>
+                            </div>
+                            <a href="{{ route('backend.port') }}" class="small-box-footer">More info <i
+                                    class="fas fa-arrow-circle-right"></i></a>
                         </div>
-                        <div class="icon">
-                            <i class="ion ion-stats-bars"></i>
-                        </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-success">
+                            <div class="inner">
+                                <h3>6</h3>
+                                <p>Port Category</p>
+                            </div>
+                            <a href="{{ route('backend.port-category') }}" class="small-box-footer">More info <i
+                                    class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-warning">
+                            <div class="inner">
+                                <h3>443</h3>
+                                <p>Employee Registrations</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-person-add"></i>
+                            </div>
+                            <a href="{{ route('backend.user') }}" class="small-box-footer">More info <i
+                                    class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-danger">
+                            <div class="inner">
+                                <h3>65</h3>
+                                <p>National Waterways Information</p>
+                            </div>
+                            <a href="{{ route('backend.view-national-waterways-information') }}" class="small-box-footer">More info <i
+                                    class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- ./col -->
                 </div>
-                <!-- ./col -->
-                <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-warning">
-                        <div class="inner">
-                            <h3>443</h3>
+                @else
 
-                            <p>User Registrations</p>
-                        </div>
-                        <div class="icon">
-                            <i class="ion ion-person-add"></i>
-                        </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-                <!-- ./col -->
-                <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-danger">
-                        <div class="inner">
-                            <h3>65</h3>
-
-                            <p>National Waterways Information</p>
-                        </div>
-                        <div class="icon">
-                            <i class="ion ion-pie-graph"></i>
-                        </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-                <!-- ./col -->
-            </div> --}}
+                @endif
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="card card-primary">
+                        <div class="card card-warning">
                             <div class="card-header">
-                                <h3 class="card-title">Portwise Cargo Data Overview(Both Major and Non-Major Ports for
-                                    Current
-                                    Year)</h3>
+                                <h3 class="card-title">Major Port Commodities Wise Data Overview (for Current Year)</h3>
                                 <!-- /.card-tools -->
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-lg-3 col-6">
+                                    <div class="col-lg-4 col-6">
                                         <!-- small box -->
-                                        <div class="small-box bg-info">
+                                        <div class="small-box bg-success">
                                             <div class="inner">
-                                                <h3>150</h3>
+                                                <h3>46484723</h3>
                                                 <p>Total Cargo Overview</p>
                                             </div>
                                             <a href="#" class="small-box-footer">More info <i
@@ -114,39 +109,81 @@
                                         </div>
                                     </div>
                                     <!-- ./col -->
-                                    <div class="col-lg-3 col-6">
+                                    <div class="col-lg-4 col-6">
                                         <!-- small box -->
                                         <div class="small-box bg-success">
                                             <div class="inner">
-                                                <h3>53<sup style="font-size: 20px">%</sup></h3>
-
-                                                <p>Overseas Cargo Data</p>
+                                                <h3>35611623</h3>
+                                                <p>Total Overseas Cargo Data</p>
                                             </div>
                                             <a href="#" class="small-box-footer">More info <i
                                                     class="fas fa-arrow-circle-right"></i></a>
                                         </div>
                                     </div>
                                     <!-- ./col -->
-                                    <div class="col-lg-3 col-6">
+                                    <div class="col-lg-4 col-6">
+                                        <!-- small box -->
+                                        <div class="small-box bg-success">
+                                            <div class="inner">
+                                                <h3>10875100</h3>
+                                                <p>Total Coastal Cargo Data</p>
+                                            </div>
+                                            <a href="#" class="small-box-footer">More info <i
+                                                    class="fas fa-arrow-circle-right"></i></a>
+                                        </div>
+                                    </div>
+                                    <!-- ./col -->
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card card-info">
+                            <div class="card-header">
+                                <h3 class="card-title">Non Major Port Commodities Wise Data Overview (for Current Year)</h3>
+                                <!-- /.card-tools -->
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-4 col-6">
                                         <!-- small box -->
                                         <div class="small-box bg-warning">
                                             <div class="inner">
-                                                <h3>44</h3>
-
-                                                <p>Coastal Cargo Data</p>
+                                                <h3>61929059</h3>
+                                                <p>Total Cargo Overview</p>
                                             </div>
                                             <a href="#" class="small-box-footer">More info <i
                                                     class="fas fa-arrow-circle-right"></i></a>
                                         </div>
                                     </div>
                                     <!-- ./col -->
-                                    <div class="col-lg-3 col-6">
+                                    <div class="col-lg-4 col-6">
                                         <!-- small box -->
-                                        <div class="small-box bg-danger">
+                                        <div class="small-box bg-warning">
                                             <div class="inner">
-                                                <h3>65</h3>
-
-                                                <p>Average Cargo Data</p>
+                                                <h3>49686484</h3>
+                                                <p>Total Overseas Cargo Data</p>
+                                            </div>
+                                            <a href="#" class="small-box-footer">More info <i
+                                                    class="fas fa-arrow-circle-right"></i></a>
+                                        </div>
+                                    </div>
+                                    <!-- ./col -->
+                                    <div class="col-lg-4 col-6">
+                                        <!-- small box -->
+                                        <div class="small-box bg-warning">
+                                            <div class="inner">
+                                                <h3>443</h3>
+                                                <p>Coastal Commodities Data</p>
                                             </div>
                                             <a href="#" class="small-box-footer">More info <i
                                                     class="fas fa-arrow-circle-right"></i></a>
@@ -168,58 +205,99 @@
                     <div class="col-md-12">
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h3 class="card-title">Portwise Commodities Data Overview(Both Major and Non-Major Ports for
-                                    Current Year)</h3>
+                                <h3 class="card-title">Major Port Cargo Traffic Data Overview (For Current Year)</h3>
                                 <!-- /.card-tools -->
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-lg-3 col-6">
+                                    <div class="col-lg-4 col-6">
                                         <!-- small box -->
                                         <div class="small-box bg-info">
                                             <div class="inner">
-                                                <h3>154</h3>
-                                                <p>Total Commodities Overview</p>
+                                                <h3>46486723</h3>
+                                                <p>Total Cargo Overview</p>
                                             </div>
                                             <a href="#" class="small-box-footer">More info <i
                                                     class="fas fa-arrow-circle-right"></i></a>
                                         </div>
                                     </div>
                                     <!-- ./col -->
-                                    <div class="col-lg-3 col-6">
+                                    <div class="col-lg-4 col-6">
                                         <!-- small box -->
-                                        <div class="small-box bg-success">
+                                        <div class="small-box bg-info">
                                             <div class="inner">
-                                                <h3>59<sup style="font-size: 20px">%</sup></h3>
-
-                                                <p>Overseas Commodities Data</p>
+                                                <h3>35611623</h3>
+                                                <p>Total Overseas Cargo Data</p>
                                             </div>
                                             <a href="#" class="small-box-footer">More info <i
                                                     class="fas fa-arrow-circle-right"></i></a>
                                         </div>
                                     </div>
                                     <!-- ./col -->
-                                    <div class="col-lg-3 col-6">
+                                    <div class="col-lg-4 col-6">
                                         <!-- small box -->
-                                        <div class="small-box bg-warning">
+                                        <div class="small-box bg-info">
                                             <div class="inner">
-                                                <h3>443</h3>
+                                                <h3>10875100</h3>
+                                                <p>Total Coastal Cargo Data</p>
+                                            </div>
+                                            <a href="#" class="small-box-footer">More info <i
+                                                    class="fas fa-arrow-circle-right"></i></a>
+                                        </div>
+                                    </div>
+                                    <!-- ./col -->
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
 
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card card-success">
+                            <div class="card-header">
+                                <h3 class="card-title">Non Major Port Cargo Traffic Data Overview (For Current Year)</h3>
+                                <!-- /.card-tools -->
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-4 col-6">
+                                        <!-- small box -->
+                                        <div class="small-box bg-primary">
+                                            <div class="inner">
+                                                <h3>121680132</h3>
+                                                <p>Total Cargo Overview</p>
+                                            </div>
+                                            <a href="#" class="small-box-footer">More info <i
+                                                    class="fas fa-arrow-circle-right"></i></a>
+                                        </div>
+                                    </div>
+                                    <!-- ./col -->
+                                    <div class="col-lg-4 col-6">
+                                        <!-- small box -->
+                                        <div class="small-box bg-primary">
+                                            <div class="inner">
+                                                <h3>99507152</h3>
+                                                <p>Total Overseas Cargo Data</p>
+                                            </div>
+                                            <a href="#" class="small-box-footer">More info <i
+                                                    class="fas fa-arrow-circle-right"></i></a>
+                                        </div>
+                                    </div>
+                                    <!-- ./col -->
+                                    <div class="col-lg-4 col-6">
+                                        <!-- small box -->
+                                        <div class="small-box bg-primary">
+                                            <div class="inner">
+                                                <h3>22172980</h3>
                                                 <p>Coastal Commodities Data</p>
-                                            </div>
-                                            <a href="#" class="small-box-footer">More info <i
-                                                    class="fas fa-arrow-circle-right"></i></a>
-                                        </div>
-                                    </div>
-                                    <!-- ./col -->
-                                    <div class="col-lg-3 col-6">
-                                        <!-- small box -->
-                                        <div class="small-box bg-danger">
-                                            <div class="inner">
-                                                <h3>625</h3>
-
-                                                <p>Average Commodities Data</p>
                                             </div>
                                             <a href="#" class="small-box-footer">More info <i
                                                     class="fas fa-arrow-circle-right"></i></a>
@@ -395,54 +473,110 @@
     <!-- ChartJS -->
     <script src="{{ asset('backend/plugins/chart.js/Chart.min.js ') }}"></script>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+
     <script>
         $(function() {
-            var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
-            var donutData = {
-                labels: [
-                    'Major Port',
-                    'Non-Major port',
-                    'PSU',
-                    'Subordinate',
-                    'Attached Offices',
-                    'Association',
-                ],
-                datasets: [{
-                    data: [700, 500, 400, 600, 300, 100],
-                    backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
-                }]
-            }
-            var donutOptions = {
-                maintainAspectRatio: false,
-                responsive: true,
-            }
-            //Create pie or douhnut chart
-            // You can switch between pie and douhnut using the method below.
-            new Chart(donutChartCanvas, {
-                type: 'doughnut',
-                data: donutData,
-                options: donutOptions
-            })
+            // Function to fetch data from the Laravel endpoint
+            function fetchData() {
+                $.ajax({
+                    url: '/chart-data',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(response) {
+                        // console.log(response); // Log the entire response object to inspect its structure
 
-            //-------------
-            //- PIE CHART -
-            //-------------
-            // Get context with jQuery - using jQuery's .get() method.
-            var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
-            var pieData = donutData;
-            var pieOptions = {
-                maintainAspectRatio: false,
-                responsive: true,
+                        // Assuming your response contains data in the format {Coastal: 28142486, Overseas: 19388211}
+                        var chartData = {
+                            labels: Object.keys(response), // Extracting keys as labels
+                            datasets: [{
+                                data: Object.values(response), // Extracting values as data
+                                backgroundColor: ['#f56954',
+                                    '#00a65a'
+                                ], // Colors for the data
+                            }]
+                        };
+
+                        var donutOptions = {
+                            maintainAspectRatio: false,
+                            responsive: true,
+                        }
+                        // Updating the doughnut chart
+                        var donutChartCanvas = $('#donutChart').get(0).getContext('2d');
+                        new Chart(donutChartCanvas, {
+                            type: 'doughnut',
+                            data: chartData,
+                            options: donutOptions
+                        });
+
+                        // Updating the pie chart
+                        var pieChartCanvas = $('#pieChart').get(0).getContext('2d');
+                        var pieOptions = {
+                            maintainAspectRatio: false,
+                            responsive: true,
+                        }
+                        new Chart(pieChartCanvas, {
+                            type: 'pie',
+                            data: chartData,
+                            options: pieOptions
+                        });
+
+                        // Configure exporting options
+                        Highcharts.setOptions({
+                            exporting: {
+                                buttons: {
+                                    contextButton: {
+                                        menuItems: ['downloadPNG', 'downloadJPEG',
+                                            'downloadPDF', 'downloadSVG'
+                                        ], // Define export options
+                                        symbol: 'download', // Set symbol for the context button
+                                        symbolStroke: '#666666',
+                                        symbolStrokeWidth: 3,
+                                        symbolFill: 'white',
+                                        align: 'right',
+                                        verticalAlign: 'top',
+                                        x: -10,
+                                        y: 10,
+                                        symbolSize: 18,
+                                        symbolX: 11,
+                                        symbolY: 11,
+                                        symbolPosition: 'relative',
+                                        text: 'Export', // Text for the context button
+                                        theme: {
+                                            fill: 'white',
+                                            stroke: null,
+                                            'stroke-width': 0,
+                                            r: 0,
+                                            style: {
+                                                color: '#666666'
+                                            },
+                                            states: {
+                                                hover: {
+                                                    fill: '#efefef'
+                                                },
+                                                select: {
+                                                    fill: '#cccccc'
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                    }
+                });
             }
-            //Create pie or douhnut chart
-            // You can switch between pie and douhnut using the method below.
-            new Chart(pieChartCanvas, {
-                type: 'pie',
-                data: pieData,
-                options: pieOptions
-            })
 
+            // Fetch data initially when the page loads
+            fetchData();
 
-        })
+            // You can also fetch data at regular intervals if it's expected to change
+            // setInterval(fetchData, 60000); // Fetch data every minute (for example)
+        });
     </script>
 @endsection
