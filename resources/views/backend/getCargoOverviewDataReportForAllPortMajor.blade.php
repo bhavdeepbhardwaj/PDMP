@@ -2,6 +2,24 @@
 
 @section('css')
     <!-- Tempusdominus Bootstrap 4 -->
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th,
+        td {
+            border: 1px solid #dddddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #228E3B;
+            text-align: center;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -45,31 +63,108 @@
                                             <div class="row">
                                                 <div class="col-md-12 col-sm-12 col-12 text-center"
                                                     style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
-                                                    <h4 class="" style="padding: 10px; margin: 10px;">DEENDAYAL PORT
-                                                        AUTHORITY</h4>
+                                                    <h4 class=""
+                                                        style="padding: 5px; margin: 5px; font-size: 1.3rem;">SYAMA PRASAD
+                                                        MOOKERJEE KOLKATA</h4>
                                                 </div>
 
                                                 <div class="col-md-6 col-sm-6 col-12">
                                                     <div class="info-box"
                                                         style="background-color:#28A745; box-shadow: 0 0 0 0!important;;">
-                                                        <span class="info-box-icon bg-success"><i
-                                                                class="far fa-"></i></span>
-                                                        <div class="info-box-content">
-                                                            <h4 class="info-box-text">Overseas</h4>
-                                                            <h5 class="info-box-number">141542540</h5>
-                                                        </div>
+                                                        <table>
+                                                            <tr>
+                                                                <th colspan="2">Year</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Overseas</td>
+                                                                <td>141542540</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Coastal</td>
+                                                                <td>141542533</td>
+                                                            </tr>
+                                                        </table>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-6 col-sm-6 col-12">
                                                     <div class="info-box"
                                                         style="background-color:#28A745; box-shadow: 0 0 0 0!important;;">
-                                                        <span class="info-box-icon bg-success"><i
-                                                                class="far fa-"></i></span>
-                                                        <div class="info-box-content">
-                                                            <h4 class="info-box-text">Coastal</h4>
-                                                            <h5 class="info-box-number">15655410</h5>
-                                                        </div>
+                                                        <table>
+                                                            <table>
+                                                                <tr>
+                                                                    <th colspan="2">Year</th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Overseas</td>
+                                                                    <td>141542540</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Coastal</td>
+                                                                    <td>141542533</td>
+                                                                </tr>
+                                                            </table>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                            <a href="/view-Cargo-Overview-Data-Report-For-All-Port-Major"
+                                                class="small-box-footer">More info <i
+                                                    class="fas fa-arrow-circle-right"></i></a>
+                                        </div>
+                                    </div>
+                                    <!-- ./col -->
+                                    <div class="col-lg-4 col-6">
+                                        <!-- small box -->
+                                        <div class="small-box bg-success">
+                                            {{-- <div class="inner">
+                                                <h3>46484723</h3>
+                                                <p>Total Cargo Overview</p>
+                                            </div> --}}
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12 col-12 text-center"
+                                                    style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
+                                                    <h4 class=""
+                                                        style="padding: 5px; margin: 5px; font-size: 1.3rem;">HALDIA DOCK
+                                                        COMPLEX</h4>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-12">
+                                                    <div class="info-box"
+                                                        style="background-color:#28A745; box-shadow: 0 0 0 0!important;;">
+                                                        <table>
+                                                            <tr>
+                                                                <th colspan="2">Year</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Overseas</td>
+                                                                <td>141542540</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Coastal</td>
+                                                                <td>141542533</td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6 col-sm-6 col-12">
+                                                    <div class="info-box"
+                                                        style="background-color:#28A745; box-shadow: 0 0 0 0!important;;">
+                                                        <table>
+                                                            <tr>
+                                                                <th colspan="2">Year</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Overseas</td>
+                                                                <td>141542540</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Coastal</td>
+                                                                <td>141542533</td>
+                                                            </tr>
+                                                        </table>
                                                     </div>
                                                 </div>
 
@@ -90,452 +185,45 @@
                                             <div class="row">
                                                 <div class="col-md-12 col-sm-12 col-12 text-center"
                                                     style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
-                                                    <h4 class="" style="padding: 10px; margin: 10px;">MUMBAI PORT AUTHORITY	</h4>
-                                                </div>
-                                                <div class="col-md-6 col-sm-6 col-12">
-                                                    <div class="info-box"
-                                                        style="background-color:#28A745; box-shadow: 0 0 0 0!important;;">
-                                                        <span class="info-box-icon bg-success"><i
-                                                                class="far fa-"></i></span>
-                                                        <div class="info-box-content">
-                                                            <h4 class="info-box-text">Overseas</h4>
-                                                            <h5 class="info-box-number">141542540</h5>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-6 col-sm-6 col-12">
-                                                    <div class="info-box"
-                                                        style="background-color:#28A745; box-shadow: 0 0 0 0!important;;">
-                                                        <span class="info-box-icon bg-success"><i
-                                                                class="far fa-"></i></span>
-                                                        <div class="info-box-content">
-                                                            <h4 class="info-box-text">Coastal</h4>
-                                                            <h5 class="info-box-number">15655410</h5>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <a href="/view-Cargo-Overview-Data-Report-For-All-Port-Major"
-                                                class="small-box-footer">More info <i
-                                                    class="fas fa-arrow-circle-right"></i></a>
-                                        </div>
-                                    </div>
-                                    <!-- ./col -->
-                                    <div class="col-lg-4 col-6">
-                                        <!-- small box -->
-                                        <div class="small-box bg-success">
-                                            {{-- <div class="inner">
-                                                <h3>46484723</h3>
-                                                <p>Total Cargo Overview</p>
-                                            </div> --}}
-                                            <div class="row">
-                                                <div class="col-md-12 col-sm-12 col-12 text-center"
-                                                    style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
-                                                    <h4 class="" style="padding: 10px; margin: 10px;">JAWAHARLAL NEHRU PORT AUTHORITY	</h4>
-                                                </div>
-                                                <div class="col-md-6 col-sm-6 col-12">
-                                                    <div class="info-box"
-                                                        style="background-color:#28A745; box-shadow: 0 0 0 0!important;;">
-                                                        <span class="info-box-icon bg-success"><i
-                                                                class="far fa-"></i></span>
-                                                        <div class="info-box-content">
-                                                            <h4 class="info-box-text">Overseas</h4>
-                                                            <h5 class="info-box-number">141542540</h5>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-6 col-sm-6 col-12">
-                                                    <div class="info-box"
-                                                        style="background-color:#28A745; box-shadow: 0 0 0 0!important;;">
-                                                        <span class="info-box-icon bg-success"><i
-                                                                class="far fa-"></i></span>
-                                                        <div class="info-box-content">
-                                                            <h4 class="info-box-text">Coastal</h4>
-                                                            <h5 class="info-box-number">15655410</h5>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <a href="/view-Cargo-Overview-Data-Report-For-All-Port-Major"
-                                                class="small-box-footer">More info <i
-                                                    class="fas fa-arrow-circle-right"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-6">
-                                        <!-- small box -->
-                                        <div class="small-box bg-success">
-                                            {{-- <div class="inner">
-                                                <h3>46484723</h3>
-                                                <p>Total Cargo Overview</p>
-                                            </div> --}}
-                                            <div class="row">
-                                                <div class="col-md-12 col-sm-12 col-12 text-center"
-                                                    style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
-                                                    <h4 class="" style="padding: 10px; margin: 10px;">MORMUGAO PORT AUTHORITY	</h4>
-                                                </div>
-                                                <div class="col-md-6 col-sm-6 col-12">
-                                                    <div class="info-box"
-                                                        style="background-color:#28A745; box-shadow: 0 0 0 0!important;;">
-                                                        <span class="info-box-icon bg-success"><i
-                                                                class="far fa-"></i></span>
-                                                        <div class="info-box-content">
-                                                            <h4 class="info-box-text">Overseas</h4>
-                                                            <h5 class="info-box-number">141542540</h5>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-6 col-sm-6 col-12">
-                                                    <div class="info-box"
-                                                        style="background-color:#28A745; box-shadow: 0 0 0 0!important;;">
-                                                        <span class="info-box-icon bg-success"><i
-                                                                class="far fa-"></i></span>
-                                                        <div class="info-box-content">
-                                                            <h4 class="info-box-text">Coastal</h4>
-                                                            <h5 class="info-box-number">15655410</h5>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <a href="/view-Cargo-Overview-Data-Report-For-All-Port-Major"
-                                                class="small-box-footer">More info <i
-                                                    class="fas fa-arrow-circle-right"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-6">
-                                        <!-- small box -->
-                                        <div class="small-box bg-success">
-                                            {{-- <div class="inner">
-                                                <h3>46484723</h3>
-                                                <p>Total Cargo Overview</p>
-                                            </div> --}}
-                                            <div class="row">
-                                                <div class="col-md-12 col-sm-12 col-12 text-center"
-                                                    style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
-                                                    <h4 class="" style="padding: 10px; margin: 10px;">NEW MANGALORE PORT AUTHORITY	</h4>
-                                                </div>
-                                                <div class="col-md-6 col-sm-6 col-12">
-                                                    <div class="info-box"
-                                                        style="background-color:#28A745; box-shadow: 0 0 0 0!important;;">
-                                                        <span class="info-box-icon bg-success"><i
-                                                                class="far fa-"></i></span>
-                                                        <div class="info-box-content">
-                                                            <h4 class="info-box-text">Overseas</h4>
-                                                            <h5 class="info-box-number">141542540</h5>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-6 col-sm-6 col-12">
-                                                    <div class="info-box"
-                                                        style="background-color:#28A745; box-shadow: 0 0 0 0!important;;">
-                                                        <span class="info-box-icon bg-success"><i
-                                                                class="far fa-"></i></span>
-                                                        <div class="info-box-content">
-                                                            <h4 class="info-box-text">Coastal</h4>
-                                                            <h5 class="info-box-number">15655410</h5>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <a href="/view-Cargo-Overview-Data-Report-For-All-Port-Major"
-                                                class="small-box-footer">More info <i
-                                                    class="fas fa-arrow-circle-right"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-6">
-                                        <!-- small box -->
-                                        <div class="small-box bg-success">
-                                            {{-- <div class="inner">
-                                                <h3>46484723</h3>
-                                                <p>Total Cargo Overview</p>
-                                            </div> --}}
-                                            <div class="row">
-                                                <div class="col-md-12 col-sm-12 col-12 text-center"
-                                                    style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
-                                                    <h4 class="" style="padding: 10px; margin: 10px;">COCHIN PORT AUTHORITY	</h4>
-                                                </div>
-                                                <div class="col-md-6 col-sm-6 col-12">
-                                                    <div class="info-box"
-                                                        style="background-color:#28A745; box-shadow: 0 0 0 0!important;;">
-                                                        <span class="info-box-icon bg-success"><i
-                                                                class="far fa-"></i></span>
-                                                        <div class="info-box-content">
-                                                            <h4 class="info-box-text">Overseas</h4>
-                                                            <h5 class="info-box-number">141542540</h5>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-6 col-sm-6 col-12">
-                                                    <div class="info-box"
-                                                        style="background-color:#28A745; box-shadow: 0 0 0 0!important;;">
-                                                        <span class="info-box-icon bg-success"><i
-                                                                class="far fa-"></i></span>
-                                                        <div class="info-box-content">
-                                                            <h4 class="info-box-text">Coastal</h4>
-                                                            <h5 class="info-box-number">15655410</h5>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <a href="/view-Cargo-Overview-Data-Report-For-All-Port-Major"
-                                                class="small-box-footer">More info <i
-                                                    class="fas fa-arrow-circle-right"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-6">
-                                        <!-- small box -->
-                                        <div class="small-box bg-success">
-                                            {{-- <div class="inner">
-                                                <h3>46484723</h3>
-                                                <p>Total Cargo Overview</p>
-                                            </div> --}}
-                                            <div class="row">
-                                                <div class="col-md-12 col-sm-12 col-12 text-center"
-                                                    style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
-                                                    <h4 class="" style="padding: 10px; margin: 10px;">V O CHIDAMBARANAR PORT AUTHORITY	</h4>
-                                                </div>
-                                                <div class="col-md-6 col-sm-6 col-12">
-                                                    <div class="info-box"
-                                                        style="background-color:#28A745; box-shadow: 0 0 0 0!important;;">
-                                                        <span class="info-box-icon bg-success"><i
-                                                                class="far fa-"></i></span>
-                                                        <div class="info-box-content">
-                                                            <h4 class="info-box-text">Overseas</h4>
-                                                            <h5 class="info-box-number">141542540</h5>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-6 col-sm-6 col-12">
-                                                    <div class="info-box"
-                                                        style="background-color:#28A745; box-shadow: 0 0 0 0!important;;">
-                                                        <span class="info-box-icon bg-success"><i
-                                                                class="far fa-"></i></span>
-                                                        <div class="info-box-content">
-                                                            <h4 class="info-box-text">Coastal</h4>
-                                                            <h5 class="info-box-number">15655410</h5>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <a href="/view-Cargo-Overview-Data-Report-For-All-Port-Major"
-                                                class="small-box-footer">More info <i
-                                                    class="fas fa-arrow-circle-right"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-6">
-                                        <!-- small box -->
-                                        <div class="small-box bg-success">
-                                            {{-- <div class="inner">
-                                                <h3>46484723</h3>
-                                                <p>Total Cargo Overview</p>
-                                            </div> --}}
-                                            <div class="row">
-                                                <div class="col-md-12 col-sm-12 col-12 text-center"
-                                                    style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
-                                                    <h4 class="" style="padding: 10px; margin: 10px;">CHENNAI PORT AUTHORITY	</h4>
-                                                </div>
-                                                <div class="col-md-6 col-sm-6 col-12">
-                                                    <div class="info-box"
-                                                        style="background-color:#28A745; box-shadow: 0 0 0 0!important;;">
-                                                        <span class="info-box-icon bg-success"><i
-                                                                class="far fa-"></i></span>
-                                                        <div class="info-box-content">
-                                                            <h4 class="info-box-text">Overseas</h4>
-                                                            <h5 class="info-box-number">141542540</h5>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-6 col-sm-6 col-12">
-                                                    <div class="info-box"
-                                                        style="background-color:#28A745; box-shadow: 0 0 0 0!important;;">
-                                                        <span class="info-box-icon bg-success"><i
-                                                                class="far fa-"></i></span>
-                                                        <div class="info-box-content">
-                                                            <h4 class="info-box-text">Coastal</h4>
-                                                            <h5 class="info-box-number">15655410</h5>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <a href="/view-Cargo-Overview-Data-Report-For-All-Port-Major"
-                                                class="small-box-footer">More info <i
-                                                    class="fas fa-arrow-circle-right"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-6">
-                                        <!-- small box -->
-                                        <div class="small-box bg-success">
-                                            {{-- <div class="inner">
-                                                <h3>46484723</h3>
-                                                <p>Total Cargo Overview</p>
-                                            </div> --}}
-                                            <div class="row">
-                                                <div class="col-md-12 col-sm-12 col-12 text-center"
-                                                    style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
-                                                    <h4 class="" style="padding: 10px; margin: 10px;">KAMARAJAR PORT AUTHORITY	</h4>
-                                                </div>
-                                                <div class="col-md-6 col-sm-6 col-12">
-                                                    <div class="info-box"
-                                                        style="background-color:#28A745; box-shadow: 0 0 0 0!important;;">
-                                                        <span class="info-box-icon bg-success"><i
-                                                                class="far fa-"></i></span>
-                                                        <div class="info-box-content">
-                                                            <h4 class="info-box-text">Overseas</h4>
-                                                            <h5 class="info-box-number">141542540</h5>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-6 col-sm-6 col-12">
-                                                    <div class="info-box"
-                                                        style="background-color:#28A745; box-shadow: 0 0 0 0!important;;">
-                                                        <span class="info-box-icon bg-success"><i
-                                                                class="far fa-"></i></span>
-                                                        <div class="info-box-content">
-                                                            <h4 class="info-box-text">Coastal</h4>
-                                                            <h5 class="info-box-number">15655410</h5>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <a href="/view-Cargo-Overview-Data-Report-For-All-Port-Major"
-                                                class="small-box-footer">More info <i
-                                                    class="fas fa-arrow-circle-right"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-6">
-                                        <!-- small box -->
-                                        <div class="small-box bg-success">
-                                            {{-- <div class="inner">
-                                                <h3>46484723</h3>
-                                                <p>Total Cargo Overview</p>
-                                            </div> --}}
-                                            <div class="row">
-                                                <div class="col-md-12 col-sm-12 col-12 text-center"
-                                                    style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
-                                                    <h4 class="" style="padding: 10px; margin: 10px;">VISAKHAPATNAM PORT AUTHORITY	</h4>
-                                                </div>
-                                                <div class="col-md-6 col-sm-6 col-12">
-                                                    <div class="info-box"
-                                                        style="background-color:#28A745; box-shadow: 0 0 0 0!important;;">
-                                                        <span class="info-box-icon bg-success"><i
-                                                                class="far fa-"></i></span>
-                                                        <div class="info-box-content">
-                                                            <h4 class="info-box-text">Overseas</h4>
-                                                            <h5 class="info-box-number">141542540</h5>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-6 col-sm-6 col-12">
-                                                    <div class="info-box"
-                                                        style="background-color:#28A745; box-shadow: 0 0 0 0!important;;">
-                                                        <span class="info-box-icon bg-success"><i
-                                                                class="far fa-"></i></span>
-                                                        <div class="info-box-content">
-                                                            <h4 class="info-box-text">Coastal</h4>
-                                                            <h5 class="info-box-number">15655410</h5>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <a href="/view-Cargo-Overview-Data-Report-For-All-Port-Major"
-                                                class="small-box-footer">More info <i
-                                                    class="fas fa-arrow-circle-right"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-6">
-                                        <!-- small box -->
-                                        <div class="small-box bg-success">
-                                            {{-- <div class="inner">
-                                                <h3>46484723</h3>
-                                                <p>Total Cargo Overview</p>
-                                            </div> --}}
-                                            <div class="row">
-                                                <div class="col-md-12 col-sm-12 col-12 text-center"
-                                                    style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
-                                                    <h4 class="" style="padding: 10px; margin: 10px;">DEENDAYAL PORT
+                                                    <h4 class=""
+                                                        style="padding: 5px; margin: 5px; font-size: 1.3rem;">PARADIP PORT
                                                         AUTHORITY</h4>
                                                 </div>
                                                 <div class="col-md-6 col-sm-6 col-12">
                                                     <div class="info-box"
                                                         style="background-color:#28A745; box-shadow: 0 0 0 0!important;;">
-                                                        <span class="info-box-icon bg-success"><i
-                                                                class="far fa-"></i></span>
-                                                        <div class="info-box-content">
-                                                            <h4 class="info-box-text">Overseas</h4>
-                                                            <h5 class="info-box-number">141542540</h5>
-                                                        </div>
+                                                        <table>
+                                                            <tr>
+                                                                <th colspan="2">Year</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Overseas</td>
+                                                                <td>141542540</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Coastal</td>
+                                                                <td>141542533</td>
+                                                            </tr>
+                                                        </table>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-6 col-sm-6 col-12">
                                                     <div class="info-box"
                                                         style="background-color:#28A745; box-shadow: 0 0 0 0!important;;">
-                                                        <span class="info-box-icon bg-success"><i
-                                                                class="far fa-"></i></span>
-                                                        <div class="info-box-content">
-                                                            <h4 class="info-box-text">Coastal</h4>
-                                                            <h5 class="info-box-number">15655410</h5>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <a href="/view-Cargo-Overview-Data-Report-For-All-Port-Major"
-                                                class="small-box-footer">More info <i
-                                                    class="fas fa-arrow-circle-right"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-6">
-                                        <!-- small box -->
-                                        <div class="small-box bg-success">
-                                            {{-- <div class="inner">
-                                                <h3>46484723</h3>
-                                                <p>Total Cargo Overview</p>
-                                            </div> --}}
-                                            <div class="row">
-                                                <div class="col-md-12 col-sm-12 col-12 text-center"
-                                                    style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
-                                                    <h4 class="" style="padding: 10px; margin: 10px;">DEENDAYAL PORT
-                                                        AUTHORITY</h4>
-                                                </div>
-                                                <div class="col-md-6 col-sm-6 col-12">
-                                                    <div class="info-box"
-                                                        style="background-color:#28A745; box-shadow: 0 0 0 0!important;;">
-                                                        <span class="info-box-icon bg-success"><i
-                                                                class="far fa-"></i></span>
-                                                        <div class="info-box-content">
-                                                            <h4 class="info-box-text">Overseas</h4>
-                                                            <h5 class="info-box-number">141542540</h5>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-6 col-sm-6 col-12">
-                                                    <div class="info-box"
-                                                        style="background-color:#28A745; box-shadow: 0 0 0 0!important;;">
-                                                        <span class="info-box-icon bg-success"><i
-                                                                class="far fa-"></i></span>
-                                                        <div class="info-box-content">
-                                                            <h4 class="info-box-text">Coastal</h4>
-                                                            <h5 class="info-box-number">15655410</h5>
-                                                        </div>
+                                                        <table>
+                                                            <tr>
+                                                                <th colspan="2">Year</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Overseas</td>
+                                                                <td>141542540</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Coastal</td>
+                                                                <td>141542533</td>
+                                                            </tr>
+                                                        </table>
                                                     </div>
                                                 </div>
 
@@ -555,30 +243,568 @@
                                             <div class="row">
                                                 <div class="col-md-12 col-sm-12 col-12 text-center"
                                                     style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
-                                                    <h4 class="" style="padding: 10px; margin: 10px;">DEENDAYAL PORT
-                                                        AUTHORITY</h4>
+                                                    <h4 class=""
+                                                        style="padding: 5px; margin: 5px; font-size: 1.3rem;">VISAKHAPATNAM
+                                                        PORT AUTHORITY</h4>
                                                 </div>
                                                 <div class="col-md-6 col-sm-6 col-12">
                                                     <div class="info-box"
                                                         style="background-color:#28A745; box-shadow: 0 0 0 0!important;;">
-                                                        <span class="info-box-icon bg-success"><i
-                                                                class="far fa-"></i></span>
-                                                        <div class="info-box-content">
-                                                            <h4 class="info-box-text">Overseas</h4>
-                                                            <h5 class="info-box-number">141542540</h5>
-                                                        </div>
+                                                        <table>
+                                                            <tr>
+                                                                <th colspan="2">Year</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Overseas</td>
+                                                                <td>141542540</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Coastal</td>
+                                                                <td>141542533</td>
+                                                            </tr>
+                                                        </table>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-6 col-sm-6 col-12">
                                                     <div class="info-box"
                                                         style="background-color:#28A745; box-shadow: 0 0 0 0!important;;">
-                                                        <span class="info-box-icon bg-success"><i
-                                                                class="far fa-"></i></span>
-                                                        <div class="info-box-content">
-                                                            <h4 class="info-box-text">Coastal</h4>
-                                                            <h5 class="info-box-number">15655410</h5>
-                                                        </div>
+                                                        <table>
+                                                            <tr>
+                                                                <th colspan="2">Year</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Overseas</td>
+                                                                <td>141542540</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Coastal</td>
+                                                                <td>141542533</td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <a href="/view-Cargo-Overview-Data-Report-For-All-Port-Major"
+                                                class="small-box-footer">More info <i
+                                                    class="fas fa-arrow-circle-right"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-6">
+                                        <!-- small box -->
+                                        <div class="small-box bg-success">
+                                            {{-- <div class="inner">
+                                                <h3>46484723</h3>
+                                                <p>Total Cargo Overview</p>
+                                            </div> --}}
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12 col-12 text-center"
+                                                    style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
+                                                    <h4 class=""
+                                                        style="padding: 5px; margin: 5px; font-size: 1.3rem;">KAMARAJAR PORT
+                                                        AUTHORITY</h4>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-12">
+                                                    <div class="info-box"
+                                                        style="background-color:#28A745; box-shadow: 0 0 0 0!important;;">
+                                                        <table>
+                                                            <tr>
+                                                                <th colspan="2">Year</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Overseas</td>
+                                                                <td>141542540</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Coastal</td>
+                                                                <td>141542533</td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6 col-sm-6 col-12">
+                                                    <div class="info-box"
+                                                        style="background-color:#28A745; box-shadow: 0 0 0 0!important;;">
+                                                        <table>
+                                                            <tr>
+                                                                <th colspan="2">Year</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Overseas</td>
+                                                                <td>141542540</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Coastal</td>
+                                                                <td>141542533</td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <a href="/view-Cargo-Overview-Data-Report-For-All-Port-Major"
+                                                class="small-box-footer">More info <i
+                                                    class="fas fa-arrow-circle-right"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-6">
+                                        <!-- small box -->
+                                        <div class="small-box bg-success">
+                                            {{-- <div class="inner">
+                                                <h3>46484723</h3>
+                                                <p>Total Cargo Overview</p>
+                                            </div> --}}
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12 col-12 text-center"
+                                                    style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
+                                                    <h4 class=""
+                                                        style="padding: 5px; margin: 5px; font-size: 1.3rem;">CHENNAI PORT
+                                                        AUTHORITY</h4>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-12">
+                                                    <div class="info-box"
+                                                        style="background-color:#28A745; box-shadow: 0 0 0 0!important;;">
+                                                        <table>
+                                                            <tr>
+                                                                <th colspan="2">Year</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Overseas</td>
+                                                                <td>141542540</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Coastal</td>
+                                                                <td>141542533</td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6 col-sm-6 col-12">
+                                                    <div class="info-box"
+                                                        style="background-color:#28A745; box-shadow: 0 0 0 0!important;;">
+                                                        <table>
+                                                            <tr>
+                                                                <th colspan="2">Year</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Overseas</td>
+                                                                <td>141542540</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Coastal</td>
+                                                                <td>141542533</td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <a href="/view-Cargo-Overview-Data-Report-For-All-Port-Major"
+                                                class="small-box-footer">More info <i
+                                                    class="fas fa-arrow-circle-right"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-6">
+                                        <!-- small box -->
+                                        <div class="small-box bg-success">
+                                            {{-- <div class="inner">
+                                                <h3>46484723</h3>
+                                                <p>Total Cargo Overview</p>
+                                            </div> --}}
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12 col-12 text-center"
+                                                    style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
+                                                    <h4 class=""
+                                                        style="padding: 5px; margin: 5px; font-size: 1.3rem;">V O
+                                                        CHIDAMBARANAR PORT AUTHORITY</h4>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-12">
+                                                    <div class="info-box"
+                                                        style="background-color:#28A745; box-shadow: 0 0 0 0!important;;">
+                                                        <table>
+                                                            <tr>
+                                                                <th colspan="2">Year</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Overseas</td>
+                                                                <td>141542540</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Coastal</td>
+                                                                <td>141542533</td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6 col-sm-6 col-12">
+                                                    <div class="info-box"
+                                                        style="background-color:#28A745; box-shadow: 0 0 0 0!important;;">
+                                                        <table>
+                                                            <tr>
+                                                                <th colspan="2">Year</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Overseas</td>
+                                                                <td>141542540</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Coastal</td>
+                                                                <td>141542533</td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <a href="/view-Cargo-Overview-Data-Report-For-All-Port-Major"
+                                                class="small-box-footer">More info <i
+                                                    class="fas fa-arrow-circle-right"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-6">
+                                        <!-- small box -->
+                                        <div class="small-box bg-success">
+                                            {{-- <div class="inner">
+                                                <h3>46484723</h3>
+                                                <p>Total Cargo Overview</p>
+                                            </div> --}}
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12 col-12 text-center"
+                                                    style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
+                                                    <h4 class=""
+                                                        style="padding: 5px; margin: 5px; font-size: 1.3rem;">COCHIN PORT
+                                                        AUTHORITY</h4>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-12">
+                                                    <div class="info-box"
+                                                        style="background-color:#28A745; box-shadow: 0 0 0 0!important;;">
+                                                        <table>
+                                                            <tr>
+                                                                <th colspan="2">Year</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Overseas</td>
+                                                                <td>141542540</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Coastal</td>
+                                                                <td>141542533</td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6 col-sm-6 col-12">
+                                                    <div class="info-box"
+                                                        style="background-color:#28A745; box-shadow: 0 0 0 0!important;;">
+                                                        <table>
+                                                            <tr>
+                                                                <th colspan="2">Year</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Overseas</td>
+                                                                <td>141542540</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Coastal</td>
+                                                                <td>141542533</td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <a href="/view-Cargo-Overview-Data-Report-For-All-Port-Major"
+                                                class="small-box-footer">More info <i
+                                                    class="fas fa-arrow-circle-right"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-6">
+                                        <!-- small box -->
+                                        <div class="small-box bg-success">
+                                            {{-- <div class="inner">
+                                                <h3>46484723</h3>
+                                                <p>Total Cargo Overview</p>
+                                            </div> --}}
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12 col-12 text-center"
+                                                    style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
+                                                    <h4 class=""
+                                                        style="padding: 5px; margin: 5px; font-size: 1.3rem;">NEW MANGALORE
+                                                        PORT AUTHORITY</h4>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-12">
+                                                    <div class="info-box"
+                                                        style="background-color:#28A745; box-shadow: 0 0 0 0!important;;">
+                                                        <table>
+                                                            <tr>
+                                                                <th colspan="2">Year</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Overseas</td>
+                                                                <td>141542540</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Coastal</td>
+                                                                <td>141542533</td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6 col-sm-6 col-12">
+                                                    <div class="info-box"
+                                                        style="background-color:#28A745; box-shadow: 0 0 0 0!important;;">
+                                                        <table>
+                                                            <tr>
+                                                                <th colspan="2">Year</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Overseas</td>
+                                                                <td>141542540</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Coastal</td>
+                                                                <td>141542533</td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <a href="/view-Cargo-Overview-Data-Report-For-All-Port-Major"
+                                                class="small-box-footer">More info <i
+                                                    class="fas fa-arrow-circle-right"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-6">
+                                        <!-- small box -->
+                                        <div class="small-box bg-success">
+                                            {{-- <div class="inner">
+                                                <h3>46484723</h3>
+                                                <p>Total Cargo Overview</p>
+                                            </div> --}}
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12 col-12 text-center"
+                                                    style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
+                                                    <h4 class=""
+                                                        style="padding: 5px; margin: 5px; font-size: 1.3rem;">MORMUGAO PORT
+                                                        AUTHORITY</h4>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-12">
+                                                    <div class="info-box"
+                                                        style="background-color:#28A745; box-shadow: 0 0 0 0!important;;">
+                                                        <table>
+                                                            <tr>
+                                                                <th colspan="2">Year</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Overseas</td>
+                                                                <td>141542540</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Coastal</td>
+                                                                <td>141542533</td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6 col-sm-6 col-12">
+                                                    <div class="info-box"
+                                                        style="background-color:#28A745; box-shadow: 0 0 0 0!important;;">
+                                                        <table>
+                                                            <tr>
+                                                                <th colspan="2">Year</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Overseas</td>
+                                                                <td>141542540</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Coastal</td>
+                                                                <td>141542533</td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <a href="/view-Cargo-Overview-Data-Report-For-All-Port-Major"
+                                                class="small-box-footer">More info <i
+                                                    class="fas fa-arrow-circle-right"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-6">
+                                        <!-- small box -->
+                                        <div class="small-box bg-success">
+                                            {{-- <div class="inner">
+                                                <h3>46484723</h3>
+                                                <p>Total Cargo Overview</p>
+                                            </div> --}}
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12 col-12 text-center"
+                                                    style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
+                                                    <h4 class=""
+                                                        style="padding: 5px; margin: 5px; font-size: 1.3rem;">JAWAHARLAL
+                                                        NEHRU PORT AUTHORITY</h4>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-12">
+                                                    <div class="info-box"
+                                                        style="background-color:#28A745; box-shadow: 0 0 0 0!important;;">
+                                                        <table>
+                                                            <tr>
+                                                                <th colspan="2">Year</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Overseas</td>
+                                                                <td>141542540</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Coastal</td>
+                                                                <td>141542533</td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6 col-sm-6 col-12">
+                                                    <div class="info-box"
+                                                        style="background-color:#28A745; box-shadow: 0 0 0 0!important;;">
+                                                        <table>
+                                                            <tr>
+                                                                <th colspan="2">Year</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Overseas</td>
+                                                                <td>141542540</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Coastal</td>
+                                                                <td>141542533</td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <a href="/view-Cargo-Overview-Data-Report-For-All-Port-Major"
+                                                class="small-box-footer">More info <i
+                                                    class="fas fa-arrow-circle-right"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-6">
+                                        <!-- small box -->
+                                        <div class="small-box bg-success">
+                                            {{-- <div class="inner">
+                                                <h3>46484723</h3>
+                                                <p>Total Cargo Overview</p>
+                                            </div> --}}
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12 col-12 text-center"
+                                                    style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
+                                                    <h4 class=""
+                                                        style="padding: 5px; margin: 5px; font-size: 1.3rem;">MUMBAI PORT
+                                                        AUTHORITY</h4>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-12">
+                                                    <div class="info-box"
+                                                        style="background-color:#28A745; box-shadow: 0 0 0 0!important;;">
+                                                        <table>
+                                                            <tr>
+                                                                <th colspan="2">Year</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Overseas</td>
+                                                                <td>141542540</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Coastal</td>
+                                                                <td>141542533</td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6 col-sm-6 col-12">
+                                                    <div class="info-box"
+                                                        style="background-color:#28A745; box-shadow: 0 0 0 0!important;;">
+                                                        <table>
+                                                            <tr>
+                                                                <th colspan="2">Year</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Overseas</td>
+                                                                <td>141542540</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Coastal</td>
+                                                                <td>141542533</td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <a href="/view-Cargo-Overview-Data-Report-For-All-Port-Major"
+                                                class="small-box-footer">More info <i
+                                                    class="fas fa-arrow-circle-right"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-6">
+                                        <!-- small box -->
+                                        <div class="small-box bg-success">
+                                            {{-- <div class="inner">
+                                                <h3>46484723</h3>
+                                                <p>Total Cargo Overview</p>
+                                            </div> --}}
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12 col-12 text-center"
+                                                    style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
+                                                    <h4 class=""
+                                                        style="padding: 5px; margin: 5px; font-size: 1.3rem;">DEENDAYAL
+                                                        PORT
+                                                        AUTHORITY</h4>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-12">
+                                                    <div class="info-box"
+                                                        style="background-color:#28A745; box-shadow: 0 0 0 0!important;;">
+                                                        <table>
+                                                            <tr>
+                                                                <th colspan="2">Year</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Overseas</td>
+                                                                <td>141542540</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Coastal</td>
+                                                                <td>141542533</td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6 col-sm-6 col-12">
+                                                    <div class="info-box"
+                                                        style="background-color:#28A745; box-shadow: 0 0 0 0!important;;">
+                                                        <table>
+                                                            <tr>
+                                                                <th colspan="2">Year</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Overseas</td>
+                                                                <td>141542540</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Coastal</td>
+                                                                <td>141542533</td>
+                                                            </tr>
+                                                        </table>
                                                     </div>
                                                 </div>
 
