@@ -64,7 +64,8 @@
                                                 <div class="col-md-12 col-sm-12 col-12 text-center"
                                                     style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
                                                     <h4 class=""
-                                                        style="padding: 5px; margin: 5px; font-size: 1.3rem;">SYAMA PRASAD
+                                                        style="padding: 5px; margin: 5px; font-size: 1.3rem;">SYAMA
+                                                        PRASAD
                                                         MOOKERJEE KOLKATA</h4>
                                                 </div>
 
@@ -120,14 +121,15 @@
                                         <!-- small box -->
                                         <div class="small-box bg-success">
                                             {{-- <div class="inner">
-                                                <h3>46484723</h3>
-                                                <p>Total Cargo Overview</p>
-                                            </div> --}}
+                                            <h3>46484723</h3>
+                                            <p>Total Cargo Overview</p>
+                                        </div> --}}
                                             <div class="row">
                                                 <div class="col-md-12 col-sm-12 col-12 text-center"
                                                     style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
                                                     <h4 class=""
-                                                        style="padding: 5px; margin: 5px; font-size: 1.3rem;">HALDIA DOCK
+                                                        style="padding: 5px; margin: 5px; font-size: 1.3rem;">
+                                                        HALDIA DOCK
                                                         COMPLEX</h4>
                                                 </div>
                                                 <div class="col-md-6 col-sm-6 col-12">
@@ -179,14 +181,15 @@
                                         <!-- small box -->
                                         <div class="small-box bg-success">
                                             {{-- <div class="inner">
-                                                <h3>46484723</h3>
-                                                <p>Total Cargo Overview</p>
-                                            </div> --}}
+                                            <h3>46484723</h3>
+                                            <p>Total Cargo Overview</p>
+                                        </div> --}}
                                             <div class="row">
                                                 <div class="col-md-12 col-sm-12 col-12 text-center"
                                                     style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
                                                     <h4 class=""
-                                                        style="padding: 5px; margin: 5px; font-size: 1.3rem;">PARADIP PORT
+                                                        style="padding: 5px; margin: 5px; font-size: 1.3rem;">
+                                                        PARADIP PORT
                                                         AUTHORITY</h4>
                                                 </div>
                                                 <div class="col-md-6 col-sm-6 col-12">
@@ -237,14 +240,15 @@
                                         <!-- small box -->
                                         <div class="small-box bg-success">
                                             {{-- <div class="inner">
-                                                <h3>46484723</h3>
-                                                <p>Total Cargo Overview</p>
-                                            </div> --}}
+                                            <h3>46484723</h3>
+                                            <p>Total Cargo Overview</p>
+                                        </div> --}}
                                             <div class="row">
                                                 <div class="col-md-12 col-sm-12 col-12 text-center"
                                                     style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
                                                     <h4 class=""
-                                                        style="padding: 5px; margin: 5px; font-size: 1.3rem;">VISAKHAPATNAM
+                                                        style="padding: 5px; margin: 5px; font-size: 1.3rem;">
+                                                        VISAKHAPATNAM
                                                         PORT AUTHORITY</h4>
                                                 </div>
                                                 <div class="col-md-6 col-sm-6 col-12">
@@ -295,14 +299,15 @@
                                         <!-- small box -->
                                         <div class="small-box bg-success">
                                             {{-- <div class="inner">
-                                                <h3>46484723</h3>
-                                                <p>Total Cargo Overview</p>
-                                            </div> --}}
+                                            <h3>46484723</h3>
+                                            <p>Total Cargo Overview</p>
+                                        </div> --}}
                                             <div class="row">
                                                 <div class="col-md-12 col-sm-12 col-12 text-center"
                                                     style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
                                                     <h4 class=""
-                                                        style="padding: 5px; margin: 5px; font-size: 1.3rem;">KAMARAJAR PORT
+                                                        style="padding: 5px; margin: 5px; font-size: 1.3rem;">
+                                                        KAMARAJAR PORT
                                                         AUTHORITY</h4>
                                                 </div>
                                                 <div class="col-md-6 col-sm-6 col-12">
@@ -353,14 +358,15 @@
                                         <!-- small box -->
                                         <div class="small-box bg-success">
                                             {{-- <div class="inner">
-                                                <h3>46484723</h3>
-                                                <p>Total Cargo Overview</p>
-                                            </div> --}}
+                                            <h3>46484723</h3>
+                                            <p>Total Cargo Overview</p>
+                                        </div> --}}
                                             <div class="row">
                                                 <div class="col-md-12 col-sm-12 col-12 text-center"
                                                     style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
                                                     <h4 class=""
-                                                        style="padding: 5px; margin: 5px; font-size: 1.3rem;">CHENNAI PORT
+                                                        style="padding: 5px; margin: 5px; font-size: 1.3rem;">
+                                                        CHENNAI PORT
                                                         AUTHORITY</h4>
                                                 </div>
                                                 <div class="col-md-6 col-sm-6 col-12">
@@ -411,9 +417,9 @@
                                         <!-- small box -->
                                         <div class="small-box bg-success">
                                             {{-- <div class="inner">
-                                                <h3>46484723</h3>
-                                                <p>Total Cargo Overview</p>
-                                            </div> --}}
+                                            <h3>46484723</h3>
+                                            <p>Total Cargo Overview</p>
+                                        </div> --}}
                                             <div class="row">
                                                 <div class="col-md-12 col-sm-12 col-12 text-center"
                                                     style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
@@ -469,14 +475,15 @@
                                         <!-- small box -->
                                         <div class="small-box bg-success">
                                             {{-- <div class="inner">
-                                                <h3>46484723</h3>
-                                                <p>Total Cargo Overview</p>
-                                            </div> --}}
+                                            <h3>46484723</h3>
+                                            <p>Total Cargo Overview</p>
+                                        </div> --}}
                                             <div class="row">
                                                 <div class="col-md-12 col-sm-12 col-12 text-center"
                                                     style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
                                                     <h4 class=""
-                                                        style="padding: 5px; margin: 5px; font-size: 1.3rem;">COCHIN PORT
+                                                        style="padding: 5px; margin: 5px; font-size: 1.3rem;">
+                                                        COCHIN PORT
                                                         AUTHORITY</h4>
                                                 </div>
                                                 <div class="col-md-6 col-sm-6 col-12">
@@ -527,14 +534,15 @@
                                         <!-- small box -->
                                         <div class="small-box bg-success">
                                             {{-- <div class="inner">
-                                                <h3>46484723</h3>
-                                                <p>Total Cargo Overview</p>
-                                            </div> --}}
+                                            <h3>46484723</h3>
+                                            <p>Total Cargo Overview</p>
+                                        </div> --}}
                                             <div class="row">
                                                 <div class="col-md-12 col-sm-12 col-12 text-center"
                                                     style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
                                                     <h4 class=""
-                                                        style="padding: 5px; margin: 5px; font-size: 1.3rem;">NEW MANGALORE
+                                                        style="padding: 5px; margin: 5px; font-size: 1.3rem;">NEW
+                                                        MANGALORE
                                                         PORT AUTHORITY</h4>
                                                 </div>
                                                 <div class="col-md-6 col-sm-6 col-12">
@@ -585,14 +593,15 @@
                                         <!-- small box -->
                                         <div class="small-box bg-success">
                                             {{-- <div class="inner">
-                                                <h3>46484723</h3>
-                                                <p>Total Cargo Overview</p>
-                                            </div> --}}
+                                            <h3>46484723</h3>
+                                            <p>Total Cargo Overview</p>
+                                        </div> --}}
                                             <div class="row">
                                                 <div class="col-md-12 col-sm-12 col-12 text-center"
                                                     style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
                                                     <h4 class=""
-                                                        style="padding: 5px; margin: 5px; font-size: 1.3rem;">MORMUGAO PORT
+                                                        style="padding: 5px; margin: 5px; font-size: 1.3rem;">
+                                                        MORMUGAO PORT
                                                         AUTHORITY</h4>
                                                 </div>
                                                 <div class="col-md-6 col-sm-6 col-12">
@@ -643,14 +652,15 @@
                                         <!-- small box -->
                                         <div class="small-box bg-success">
                                             {{-- <div class="inner">
-                                                <h3>46484723</h3>
-                                                <p>Total Cargo Overview</p>
-                                            </div> --}}
+                                            <h3>46484723</h3>
+                                            <p>Total Cargo Overview</p>
+                                        </div> --}}
                                             <div class="row">
                                                 <div class="col-md-12 col-sm-12 col-12 text-center"
                                                     style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
                                                     <h4 class=""
-                                                        style="padding: 5px; margin: 5px; font-size: 1.3rem;">JAWAHARLAL
+                                                        style="padding: 5px; margin: 5px; font-size: 1.3rem;">
+                                                        JAWAHARLAL
                                                         NEHRU PORT AUTHORITY</h4>
                                                 </div>
                                                 <div class="col-md-6 col-sm-6 col-12">
@@ -701,14 +711,15 @@
                                         <!-- small box -->
                                         <div class="small-box bg-success">
                                             {{-- <div class="inner">
-                                                <h3>46484723</h3>
-                                                <p>Total Cargo Overview</p>
-                                            </div> --}}
+                                            <h3>46484723</h3>
+                                            <p>Total Cargo Overview</p>
+                                        </div> --}}
                                             <div class="row">
                                                 <div class="col-md-12 col-sm-12 col-12 text-center"
                                                     style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
                                                     <h4 class=""
-                                                        style="padding: 5px; margin: 5px; font-size: 1.3rem;">MUMBAI PORT
+                                                        style="padding: 5px; margin: 5px; font-size: 1.3rem;">
+                                                        MUMBAI PORT
                                                         AUTHORITY</h4>
                                                 </div>
                                                 <div class="col-md-6 col-sm-6 col-12">
@@ -759,14 +770,15 @@
                                         <!-- small box -->
                                         <div class="small-box bg-success">
                                             {{-- <div class="inner">
-                                                <h3>46484723</h3>
-                                                <p>Total Cargo Overview</p>
-                                            </div> --}}
+                                            <h3>46484723</h3>
+                                            <p>Total Cargo Overview</p>
+                                        </div> --}}
                                             <div class="row">
                                                 <div class="col-md-12 col-sm-12 col-12 text-center"
                                                     style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
                                                     <h4 class=""
-                                                        style="padding: 5px; margin: 5px; font-size: 1.3rem;">DEENDAYAL
+                                                        style="padding: 5px; margin: 5px; font-size: 1.3rem;">
+                                                        DEENDAYAL
                                                         PORT
                                                         AUTHORITY</h4>
                                                 </div>
@@ -846,105 +858,5 @@
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
 
     <script>
-        $(function() {
-            // Function to fetch data from the Laravel endpoint
-            function fetchData() {
-                $.ajax({
-                    url: '/chart-data',
-                    type: 'GET',
-                    dataType: 'json',
-                    success: function(response) {
-                        // console.log(response); // Log the entire response object to inspect its structure
-
-                        // Assuming your response contains data in the format {Coastal: 28142486, Overseas: 19388211}
-                        var chartData = {
-                            labels: Object.keys(response), // Extracting keys as labels
-                            datasets: [{
-                                data: Object.values(response), // Extracting values as data
-                                backgroundColor: ['#f56954',
-                                    '#00a65a'
-                                ], // Colors for the data
-                            }]
-                        };
-
-                        var donutOptions = {
-                            maintainAspectRatio: false,
-                            responsive: true,
-                        }
-                        // Updating the doughnut chart
-                        var donutChartCanvas = $('#donutChart').get(0).getContext('2d');
-                        new Chart(donutChartCanvas, {
-                            type: 'doughnut',
-                            data: chartData,
-                            options: donutOptions
-                        });
-
-                        // Updating the pie chart
-                        var pieChartCanvas = $('#pieChart').get(0).getContext('2d');
-                        var pieOptions = {
-                            maintainAspectRatio: false,
-                            responsive: true,
-                        }
-                        new Chart(pieChartCanvas, {
-                            type: 'pie',
-                            data: chartData,
-                            options: pieOptions
-                        });
-
-                        // Configure exporting options
-                        Highcharts.setOptions({
-                            exporting: {
-                                buttons: {
-                                    contextButton: {
-                                        menuItems: ['downloadPNG', 'downloadJPEG',
-                                            'downloadPDF', 'downloadSVG'
-                                        ], // Define export options
-                                        symbol: 'download', // Set symbol for the context button
-                                        symbolStroke: '#666666',
-                                        symbolStrokeWidth: 3,
-                                        symbolFill: 'white',
-                                        align: 'right',
-                                        verticalAlign: 'top',
-                                        x: -10,
-                                        y: 10,
-                                        symbolSize: 18,
-                                        symbolX: 11,
-                                        symbolY: 11,
-                                        symbolPosition: 'relative',
-                                        text: 'Export', // Text for the context button
-                                        theme: {
-                                            fill: 'white',
-                                            stroke: null,
-                                            'stroke-width': 0,
-                                            r: 0,
-                                            style: {
-                                                color: '#666666'
-                                            },
-                                            states: {
-                                                hover: {
-                                                    fill: '#efefef'
-                                                },
-                                                select: {
-                                                    fill: '#cccccc'
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        });
-                    },
-                    error: function(xhr, status, error) {
-                        console.error(error);
-                    }
-                });
-            }
-
-            // Fetch data initially when the page loads
-            fetchData();
-
-            // You can also fetch data at regular intervals if it's expected to change
-            // setInterval(fetchData, 60000); // Fetch data every minute (for example)
-        });
     </script>
 @endsection

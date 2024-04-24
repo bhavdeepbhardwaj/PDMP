@@ -216,7 +216,7 @@
                                                 <h3>46486723</h3>
                                                 <p>Total Cargo Overview</p>
                                             </div>
-                                            <a href="#" class="small-box-footer">More info <i
+                                            <a href="/Cargo-Overview-Data-Report-For-All-Port-Major" class="small-box-footer">More info <i
                                                     class="fas fa-arrow-circle-right"></i></a>
                                         </div>
                                     </div>
@@ -228,7 +228,7 @@
                                                 <h3>35611623</h3>
                                                 <p>Total Overseas Cargo Data</p>
                                             </div>
-                                            <a href="#" class="small-box-footer">More info <i
+                                            <a href="/Cargo-Overview-Data-Report-For-All-Port-Major" class="small-box-footer">More info <i
                                                     class="fas fa-arrow-circle-right"></i></a>
                                         </div>
                                     </div>
@@ -240,7 +240,7 @@
                                                 <h3>10875100</h3>
                                                 <p>Total Coastal Cargo Data</p>
                                             </div>
-                                            <a href="#" class="small-box-footer">More info <i
+                                            <a href="/Cargo-Overview-Data-Report-For-All-Port-Major" class="small-box-footer">More info <i
                                                     class="fas fa-arrow-circle-right"></i></a>
                                         </div>
                                     </div>
@@ -273,7 +273,7 @@
                                                 <h3>121680132</h3>
                                                 <p>Total Cargo Overview</p>
                                             </div>
-                                            <a href="#" class="small-box-footer">More info <i
+                                            <a href="/Cargo-Overview-Data-Report-For-All-Port-Non-Major" class="small-box-footer">More info <i
                                                     class="fas fa-arrow-circle-right"></i></a>
                                         </div>
                                     </div>
@@ -285,7 +285,7 @@
                                                 <h3>99507152</h3>
                                                 <p>Total Overseas Cargo Data</p>
                                             </div>
-                                            <a href="#" class="small-box-footer">More info <i
+                                            <a href="/Cargo-Overview-Data-Report-For-All-Port-Non-Major" class="small-box-footer">More info <i
                                                     class="fas fa-arrow-circle-right"></i></a>
                                         </div>
                                     </div>
@@ -297,7 +297,7 @@
                                                 <h3>22172980</h3>
                                                 <p>Coastal Commodities Data</p>
                                             </div>
-                                            <a href="#" class="small-box-footer">More info <i
+                                            <a href="/Cargo-Overview-Data-Report-For-All-Port-Non-Major" class="small-box-footer">More info <i
                                                     class="fas fa-arrow-circle-right"></i></a>
                                         </div>
                                     </div>
