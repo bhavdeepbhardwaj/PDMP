@@ -48,6 +48,8 @@ class RoleController extends Controller
             $rules = [
                 'role_name' => 'required|regex:/^[A-Za-z\s]+$/',
                 'role_slug' => 'required',
+                'level' => 'required|numeric|unique:roles,level|max:10',
+                'employee_role' => 'required',
             ];
 
             // Custom error messages
@@ -55,6 +57,11 @@ class RoleController extends Controller
                 'role_name.required' => 'The role name field is required.',
                 'role_name.regex' => 'The role name field does not contain special characters and numbers.',
                 'role_slug.required' => 'The slug name field is required.',
+                'level.required' => 'The level field is required.',
+                'level.numeric' => 'The level is (1-9) be a numeric value.',
+                'level.unique' => 'The level number is already in use.',
+                'level.max' => 'The level must be at least 10.',
+                'employee_role.required' => 'The employee role field is required.',
             ];
 
             // Validate the request data
@@ -70,6 +77,8 @@ class RoleController extends Controller
                 $editResponse = Role::where('id', $request->input('id'))->update([
                     'role_name' => $request->input('role_name'),
                     'role_slug' => $request->input('role_slug'),
+                    'level' => $request->input('level'),
+                    'employee_role' => $request->input('employee_role'),
                     'updated_by' => $request->input('updated_by'),
                 ]);
 
@@ -86,6 +95,8 @@ class RoleController extends Controller
                 $createdResponse = Role::create([
                     'role_name' => $request->input('role_name'),
                     'role_slug' => $request->input('role_slug'),
+                    'level' => $request->input('level'),
+                    'employee_role' => $request->input('employee_role'),
                     'created_by' => $request->input('created_by'),
                 ]);
 

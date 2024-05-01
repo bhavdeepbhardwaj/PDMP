@@ -54,6 +54,8 @@
                                         <th>S.No</th>
                                         <th>Role Name</th>
                                         <th>Role slug</th>
+                                        <th>Level</th>
+                                        <th>Employee Role</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -63,6 +65,8 @@
                                         <td>{{ $loop->index + 1 }}</td>
                                         <td>{{ $value['role_name'] }}</td>
                                         <td>{{ $value['role_slug'] }}</td>
+                                        <td>{{ $value['level'] }}</td>
+                                        <td>{{ $value['employee_role'] }}</td>
                                         <td><a href="javascript:void(0)" data-toggle="modal" data-target="#editmodal-lg"
                                                 class="edit-role" data-roleID="{{ $value['id'] }}"><i
                                                     class="far fa-edit" aria-hidden="true"></i></a></td>
@@ -74,6 +78,8 @@
                                         <th>S.No</th>
                                         <th>Role Name</th>
                                         <th>Role slug</th>
+                                        <th>Level</th>
+                                        <th>Employee Role</th>
                                         <th>Action</th>
                                     </tr>
                                 </tfoot>
@@ -122,6 +128,24 @@
                                         <label for="roleSlug">Role Slug</label>
                                         <input type="text" class="form-control" id="roleSlug" placeholder="Role Slug"
                                             name="role_slug" disabled>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="roleLevel">Level</label>
+                                        <input type="text" class="form-control roleLevel" id="roleLevel"
+                                            placeholder="Enter Role Level" name="level">
+                                        <span class="invalid-feedback level-err" role="alert" id="level-err">
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="roleEmployeeRole">Employee Role Name</label>
+                                        <input type="text" class="form-control roleEmployeeRole" id="roleEmployeeRole"
+                                            placeholder="Enter Employee Role Name" name="employee_role">
+                                        <span class="invalid-feedback employee-err" role="alert" id="employee-err">
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -173,6 +197,24 @@
                                         <label for="editroleSlug">Role Slug</label>
                                         <input type="text" class="form-control editroleSlug roleSlug" id="editroleSlug"
                                             placeholder="Role Slug" name="role_slug" disabled>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="editroleLevel">Level</label>
+                                        <input type="text" class="form-control editroleLevel " id="editroleLevel"
+                                            placeholder="Enter Level" name="level">
+                                        <span class="invalid-feedback level-err" role="alert" id="level-err">
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="editroleEmployeeRole">Employee Role Name</label>
+                                        <input type="text" class="form-control editroleEmployeeRole " id="editroleEmployeeRole"
+                                            placeholder="Enter Employee Role Name" name="employee_role">
+                                        <span class="invalid-feedback employee-err" role="alert" id="employee-err">
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -273,6 +315,9 @@
 
             var role_name = $('#roleName').val();
             var role_slug = $('#roleSlug').val();
+            var role_slug = $('#roleSlug').val();
+            var level = $('#roleLevel').val();
+            var employee_role = $('#roleEmployeeRole').val();
             var created_by = $('#userID').val();
 
             $.ajax({
@@ -281,6 +326,8 @@
                 data: {
                     role_name: role_name,
                     role_slug: role_slug,
+                    level: level,
+                    employee_role: employee_role,
                     created_by: created_by
                 },
                 success: function(data) {
@@ -325,6 +372,8 @@
                         $('#roleId').val(data.id);
                         $('#editroleName').val(data.role_name);
                         $('#editroleSlug').val(data.role_slug);
+                        $('#editroleLevel').val(data.level);
+                        $('#editroleEmployeeRole').val(data.employee_role);
                         // alert(data.port_id);
                     } else {
                         // Handle the case where data is not available or not in the expected format
@@ -344,6 +393,8 @@
             var roleId = $('.editroleId').val();
             var role_name = $('.editroleName').val();
             var role_slug = $(".editroleSlug").val();
+            var level = $(".editroleLevel").val();
+            var employee_role = $(".editroleEmployeeRole").val();
             var updated_by = $(".editupdatedby").val();
 
             $.ajax({
@@ -353,21 +404,12 @@
                     id: roleId,
                     role_name: role_name,
                     role_slug: role_slug,
+                    level: level,
+                    employee_role: employee_role,
                     updated_by: updated_by
                 },
                 success: function(data) {
                     if (data.success == true && $.isEmptyObject(data.error)) {
-
-                        // var Toast = Swal.mixin({
-                        //     toast: true,
-                        //     position: 'top-end',
-                        //     showConfirmButton: false,
-                        //     timer: 3000
-                        // });
-                        // Toast.fire({
-                        //     icon: 'info',
-                        //     title: "User Updated!!"
-                        // });
                         setTimeout(function() {
                             location.reload();
                         }, 1000);
@@ -378,111 +420,19 @@
             });
 
             function printErrorMsg(msg) {
-                // $(".print-error-msg").find("ul").html('');
-                // $(".print-error-msg").css('display', 'block');
-                // $.each(msg, function(key, value) {
-                //     console.log("value = "+value);
-                //     console.log("key = "+key);
-                //     $(".print-error-msg").find("ul").append('<li>' + value + '</li>');
-                // });
-                // $('.invalid-feedback').css('display', 'none');
-                var errMsg = msg;
-                var modifiedString = errMsg.substring(4);
-                var errKey = modifiedString.split(' ');
-                var errKeyFirst = errKey[0];
-
-                var errMsgId = errKeyFirst + '-err';
-                $('#' + errMsgId).css('display', 'block');
-                $('#' + errMsgId).html(msg);
-                // alert(errKeyFirst);
-            }
-
-        });
-</script>
-
-{{-- <script type="text/javascript">
-    // Use event delegation to capture the click event
-        $(document).on("click", ".edit-role", function(e) {
-            e.preventDefault();
-
-            // Get the role ID from the clicked element's data attribute
-            var roleId = $(this).data('roleid');
-
-            // Define the Ajax request to fetch role data for editing
-            $.ajax({
-                type: 'GET',
-                url: '/role/edit/' + roleId,
-                dataType: 'json',
-                success: function(data) {
-                    if (data) {
-                        // Populate the modal form fields with role data
-                        $('#roleIdEdit').val(data.id);
-                        $('#roleNameEdit').val(data.role_name);
-                        $('#roleSlugEdit').val(data.role_slug);
-
-                        // Update the selected options in dropdowns or perform any other necessary updates
-                        // (e.g., updating other fields based on the retrieved data)
-
-                    } else {
-                        // Handle the case where data is not available or not in the expected format
-                        console.error('Invalid data received from the server.');
-                    }
-                },
-                error: function(xhr, status, error) {
-                    // Handle AJAX errors if needed
-                    console.error('AJAX Request Failed:', status, error);
-                }
-            });
-        });
-
-        // Ajax Request for Edit Role
-        $(".btn-edit").click(function(e) {
-            e.preventDefault();
-
-            // Get role ID and updated values from the form
-            var roleId = $('#roleIdEdit').val();
-            var role_name = $('#roleNameEdit').val();
-            var role_slug = $('#roleSlugEdit').val();
-
-            // Prepare data for Ajax request
-            var requestData = {
-                id: roleId,
-                role_name: role_name,
-                role_slug: role_slug
-            };
-
-            // Define the Ajax request for editing role
-            $.ajax({
-                type: 'POST',
-                url: "{{ route('role.edit') }}",
-                data: requestData,
-                success: function(data) {
-                    if (data.success == true && $.isEmptyObject(data.error)) {
-                        // If the request is successful and no errors, reload the page after a delay
-                        setTimeout(function() {
-                            location.reload();
-                        }, 1000);
-                    } else {
-                        // If there are errors, display them
-                        printErrorMsg(data.error);
-                    }
-                }
-            });
-
-            // Function to display error messages
-            function printErrorMsg(msg) {
-                console.log("msg = " + msg);
+                // console.log("msg = " + msg);
                 $('.invalid-feedback').css('display', 'none');
                 var errMsg = msg;
                 var modifiedString = errMsg.substring(4);
                 var errKey = modifiedString.split(' ');
                 var errKeyFirst = errKey[0];
-                var errMsgId = errKeyFirst + '-err';
+                var errMsgId = errKeyFirst + '-errE';
                 $('#' + errMsgId).css('display', 'block');
-                $('#' + errMsgId).html(msg);
-                // alert(errKeyFirst);
             }
-        });
 
-</script> --}}
+
+
+        });
+</script>
+
 @endsection
