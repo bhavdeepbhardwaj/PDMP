@@ -63,6 +63,15 @@ Route::group(['prefix' => 'portal', 'middleware' => ['auth', 'user-access', 'rol
 Route::get('add-module', [App\Http\Controllers\Backend\ModuleController::class, 'addModule'])->name('addModule');
 Route::get('edit-module', [App\Http\Controllers\Backend\ModuleController::class, 'editModule'])->name('editModule');
 
+// Role Add
+Route::get('add-role', [App\Http\Controllers\Backend\RoleController::class, 'addRole'])->name('backend.addRole');
+Route::get('edit-role/{id}', [App\Http\Controllers\Backend\RoleController::class, 'editRole'])->name('backend.editRole');
+Route::post('save-role', [App\Http\Controllers\Backend\RoleController::class, 'saveRole'])->name('backend.saveRole');
+Route::put('update-role/{id}', [App\Http\Controllers\Backend\RoleController::class, 'updateRole'])->name('backend.updateRole');
+
+
+
+
 
 // User Routes create User
 Route::post('usercreate', [UserController::class, 'createUser'])->name('user.create');
