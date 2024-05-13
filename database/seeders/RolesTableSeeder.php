@@ -41,7 +41,7 @@ class RolesTableSeeder extends Seeder
             'role_name' => 'Port Nodal Officer',
             'role_slug' => 'portnodalofficer',
             'level'     => '4',
-            'employee_role' => 'Port Nodal Officer (Admin III)',
+            'employee_role' => 'Port Nodal Officer (Admin II)',
             'access_role' => '5,6'
         ]);
 

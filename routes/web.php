@@ -61,13 +61,16 @@ Route::group(['prefix' => 'portal', 'middleware' => ['auth', 'user-access', 'rol
     Route::get('view-employment-dock-labour-boards-major-port', [App\Http\Controllers\Backend\FormController::class, 'viewEmploymentDockLabourBoardsMajorPort'])->name('view-employment-dock-labour-boards-major-port');
 
 
-    Route::get('view-commodities', [App\Http\Controllers\Backend\FormController::class, 'viewCommodities'])->name('view-commodities');
+    // Route::get('view-commodities', [App\Http\Controllers\Backend\FormController::class, 'viewCommodities'])->name('view-commodities');
+    Route::get('view-commodities', [App\Http\Controllers\Backend\CommodityController::class, 'viewCommodities'])->name('view-commodities');
 
-    Route::get('add-commodities-form', [App\Http\Controllers\Backend\FormController::class, 'addCommoditiesForm'])->name('add-commodities-form');
+    // Route::get('add-commodities-form', [App\Http\Controllers\Backend\FormController::class, 'addCommoditiesForm'])->name('add-commodities-form');
+    Route::get('add-commodities-form', [App\Http\Controllers\Backend\CommodityController::class, 'addCommoditiesForm'])->name('add-commodities-form');
 
 
 
     Route::get('view-report', [App\Http\Controllers\Backend\FormController::class, 'viewReport'])->name('view-report');
+    // Route::get('view-report', [App\Http\Controllers\Backend\CommodityController::class, 'viewReport'])->name('view-report');
 
 });
 
@@ -226,5 +229,6 @@ Route::get('phpinfo', fn () => phpinfo());
 
 Route::get('/chart-data', [App\Http\Controllers\Backend\DashboardController::class, 'getData']);
 
-Route::get('/commodity-allocate/{id}',[App\Http\Controllers\Backend\FormController::class,'commodityAllocate']);
+Route::get('/commodity-allocate/{id}',[App\Http\Controllers\Backend\CommodityController::class,'commodityAllocate']);
+// Route::get('/commodity-allocate/{id}',[App\Http\Controllers\Backend\FormController::class,'commodityAllocate']);
 

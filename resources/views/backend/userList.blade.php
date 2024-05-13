@@ -99,12 +99,20 @@
                                                 <td>
                                                     {{-- <a href="{{ route('backend.editUser', $value['id']) }}" class="edit-user"><i
                                                             class="far fa-edit" aria-hidden="true"></i></a> --}}
-                                                            <form id="editUserForm" action="{{ route('backend.editUser') }}" method="POST" >
-                                                                @csrf
-                                                                <input type="text" name="user_id" value={{$value['id']}} />
-                                                                <button type="submit" name="edit" class="edit-user"><i
-                                                                    class="far fa-edit" aria-hidden="true"></i></button>
-                                                            </form>
+                                                            @if (Auth::user()->role_id == 1) 
+                                                                
+                                                            @else
+                                                            <form id="editUserForm" action="{{ route('backend.editUser') }}"
+                                                            method="POST">
+                                                            @csrf
+                                                            <input type="text" hidden name="user_id"
+                                                                value={{ $value['id'] }} />
+                                                            <button type="submit" name="edit"
+                                                                class="edit-user badge badge-primary"><i class="far fa-edit"
+                                                                    aria-hidden="true"></i></button>
+                                                        </form>
+                                                            @endif
+
                                                 </td>
                                             </tr>
                                         @endforeach

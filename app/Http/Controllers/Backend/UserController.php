@@ -80,9 +80,11 @@ class UserController extends Controller
 
             // Fetch Report Officer list where is_deleted is 0 and role ID is 1,3
 
+            $reportList = User::where('is_deleted', 0)->whereIn('role_id', [1, 2, 3, 4])->get()->toArray();
+
             $userList = User::where('is_deleted', 0)->where('report_to', Auth::user()->id)->get()->toArray();
 
-            $reportList = User::where('is_deleted', 0)->whereIn('role_id', [2, 3, 4,5,6])->get()->toArray();
+            // $reportList = User::where('is_deleted', 0)->whereIn('role_id', [2, 3, 4, 5, 6])->get()->toArray();
 
             // Fetch department IDs that are not deleted
             $depID = Department::where('is_deleted', 0)->get();
@@ -92,22 +94,20 @@ class UserController extends Controller
 
             // Fetch port category names and IDs that are not deleted
             $portJs = false;
-            if(auth()->user()->port_type != 0){
-                $portCatName = PortCategory::where('id',auth()->user()->port_type)->select('category_name', 'id')->where('is_deleted', 0)->get()->toArray();
-
-            }else{
+            if (auth()->user()->port_type != 0) {
+                $portCatName = PortCategory::where('id', auth()->user()->port_type)->select('category_name', 'id')->where('is_deleted', 0)->get()->toArray();
+            } else {
                 $portCatName = PortCategory::select('category_name', 'id')->where('is_deleted', 0)->get()->toArray();
                 $portJs = true;
             }
             // Fetch all roles
 
-            $currentUserRole = Role::where('id',auth()->user()->role_id)->select('access_role')->first();
-            if(isset($currentUserRole)){
-                $currentUserRoleArr = explode(',',$currentUserRole->access_role);
-                $roleIds = Role::whereIn('id',$currentUserRoleArr)->get();
-            }else{
-                $roleIds = Role::where('status',1)->get();
-
+            $currentUserRole = Role::where('id', auth()->user()->role_id)->select('access_role')->first();
+            if (isset($currentUserRole)) {
+                $currentUserRoleArr = explode(',', $currentUserRole->access_role);
+                $roleIds = Role::whereIn('id', $currentUserRoleArr)->get();
+            } else {
+                $roleIds = Role::where('status', 1)->get();
             }
 
             // dd($roleIds);
