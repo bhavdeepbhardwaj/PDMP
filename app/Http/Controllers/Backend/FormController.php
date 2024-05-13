@@ -17,11 +17,12 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Models\SeafarersInformation;
 use App\Models\BerthRelatedInformation;
+use App\Models\Commodities;
 use Illuminate\Support\Facades\Validator;
 use App\Models\NationalWaterwaysInformation;
 use App\Models\EmploymentDockLabourBoardsMajorPort;
 use App\Models\DirectPortEntryDeliveryRelatedContainers;
-
+use App\Models\User;
 
 class FormController extends Controller
 {
@@ -33,7 +34,14 @@ class FormController extends Controller
     public function getPortTypes()
     {
         // Retrieve port types with IDs 1 and 2 from the database
-        $portTypes = PortCategory::whereIn('id', [1, 2])->get();
+
+        // $portTypes = PortCategory::whereIn('id', [1, 2])->get(); commentid line previous
+
+        if (auth()->user()->port_type != 0) {
+            $portTypes = PortCategory::where('id', auth()->user()->port_type)->select('category_name', 'id')->where('is_deleted', 0)->get()->toArray();
+        } else {
+            $portTypes = PortCategory::whereIn('id', [1, 2])->get();
+        }
 
         // Return the port types as a JSON response
         return response()->json(['portTypes' => $portTypes]);
@@ -46,7 +54,13 @@ class FormController extends Controller
     public function getStateBoards()
     {
         // Retrieve all state boards from the database
-        $stateBoards = StateBoard::all();
+
+        if (auth()->user()->port_type != 0) {
+            // $portTypes = PortCategory::where('id',auth()->user()->port_type)->select('category_name', 'id')->where('is_deleted', 0)->get()->toArray();
+            $stateBoards = StateBoard::where('id', auth()->user()->state_board)->get();
+        } else {
+            $stateBoards = StateBoard::all();
+        }
 
         // Return the state boards as a JSON response
         return response()->json(['stateBoards' => $stateBoards]);
@@ -65,10 +79,20 @@ class FormController extends Controller
         // Check if 'port_type' is set in the request and equal to 1
         if (isset($request['port_type']) && $request['port_type'] == 1) {
             // Retrieve ports based on 'port_type'
-            $query = Port::where('port_type', $request->port_type)->get();
+            if (auth()->user()->port_id != 0) {
+                $query = Port::where('id', auth()->user()->port_id)->where('port_type', 1)->get();
+            } else {
+                $query = Port::where('port_type', $request->port_type)->get();
+            }
+            // $query = Port::where('port_type', $request->port_type)->get();
         } else {
             // Retrieve ports based on 'state_board'
-            $query = Port::where('states_board_id', $request->state_board)->get();
+            if (auth()->user()->port_id != 0) {
+                $query = Port::where('id', auth()->user()->port_id)->where('states_board_id', $request->state_board)->get();
+            } else {
+                $query = Port::where('states_board_id', $request->state_board)->get();
+            }
+            // $query = Port::where('states_board_id', $request->state_board)->get();
         }
 
         // Return the result as a JSON response
@@ -83,7 +107,7 @@ class FormController extends Controller
     {
         try {
             // Fetch MAJOR/NON MAJOR PORTS AND Capacity that are not deleted
-            $getData = MNMPortCapacity::where('is_deleted', 0)->get()->toArray();
+            $getData = MNMPortCapacity::where('id', auth()->user()->port_type)->where('is_deleted', 0)->get()->toArray();
 
             // Return the view with data
             return view('backend.viewMajorNonMajorPortCapacity', ['getData' => $getData]);
@@ -168,8 +192,15 @@ class FormController extends Controller
             }
 
             // Check if a record with the specified year and month already exists
+            // $recordExists = MNMPortCapacity::where('select_year', $request->input('select_year'))
+            //     ->where('select_month', $request->input('select_month'))
+            //     ->exists();
+            // Check if a record with the specified year, month, port_type, state_board, and port_name already exists
             $recordExists = MNMPortCapacity::where('select_year', $request->input('select_year'))
                 ->where('select_month', $request->input('select_month'))
+                ->where('port_type', $request->input('port_type'))
+                ->where('state_board', $request->input('state_board'))
+                ->where('port_name', $request->input('port_name'))
                 ->exists();
 
             // If record exists, notify the user and redirect back
@@ -2263,6 +2294,234 @@ class FormController extends Controller
         } else {
             // If the operation was unsuccessful
             return redirect()->route('backend.view-employment-dock-labour-boards-major-port')->with('error', 'Failed to update record');
+        }
+    }
+    // ****************************************************************
+    // ****************************************************************
+    // ****************************************************************
+    // ****************************************************************
+    /**
+     * Display the view for Commodities
+     *
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function viewCommodities()
+    {
+        try {
+            // Fetch Commodities that are not deleted
+            // $getData = SeafarersInformation::where('is_deleted', 0)->get()->toArray();
+            // $getData = Commodities::where('is_deleted', 0)->get()->toArray();
+            // dd($getData);
+            // Return the view with data
+            $commodityArr = [];
+
+            $commodityParents = Commodities::where('parent_id', 0)->get()->toArray();
+
+            foreach ($commodityParents as $parent) {
+                $commodityItem = [
+                    'parent' => $parent,
+                    'sub' => [], // Initialize an empty array for sub-commodities
+                ];
+
+                $subCommodities = Commodities::where('parent_id', $parent['id'])->get()->toArray();
+
+                foreach ($subCommodities as $subCommodity) {
+                    $subCommodityItem = [
+                        'sub' => $subCommodity,
+                        'innersub' => [], // Initialize an empty array for inner sub-commodities
+                    ];
+
+                    $innerSubCommodities = Commodities::where('parent_id', $subCommodity['id'])->get()->toArray();
+
+                    foreach ($innerSubCommodities as $innerSubCommodity) {
+                        $innerSubCommodityItem = [
+                            'innersub' => $innerSubCommodity,
+                            'innermostsub' => [], // Initialize an empty array for innermost sub-commodities
+                        ];
+
+                        $innerMostSubCommodities = Commodities::where('parent_id', $innerSubCommodity['id'])->get()->toArray();
+
+                        foreach ($innerMostSubCommodities as $innerMostSubCommodity) {
+                            $innerSubCommodityItem['innermostsub'][] = $innerMostSubCommodity;
+                        }
+
+                        $subCommodityItem['innersub'][] = $innerSubCommodityItem;
+                    }
+
+                    $commodityItem['sub'][] = $subCommodityItem;
+                }
+
+                $commodityArr[] = $commodityItem;
+            }
+
+            // Now $commodityArr contains the desired structure
+
+
+            $userData = User::where('id', Auth::User()->id)->first();
+
+            // dd($userData);
+
+
+            // dd($commodityArr);
+            return view('backend.viewCommodities', [
+                'commodityArr' => $commodityArr,
+                'userData' => $userData
+            ]);
+        } catch (\Exception $e) {
+            // Handle exceptions and show an error page or log the error
+            // It's a good practice to log errors for further investigation
+            Log::error('Error in viewCommodities method: ' . $e->getMessage());
+
+            // Return a view with an error message
+            return view('backend.error')->with('error', 'An error occurred: ' . $e->getMessage());
+        }
+    }
+
+    // ****************************************************************
+    // ****************************************************************
+    // ****************************************************************
+    // ****************************************************************
+    /**
+     * Add Commodities Form Major Port details.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function addCommoditiesForm(Request $request)
+    {
+        try {
+            // Your logic goes here..
+            $userData = User::where('id', Auth::User()->id)->first();
+
+            // Return the view with data
+            $commodityArr = [];
+
+            $commodityParents = Commodities::where('parent_id', 0)->get()->toArray();
+
+            foreach ($commodityParents as $parent) {
+                $commodityItem = [
+                    'parent' => $parent,
+                    'sub' => [], // Initialize an empty array for sub-commodities
+                ];
+
+                $subCommodities = Commodities::where('parent_id', $parent['id'])->get()->toArray();
+
+                foreach ($subCommodities as $subCommodity) {
+                    $subCommodityItem = [
+                        'sub' => $subCommodity,
+                        'innersub' => [], // Initialize an empty array for inner sub-commodities
+                    ];
+
+                    $innerSubCommodities = Commodities::where('parent_id', $subCommodity['id'])->get()->toArray();
+
+                    foreach ($innerSubCommodities as $innerSubCommodity) {
+                        $innerSubCommodityItem = [
+                            'innersub' => $innerSubCommodity,
+                            'innermostsub' => [], // Initialize an empty array for innermost sub-commodities
+                        ];
+
+                        $innerMostSubCommodities = Commodities::where('parent_id', $innerSubCommodity['id'])->get()->toArray();
+
+                        foreach ($innerMostSubCommodities as $innerMostSubCommodity) {
+                            $innerSubCommodityItem['innermostsub'][] = $innerMostSubCommodity;
+                        }
+
+                        $subCommodityItem['innersub'][] = $innerSubCommodityItem;
+                    }
+
+                    $commodityItem['sub'][] = $subCommodityItem;
+                }
+
+                $commodityArr[] = $commodityItem;
+            }
+
+            // Now $commodityArr contains the desired structure
+            // dd($commodityArr);
+
+            // dd("ADD Form");
+            // Return the view with Commodities Form Major Port details
+            return view('backend.addCommoditiesForm',[
+                "userData" => $userData,
+                "commodityArr" => $commodityArr
+            ]);
+        } catch (\Exception $e) {
+            // Return an error response
+            return response()->json(['error' => 'An error occurred: ' . $e->getMessage()]);
+        }
+    }
+    // ****************************************************************
+    // ****************************************************************
+    // ****************************************************************
+    // ****************************************************************
+    /**
+     * Display the view for Report
+     *
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function viewReport()
+    {
+        try {
+            // dd("Report Page");
+            // Fetch Report that are not deleted
+            $getData = SeafarersInformation::where('is_deleted', 0)->get()->toArray();
+            // $getData = Report::where('is_deleted', 0)->get()->toArray();
+            // dd($getData);
+            // Return the view with data
+            return view('backend.viewReport', ['getData' => $getData]);
+        } catch (\Exception $e) {
+            // Handle exceptions and show an error page or log the error
+            // It's a good practice to log errors for further investigation
+            Log::error('Error in viewReport method: ' . $e->getMessage());
+
+            // Return a view with an error message
+            return view('backend.error')->with('error', 'An error occurred: ' . $e->getMessage());
+        }
+    }
+
+    //Commodity Allocate
+
+    public function commodityAllocate($id)
+    {
+        // dd($id);
+        $commodityData = Commodities::where('id', $id)->first();
+        $expPortId = explode(',', $commodityData->port_id);
+        $user = User::where('id', Auth::User()->id)->select('port_id')->first();
+
+        if (in_array($user->port_id, $expPortId) && ($commodityData->port_id != 0)) {
+
+            $array = $expPortId;
+            $valueToRemove = $user->port_id;
+
+            $array = array_filter($array, function ($item) use ($valueToRemove) {
+                return $item !== $valueToRemove;
+            });
+
+            $impPortIdarray = implode(',', $array);
+
+            // dd($impPortIdarray);
+
+            // // print_r($array); // [1, 2, 4, 5]
+
+
+
+            // $userPortIdArr[] = $user->port_id;
+            // $portIdArr = array_merge($expPortId,$userPortIdArr);
+
+            // $impPortId = implode(',',$portIdArr);
+            // dd($impPortId);
+            Commodities::where('id', $id)->update([
+                'port_id' => $impPortIdarray
+            ]);
+        } else {
+
+            $userPortIdArr[] = $user->port_id;
+            $portIdArr = array_merge($expPortId, $userPortIdArr);
+
+            $impPortId = implode(',', $portIdArr);
+            // dd($impPortId);
+            Commodities::where('id', $id)->update([
+                'port_id' => $impPortId
+            ]);
         }
     }
 }

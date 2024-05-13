@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('ports', function (Blueprint $table) {
             $table->id();
+            $table->text('state_id')->default(0);
             $table->text('states_board_id')->default(0);
             $table->text('port_type')->default(0);
             $table->text('port_name')->default(0);

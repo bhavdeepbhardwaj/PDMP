@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use App\Rules\AllowedEmailDomain;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
@@ -24,33 +25,40 @@ class UserController extends Controller
     public function userList()
     {
         try {
+
+            // dd(Auth::user()->id);
             // Fetch user list where is_deleted is 0
-            $userList = User::where('is_deleted', 0)->get()->toArray();
+
+            if (auth()->user()->port_id != 0) {
+                $userList = User::where('is_deleted', 0)->where('report_to', Auth::user()->id)->get()->toArray();
+            } else {
+                $userList = User::where('is_deleted', 0)->get()->toArray();
+            }
 
             // Fetch Report Officer list where is_deleted is 0 and role ID is 1 or 2
-            $reportList = User::where('is_deleted', 0)->whereIn('role_id', [1, 2])->get()->toArray();
+            // $reportList = User::where('is_deleted', 0)->whereIn('role_id', [1, 2])->get()->toArray();
 
             // Fetch department IDs that are not deleted
-            $depID = Department::where('is_deleted', 0)->get();
+            // $depID = Department::where('is_deleted', 0)->get();
 
             // Fetch all ports that are not deleted
-            $portName = Port::where('is_deleted', 0)->get();
+            // $portName = Port::where('is_deleted', 0)->get();
 
             // Fetch port category names and IDs that are not deleted
-            $portCatName = PortCategory::select('category_name', 'id')->where('is_deleted', 0)->get()->toArray();
+            // $portCatName = PortCategory::select('category_name', 'id')->where('is_deleted', 0)->get()->toArray();
 
             // Fetch all roles
-            $roleId = Role::get();
+            // $roleId = Role::get();
 
 
             // Return the view with user list and related data
             return view('backend.userList', [
                 'userList' => $userList,
-                'depID' => $depID,
-                'roleId' => $roleId,
-                'portName' => $portName,
-                'portCatName' => $portCatName,
-                'reportList' => $reportList,
+                // 'depID' => $depID,
+                // 'roleId' => $roleId,
+                // 'portName' => $portName,
+                // 'portCatName' => $portCatName,
+                // 'reportList' => $reportList,
             ]);
         } catch (\Exception $e) {
             // Handle exceptions and show an error page or log the error
@@ -68,10 +76,13 @@ class UserController extends Controller
         try {
             // Your logic goes here...
             // Fetch user list where is_deleted is 0
-            $userList = User::where('is_deleted', 0)->get()->toArray();
+            // dd($userList);
 
             // Fetch Report Officer list where is_deleted is 0 and role ID is 1,3
-            $reportList = User::where('is_deleted', 0)->whereIn('role_id', [1, 2, 3, 4])->get()->toArray();
+
+            $userList = User::where('is_deleted', 0)->where('report_to', Auth::user()->id)->get()->toArray();
+
+            $reportList = User::where('is_deleted', 0)->whereIn('role_id', [2, 3, 4,5,6])->get()->toArray();
 
             // Fetch department IDs that are not deleted
             $depID = Department::where('is_deleted', 0)->get();
@@ -80,10 +91,26 @@ class UserController extends Controller
             $portName = Port::where('is_deleted', 0)->get();
 
             // Fetch port category names and IDs that are not deleted
-            $portCatName = PortCategory::select('category_name', 'id')->where('is_deleted', 0)->get()->toArray();
+            $portJs = false;
+            if(auth()->user()->port_type != 0){
+                $portCatName = PortCategory::where('id',auth()->user()->port_type)->select('category_name', 'id')->where('is_deleted', 0)->get()->toArray();
 
+            }else{
+                $portCatName = PortCategory::select('category_name', 'id')->where('is_deleted', 0)->get()->toArray();
+                $portJs = true;
+            }
             // Fetch all roles
-            $roleId = Role::get();
+
+            $currentUserRole = Role::where('id',auth()->user()->role_id)->select('access_role')->first();
+            if(isset($currentUserRole)){
+                $currentUserRoleArr = explode(',',$currentUserRole->access_role);
+                $roleIds = Role::whereIn('id',$currentUserRoleArr)->get();
+            }else{
+                $roleIds = Role::where('status',1)->get();
+
+            }
+
+            // dd($roleIds);
 
             $moduleList = IconWithPanel::get()->toArray();
 
@@ -91,11 +118,12 @@ class UserController extends Controller
             return view('backend.addUser', [
                 'userList' => $userList,
                 'depID' => $depID,
-                'roleId' => $roleId,
+                'roleId' => $roleIds,
                 'portName' => $portName,
                 'portCatName' => $portCatName,
                 'reportList' => $reportList,
                 'moduleList' => $moduleList,
+                'portJs' => $portJs
             ]);
         } catch (\Exception $e) {
             // Return an error response
@@ -205,11 +233,14 @@ class UserController extends Controller
      * @param int $id The ID of the user to be edited
      * @return \Illuminate\Http\Response
      */
-    public function editUser($id)
+    public function editUser(Request $request)
     {
         try {
+            // dd($request->all());
+            $id = $request->user_id;
             // Use findOrFail to retrieve the edit data by ID; it automatically handles the 404 case
             $editData = User::findOrFail($id);
+            // dd($editData);
             $implodeExtMod = []; // Initialize an empty array
 
             // Check if $editData->extra_module is not empty

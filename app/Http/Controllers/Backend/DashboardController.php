@@ -37,7 +37,7 @@ class DashboardController extends Controller
 
     public function moduleList()
     {
-        $link = $_SERVER['PHP_SELF'];
+        $link = $_SERVER['REQUEST_URI'];
         $link_array = explode('/', $link);
         $moduleName = end($link_array);
         $moduleId = IconWithPanel::where('mod_list_name', $moduleName)->first();
@@ -109,7 +109,7 @@ class DashboardController extends Controller
 
     public function modulePermission()
     {
-        $link = $_SERVER['PHP_SELF'];
+        $link = $_SERVER['REQUEST_URI'];
         $link_array = explode('/', $link);
         $moduleName = end($link_array);
         $moduleId = IconWithPanel::where('mod_list_name', $moduleName)->first();

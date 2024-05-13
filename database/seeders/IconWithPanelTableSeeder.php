@@ -225,5 +225,32 @@ class IconWithPanelTableSeeder extends Seeder
             'mod_list_name' => 'view-seafarers-information',
             'icon' => 'fa-ship',
         ]);
+
+        IconWithPanel::create([
+            'parent_id' => '0',
+            'module' => 'mod_24',
+            'module_name' => 'Commodities List',
+            'url' => 'view-commodities',
+            'mod_list_name' => 'view-commodities',
+            'icon' => 'fa-ship',
+        ]);
+
+        IconWithPanel::create([
+            'parent_id' => '0',
+            'module' => 'mod_25',
+            'module_name' => 'Commodities List Form Add',
+            'url' => 'add-commodities-form',
+            'mod_list_name' => 'add-commodities-form',
+            'icon' => 'fa-ship',
+        ]);
+
+        IconWithPanel::create([
+            'parent_id' => '0',
+            'module' => 'mod_26',
+            'module_name' => 'Report',
+            'url' => 'view-report',
+            'mod_list_name' => 'view-report',
+            'icon' => 'fa-ship',
+        ]);
     }
 }

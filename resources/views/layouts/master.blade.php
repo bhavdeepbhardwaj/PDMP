@@ -15,7 +15,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('backend/images//favicon-16x16.png') }}">
 
 
-    <title>{{ config('app.name', 'CAPEX') }}</title>
+    <title>{{ config('app.name', 'PDMP 2.0') }}</title>
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -34,7 +34,8 @@
 
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed text-sm layout-footer-fixed layout-navbar-fixed" data-panel-auto-height-mode="height">
+{{-- <body class="hold-transition sidebar-mini layout-fixed text-sm layout-footer-fixed layout-navbar-fixed" data-panel-auto-height-mode="height"> --}}
+    <body class="hold-transition sidebar-mini layout-fixed text-sm layout-footer-fixed layout-navbar-fixed" >
     <div class="wrapper">
         <!-- Navbar -->
         @include('partials.header')
@@ -103,7 +104,24 @@
     <script src="{{ asset('backend/plugins/sweetalert2/sweetalert2.min.js ') }}"></script>
     @yield('js')
 
-
+    <script>
+        function CommodityAllocate(id){
+            // alert(id);
+            $.ajax({
+                type: "GET",
+                url: "/commodity-allocate/" + id,
+                // If you need to pass additional data, you can use the data property like this:
+                // data: { key1: value1, key2: value2 },
+                success: function(response) {
+                    // alert(response);
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                    // Handle errors here
+                }
+            });
+        }
+    </script>
 
 </body>
 

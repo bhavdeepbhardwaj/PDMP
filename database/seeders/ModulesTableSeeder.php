@@ -15,20 +15,20 @@ class ModulesTableSeeder extends Seeder
     {
         Modules::create([
             'role_id' => '1',
-            'module_id' => '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23',
+            'module_id' => '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26',
             // 'module_id' => '1,2,3,4,5,6,7,8,9,10,11,12,13,14',
             'permission' => '',
         ]);
 
         Modules::create([
             'role_id' => '2',
-            'module_id' => '1,15,16,17,18,19,20',
+            'module_id' => '1',
             'permission' => '',
         ]);
 
         Modules::create([
             'role_id' => '3',
-            'module_id' => '1,22,23',
+            'module_id' => '1',
             'permission' => '',
         ]);
 
@@ -46,7 +46,7 @@ class ModulesTableSeeder extends Seeder
 
         Modules::create([
             'role_id' => '6',
-            'module_id' => '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23',
+            'module_id' => '1',
             'permission' => '',
         ]);
     }

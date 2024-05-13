@@ -9,6 +9,7 @@ use App\Http\Controllers\Backend\DepartmentController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -42,7 +43,8 @@ Route::group(['prefix' => 'portal', 'middleware' => ['auth', 'user-access', 'rol
     Route::get('user', [App\Http\Controllers\Backend\UserController::class, 'userList'])->name('user');
     Route::get('add-user', [App\Http\Controllers\Backend\UserController::class, 'addUser'])->name('addUser');
     // Route::post('save-user', [App\Http\Controllers\Backend\UserController::class, 'saveUser'])->name('saveUser');
-    Route::get('edit-user/{id}', [App\Http\Controllers\Backend\UserController::class, 'editUser'])->name('editUser');
+    // Route::get('edit-user/{id}', [App\Http\Controllers\Backend\UserController::class, 'editUser'])->name('editUser');/old route
+    Route::post('edit-user', [App\Http\Controllers\Backend\UserController::class, 'editUser'])->name('editUser');
     // Route::put('update-user/{id}', [App\Http\Controllers\Backend\UserController::class, 'updateUser'])->name('updateUser');
     Route::get('role', [App\Http\Controllers\Backend\RoleController::class, 'roleList'])->name('role');
     Route::get('port', [App\Http\Controllers\Backend\PortController::class, 'portList'])->name('port');
@@ -57,6 +59,16 @@ Route::group(['prefix' => 'portal', 'middleware' => ['auth', 'user-access', 'rol
     Route::get('view-seafarers-information', [App\Http\Controllers\Backend\FormController::class, 'viewSeafarersInformation'])->name('view-seafarers-information');
     Route::get('view-employment-major-ports', [App\Http\Controllers\Backend\FormController::class, 'viewEmploymentMajorPorts'])->name('view-employment-major-ports');
     Route::get('view-employment-dock-labour-boards-major-port', [App\Http\Controllers\Backend\FormController::class, 'viewEmploymentDockLabourBoardsMajorPort'])->name('view-employment-dock-labour-boards-major-port');
+
+
+    Route::get('view-commodities', [App\Http\Controllers\Backend\FormController::class, 'viewCommodities'])->name('view-commodities');
+
+    Route::get('add-commodities-form', [App\Http\Controllers\Backend\FormController::class, 'addCommoditiesForm'])->name('add-commodities-form');
+
+
+
+    Route::get('view-report', [App\Http\Controllers\Backend\FormController::class, 'viewReport'])->name('view-report');
+
 });
 
 // Module Route Add
@@ -213,4 +225,6 @@ Route::get('phpinfo', fn () => phpinfo());
 
 
 Route::get('/chart-data', [App\Http\Controllers\Backend\DashboardController::class, 'getData']);
+
+Route::get('/commodity-allocate/{id}',[App\Http\Controllers\Backend\FormController::class,'commodityAllocate']);
 

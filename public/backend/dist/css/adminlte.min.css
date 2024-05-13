@@ -14188,7 +14188,8 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
 }
 
 .nav-sidebar .nav-link p {
-    display: inline;
+    /* display: inline; */
+    display: inline-block;
     margin: 0;
     white-space: normal
 }

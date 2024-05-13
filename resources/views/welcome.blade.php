@@ -173,7 +173,15 @@
                     </li>
                     <li><a class="nav-link scrollto" href="#publications">Publication</a></li>
                     <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-                    <li><a class="nav-link scrollto" href="\login">Login</a></li>
+                    @if (Route::has('login'))
+                        @auth
+                            @if (Auth::user())
+                                <li><a class="nav-link scrollto" href="{{ route('backend.dashboard') }}"><b> <i class="nav-icon fas fa-th"></i> Dashboard</b></a></li>
+                            @endif
+                        @else
+                            <li><a class="nav-link scrollto" href="{{ route('login') }}">Login</a></li>
+                        @endauth
+                    @endif
 
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name')->default(0);
+            $table->text('state_id')->default(0);
             $table->text('port_type')->default(0);
             $table->text('state_board')->default(0);
             $table->text('port_id')->default(0);

@@ -46,6 +46,12 @@
                                 $portCat = \App\Models\PortCategory::where('id', $editData['port_type'])
                                     ->select('category_name')
                                     ->first();
+                                    
+                                // State Board
+                                $stateBoardname = \App\Models\StateBoard::where('id', $editData['state_board'])
+                                    ->select('name')
+                                    ->first();
+                                // dd($stateBoardname['name']);
                                 // Port
                                 $portName = \App\Models\Port::where('id', $editData['port_id'])
                                     ->select('port_name')
@@ -196,7 +202,7 @@
                                         <select class="form-control @error('state_board') is-invalid @enderror"
                                             name="state_board" id="state_board" value="{{ old('state_board') }}">
                                             <option value="{{ $editData->state_board }}" selected>
-                                                {{ $stateboard['name'] ?? 'N/A' }}
+                                                {{ $stateBoardname['name'] ?? 'N/A' }}
                                             </option>
                                         </select>
                                         @error('state_board')
