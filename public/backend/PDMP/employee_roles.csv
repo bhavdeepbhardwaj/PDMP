@@ -1,0 +1,8 @@
+﻿id,employee_role,level,dependency,created_by_employee_id,created_on,updated_by_employee_id,updated_on
+1,Super Admin,1,none,1,2017-01-03 06:01:09,,2017-01-03 06:01:25
+2,Ministry Nodal Officer,2,organization,1,2017-01-04 06:22:29,,2017-01-04 06:28:02
+3,State Maritime Board Nodal Officer,4,organization,1,2017-01-04 06:26:05,,2017-05-04 09:48:36
+4,Port Nodal Officer,6,organization,1,2017-01-04 06:26:25,,2018-10-04 13:27:52
+5,Port Manager,7,organization,1,2017-01-04 06:27:13,,2017-05-04 09:48:36
+6,Data Entry Officer,8,organization,1,2017-01-04 06:29:48,,2017-05-04 09:48:36
+7,administrator,3,none,1,2017-05-04 09:48:36,,0000-00-00 00:00:00

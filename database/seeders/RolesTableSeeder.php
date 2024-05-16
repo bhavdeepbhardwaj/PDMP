@@ -34,7 +34,7 @@ class RolesTableSeeder extends Seeder
             'role_slug' => 'statemaritimeboardnodalofficer',
             'level'     => '3',
             'employee_role' => 'State Maritime Board Nodal Officer (Admin II)',
-            'access_role' => '0'
+            'access_role' => '5,6'
         ]);
 
         Role::create([

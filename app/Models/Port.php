@@ -10,6 +10,8 @@ class Port extends Model
     use HasFactory;
 
     protected $fillable = [
+        'state_id',
+        'states_board_id',
         'port_type',
         'port_name',
         'port_code',

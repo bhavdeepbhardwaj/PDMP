@@ -15,6 +15,7 @@ class PortSeeder extends Seeder
     {
         Port::create([
             'port_type' => '1',
+            'state_id' => '31',
             'states_board_id' => '0',
             'port_name' => 'Chennai Port Authority',
             'port_code' => '0',
@@ -24,6 +25,7 @@ class PortSeeder extends Seeder
 
         Port::create([
             'port_type' => '1',
+            'state_id' => '18',
             'states_board_id' => '0',
             'port_name' => 'Cochin Port Authority',
             'port_code' => '0',
@@ -33,6 +35,7 @@ class PortSeeder extends Seeder
 
         Port::create([
             'port_type' => '1',
+            'state_id' => '12',
             'states_board_id' => '0',
             'port_name' => 'Deendayal Port Authority',
             'port_code' => '0',
@@ -42,6 +45,7 @@ class PortSeeder extends Seeder
 
         Port::create([
             'port_type' => '1',
+            'state_id' => '37',
             'states_board_id' => '0',
             'port_name' => 'Haldia Dock Complex',
             'port_code' => '0',
@@ -51,6 +55,7 @@ class PortSeeder extends Seeder
 
         Port::create([
             'port_type' => '1',
+            'state_id' => '21',
             'states_board_id' => '0',
             'port_name' => 'Jawaharlal Nehru Port Authority',
             'port_code' => '0',
@@ -60,6 +65,7 @@ class PortSeeder extends Seeder
 
         Port::create([
             'port_type' => '1',
+            'state_id' => '31',
             'states_board_id' => '0',
             'port_name' => 'Kamarajar Port Authority',
             'port_code' => '0',
@@ -69,6 +75,7 @@ class PortSeeder extends Seeder
 
         Port::create([
             'port_type' => '1',
+            'state_id' => '11',
             'states_board_id' => '0',
             'port_name' => 'Mormugao Port Authority',
             'port_code' => '0',
@@ -78,6 +85,7 @@ class PortSeeder extends Seeder
 
         Port::create([
             'port_type' => '1',
+            'state_id' => '21',
             'states_board_id' => '0',
             'port_name' => 'Mumbai Port Authority',
             'port_code' => '0',
@@ -87,6 +95,7 @@ class PortSeeder extends Seeder
 
         Port::create([
             'port_type' => '1',
+            'state_id' => '17',
             'states_board_id' => '0',
             'port_name' => 'New Mangalore Port Authority',
             'port_code' => '0',
@@ -96,6 +105,7 @@ class PortSeeder extends Seeder
 
         Port::create([
             'port_type' => '1',
+            'state_id' => '26',
             'states_board_id' => '0',
             'port_name' => 'Paradip Port Authority',
             'port_code' => '0',
@@ -105,6 +115,7 @@ class PortSeeder extends Seeder
 
         Port::create([
             'port_type' => '1',
+            'state_id' => '37',
             'states_board_id' => '0',
             'port_name' => 'Syama Prasad Mookerjee Kolkata',
             'port_code' => '0',
@@ -114,6 +125,7 @@ class PortSeeder extends Seeder
 
         Port::create([
             'port_type' => '1',
+            'state_id' => '31',
             'states_board_id' => '0',
             'port_name' => 'V O Chidambaranar Port Authority',
             'port_code' => '0',
@@ -123,6 +135,7 @@ class PortSeeder extends Seeder
 
         Port::create([
             'port_type' => '1',
+            'state_id' => '1',
             'states_board_id' => '0',
             'port_name' => 'Visakhapatnam Port Authority',
             'port_code' => '0',
@@ -183,24 +196,6 @@ class PortSeeder extends Seeder
             'port_data_code' => '0',
             'created_by' => '1',
         ]);
-
-        // Port::create([
-        //     'port_type' => '2',
-        //     'states_board_id' => '3',
-        //     'port_name' => '',
-        //     'port_code' => '0',
-        //     'port_data_code' => '0',
-        //     'created_by' => '1',
-        // ]);
-
-        // Port::create([
-        //     'port_type' => '2',
-        //     'states_board_id' => '4',
-        //     'port_name' => '',
-        //     'port_code' => '0',
-        //     'port_data_code' => '0',
-        //     'created_by' => '1',
-        // ]);
 
         Port::create([
             'port_type' => '2',
@@ -462,15 +457,6 @@ class PortSeeder extends Seeder
             'port_data_code' => '0',
             'created_by' => '1',
         ]);
-
-        // Port::create([
-        //     'port_type' => '2',
-        //     'states_board_id' => '9',
-        //     'port_name' => '',
-        //     'port_code' => '0',
-        //     'port_data_code' => '0',
-        //     'created_by' => '1',
-        // ]);
 
         Port::create([
             'port_type' => '2',
@@ -769,31 +755,31 @@ class PortSeeder extends Seeder
             'created_by' => '1',
         ]);
 
-        Port::create([
-            'port_type' => '3',
-            'states_board_id' => '0',
-            'port_name' => 'Shipping Sector Port',
-            'port_code' => '0',
-            'port_data_code' => '0',
-            'created_by' => '1',
-        ]);
+        // Port::create([
+        //     'port_type' => '3',
+        //     'states_board_id' => '0',
+        //     'port_name' => 'Shipping Sector Port',
+        //     'port_code' => '0',
+        //     'port_data_code' => '0',
+        //     'created_by' => '1',
+        // ]);
 
-        Port::create([
-            'port_type' => '4',
-            'states_board_id' => '0',
-            'port_name' => 'Other Organisations Port',
-            'port_code' => '0',
-            'port_data_code' => '0',
-            'created_by' => '1',
-        ]);
+        // Port::create([
+        //     'port_type' => '4',
+        //     'states_board_id' => '0',
+        //     'port_name' => 'Other Organisations Port',
+        //     'port_code' => '0',
+        //     'port_data_code' => '0',
+        //     'created_by' => '1',
+        // ]);
 
-        Port::create([
-            'port_type' => '5',
-            'states_board_id' => '0',
-            'port_name' => 'Sagarmala + ALHW Project Port',
-            'port_code' => '0',
-            'port_data_code' => '0',
-            'created_by' => '1',
-        ]);
+        // Port::create([
+        //     'port_type' => '5',
+        //     'states_board_id' => '0',
+        //     'port_name' => 'Sagarmala + ALHW Project Port',
+        //     'port_code' => '0',
+        //     'port_data_code' => '0',
+        //     'created_by' => '1',
+        // ]);
     }
 }

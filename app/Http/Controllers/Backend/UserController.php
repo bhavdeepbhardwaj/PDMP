@@ -34,22 +34,7 @@ class UserController extends Controller
             } else {
                 $userList = User::where('is_deleted', 0)->get()->toArray();
             }
-
-            // Fetch Report Officer list where is_deleted is 0 and role ID is 1 or 2
-            // $reportList = User::where('is_deleted', 0)->whereIn('role_id', [1, 2])->get()->toArray();
-
-            // Fetch department IDs that are not deleted
-            // $depID = Department::where('is_deleted', 0)->get();
-
-            // Fetch all ports that are not deleted
-            // $portName = Port::where('is_deleted', 0)->get();
-
-            // Fetch port category names and IDs that are not deleted
-            // $portCatName = PortCategory::select('category_name', 'id')->where('is_deleted', 0)->get()->toArray();
-
-            // Fetch all roles
-            // $roleId = Role::get();
-
+            // dd($userList);
 
             // Return the view with user list and related data
             return view('backend.userList', [
@@ -75,16 +60,39 @@ class UserController extends Controller
     {
         try {
             // Your logic goes here...
-            // Fetch user list where is_deleted is 0
-            // dd($userList);
-
             // Fetch Report Officer list where is_deleted is 0 and role ID is 1,3
 
-            $reportList = User::where('is_deleted', 0)->whereIn('role_id', [1, 2, 3, 4])->get()->toArray();
+            $currentUserReport = auth()->user()->report_to;
+            // dd($currentUserReport, $authUserId);
+
+            // if (isset($currentUserReport)) {
+            //     $reportList = User::whereIn('id', [$currentUserReport, auth()->user()->id])->get()->toArray();
+            // } else {
+            //     $reportList = User::where('is_deleted', 0)
+            //         ->whereIn('role_id', [1, 2, 3, 4])
+            //         ->get()
+            //         ->toArray();
+            // }
+
+            if (Auth::user()->role_id == 1) {
+                $reportList = User::where('is_deleted', 0)
+                    ->whereIn('role_id', [1, 2, 3, 4])
+                    ->get()
+                    ->toArray();
+            } elseif (isset($currentUserReport)) {
+                $reportList = User::whereIn('id', [auth()->user()->id])->get()->toArray();
+            } else {
+                // Define what should happen when neither condition is met
+                // For example, fetch all users with specific conditions
+                $reportList = User::where('is_deleted', 0)->get()->toArray();
+            }
+
+            // dd($reportList);
+
 
             $userList = User::where('is_deleted', 0)->where('report_to', Auth::user()->id)->get()->toArray();
 
-            // $reportList = User::where('is_deleted', 0)->whereIn('role_id', [2, 3, 4, 5, 6])->get()->toArray();
+            // $reportList = User::where('is_deleted', 0)->whereIn('role_id', [2, 3, 4, 5])->get()->toArray();
 
             // Fetch department IDs that are not deleted
             $depID = Department::where('is_deleted', 0)->get();
@@ -100,14 +108,17 @@ class UserController extends Controller
                 $portCatName = PortCategory::select('category_name', 'id')->where('is_deleted', 0)->get()->toArray();
                 $portJs = true;
             }
-            // Fetch all roles
+
+            // Fetch access_role roles only
 
             $currentUserRole = Role::where('id', auth()->user()->role_id)->select('access_role')->first();
+            // dd($currentUserRole);
             if (isset($currentUserRole)) {
                 $currentUserRoleArr = explode(',', $currentUserRole->access_role);
                 $roleIds = Role::whereIn('id', $currentUserRoleArr)->get();
             } else {
-                $roleIds = Role::where('status', 1)->get();
+                // Fetch all roles
+                $roleIds = Role::where('is_deleted', 0)->get();
             }
 
             // dd($roleIds);

@@ -25,22 +25,22 @@ class PortCategorySeeder extends Seeder
             'created_by' => '1',
         ]);
 
-        PortCategory::create([
-            'category_name' => 'Shipping Sector',
-            'slug' => 'shippingsector',
-            'created_by' => '1',
-        ]);
+        // PortCategory::create([
+        //     'category_name' => 'Shipping Sector',
+        //     'slug' => 'shippingsector',
+        //     'created_by' => '1',
+        // ]);
 
-        PortCategory::create([
-            'category_name' => 'Other Organisations',
-            'slug' => 'otherorganisations',
-            'created_by' => '1',
-        ]);
+        // PortCategory::create([
+        //     'category_name' => 'Other Organisations',
+        //     'slug' => 'otherorganisations',
+        //     'created_by' => '1',
+        // ]);
 
-        PortCategory::create([
-            'category_name' => 'Sagarmala + ALHW Project',
-            'slug' => 'sagarmala+alhwproject',
-            'created_by' => '1',
-        ]);
+        // PortCategory::create([
+        //     'category_name' => 'Sagarmala + ALHW Project',
+        //     'slug' => 'sagarmala+alhwproject',
+        //     'created_by' => '1',
+        // ]);
     }
 }

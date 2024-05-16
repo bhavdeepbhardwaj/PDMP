@@ -62,6 +62,7 @@
                                             <th>Email</th>
                                             <th>Username</th>
                                             <th>Status (Active / Inactive)</th>
+                                            <th>Report Officer</th>
                                             <th>Created</th>
                                             {{-- <th>Updated</th> --}}
                                             <th>Action</th>
@@ -69,19 +70,35 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($userList as $key => $value)
+                                            @php
+                                                // Report To User name
+                                                $reportUser = \App\Models\User::where('id', $value['report_to'])
+                                                    ->select('name')
+                                                    ->first();
+
+                                                $roleName = \App\Models\Role::where('id', $value['role_id'])
+                                                    ->select('role_name')
+                                                    ->first();
+
+                                                $depName = \App\Models\Department::where('id', $value['dep_id'])
+                                                    ->select('name')
+                                                    ->first();
+                                                    // dd($depName);
+                                            @endphp
                                             <tr>
                                                 <td>{{ $loop->index + 1 }}</td>
                                                 <td>{{ $value['name'] }}</td>
                                                 <td>
-                                                    <?php $roleName = \App\Models\Role::where('id', $value['role_id'])
-                                                        ->first()
-                                                        ->toArray(); ?>
-                                                    {{ $roleName['role_name'] }}
+                                                    @if ($roleName)
+                                                        {{ $roleName['role_name'] ?? 'Name not available' }}
+                                                    @else
+                                                    @endif
                                                 </td>
-                                                <td><?php $depName = \App\Models\Department::where('id', $value['dep_id'])
-                                                    ->first()
-                                                    ->toArray(); ?>
-                                                    {{ $depName['name'] }}
+                                                <td>
+                                                    @if ($depName)
+                                                        {{ $depName['name'] ?? 'Name not available' }}
+                                                    @else
+                                                    @endif
                                                 </td>
                                                 <td>{{ $value['email'] }}</td>
                                                 <td>{{ $value['username'] }}</td>
@@ -92,17 +109,20 @@
                                                         <span class="badge badge-danger">Inactive</span>
                                                     @endif
                                                 </td>
-                                                <td>{{ date('jS \of F Y h:i:s A', strtotime($value['created_at'])) }}
+                                                <td>
+                                                    @if ($reportUser)
+                                                        {{ $reportUser->name ?? 'Name not available' }}
+                                                    @else
+                                                    @endif
                                                 </td>
+                                                <td>{{ date('jS \of F Y h:i:s A', strtotime($value['created_at'])) }}</td>
                                                 {{-- <td>{{ date('jS \of F Y h:i:s A', strtotime($value['updated_at'])) }}
                                                 </td> --}}
                                                 <td>
                                                     {{-- <a href="{{ route('backend.editUser', $value['id']) }}" class="edit-user"><i
                                                             class="far fa-edit" aria-hidden="true"></i></a> --}}
-                                                            @if (Auth::user()->role_id == 1) 
-                                                                
-                                                            @else
-                                                            <form id="editUserForm" action="{{ route('backend.editUser') }}"
+                                                    @if (Auth::user()->role_id == 1 || Auth::user()->role_id == 4)
+                                                        <form id="editUserForm" action="{{ route('backend.editUser') }}"
                                                             method="POST">
                                                             @csrf
                                                             <input type="text" hidden name="user_id"
@@ -111,8 +131,8 @@
                                                                 class="edit-user badge badge-primary"><i class="far fa-edit"
                                                                     aria-hidden="true"></i></button>
                                                         </form>
-                                                            @endif
-
+                                                    @else
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -126,6 +146,7 @@
                                             <th>Email</th>
                                             <th>Username</th>
                                             <th>Status (Active / Inactive)</th>
+                                            <th>Report Officer</th>
                                             <th>Created</th>
                                             {{-- <th>Updated</th> --}}
                                             <th>Action</th>

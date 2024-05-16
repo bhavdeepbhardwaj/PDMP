@@ -1,0 +1,4 @@
+﻿id,row_id,state_board_id,port_board_id,period,vessels_left,avg_turn_r_time,status,created_by_user_id,created_on,modified_by_user_id,approved_on,modified_on,log_data_created_on
+1,2,3,30,2016,36,1633,Approval Awaited,69,2017-08-18 16:01:30,,,,2017-08-18 17:09:57
+2,13,6,41,2017,15,10,Approval Awaited,119,2018-11-02 15:17:33,,,,2018-11-03 11:00:21
+3,14,6,41,2018,17,10,Approval Awaited,119,2018-11-02 15:17:55,,,,2018-11-03 11:00:30

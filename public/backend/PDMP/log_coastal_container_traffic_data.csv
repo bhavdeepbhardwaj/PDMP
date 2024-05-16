@@ -1,0 +1,5 @@
+﻿id,row_id,coastal_container_traffic_master_id,period,state_board_id,port_board_id,traffic_data,status,approved_on,created_by_user_id,updated_by_user_id,created_on,modified_on,log_data_created_on
+1,5,1,2017,,10,29632.000,Approval Awaited,,61,,2017-05-16 15:49:11,,2017-05-19 17:15:41
+2,6,2,2017,,10,3521.000,Approval Awaited,,61,,2017-05-16 15:49:11,,2017-05-19 17:15:41
+3,7,3,2017,,10,5591.000,Approval Awaited,,61,,2017-05-16 15:49:11,,2017-05-19 17:15:41
+4,8,4,2017,,10,4489.000,Approval Awaited,,61,,2017-05-16 15:49:11,,2017-05-19 17:15:41

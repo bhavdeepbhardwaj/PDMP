@@ -1,0 +1,5 @@
+﻿id,berth_type,created_on,created_by_employee_id,updated_on,updated_by_employee_id
+1,General Berth,2016-05-04 11:37:44,9,2016-11-18 10:51:27,2
+2,Container Berth,2016-05-04 11:42:13,9,,
+3,Bulk Berth,2016-05-04 11:42:27,9,2016-05-04 11:43:16,
+4,Open sea Jetty,2017-09-06 10:54:42,2,,

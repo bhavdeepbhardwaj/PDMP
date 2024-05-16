@@ -1,0 +1,5 @@
+﻿id,table_code,table_name,table_descr,table_type,data_type,applicable_for,created_by_employee_id
+1,md,M1,Monthly,Monthly,Commodities,Both Major & Non-Major,2
+2,Half,H1,Half Yearly,Half Yearly,Commodities,Both Major & Non-Major,2
+3,Yrly,A1,Annual Cargo Handled,Yearly,Commodities,Both Major & Non-Major,2
+4,VPP,Vesselwise Phy Performance,Vesselwise Phy Performance,Monthly,Vessels,Major,2
