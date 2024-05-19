@@ -26,7 +26,6 @@ return new class extends Migration
             $table->text('extra_module')->default(0);
             $table->string('email')->unique();
             $table->string('username')->nullable();
-            $table->tinyInteger('is_deleted')->default(0)->comment('Soft Deleted');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->text('created_by')->default(0)->comment('Create User ID');
