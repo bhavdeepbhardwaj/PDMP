@@ -242,5 +242,67 @@ class RolePermissionsSeeder extends Seeder
             'deleted' => '1',
             'status' => '1',
         ]);
+
+        RolePermission::create([
+            'role_id' => '1',
+            'module_id' => '24',
+            'create' => '1',
+            'edit' => '1',
+            'view' => '1',
+            'deleted' => '1',
+            'status' => '1',
+        ]);
+
+        RolePermission::create([
+            'role_id' => '1',
+            'module_id' => '25',
+            'create' => '1',
+            'edit' => '1',
+            'view' => '1',
+            'deleted' => '1',
+            'status' => '1',
+        ]);
+
+        RolePermission::create([
+            'role_id' => '1',
+            'module_id' => '26',
+            'create' => '1',
+            'edit' => '1',
+            'view' => '1',
+            'deleted' => '1',
+            'status' => '1',
+        ]);
+
+        // Nodal Port Officer Role ID-4
+
+        RolePermission::create([
+            'role_id' => '4',
+            'module_id' => '3',
+            'create' => '1',
+            'edit' => '1',
+            'view' => '1',
+            'deleted' => '1',
+            'status' => '1',
+        ]);
+
+        RolePermission::create([
+            'role_id' => '4',
+            'module_id' => '4',
+            'create' => '1',
+            'edit' => '1',
+            'view' => '1',
+            'deleted' => '1',
+            'status' => '1',
+        ]);
+
+        RolePermission::create([
+            'role_id' => '4',
+            'module_id' => '5',
+            'create' => '1',
+            'edit' => '1',
+            'view' => '1',
+            'deleted' => '1',
+            'status' => '1',
+        ]);
     }
 }

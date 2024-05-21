@@ -37,9 +37,11 @@
                             <div class="card-header">
                                 <h3 class="card-title">Role Management</h3>
                                 <div class="float-right">
-                                    <a href="{{ route('backend.addRole') }}" class="btn btn-primary">
-                                        <i class="fas fa-plus"></i> Add Role
-                                    </a>
+                                    @if ($permissionData->create == 1)
+                                        <a href="{{ route('backend.addRole') }}" class="btn btn-primary">
+                                            <i class="fas fa-plus"></i> Add Role
+                                        </a>
+                                    @endif
                                 </div>
                             </div>
 
@@ -69,8 +71,9 @@
                                                 {{-- <td><a href="javascript:void(0)" data-toggle="modal" data-target="#editmodal-lg"
                                                 class="edit-role" data-roleID="{{ $value['id'] }}"><i
                                                     class="far fa-edit" aria-hidden="true"></i></a></td> --}}
-                                                <td><a href="{{ route('backend.editRole', $value['id']) }}" class="edit-role"><i class="far fa-edit"
-                                                            aria-hidden="true"></i></a></td>
+                                                <td><a href="{{ route('backend.editRole', $value['id']) }}"
+                                                        class="edit-role"><i class="far fa-edit" aria-hidden="true"></i></a>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>

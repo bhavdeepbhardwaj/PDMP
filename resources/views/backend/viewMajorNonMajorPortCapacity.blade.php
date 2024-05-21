@@ -63,6 +63,7 @@
                                             <th>Port Name</th>
                                             <th>Operational</th>
                                             <th>Capacity (In Million Metric Tons)</th>
+                                            <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -94,6 +95,9 @@
                                                 <td>{{ $value['operational'] }}</td>
                                                 <td>{{ $value['capacity'] }}</td>
                                                 <td>
+                                                    {{ $value['status'] == 1 ? 'Approved' : ($value['status'] == 3 ? 'Drafted' : 'Approval Awaited') }}
+                                                </td>
+                                                <td>
                                                     <a href="{{ route('editMajorNonMajorPortCapacity', $value['id']) }}">
                                                         <i class="far fa-edit" aria-hidden="true"></i>
                                                     </a>
@@ -111,6 +115,7 @@
                                             <th>Port Name</th>
                                             <th>Operational</th>
                                             <th>Capacity (In Million Metric Tons)</th>
+                                            <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </tfoot>
@@ -177,5 +182,4 @@
             });
         });
     </script>
-
 @endsection

@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
+
     /**
      * Fetches user list and related data for display.
      *
@@ -25,9 +26,12 @@ class UserController extends Controller
     public function userList()
     {
         try {
-
+            $permissionData = app('App\Http\Controllers\Backend\DashboardController')->modulePermission();
+            // $permissionData = modulePermission();
             // dd(Auth::user()->id);
             // Fetch user list where is_deleted is 0
+
+            // dd($permissionData);
 
             if (auth()->user()->port_id != 0) {
                 $userList = User::where('is_deleted', 0)->where('report_to', Auth::user()->id)->get()->toArray();
@@ -39,6 +43,7 @@ class UserController extends Controller
             // Return the view with user list and related data
             return view('backend.userList', [
                 'userList' => $userList,
+                'permissionData' => $permissionData
                 // 'depID' => $depID,
                 // 'roleId' => $roleId,
                 // 'portName' => $portName,

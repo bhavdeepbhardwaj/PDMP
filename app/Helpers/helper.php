@@ -2,6 +2,9 @@
 
 // app/Helpers/CustomHelpers.php
 
+use App\Models\RolePermission;
+use App\Models\IconWithPanel;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 if (!function_exists('getUserName')) {
@@ -59,5 +62,17 @@ if (!function_exists('getYearOptions')) {
         }
 
         return $options;
+    }
+}
+
+if (!function_exists('modulePermission')) {
+    function modulePermission()
+    {
+        $link = $_SERVER['REQUEST_URI'];
+        $link_array = explode('/', $link);
+        $moduleName = end($link_array);
+        $moduleId = IconWithPanel::where('mod_list_name', $moduleName)->first();
+        $permissionData = RolePermission::where('role_id', Auth::user()->role_id)->where('module_id', $moduleId->id)->where('status', 1)->first();
+        return $permissionData;
     }
 }

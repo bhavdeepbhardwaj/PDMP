@@ -190,7 +190,13 @@ class FormController extends Controller
                     ->withErrors($validator)  // Flash the validation errors to the session
                     ->withInput();  // Flash the input data to the session
             }
+            // $statusRequest = MNMPortCapacity::where('status', '3')->count();
 
+            // dd($statusRequest);
+
+            // if ($statusRequest != 3) {
+
+            // }
             // Check if a record with the specified year and month already exists
             // $recordExists = MNMPortCapacity::where('select_year', $request->input('select_year'))
             //     ->where('select_month', $request->input('select_month'))
@@ -204,7 +210,7 @@ class FormController extends Controller
                 ->exists();
 
             // If record exists, notify the user and redirect back
-            if ($recordExists) {
+            if ($recordExists ) {
                 // Map numeric month value to month name using DateTime
                 $monthName = DateTime::createFromFormat('!m', $request->input('select_month'))->format('F');
                 $message = 'A record with the selected ' . $request->input('select_year') . ' and selected ' . $monthName . ' already exists.';

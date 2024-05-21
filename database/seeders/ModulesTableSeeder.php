@@ -34,7 +34,7 @@ class ModulesTableSeeder extends Seeder
 
         Modules::create([
             'role_id' => '4',
-            'module_id' => '1,21',
+            'module_id' => '1',
             'permission' => '',
         ]);
 

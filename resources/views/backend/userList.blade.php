@@ -43,9 +43,11 @@
                             <div class="card-header">
                                 <h3 class="card-title">User Management</h3>
                                 <div class="float-right">
-                                    <a href="{{ route('backend.addUser') }}" class="btn btn-primary">
-                                        <i class="fas fa-plus"></i> Add User
-                                    </a>
+                                    @if ($permissionData->create == 1)
+                                        <a href="{{ route('backend.addUser') }}" class="btn btn-primary">
+                                            <i class="fas fa-plus"></i> Add User
+                                        </a>
+                                    @endif
                                 </div>
                             </div>
                             <!-- /.card-header -->
@@ -65,7 +67,9 @@
                                             <th>Report Officer</th>
                                             <th>Created</th>
                                             {{-- <th>Updated</th> --}}
-                                            <th>Action</th>
+                                            @if ($permissionData->edit == 1)
+                                                <th>Action</th>
+                                            @endif
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -83,7 +87,7 @@
                                                 $depName = \App\Models\Department::where('id', $value['dep_id'])
                                                     ->select('name')
                                                     ->first();
-                                                    // dd($depName);
+                                                // dd($depName);
                                             @endphp
                                             <tr>
                                                 <td>{{ $loop->index + 1 }}</td>
@@ -118,22 +122,24 @@
                                                 <td>{{ date('jS \of F Y h:i:s A', strtotime($value['created_at'])) }}</td>
                                                 {{-- <td>{{ date('jS \of F Y h:i:s A', strtotime($value['updated_at'])) }}
                                                 </td> --}}
-                                                <td>
-                                                    {{-- <a href="{{ route('backend.editUser', $value['id']) }}" class="edit-user"><i
+                                                @if ($permissionData->edit == 1)
+                                                    <td>
+                                                        {{-- <a href="{{ route('backend.editUser', $value['id']) }}" class="edit-user"><i
                                                             class="far fa-edit" aria-hidden="true"></i></a> --}}
-                                                    @if (Auth::user()->role_id == 1 || Auth::user()->role_id == 4)
-                                                        <form id="editUserForm" action="{{ route('backend.editUser') }}"
-                                                            method="POST">
-                                                            @csrf
-                                                            <input type="text" hidden name="user_id"
-                                                                value={{ $value['id'] }} />
-                                                            <button type="submit" name="edit"
-                                                                class="edit-user badge badge-primary"><i class="far fa-edit"
-                                                                    aria-hidden="true"></i></button>
-                                                        </form>
-                                                    @else
-                                                    @endif
-                                                </td>
+                                                        @if (Auth::user()->role_id == 1 || Auth::user()->role_id == 4)
+                                                            <form id="editUserForm"
+                                                                action="{{ route('backend.editUser') }}" method="POST">
+                                                                @csrf
+                                                                <input type="text" hidden name="user_id"
+                                                                    value={{ $value['id'] }} />
+                                                                <button type="submit" name="edit"
+                                                                    class="edit-user badge badge-primary"><i
+                                                                        class="far fa-edit" aria-hidden="true"></i></button>
+                                                            </form>
+                                                        @else
+                                                        @endif
+                                                    </td>
+                                                @endif
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -149,7 +155,9 @@
                                             <th>Report Officer</th>
                                             <th>Created</th>
                                             {{-- <th>Updated</th> --}}
-                                            <th>Action</th>
+                                            @if ($permissionData->edit == 1)
+                                                <th>Action</th>
+                                            @endif
                                         </tr>
                                     </tfoot>
                                 </table>

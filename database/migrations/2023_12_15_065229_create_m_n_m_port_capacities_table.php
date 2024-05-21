@@ -19,8 +19,8 @@ return new class extends Migration
             $table->text('state_board')->default(0);
             $table->text('port_name')->default(0);
             $table->text('operational')->default(0);
-            // $table->text('nonOperational')->default(0);
             $table->text('capacity')->default(0);
+            $table->text('status')->default(0);
             $table->text('created_by')->default(0)->comment('Users ID');
             $table->text('updated_by')->default(0)->comment('Admin ID');
             // $table->text('modify_id')->default(0)->comment('User ID');

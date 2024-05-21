@@ -21,10 +21,14 @@ class RoleController extends Controller
     {
         try {
             // Fetch all roles from the database
+            $permissionData = modulePermission();
             $roles = Role::get()->toArray();
 
             // Return the view with the fetched roles
-            return view('backend.roleList', ['roles' => $roles]);
+            return view('backend.roleList', [
+                'roles' => $roles,
+                'permissionData' => $permissionData
+            ]);
         } catch (\Exception $e) {
             // Handle exceptions and errors gracefully
             // Log the error for further investigation
