@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Middleware\RolePermission;
 use App\Models\Department;
 use App\Models\IconWithPanel;
 use App\Models\Port;
@@ -30,26 +31,30 @@ class UserController extends Controller
             // $permissionData = modulePermission();
             // dd(Auth::user()->id);
             // Fetch user list where is_deleted is 0
+            // $subActionList = \App\Models\RolePermission::where('role_id',$permissionData['role_id'])->where('parent_module_id',$permissionData['module_id'])->first();
+            // dd($permissionData,$subActionList);
+            if(isset($permissionData)){
+                if (auth()->user()->port_id != 0) {
+                    $userList = User::where('is_deleted', 0)->where('report_to', Auth::user()->id)->get()->toArray();
+                } else {
+                    $userList = User::where('is_deleted', 0)->get()->toArray();
+                }
+                // dd($userList);
 
-            // dd($permissionData);
-
-            if (auth()->user()->port_id != 0) {
-                $userList = User::where('is_deleted', 0)->where('report_to', Auth::user()->id)->get()->toArray();
-            } else {
-                $userList = User::where('is_deleted', 0)->get()->toArray();
+                // Return the view with user list and related data
+                return view('backend.userList', [
+                    'userList' => $userList,
+                    'permissionData' => $permissionData,
+                    // 'subActionList' => $subActionList,
+                    // 'roleId' => $roleId,
+                    // 'portName' => $portName,
+                    // 'portCatName' => $portCatName,
+                    // 'reportList' => $reportList,
+                ]);
+            } else{
+                dd("not");
             }
-            // dd($userList);
 
-            // Return the view with user list and related data
-            return view('backend.userList', [
-                'userList' => $userList,
-                'permissionData' => $permissionData
-                // 'depID' => $depID,
-                // 'roleId' => $roleId,
-                // 'portName' => $portName,
-                // 'portCatName' => $portCatName,
-                // 'reportList' => $reportList,
-            ]);
         } catch (\Exception $e) {
             // Handle exceptions and show an error page or log the error
             return view('backend.error')->with('error', 'An error occurred: ' . $e->getMessage());

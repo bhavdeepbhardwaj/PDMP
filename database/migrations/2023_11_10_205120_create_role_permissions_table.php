@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('role_permissions', function (Blueprint $table) {
             $table->id();
             $table->text('role_id')->default(0);
+            $table->text('parent_module_id')->default(0);
             $table->text('module_id')->default(0);
             $table->text('create')->default(0);
             $table->text('edit')->default(0);
