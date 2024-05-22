@@ -43,6 +43,7 @@
 
                                 <input type="hidden" class="form-control" id="createdBy" value="{{ Auth::user()->id }}"
                                     name="created_by">
+                                {{-- <input type="" class="form-control" id="status" value="3" name="status"> --}}
 
                                 <div class="col-md-4">
                                     <div class="form-group">
@@ -192,8 +193,8 @@
                                         <label for="capacity">Capacity (In Million Metric Tons) <span
                                                 style="color: red;">*</span></label>
                                         <input type="text" class="form-control @error('capacity') is-invalid @enderror"
-                                            id="capacity" placeholder="Enter Capacity (In Million Metric Tons)" name="capacity"
-                                            value="{{ old('capacity') }}">
+                                            id="capacity" placeholder="Enter Capacity (In Million Metric Tons)"
+                                            name="capacity" value="{{ old('capacity') }}">
                                         @error('capacity')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>

@@ -131,7 +131,7 @@ Route::get('add-major-non-major-port-capacity', [App\Http\Controllers\Backend\Fo
 Route::post('save-major-non-major-port-capacity', [App\Http\Controllers\Backend\FormController::class, 'saveMajorNonMajorPortCapacity'])->name('saveMajorNonMajorPortCapacity');
 Route::get('edit-major-non-major-port-capacity/{id}', [App\Http\Controllers\Backend\FormController::class, 'editMajorNonMajorPortCapacity'])->name('editMajorNonMajorPortCapacity');
 Route::put('update-major-non-major-port-capacity/{id}', [App\Http\Controllers\Backend\FormController::class, 'updateMajorNonMajorPortCapacity'])->name('updateMajorNonMajorPortCapacity');
-
+Route::post('/update-status', [App\Http\Controllers\Backend\FormController::class, 'updateStatus']);
 
 // Berth Related Information berth-related-information
 Route::get('add-berth-related-information', [App\Http\Controllers\Backend\FormController::class, 'addBerthRelatedInformation'])->name('addBerthRelatedInformation');

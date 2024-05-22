@@ -64,7 +64,10 @@
                                             <th>Operational</th>
                                             <th>Capacity (In Million Metric Tons)</th>
                                             <th>Status</th>
-                                            <th>Action</th>
+                                            @if (Auth::user()->role_id != 5 && Auth::user()->role_id != 6)
+                                            @else
+                                                <th>Action</th>
+                                            @endif
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -84,6 +87,7 @@
                                                 $monthName = \Carbon\Carbon::create()
                                                     ->month($numericMonth)
                                                     ->format('F');
+                                                // dd(Auth::user()->role_id );
                                             @endphp
                                             <tr>
                                                 <td>{{ $loop->index + 1 }}</td>
@@ -94,14 +98,58 @@
                                                 <td>{{ $portName->port_name }}</td>
                                                 <td>{{ $value['operational'] }}</td>
                                                 <td>{{ $value['capacity'] }}</td>
-                                                <td>
+                                                {{-- <td>
                                                     {{ $value['status'] == 1 ? 'Approved' : ($value['status'] == 3 ? 'Drafted' : 'Approval Awaited') }}
+                                                </td> --}}
+                                                <td scope="col" style="width: 200px;">
+                                                    @if (Auth::user()->role_id == 4)
+                                                        @if ($value['status'] == 1)
+                                                            Approved
+                                                        @else
+                                                            Pending
+                                                        @endif
+                                                    @else
+                                                        <select rowid="{{ $value['id'] }}" id="rowID{{ $value['id'] }}"
+                                                            name="status" class="form-control status">
+                                                            @php
+                                                                $isRole5 = Auth::user()->role_id == 5;
+                                                                $isRole6 = Auth::user()->role_id == 6;
+                                                                $isStatus1 = $value['status'] == 1;
+                                                                $isStatus3 = $value['status'] == 3;
+                                                            @endphp
+                                                            <option value="3"
+                                                                {{ $isRole5 || $isRole6 || $isStatus1 ? 'hidden' : '' }}
+                                                                {{ $value['status'] == 3 ? 'selected' : '' }}>Drafted
+                                                            </option>
+                                                            <option value="2"
+                                                                {{ $isRole5 || $isStatus1 ? 'hidden' : '' }}
+                                                                {{ $value['status'] == 2 ? 'selected' : '' }}>Approval
+                                                                Awaited</option>
+                                                            <option value="1"
+                                                                {{ $isRole6 || $isStatus1 ? 'hidden' : '' }}
+                                                                {{ $isStatus3 ? 'disabled' : '' }}
+                                                                {{ $value['status'] == 1 ? 'selected' : '' }}>Approved
+                                                            </option>
+                                                        </select>
+                                                    @endif
+
+                                                    <input type="hidden" name="updated_by"
+                                                        id="updatedby_{{ $value['id'] }}" value="{{ Auth::user()->id }}">
+                                                    <input type="hidden" name="select_month"
+                                                        id="selectMonth_{{ $value['id'] }}"
+                                                        value="{{ $value['select_month'] }}">
                                                 </td>
-                                                <td>
-                                                    <a href="{{ route('editMajorNonMajorPortCapacity', $value['id']) }}">
-                                                        <i class="far fa-edit" aria-hidden="true"></i>
-                                                    </a>
-                                                </td>
+
+                                                @if (Auth::user()->role_id != 5 && Auth::user()->role_id != 6)
+                                                @else
+                                                    <td>
+                                                        <a @if (Auth::user()->role_id == 5 && $value['status'] == 3) onclick="alert('Do Not Edit the data Because of Month Data is not Submitted'); return false;" @endif
+                                                            @if ($value['status'] == 1) onclick="alert('Data is Submitted'); return false;" @endif
+                                                            href="{{ route('editMajorNonMajorPortCapacity', $value['id']) }}">
+                                                            <i class="far fa-edit" aria-hidden="true"></i>
+                                                        </a>
+                                                    </td>
+                                                @endif
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -116,7 +164,10 @@
                                             <th>Operational</th>
                                             <th>Capacity (In Million Metric Tons)</th>
                                             <th>Status</th>
-                                            <th>Action</th>
+                                            @if (Auth::user()->role_id != 5 && Auth::user()->role_id != 6)
+                                            @else
+                                                <th>Action</th>
+                                            @endif
                                         </tr>
                                     </tfoot>
                                 </table>
@@ -179,6 +230,57 @@
                 "info": true,
                 "autoWidth": false,
                 "responsive": true,
+            });
+        });
+    </script>
+
+    <script>
+        // Set up CSRF token for jQuery Ajax requests
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        // Document ready function
+        $(document).ready(function() {
+            // Attach a change event handler to elements with the class 'status'
+            $('.status').on("change", function(e) {
+                e.preventDefault();
+
+                // Get values from the DOM elements
+                var rowid = $(this).attr('rowid');
+                var status = $(this).val();
+                var select_month = $('#selectMonth_' + rowid).val();
+                var updated_by = $('#updatedby_' + rowid).val();
+
+                // Debugging: Display rowid in an alert
+                // alert(select_month);
+
+                // Make an Ajax request to update the status
+                $.ajax({
+                    type: 'POST',
+                    url: '/update-status',
+                    data: {
+                        select_month: select_month,
+                        updated_by: updated_by,
+                        status: status,
+                        rowid: rowid,
+                    },
+                    success: function(data) {
+                        // Handle success, if needed
+                        // Check if the response contains the success status
+                        if (data.status === 'success') {
+                            // Display the success message
+                            $('#successMessage').show();
+                            location.reload();
+                        }
+                    },
+                    error: function(error) {
+                        // Handle error, if needed
+                        console.error('Error updating status.');
+                    }
+                });
             });
         });
     </script>

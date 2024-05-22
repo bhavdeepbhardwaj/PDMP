@@ -44,6 +44,12 @@
 
                                 <input type="hidden" class="form-control" id="createdBy" value="{{ Auth::user()->id }}"
                                     name="updated_by">
+                                @if (Auth::user()->role_id != 5)
+                                    <input type="" class="form-control" id="status"
+                                        value="{{ $editData->status }}" name="status">
+                                @else
+                                    <input type="" class="form-control" id="status" value="1" name="status">
+                                @endif
 
                                 <div class="col-md-4">
                                     <div class="form-group">
@@ -122,7 +128,8 @@
                                         <label for="port_type">Port Type <span style="color: red;">*</span></label>
                                         <select class="form-control @error('port_type') is-invalid @enderror port_type"
                                             name="port_type" id="port_type">
-                                            <option value="{{ $editData->port_type }}" selected>{{ $portCat['category_name'] }}
+                                            <option value="{{ $editData->port_type }}" selected>
+                                                {{ $portCat['category_name'] }}
                                             </option>
                                         </select>
                                         @error('port_type')
@@ -139,19 +146,19 @@
                                         {{-- {{ dd($editData->state_board); }} --}}
                                         <select class="form-control @error('state_board') is-invalid @enderror"
                                             name="state_board" id="state_board">
-                                            {{-- @if($editData && $stateboard)
+                                            {{-- @if ($editData && $stateboard)
                                                 <option value="{{ $editData->state_board }}" selected>
                                                     {{ isset($stateboard['name']) ? $stateboard['name'] : '' }}
                                                 </option>
                                             @endif --}}
-                                            @if($editData && $stateboard)
+                                            @if ($editData && $stateboard)
                                                 <option value="{{ $editData->state_board }}" selected>
                                                     {{ isset($stateboard['name']) ? $stateboard['name'] : '' }}
                                                 </option>
                                             @else
-                                            <option value="0" selected>
-                                                N/A
-                                            </option>
+                                                <option value="0" selected>
+                                                    N/A
+                                                </option>
                                             @endif
                                         </select>
                                         @error('state_board')
@@ -167,7 +174,8 @@
                                         <label for="port_name">Port Name <span style="color: red;">*</span></label>
                                         <select class="form-control @error('port_name') is-invalid @enderror"
                                             name="port_name" id="port_name">
-                                            <option value="{{ $editData->port_name }}" selected>{{ $portName['port_name'] }}
+                                            <option value="{{ $editData->port_name }}" selected>
+                                                {{ $portName['port_name'] }}
                                             </option>
                                         </select>
                                         @error('port_name')
@@ -207,8 +215,8 @@
                                         <label for="capacity">Capacity (In Million Metric Tons) <span
                                                 style="color: red;">*</span></label>
                                         <input type="text" class="form-control @error('capacity') is-invalid @enderror"
-                                            id="capacity" placeholder="Enter Capacity (In Million Metric Tons)" name="capacity"
-                                            value="{{ $editData->capacity }}">
+                                            id="capacity" placeholder="Enter Capacity (In Million Metric Tons)"
+                                            name="capacity" value="{{ $editData->capacity }}">
                                         @error('capacity')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -239,14 +247,14 @@
 @section('js')
     <!-- jQuery -->
     <script>
-    //     $.get('/get-port-types', function (data) {
-    //     var portTypes = data.portTypes;
-    //     // $('#port_type').html('<option value="">-- Select Type --</option>');
-    //     $.each(portTypes, function (index, portType) {
-    //         $('.port_type').append('<option value="' + portType.id + '">' + portType
-    //             .category_name + '</option>');
-    //     });
-    // });
+        //     $.get('/get-port-types', function (data) {
+        //     var portTypes = data.portTypes;
+        //     // $('#port_type').html('<option value="">-- Select Type --</option>');
+        //     $.each(portTypes, function (index, portType) {
+        //         $('.port_type').append('<option value="' + portType.id + '">' + portType
+        //             .category_name + '</option>');
+        //     });
+        // });
     </script>
     {{-- <script src="{{ asset('backend/js/port.js') }}"></script> --}}
 @endsection

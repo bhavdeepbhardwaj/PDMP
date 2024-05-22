@@ -17,7 +17,7 @@ class MNMPortCapacity extends Model
         'select_year',
         'port_name',
         'capacity',
-        // 'nonOperational',
+        'status',
         'operational',
         'select_month',
         'created_by',
