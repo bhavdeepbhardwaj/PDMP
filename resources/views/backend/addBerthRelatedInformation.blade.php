@@ -103,7 +103,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="port_type">Port Type <span style="color: red;">*</span></label>
                                         <select class="form-control @error('port_type') is-invalid @enderror"
@@ -117,7 +117,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-4" id="startBoard_div">
+                                <div class="col-md-6" id="startBoard_div">
                                     <div class="form-group">
                                         <label for="state_board">State Board <span style="color: red;">*</span></label>
                                         <select class="form-control @error('state_board') is-invalid @enderror"
@@ -132,7 +132,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="port_name">Port Name <span style="color: red;">*</span></label>
                                         <select class="form-control @error('port_id') is-invalid @enderror" name="port_id"
@@ -147,7 +147,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="type_of_berth">Type Of Berth</label>
                                         <input class="form-control @error('type_of_berth') is-invalid @enderror"
@@ -161,7 +161,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="no_of_berth">Total No of Berth</label>
                                         <input type="text"
@@ -176,7 +176,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="public">Public</label>
                                         <input type="text" class="form-control @error('public') is-invalid @enderror"
@@ -190,7 +190,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="ppp">PPP</label>
                                         <input type="text" class="form-control @error('ppp') is-invalid @enderror"
@@ -204,7 +204,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="designed_depth">Designed / Depth (in meters)</label>
                                         <input class="form-control @error('designed_depth') is-invalid @enderror"
@@ -219,7 +219,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="permissible_draft">Permissible Draft (in meters)</label>
                                         <input class="form-control @error('permissible_draft') is-invalid @enderror"
@@ -234,7 +234,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="avg_total_draft">Average Total Draft (in meters)</label>
                                         <input class="form-control @error('avg_total_draft') is-invalid @enderror"

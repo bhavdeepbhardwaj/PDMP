@@ -20,6 +20,7 @@ class DirectPortEntryDeliveryRelatedContainers extends Model
         'containers',
         'direct_port_entry_of_teu',
         'direct_port_delivery',
+        'status',
         'created_by',
         'updated_by',
     ];

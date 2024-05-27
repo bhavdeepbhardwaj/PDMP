@@ -27,6 +27,7 @@ class EmploymentDockLabourBoardsMajorPort extends Model
         'others',
         'dwtotal',
         'grandTotal',
+        'status',
         'created_by',
         'updated_by',
     ];

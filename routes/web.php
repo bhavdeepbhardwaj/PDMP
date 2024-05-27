@@ -138,12 +138,14 @@ Route::get('add-berth-related-information', [App\Http\Controllers\Backend\FormCo
 Route::post('save-berth-related-information', [App\Http\Controllers\Backend\FormController::class, 'saveBerthRelatedInformation'])->name('saveBerthRelatedInformation');
 Route::get('edit-berth-related-information/{id?}', [App\Http\Controllers\Backend\FormController::class, 'editBerthRelatedInformation'])->name('editBerthRelatedInformation');
 Route::put('update-berth-related-information/{id}', [App\Http\Controllers\Backend\FormController::class, 'updateBerthRelatedInformation'])->name('updateBerthRelatedInformation');
+Route::post('/update-status-berth-related-information', [App\Http\Controllers\Backend\FormController::class, 'updateStatusBerthRelatedInformation']);
 
 // Direct Port Entry Delivery Related Containers direct-port-entry-delivery-related-containers
 Route::get('add-direct-port-entry-delivery-related-containers', [App\Http\Controllers\Backend\FormController::class, 'addDirectPortEntryDeliveryRelatedContainers'])->name('addDirectPortEntryDeliveryRelatedContainers');
 Route::post('save-direct-port-entry-delivery-related-containers', [App\Http\Controllers\Backend\FormController::class, 'saveDirectPortEntryDeliveryRelatedContainers'])->name('saveDirectPortEntryDeliveryRelatedContainers');
 Route::get('edit-direct-port-entry-delivery-related-containers/{id?}', [App\Http\Controllers\Backend\FormController::class, 'editDirectPortEntryDeliveryRelatedContainers'])->name('editDirectPortEntryDeliveryRelatedContainers');
 Route::put('update-direct-port-entry-delivery-related-containers/{id}', [App\Http\Controllers\Backend\FormController::class, 'updateDirectPortEntryDeliveryRelatedContainers'])->name('updateDirectPortEntryDeliveryRelatedContainers');
+Route::post('/update-status-direct-port-entry-delivery-related-containers', [App\Http\Controllers\Backend\FormController::class, 'updateStatusDirectPortEntryDeliveryRelatedContainers']);
 
 // Cruise Tourism cruise-tourism
 Route::get('add-cruise-tourism', [App\Http\Controllers\Backend\FormController::class, 'addCruiseTourism'])->name('addCruiseTourism');

@@ -28,6 +28,7 @@ return new class extends Migration
             $table->text('shore_wrk')->default('0');
             $table->text('casual_work')->default('0');
             $table->text('total')->default('0');
+            $table->text('status')->default(0);
             $table->text('created_by')->default(0)->comment('Users ID');
             $table->text('updated_by')->default(0)->comment('Admin ID');
             $table->tinyInteger('is_deleted')->default(0)->comment('Soft Deleted');

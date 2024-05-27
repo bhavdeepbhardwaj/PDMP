@@ -27,6 +27,7 @@ class EmploymentMajorPort extends Model
         'shore_wrk',
         'casual_work',
         'total',
+        'status',
         'created_by',
         'updated_by',
     ];

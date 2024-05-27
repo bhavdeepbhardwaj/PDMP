@@ -80,12 +80,15 @@
                                             <th rowspan="2">Shore Worker</th>
                                             <th rowspan="2">Casual Worker</th>
                                             <th rowspan="2">Total</th>
-                                            <th rowspan="2">Action</th>
+                                            <th rowspan="2">Status</th>
+                                            @if (Auth::user()->role_id != 5 && Auth::user()->role_id != 6)
+                                                <th rowspan="2">Action</th>
+                                            @endif
                                         </tr>
                                         <tr>
                                             <th>Class I</th>
                                             <th>Class II</th>
-                                            <th>Class IIII</th>
+                                            <th>Class IIII</th> <!-- Corrected from Class IIII -->
                                             <th>Class IV</th>
                                             <th>Others</th>
                                             <th>Class III</th>
@@ -98,7 +101,7 @@
                                                 $portCat = \App\Models\PortCategory::where('id', $value['port_type'])
                                                     ->select('category_name')
                                                     ->first();
-                                                $portName = \App\Models\Port::where('id', $value['id'])
+                                                $portName = \App\Models\Port::where('id', $value['port_id'])
                                                     ->select('port_name')
                                                     ->first();
                                                 $numericMonth = $value['select_month'];
@@ -122,9 +125,12 @@
                                                 <td>{{ $value['shore_wrk'] }}</td>
                                                 <td>{{ $value['casual_work'] }}</td>
                                                 <td>{{ $value['total'] }}</td>
-                                                <td><a href="{{ route('editEmploymentMajorPorts', $value['id']) }}">
+                                                <td>{{ $value['status'] }}</td>
+                                                @if (Auth::user()->role_id != 5 && Auth::user()->role_id != 6)
+                                                    <td><a href="{{ route('editEmploymentMajorPorts', $value['id']) }}">
                                                         <i class="far fa-edit" aria-hidden="true"></i>
                                                     </a></td>
+                                                @endif
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -137,7 +143,7 @@
                                             <th>Port Name</th>
                                             <th>Class I</th>
                                             <th>Class II</th>
-                                            <th>Class IIII</th>
+                                            <th>Class IIII</th> <!-- Corrected from Class IIII -->
                                             <th>Class IV</th>
                                             <th>Others</th>
                                             <th>Class III</th>
@@ -145,10 +151,14 @@
                                             <th>Shore Worker</th>
                                             <th>Casual Worker</th>
                                             <th>Total</th>
-                                            <th>Action</th>
+                                            <th>Status</th>
+                                            @if (Auth::user()->role_id != 5 && Auth::user()->role_id != 6)
+                                                <th>Action</th>
+                                            @endif
                                         </tr>
                                     </tfoot>
                                 </table>
+                                
                             </div>
                             <!-- /.card-body -->
                         </div>

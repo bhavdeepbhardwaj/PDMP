@@ -130,10 +130,6 @@ class FormController extends Controller
     {
         try {
             // Your logic goes here...
-            // $portTypes = PortCategory::whereIn('id', [1, 2])->get()->toArray();
-            // dd($portTypes);
-            // $stateBoards = StateBoard::all();
-
             // Return the view with port information and the select_year
             return view('backend.addMajorNonMajorPortCapacity')->with([
                 // 'portTypes' => $portTypes,
@@ -190,17 +186,6 @@ class FormController extends Controller
                     ->withErrors($validator)  // Flash the validation errors to the session
                     ->withInput();  // Flash the input data to the session
             }
-            // $statusRequest = MNMPortCapacity::where('status', '3')->count();
-
-            // dd($statusRequest);
-
-            // if ($statusRequest != 3) {
-
-            // }
-            // Check if a record with the specified year and month already exists
-            // $recordExists = MNMPortCapacity::where('select_year', $request->input('select_year'))
-            //     ->where('select_month', $request->input('select_month'))
-            //     ->exists();
             // Check if a record with the specified year, month, port_type, state_board, and port_name already exists
             $recordExists = MNMPortCapacity::where('select_year', $request->input('select_year'))
                 ->where('select_month', $request->input('select_month'))
@@ -268,8 +253,6 @@ class FormController extends Controller
             return response()->json(['error' => 'An error occurred while processing the request.']);
         }
     }
-
-
     /**
      * Update the status of view-major-non-major-port-capacity records based on the specified conditions.
      *
@@ -315,7 +298,7 @@ class FormController extends Controller
                 if ($request->status == 1) {
                     session()->flash('success', 'Status updated successfully');
                 } elseif (in_array($request->status, [2, 3])) {
-                    session()->flash('warning', 'Status updated successfully');
+                    session()->flash('warning', 'Status updated for Approval Awaited successfully');
                 }
                 // Return a success response
                 return response()->json(['status' => 'success']);
@@ -328,8 +311,6 @@ class FormController extends Controller
             return response()->json(['error' => 'An error occurred: ' . $e->getMessage()]);
         }
     }
-
-
     /**
      * Retrieve user data for editing.
      *
@@ -366,6 +347,7 @@ class FormController extends Controller
      */
     public function updateMajorNonMajorPortCapacity(Request $request, $id)
     {
+        // dd($request->all());
         // Validation rules
         $rules = [
             'port_type' => 'required',
@@ -443,7 +425,7 @@ class FormController extends Controller
     {
         try {
             // Fetch Berth Related Information that are not deleted
-            $getData = BerthRelatedInformation::where('is_deleted', 0)->get()->toArray();
+            $getData = BerthRelatedInformation::where('port_type', auth()->user()->port_type)->where('is_deleted', 0)->get()->toArray();
             // Return the view with data
             return view('backend.viewBerthRelatedInformation', ['getData' => $getData]);
         } catch (\Exception $e) {
@@ -482,7 +464,6 @@ class FormController extends Controller
     public function saveBerthRelatedInformation(Request $request)
     {
         try {
-            // dd($request->all());
             // Validation rules
             $rules = [
                 'select_year' => 'required|numeric',
@@ -512,13 +493,13 @@ class FormController extends Controller
                 'type_of_berth.required' => 'The type of berth field is required.',
                 'no_of_berth.required' => 'The number of berth field is required.',
                 'public.required' => 'The public field is required.',
-                'ppp.required' => 'The ppp field is required.',
+                'ppp.required' => 'The PPP field is required.',
                 'designed_depth.required' => 'The designed depth field is required.',
                 'permissible_draft.required' => 'The permissible draft field is required.',
                 'avg_total_draft.required' => 'The average total draft field is required.',
                 'no_of_berth.numeric' => 'The number of berth must be a numeric value.',
                 'public.numeric' => 'The public field must be a numeric value.',
-                'ppp.numeric' => 'The ppp field must be a numeric value.',
+                'ppp.numeric' => 'The PPP field must be a numeric value.',
                 'designed_depth.numeric' => 'The designed depth field must be a numeric value.',
                 'permissible_draft.numeric' => 'The permissible draft field must be a numeric value.',
                 'avg_total_draft.numeric' => 'The average total draft field must be a numeric value.',
@@ -534,19 +515,34 @@ class FormController extends Controller
                     ->withInput();  // Flash the input data to the session
             }
 
-            // Check if a record with the specified year and month already exists
+            // Check if a record with the specified year, month, port_type, state_board, and port_id already exists
             $recordExists = BerthRelatedInformation::where('select_year', $request->input('select_year'))
                 ->where('select_month', $request->input('select_month'))
+                ->where('port_type', $request->input('port_type'))
+                ->where('state_board', $request->input('state_board'))
+                ->where('port_id', $request->input('port_id'))
                 ->exists();
 
             // If record exists, notify the user and redirect back
             if ($recordExists) {
-                // Map numeric month value to month name using DateTime
                 $monthName = DateTime::createFromFormat('!m', $request->input('select_month'))->format('F');
                 $message = 'A record with the selected ' . $request->input('select_year') . ' and selected ' . $monthName . ' already exists.';
                 return redirect()->back()->with('warning', $message);
             }
 
+            // Get the authenticated user's role ID
+            $userRoleID = Auth::user()->role_id;
+
+            // Assign the appropriate status ID based on the user's role and status
+            if (in_array($userRoleID, [4, 5])) {
+                $statusID = 1;
+            } elseif ($userRoleID == 6) {
+                $statusID = 3;
+            } else {
+                $statusID = 3; // Default status
+            }
+
+            // Create the new BerthRelatedInformation record
             $createdResponse = BerthRelatedInformation::create([
                 'select_month' => $request->input('select_month'),
                 'state_board' => $request->input('state_board'),
@@ -557,28 +553,81 @@ class FormController extends Controller
                 'no_of_berth' => $request->input('no_of_berth'),
                 'public' => $request->input('public'),
                 'ppp' => $request->input('ppp'),
+                'status' => $statusID,
                 'designed_depth' => $request->input('designed_depth'),
                 'permissible_draft' => $request->input('permissible_draft'),
                 'avg_total_draft' => $request->input('avg_total_draft'),
                 'created_by' => $request->input('created_by'),
             ]);
 
-            // Check if the Create was successful
+            // Check if the create operation was successful
             if ($createdResponse) {
-                // If the operation was successful
-                return redirect()->route('backend.view-berth-related-information')->with('success', 'Record Created successfully');
+                $message = ($createdResponse->status === 1 || $createdResponse->status === 2) ?
+                    'Record Created successfully' :
+                    'Record is Drafted successfully';
+
+                return redirect()->route('backend.view-berth-related-information')->with('success', $message);
             } else {
-                // If the operation was unsuccessful
-                return redirect()->route('backend.view-berth-related-information')->with('error', 'Failed to Created record');
+                return redirect()->route('backend.view-berth-related-information')->with('error', 'Failed to create record');
             }
         } catch (\Exception $e) {
             // Log the error for further investigation
             Log::error('Error in saveBerthRelatedInformation method: ' . $e->getMessage());
 
             // Return an error response
-            return response()->json(['error' => 'An error occurred while processing the request.']);
+            return redirect()->back()->with('error', 'An error occurred while processing the request.');
         }
     }
+
+    /**
+     * Update the status of view-berth-related-information records based on the specified conditions.
+     *
+     * @param  Request  $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function updateStatusBerthRelatedInformation(Request $request)
+    {
+        try {
+            // dd($request->all());
+            // Validate the incoming request
+            $request->validate([
+                'select_month' => 'required',
+                'rowid' => 'required|numeric',
+                'status' => 'required|in:1,2,3',
+            ]);
+
+            // Find view-major-non-major-port-capacity records based on the specified conditions
+            $getData = BerthRelatedInformation::where('id', $request->rowid)
+                ->where('select_month', $request->select_month)
+                ->get()->toArray();
+            // Check if records are found
+            if (!empty($getData)) {
+                // Update the status and user ID in the database
+                foreach ($getData as $data) {
+                    $portData = BerthRelatedInformation::find($data['id']);
+                    $portData->status = $request->status;
+                    $portData->updated_by = $request->updated_by;
+                    $portData->save();
+                }
+                // dd($portData);
+                // Set success message in the session
+                if ($request->status == 1) {
+                    session()->flash('success', 'Status updated successfully');
+                } elseif (in_array($request->status, [2, 3])) {
+                    session()->flash('warning', 'Status updated for Approval Awaited successfully');
+                }
+                // Return a success response
+                return response()->json(['status' => 'success']);
+            } else {
+                // Return a response indicating that no matching records were found
+                return response()->json(['error' => 'No records found matching the criteria.']);
+            }
+        } catch (\Exception $e) {
+            // Return an error response
+            return response()->json(['error' => 'An error occurred: ' . $e->getMessage()]);
+        }
+    }
+
     /**
      * Retrieve user data for editing.
      *
@@ -596,7 +645,6 @@ class FormController extends Controller
                 'editData' => $editData,
                 // 'stateBoards' => $stateBoards,
             ]);
-            // Return the edit data in a JSON response
             // return response()->json($editData);
         } catch (\Exception $e) {
             // Log the error for further investigation
@@ -669,6 +717,11 @@ class FormController extends Controller
 
         $editResponse = BerthRelatedInformation::find($id);
 
+        // Check if the status is already approved
+        if ($editResponse->status == 1) {
+            return redirect()->route('backend.view-berth-related-information')->with('warning', 'Record is already approved.');
+        }
+
         $editResponse->update([
             'select_month' => $request->input('select_month'),
             'state_board' => $request->input('state_board'),
@@ -706,7 +759,7 @@ class FormController extends Controller
     {
         try {
             // Fetch view Direct Port Entry Delivery Related Containers that are not deleted
-            $getData = DirectPortEntryDeliveryRelatedContainers::where('is_deleted', 0)->get()->toArray();
+            $getData = DirectPortEntryDeliveryRelatedContainers::where('port_type', auth()->user()->port_type)->where('is_deleted', 0)->get()->toArray();
             // Return the view with data
             return view('backend.viewDirectPortEntryDeliveryRelatedContainers', ['getData' => $getData]);
         } catch (\Exception $e) {
@@ -786,17 +839,31 @@ class FormController extends Controller
                     ->withInput();  // Flash the input data to the session
             }
 
-            // Check if a record with the specified year and month already exists
+            // Check if a record with the specified year, month, port_type, state_board, and port_id already exists
             $recordExists = DirectPortEntryDeliveryRelatedContainers::where('select_year', $request->input('select_year'))
                 ->where('select_month', $request->input('select_month'))
+                ->where('port_type', $request->input('port_type'))
+                ->where('state_board', $request->input('state_board'))
+                ->where('port_id', $request->input('port_id'))
                 ->exists();
 
             // If record exists, notify the user and redirect back
             if ($recordExists) {
-                // Map numeric month value to month name using DateTime
                 $monthName = DateTime::createFromFormat('!m', $request->input('select_month'))->format('F');
                 $message = 'A record with the selected ' . $request->input('select_year') . ' and selected ' . $monthName . ' already exists.';
                 return redirect()->back()->with('warning', $message);
+            }
+
+            // Get the authenticated user's role ID
+            $userRoleID = Auth::user()->role_id;
+
+            // Assign the appropriate status ID based on the user's role and status
+            if (in_array($userRoleID, [4, 5])) {
+                $statusID = 1;
+            } elseif ($userRoleID == 6) {
+                $statusID = 3;
+            } else {
+                $statusID = 3; // Default status
             }
 
             // If 'id' is set in the request, update the existing record, else create a new record
@@ -809,16 +876,19 @@ class FormController extends Controller
                 'containers' => $request->input('containers'),
                 'direct_port_entry_of_teu' => $request->input('direct_port_entry_of_teu'),
                 'direct_port_delivery' => $request->input('direct_port_delivery'),
+                'status' => $statusID,
                 'created_by' => $request->input('created_by'),
             ]);
 
             // Check if the Create was successful
             if ($createdResponse) {
-                // If the operation was successful
-                return redirect()->route('backend.view-direct-port-entry-delivery-related-containers')->with('success', 'Record Created successfully');
+                $message = ($createdResponse->status === 1 || $createdResponse->status === 2) ?
+                    'Record Created successfully' :
+                    'Record is Drafted successfully';
+
+                return redirect()->route('backend.view-direct-port-entry-delivery-related-containers')->with('success', $message);
             } else {
-                // If the operation was unsuccessful
-                return redirect()->route('backend.view-direct-port-entry-delivery-related-containers')->with('error', 'Failed to Created record');
+                return redirect()->route('backend.view-direct-port-entry-delivery-related-containers')->with('error', 'Failed to create record');
             }
         } catch (\Exception $e) {
             // Log the error for further investigation
@@ -826,6 +896,55 @@ class FormController extends Controller
 
             // Return an error response
             return response()->json(['error' => 'An error occurred while processing the request.']);
+        }
+    }
+
+    /**
+     * Update the status of Direct Port Entry Delivery Related Containers records based on the specified conditions.
+     *
+     * @param  Request  $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function updateStatusDirectPortEntryDeliveryRelatedContainers(Request $request)
+    {
+        try {
+            // dd($request->all());
+            // Validate the incoming request
+            $request->validate([
+                'select_month' => 'required',
+                'rowid' => 'required|numeric',
+                'status' => 'required|in:1,2,3',
+            ]);
+
+            // Find view-major-non-major-port-capacity records based on the specified conditions
+            $getData = DirectPortEntryDeliveryRelatedContainers::where('id', $request->rowid)
+                ->where('select_month', $request->select_month)
+                ->get()->toArray();
+            // Check if records are found
+            if (!empty($getData)) {
+                // Update the status and user ID in the database
+                foreach ($getData as $data) {
+                    $portData = DirectPortEntryDeliveryRelatedContainers::find($data['id']);
+                    $portData->status = $request->status;
+                    $portData->updated_by = $request->updated_by;
+                    $portData->save();
+                }
+                // dd($portData);
+                // Set success message in the session
+                if ($request->status == 1) {
+                    session()->flash('success', 'Status updated successfully');
+                } elseif (in_array($request->status, [2, 3])) {
+                    session()->flash('warning', 'Status updated for Approval Awaited successfully');
+                }
+                // Return a success response
+                return response()->json(['status' => 'success']);
+            } else {
+                // Return a response indicating that no matching records were found
+                return response()->json(['error' => 'No records found matching the criteria.']);
+            }
+        } catch (\Exception $e) {
+            // Return an error response
+            return response()->json(['error' => 'An error occurred: ' . $e->getMessage()]);
         }
     }
     /**
@@ -906,6 +1025,11 @@ class FormController extends Controller
 
         $editResponse = DirectPortEntryDeliveryRelatedContainers::find($id);
 
+
+        // Check if the status is already approved
+        if ($editResponse->status == 1) {
+            return redirect()->route('backend.view-berth-related-information')->with('warning', 'Record is already approved.');
+        }
         $editResponse->update([
             'select_month' => $request->input('select_month'),
             'state_board' => $request->input('state_board'),

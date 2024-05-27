@@ -25,6 +25,7 @@ return new class extends Migration
             $table->text('designed_depth')->default(0);
             $table->text('permissible_draft')->default(0);
             $table->text('avg_total_draft')->default(0);
+            $table->text('status')->default(0);
             $table->text('created_by')->default(0)->comment('Users ID');
             $table->text('updated_by')->default(0)->comment('Admin ID');
             $table->tinyInteger('is_deleted')->default(0)->comment('Soft Deleted');

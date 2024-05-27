@@ -21,6 +21,7 @@ return new class extends Migration
             $table->text('containers')->default(0);
             $table->text('direct_port_entry_of_teu')->default(0);
             $table->text('direct_port_delivery')->default(0);
+            $table->text('status')->default(0);
             $table->text('created_by')->default(0)->comment('Users ID');
             $table->text('updated_by')->default(0)->comment('Admin ID');
             $table->tinyInteger('is_deleted')->default(0)->comment('Soft Deleted');

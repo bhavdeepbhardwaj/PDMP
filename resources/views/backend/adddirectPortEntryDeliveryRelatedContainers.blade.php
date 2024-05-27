@@ -103,7 +103,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="port_type">Port Type <span style="color: red;">*</span></label>
                                         <select class="form-control @error('port_type') is-invalid @enderror"
@@ -117,7 +117,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-4" id="startBoard_div">
+                                <div class="col-md-6" id="startBoard_div">
                                     <div class="form-group">
                                         <label for="state_board">State Board <span style="color: red;">*</span></label>
                                         <select class="form-control @error('state_board') is-invalid @enderror"
@@ -132,7 +132,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="port_name">Port Name <span style="color: red;">*</span></label>
                                         <select class="form-control @error('port_id') is-invalid @enderror" name="port_id"
@@ -147,7 +147,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="containers">Containers <span style="color: red;">*</span></label>
                                         <input class="form-control @error('containers') is-invalid @enderror"
@@ -161,7 +161,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="direct_port_entry_of_teu">Direct Port Entry of Teu (No) <span
                                                 style="color: red;">*</span></label>
@@ -177,7 +177,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="direct_port_delivery">Direct Port Delivery (No) <span
                                                 style="color: red;">*</span></label>

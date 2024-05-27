@@ -143,9 +143,12 @@
                                                 @if (Auth::user()->role_id != 5 && Auth::user()->role_id != 6)
                                                 @else
                                                     <td>
-                                                        <a @if (Auth::user()->role_id == 5 && $value['status'] == 3) onclick="alert('Do Not Edit the data Because of Month Data is not Submitted'); return false;" @endif
-                                                            @if ($value['status'] == 1) onclick="alert('Data is Submitted'); return false;" @endif
-                                                            href="{{ route('editMajorNonMajorPortCapacity', $value['id']) }}">
+                                                        <a href="{{ route('editMajorNonMajorPortCapacity', $value['id']) }}"
+                                                            @if (Auth::user()->role_id == 5 && $value['status'] == 3) onclick="alert('Do Not Edit the data Because of Month Data is not Submitted'); return false;"
+    @elseif (Auth::user()->role_id == 6 && $value['status'] == 2)
+        onclick="alert('Data is Submitted for Approval Awaited Data'); return false;"
+    @elseif ($value['status'] == 1)
+        onclick="alert('Data is Submitted'); return false;" @endif>
                                                             <i class="far fa-edit" aria-hidden="true"></i>
                                                         </a>
                                                     </td>
@@ -233,6 +236,9 @@
             });
         });
     </script>
+{{-- 
+     <!-- Include your custom JS file -->
+     <script src="{{ asset('backend/js/status.js') }}"></script> --}}
 
     <script>
         // Set up CSRF token for jQuery Ajax requests

@@ -21,6 +21,7 @@ class BerthRelatedInformation extends Model
         'no_of_berth',
         'public',
         'ppp',
+        'status',
         'designed_depth',
         'permissible_draft',
         'avg_total_draft',

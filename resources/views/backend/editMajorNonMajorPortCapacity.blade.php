@@ -44,8 +44,10 @@
 
                                 <input type="hidden" class="form-control" id="createdBy" value="{{ Auth::user()->id }}"
                                     name="updated_by">
+                                    <input type="hidden" class="form-control" id="status" value="{{ $editData->status }}"
+                                    name="status">
 
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Year <span style="color: red;">*</span></label>
                                         <select name="select_year" id="select_year"
@@ -77,7 +79,7 @@
 
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Month <span style="color: red;">*</span></label>
                                         <select name="select_month" id="select_month"
@@ -117,7 +119,7 @@
                                 @endphp
 
                                 {{-- <div class="row"> --}}
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="port_type">Port Type <span style="color: red;">*</span></label>
                                         <select class="form-control @error('port_type') is-invalid @enderror port_type"
@@ -134,7 +136,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-4" id="startBoard_div">
+                                <div class="col-md-6" id="startBoard_div">
                                     <div class="form-group">
                                         <label for="state_board">State Board <span style="color: red;">*</span></label>
                                         {{-- {{ dd($editData->state_board); }} --}}
@@ -163,7 +165,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="port_name">Port Name <span style="color: red;">*</span></label>
                                         <select class="form-control @error('port_name') is-invalid @enderror"
@@ -180,7 +182,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="operational">Operational <span style="color: red;">*</span></label>
                                         <select class="form-control @error('operational') is-invalid @enderror"
@@ -204,7 +206,7 @@
 
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="capacity">Capacity (In Million Metric Tons) <span
                                                 style="color: red;">*</span></label>
