@@ -44,12 +44,6 @@
 
                                 <input type="hidden" class="form-control" id="createdBy" value="{{ Auth::user()->id }}"
                                     name="updated_by">
-                                @if (Auth::user()->role_id != 5)
-                                    <input type="" class="form-control" id="status"
-                                        value="{{ $editData->status }}" name="status">
-                                @else
-                                    <input type="" class="form-control" id="status" value="1" name="status">
-                                @endif
 
                                 <div class="col-md-4">
                                     <div class="form-group">
