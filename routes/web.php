@@ -50,15 +50,16 @@ Route::group(['prefix' => 'portal', 'middleware' => ['auth', 'user-access', 'rol
     Route::get('port', [App\Http\Controllers\Backend\PortController::class, 'portList'])->name('port');
     Route::get('port-category', [App\Http\Controllers\Backend\PortCategoryController::class, 'portCategoryList'])->name('port-category');
 
-    Route::get('view-major-non-major-port-capacity', [App\Http\Controllers\Backend\FormController::class, 'viewMajorNonMajorPortCapacity'])->name('view-major-non-major-port-capacity');
-    Route::get('view-berth-related-information', [App\Http\Controllers\Backend\FormController::class, 'viewBerthRelatedInformation'])->name('view-berth-related-information');
-    Route::get('view-direct-port-entry-delivery-related-containers', [App\Http\Controllers\Backend\FormController::class, 'viewDirectPortEntryDeliveryRelatedContainers'])->name('view-direct-port-entry-delivery-related-containers');
+    Route::get('view-major-non-major-port-capacity', [App\Http\Controllers\Backend\MajorNonMajorPortCapacityController::class, 'viewMajorNonMajorPortCapacity'])->name('view-major-non-major-port-capacity');
+    Route::get('view-berth-related-information', [App\Http\Controllers\Backend\BerthRelatedInformationController::class, 'viewBerthRelatedInformation'])->name('view-berth-related-information');
+    Route::get('view-direct-port-entry-delivery-related-containers', [App\Http\Controllers\Backend\DirectPortEntryDeliveryRelatedContainersController::class, 'viewDirectPortEntryDeliveryRelatedContainers'])->name('view-direct-port-entry-delivery-related-containers');
+    Route::get('view-employment-major-ports', [App\Http\Controllers\Backend\EmploymentMajorPortsController::class, 'viewEmploymentMajorPorts'])->name('view-employment-major-ports');
+    Route::get('view-employment-dock-labour-boards-major-port', [App\Http\Controllers\Backend\EmploymentDockLabourBoardsMajorPortController::class, 'viewEmploymentDockLabourBoardsMajorPort'])->name('view-employment-dock-labour-boards-major-port');
+
     Route::get('view-cruise-tourism', [App\Http\Controllers\Backend\FormController::class, 'viewCruiseTourism'])->name('view-cruise-tourism');
     Route::get('view-national-waterways-information', [App\Http\Controllers\Backend\FormController::class, 'viewNationalWaterwaysInformation'])->name('view-national-waterways-information');
     Route::get('view-indian-tonnage', [App\Http\Controllers\Backend\FormController::class, 'viewIndianTonnage'])->name('view-indian-tonnage');
     Route::get('view-seafarers-information', [App\Http\Controllers\Backend\FormController::class, 'viewSeafarersInformation'])->name('view-seafarers-information');
-    Route::get('view-employment-major-ports', [App\Http\Controllers\Backend\FormController::class, 'viewEmploymentMajorPorts'])->name('view-employment-major-ports');
-    Route::get('view-employment-dock-labour-boards-major-port', [App\Http\Controllers\Backend\FormController::class, 'viewEmploymentDockLabourBoardsMajorPort'])->name('view-employment-dock-labour-boards-major-port');
 
 
     // Route::get('view-commodities', [App\Http\Controllers\Backend\FormController::class, 'viewCommodities'])->name('view-commodities');
@@ -127,25 +128,40 @@ Route::post('/get-ports', [FormController::class, 'getPorts']);
 
 
 // MAJOR/NON MAJOR PORTS AND CAPACITIES.
-Route::get('add-major-non-major-port-capacity', [App\Http\Controllers\Backend\FormController::class, 'addMajorNonMajorPortCapacity'])->name('addMajorNonMajorPortCapacity');
-Route::post('save-major-non-major-port-capacity', [App\Http\Controllers\Backend\FormController::class, 'saveMajorNonMajorPortCapacity'])->name('saveMajorNonMajorPortCapacity');
-Route::get('edit-major-non-major-port-capacity/{id}', [App\Http\Controllers\Backend\FormController::class, 'editMajorNonMajorPortCapacity'])->name('editMajorNonMajorPortCapacity');
-Route::put('update-major-non-major-port-capacity/{id}', [App\Http\Controllers\Backend\FormController::class, 'updateMajorNonMajorPortCapacity'])->name('updateMajorNonMajorPortCapacity');
-Route::post('/update-status', [App\Http\Controllers\Backend\FormController::class, 'updateStatus']);
+Route::get('add-major-non-major-port-capacity', [App\Http\Controllers\Backend\MajorNonMajorPortCapacityController::class, 'addMajorNonMajorPortCapacity'])->name('addMajorNonMajorPortCapacity');
+Route::post('save-major-non-major-port-capacity', [App\Http\Controllers\Backend\MajorNonMajorPortCapacityController::class, 'saveMajorNonMajorPortCapacity'])->name('saveMajorNonMajorPortCapacity');
+Route::get('edit-major-non-major-port-capacity/{id}', [App\Http\Controllers\Backend\MajorNonMajorPortCapacityController::class, 'editMajorNonMajorPortCapacity'])->name('editMajorNonMajorPortCapacity');
+Route::put('update-major-non-major-port-capacity/{id}', [App\Http\Controllers\Backend\MajorNonMajorPortCapacityController::class, 'updateMajorNonMajorPortCapacity'])->name('updateMajorNonMajorPortCapacity');
+Route::post('/update-status', [App\Http\Controllers\Backend\MajorNonMajorPortCapacityController::class, 'updateStatus']);
 
 // Berth Related Information berth-related-information
-Route::get('add-berth-related-information', [App\Http\Controllers\Backend\FormController::class, 'addBerthRelatedInformation'])->name('addBerthRelatedInformation');
-Route::post('save-berth-related-information', [App\Http\Controllers\Backend\FormController::class, 'saveBerthRelatedInformation'])->name('saveBerthRelatedInformation');
-Route::get('edit-berth-related-information/{id?}', [App\Http\Controllers\Backend\FormController::class, 'editBerthRelatedInformation'])->name('editBerthRelatedInformation');
-Route::put('update-berth-related-information/{id}', [App\Http\Controllers\Backend\FormController::class, 'updateBerthRelatedInformation'])->name('updateBerthRelatedInformation');
-Route::post('/update-status-berth-related-information', [App\Http\Controllers\Backend\FormController::class, 'updateStatusBerthRelatedInformation']);
+Route::get('add-berth-related-information', [App\Http\Controllers\Backend\BerthRelatedInformationController::class, 'addBerthRelatedInformation'])->name('addBerthRelatedInformation');
+Route::post('save-berth-related-information', [App\Http\Controllers\Backend\BerthRelatedInformationController::class, 'saveBerthRelatedInformation'])->name('saveBerthRelatedInformation');
+Route::get('edit-berth-related-information/{id?}', [App\Http\Controllers\Backend\BerthRelatedInformationController::class, 'editBerthRelatedInformation'])->name('editBerthRelatedInformation');
+Route::put('update-berth-related-information/{id}', [App\Http\Controllers\Backend\BerthRelatedInformationController::class, 'updateBerthRelatedInformation'])->name('updateBerthRelatedInformation');
+Route::post('/update-status-berth-related-information', [App\Http\Controllers\Backend\BerthRelatedInformationController::class, 'updateStatusBerthRelatedInformation']);
 
 // Direct Port Entry Delivery Related Containers direct-port-entry-delivery-related-containers
-Route::get('add-direct-port-entry-delivery-related-containers', [App\Http\Controllers\Backend\FormController::class, 'addDirectPortEntryDeliveryRelatedContainers'])->name('addDirectPortEntryDeliveryRelatedContainers');
-Route::post('save-direct-port-entry-delivery-related-containers', [App\Http\Controllers\Backend\FormController::class, 'saveDirectPortEntryDeliveryRelatedContainers'])->name('saveDirectPortEntryDeliveryRelatedContainers');
-Route::get('edit-direct-port-entry-delivery-related-containers/{id?}', [App\Http\Controllers\Backend\FormController::class, 'editDirectPortEntryDeliveryRelatedContainers'])->name('editDirectPortEntryDeliveryRelatedContainers');
-Route::put('update-direct-port-entry-delivery-related-containers/{id}', [App\Http\Controllers\Backend\FormController::class, 'updateDirectPortEntryDeliveryRelatedContainers'])->name('updateDirectPortEntryDeliveryRelatedContainers');
-Route::post('/update-status-direct-port-entry-delivery-related-containers', [App\Http\Controllers\Backend\FormController::class, 'updateStatusDirectPortEntryDeliveryRelatedContainers']);
+Route::get('add-direct-port-entry-delivery-related-containers', [App\Http\Controllers\Backend\DirectPortEntryDeliveryRelatedContainersController::class, 'addDirectPortEntryDeliveryRelatedContainers'])->name('addDirectPortEntryDeliveryRelatedContainers');
+Route::post('save-direct-port-entry-delivery-related-containers', [App\Http\Controllers\Backend\DirectPortEntryDeliveryRelatedContainersController::class, 'saveDirectPortEntryDeliveryRelatedContainers'])->name('saveDirectPortEntryDeliveryRelatedContainers');
+Route::get('edit-direct-port-entry-delivery-related-containers/{id?}', [App\Http\Controllers\Backend\DirectPortEntryDeliveryRelatedContainersController::class, 'editDirectPortEntryDeliveryRelatedContainers'])->name('editDirectPortEntryDeliveryRelatedContainers');
+Route::put('update-direct-port-entry-delivery-related-containers/{id}', [App\Http\Controllers\Backend\DirectPortEntryDeliveryRelatedContainersController::class, 'updateDirectPortEntryDeliveryRelatedContainers'])->name('updateDirectPortEntryDeliveryRelatedContainers');
+Route::post('/update-status-direct-port-entry-delivery-related-containers', [App\Http\Controllers\Backend\DirectPortEntryDeliveryRelatedContainersController::class, 'updateStatusDirectPortEntryDeliveryRelatedContainers']);
+
+// Employment Major Ports employment-major-ports EmploymentMajorPorts
+Route::get('add-employment-major-ports', [App\Http\Controllers\Backend\EmploymentMajorPortsController::class, 'addEmploymentMajorPorts'])->name('addEmploymentMajorPorts');
+Route::post('save-employment-major-ports', [App\Http\Controllers\Backend\EmploymentMajorPortsController::class, 'saveEmploymentMajorPorts'])->name('saveEmploymentMajorPorts');
+Route::get('edit-employment-major-ports/{id}', [App\Http\Controllers\Backend\EmploymentMajorPortsController::class, 'editEmploymentMajorPorts'])->name('editEmploymentMajorPorts');
+Route::put('update-employment-major-ports/{id}', [App\Http\Controllers\Backend\EmploymentMajorPortsController::class, 'updateEmploymentMajorPorts'])->name('updateEmploymentMajorPorts');
+Route::post('/update-status-employment-major-ports', [App\Http\Controllers\Backend\EmploymentMajorPortsController::class, 'updateStatusEmploymentMajorPorts']);
+
+// Employment Dock Labour Boards Major Port employment-dock-labour-boards-major-port EmploymentDockLabourBoardsMajorPort
+Route::get('add-employment-dock-labour-boards-major-port', [App\Http\Controllers\Backend\EmploymentDockLabourBoardsMajorPortController::class, 'addEmploymentDockLabourBoardsMajorPort'])->name('addEmploymentDockLabourBoardsMajorPort');
+Route::get('/data-get-port-types', [App\Http\Controllers\Backend\EmploymentDockLabourBoardsMajorPortController::class, 'dataPortTypes']);
+Route::post('save-employment-dock-labour-boards-major-port', [App\Http\Controllers\Backend\EmploymentDockLabourBoardsMajorPortController::class, 'saveEmploymentDockLabourBoardsMajorPort'])->name('saveEmploymentDockLabourBoardsMajorPort');
+Route::get('edit-employment-dock-labour-boards-major-port/{id}', [App\Http\Controllers\Backend\EmploymentDockLabourBoardsMajorPortController::class, 'editEmploymentDockLabourBoardsMajorPort'])->name('editEmploymentDockLabourBoardsMajorPort');
+Route::put('update-employment-dock-labour-boards-major-port/{id}', [App\Http\Controllers\Backend\EmploymentDockLabourBoardsMajorPortController::class, 'updateEmploymentDockLabourBoardsMajorPort'])->name('updateEmploymentDockLabourBoardsMajorPort');
+Route::post('/update-status-employment-dock-labour-boards-major-port', [App\Http\Controllers\Backend\EmploymentDockLabourBoardsMajorPortController::class, 'updateStatusEmploymentDockLabourBoardsMajorPort']);
 
 // Cruise Tourism cruise-tourism
 Route::get('add-cruise-tourism', [App\Http\Controllers\Backend\FormController::class, 'addCruiseTourism'])->name('addCruiseTourism');
@@ -171,18 +187,6 @@ Route::post('save-seafarers-information', [App\Http\Controllers\Backend\FormCont
 Route::get('edit-seafarers-information/{id?}', [App\Http\Controllers\Backend\FormController::class, 'editSeafarersInformation'])->name('editSeafarersInformation');
 Route::put('update-seafarers-information/{id?}', [App\Http\Controllers\Backend\FormController::class, 'updateSeafarersInformation'])->name('updateSeafarersInformation');
 
-// Employment Major Ports employment-major-ports EmploymentMajorPorts
-Route::get('add-employment-major-ports', [App\Http\Controllers\Backend\FormController::class, 'addEmploymentMajorPorts'])->name('addEmploymentMajorPorts');
-Route::post('save-employment-major-ports', [App\Http\Controllers\Backend\FormController::class, 'saveEmploymentMajorPorts'])->name('saveEmploymentMajorPorts');
-Route::get('edit-employment-major-ports/{id}', [App\Http\Controllers\Backend\FormController::class, 'editEmploymentMajorPorts'])->name('editEmploymentMajorPorts');
-Route::put('update-employment-major-ports/{id}', [App\Http\Controllers\Backend\FormController::class, 'updateEmploymentMajorPorts'])->name('updateEmploymentMajorPorts');
-
-// Employment Dock Labour Boards Major Port employment-dock-labour-boards-major-port EmploymentDockLabourBoardsMajorPort
-Route::get('add-employment-dock-labour-boards-major-port', [App\Http\Controllers\Backend\FormController::class, 'addEmploymentDockLabourBoardsMajorPort'])->name('addEmploymentDockLabourBoardsMajorPort');
-Route::get('/data-get-port-types', [FormController::class, 'dataPortTypes']);
-Route::post('save-employment-dock-labour-boards-major-port', [App\Http\Controllers\Backend\FormController::class, 'saveEmploymentDockLabourBoardsMajorPort'])->name('saveEmploymentDockLabourBoardsMajorPort');
-Route::get('edit-employment-dock-labour-boards-major-port/{id}', [App\Http\Controllers\Backend\FormController::class, 'editEmploymentDockLabourBoardsMajorPort'])->name('editEmploymentDockLabourBoardsMajorPort');
-Route::put('update-employment-dock-labour-boards-major-port/{id}', [App\Http\Controllers\Backend\FormController::class, 'updateEmploymentDockLabourBoardsMajorPort'])->name('updateEmploymentDockLabourBoardsMajorPort');
 
 Route::get('blank-page', [DashboardController::class, 'blankPage'])->name('backend.blankPage');
 
@@ -231,6 +235,5 @@ Route::get('phpinfo', fn () => phpinfo());
 
 Route::get('/chart-data', [App\Http\Controllers\Backend\DashboardController::class, 'getData']);
 
-Route::get('/commodity-allocate/{id}',[App\Http\Controllers\Backend\CommodityController::class,'commodityAllocate']);
+Route::get('/commodity-allocate/{id}', [App\Http\Controllers\Backend\CommodityController::class, 'commodityAllocate']);
 // Route::get('/commodity-allocate/{id}',[App\Http\Controllers\Backend\FormController::class,'commodityAllocate']);
-

@@ -160,7 +160,7 @@
                                         <td class="h5">{{ $innerSubData['innersub']['name'] }}</td>
 
                                         <td class="text-center h6">
-                                            <input type="hidden" name="data[CommoditiesData][0][commodity_id]"
+                                            <input type="" name="data[CommoditiesData][0][commodity_id]"
                                                 value="7" id="CommoditiesData0CommodityId">
                                             <div class="form-group ">
                                                 <div class="input text required" aria-required="true"><input

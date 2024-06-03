@@ -51,6 +51,9 @@
                             <div class="row">
                                 <input type="hidden" class="form-control" id="createdBy" value="{{ Auth::user()->id }}"
                                     name="updated_by">
+                                    
+                                    <input type="hidden" class="form-control" id="status" value="{{ $editData->status }}"
+                                    name="status">
 
                                 <div class="col-md-6">
                                     <div class="form-group">
