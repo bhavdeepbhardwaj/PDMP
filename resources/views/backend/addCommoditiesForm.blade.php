@@ -131,13 +131,15 @@
                                 </thead>
                                 <tbody id="records">
                                     @foreach ($commodityArr as $commodityData)
-                                    @foreach ($commodityData['sub'] as $subCommodity)
-
+                                    @foreach ($commodityData['sub'] as $subKey => $subCommodity)
+                                    @php
+                                        $mainSub = \App\Models\Commodities::where('parent_id',$subCommodity['sub']['id'])->whereRaw('FIND_IN_SET(?, port_id)', [$port_id])->count();
+                                    @endphp
+                                    @if($mainSub > 0)
                                     <tr class="2">
                                         <td class="text-center text-bold h4">
-                                            A </td>
+                                            {{++$subKey}} </td>
                                         <td class="text-bold h4"> {{ $subCommodity['sub']['name'] }}</td>
-
                                         <td class="text-center h6"></td>
                                         <td class="text-center h6"></td>
                                         <td class="text-center h6"></td>
@@ -150,15 +152,20 @@
                                         <td class="text-center h6"></td>
                                         <td class="text-center h6"></td>
                                     </tr>
-
+                                    @if(isset($subCommodity['innersub']) && (!empty($subCommodity['innersub'])))
                                     @foreach ($subCommodity['innersub'] as $innerKey => $innerSubData)
-                                    @if (!empty($innerSubData['innermostsub']))
 
+                                    @if(isset($innerSubData['innermostsub']) && (empty($innerSubData['innermostsub'])))
+
+                                    @php
+                                        $innerSub = \App\Models\Commodities::where('id',$innerSubData['innersub']['id'])->whereRaw('FIND_IN_SET(?, port_id)', [$port_id])->count();
+                                    @endphp
+                                    @if($innerSub > 0)
                                     <tr class="2">
                                         <td class="text-center h5">
-                                            1 </td>
+                                            {{++$innerKey}} </td>
+                                        
                                         <td class="h5">{{ $innerSubData['innersub']['name'] }}</td>
-
                                         <td class="text-center h6">
                                             <input type="" name="data[CommoditiesData][0][commodity_id]"
                                                 value="7" id="CommoditiesData0CommodityId">
@@ -311,7 +318,206 @@
                                         </td>
                                     </tr>
                                     @endif
+                                    @endif
+
+                                    @if(isset($innerSubData['innermostsub']) && (!empty($innerSubData['innermostsub'])))
+
+                                    @php
+                                        $innerMostSubHeading = \App\Models\Commodities::where('parent_id',$innerSubData['innersub']['id'])->whereRaw('FIND_IN_SET(?, port_id)', [$port_id])->count();
+                                    @endphp
+
+                                    @if($innerMostSubHeading > 0)
+                                    <tr class="3">
+                                        <td class="text-center h5">
+                                            1 </td>
+                                        <td class="h5"> {{$innerSubData['innersub']['name']}}</td>
+
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+                                    </tr>
+                                    @endif
+                                    @endif
+                                    @if(isset($innerSubData['innermostsub']) && (!empty($innerSubData['innermostsub'])))
+
+                                    @foreach($innerSubData['innermostsub'] as $key => $innermostsub)
+                                    
+                                    @php
+                                        $innerMostSub = \App\Models\Commodities::where('id',$innermostsub['id'])->whereRaw('FIND_IN_SET(?, port_id)', [$port_id])->count();
+                                    @endphp
+                                    @if($innerMostSub > 0)
+                                    <tr class="3">
+                                        <td class="text-right h6">
+                                            {{++$key}} </td>
+                                        <td class="h6"> {{$innermostsub['name']}}</td>
+
+                                        <td class="text-center h6">
+                                            <input type="hidden" name="data[CommoditiesData][5][commodity_id]"
+                                                value="14" id="CommoditiesData5CommodityId">
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][5][ov_ul_if]"
+                                                        class="form-control section1" rel="6"
+                                                        required="required" number="1" placeholder="O_U_IF"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData5OvUlIf"
+                                                        aria-required="true"></div>
+                                            </div>
+
+                                        </td>
+                                        <td class="text-center h6">
+
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][5][ov_ul_ff]"
+                                                        class="form-control section1" rel="6"
+                                                        required="required" number="1" placeholder="O_U_FF"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData5OvUlFf"
+                                                        aria-required="true"></div>
+                                            </div>
+                                        </td>
+                                        <td class="text-center h6">
+
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][5][ov_l_if]"
+                                                        class="form-control section1" rel="6"
+                                                        required="required" number="1" placeholder="O_L_IF"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData5OvLIf"
+                                                        aria-required="true"></div>
+                                            </div>
+
+                                        </td>
+                                        <td class="text-center h6">
+
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][5][ov_l_ff]"
+                                                        class="form-control section1" rel="6"
+                                                        required="required" number="1" placeholder="O_L_FF"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData5OvLFf"
+                                                        aria-required="true"></div>
+                                            </div>
+                                        </td>
+                                        <td class="text-center h6">
+
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][5][ov_total]"
+                                                        class="form-control total-section1" rel="6"
+                                                        required="required" number="1" placeholder="O_Total"
+                                                        readonly="1"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData5OvTotal"
+                                                        aria-required="true"></div>
+                                            </div>
+                                        </td>
+                                        <td class="text-center h6">
+
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][5][co_ul_if]"
+                                                        class="form-control section2" rel="6"
+                                                        required="required" number="1" placeholder="C_U_IF"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData5CoUlIf"
+                                                        aria-required="true"></div>
+                                            </div>
+                                        </td>
+                                        <td class="text-center h6">
+
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][5][co_ul_ff]"
+                                                        class="form-control section2" rel="6"
+                                                        required="required" number="1" placeholder="C_U_FF"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData5CoUlFf"
+                                                        aria-required="true"></div>
+                                            </div>
+                                        </td>
+                                        <td class="text-center h6">
+
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][5][co_l_if]"
+                                                        class="form-control section2" rel="6"
+                                                        required="required" number="1" placeholder="C_L_IF"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData5CoLIf"
+                                                        aria-required="true"></div>
+                                            </div>
+
+                                        </td>
+                                        <td class="text-center h6">
+
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][5][co_l_ff]"
+                                                        class="form-control section2" rel="6"
+                                                        required="required" number="1" placeholder="C_L_FF"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData5CoLFf"
+                                                        aria-required="true"></div>
+                                            </div>
+
+                                        </td>
+
+                                        <td class="text-center h6">
+
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][5][co_total]"
+                                                        class="form-control total-section2" rel="6"
+                                                        required="required" number="1" placeholder="C_Total"
+                                                        readonly="1"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData5CoTotal"
+                                                        aria-required="true"></div>
+                                            </div>
+
+                                        </td>
+                                        <td class="text-center h6">
+
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][5][grand_total]"
+                                                        class="form-control grand-total" rel="6"
+                                                        required="required" number="1" placeholder="Grand"
+                                                        readonly="1"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData5GrandTotal"
+                                                        aria-required="true"></div>
+                                            </div>
+                                            <input type="hidden" name="data[CommoditiesData][5][state_board_id]"
+                                                id="CommoditiesData5StateBoardId">
+                                            <input type="hidden" name="data[CommoditiesData][5][port_board_id]"
+                                                value="10" id="CommoditiesData5PortBoardId"> <input type="hidden"
+                                                name="data[CommoditiesData][5][created_by_user_id]" value="60"
+                                                id="CommoditiesData5CreatedByUserId"> <input type="hidden"
+                                                name="data[CommoditiesData][5][data_table_type_id]" value="1"
+                                                id="CommoditiesData5DataTableTypeId">
+                                        </td>
+                                    </tr>
+                                    @endif
                                     @endforeach
+                                    @endif
+
+                                    @endforeach
+                                    @endif
+                                    @endif
 
                                     @endforeach
                                     @endforeach

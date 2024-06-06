@@ -119,7 +119,7 @@ class CommodityController extends Controller
                     'sub' => [], // Initialize an empty array for sub-commodities
                 ];
 
-                $subCommodities = Commodities::where('parent_id', $parent['id'])->get()->toArray();
+                $subCommodities = Commodities::where('parent_id', $parent['id'])->whereRaw('FIND_IN_SET(?, port_id)', [$userData->port_id])->get()->toArray();
 
                 foreach ($subCommodities as $subCommodity) {
                     $subCommodityItem = [
@@ -127,7 +127,7 @@ class CommodityController extends Controller
                         'innersub' => [], // Initialize an empty array for inner sub-commodities
                     ];
 
-                    $innerSubCommodities = Commodities::where('parent_id', $subCommodity['id'])->get()->toArray();
+                    $innerSubCommodities = Commodities::where('parent_id', $subCommodity['id'])->whereRaw('FIND_IN_SET(?, port_id)', [$userData->port_id])->get()->toArray();
 
                     foreach ($innerSubCommodities as $innerSubCommodity) {
                         $innerSubCommodityItem = [
@@ -135,7 +135,7 @@ class CommodityController extends Controller
                             'innermostsub' => [], // Initialize an empty array for innermost sub-commodities
                         ];
 
-                        $innerMostSubCommodities = Commodities::where('parent_id', $innerSubCommodity['id'])->get()->toArray();
+                        $innerMostSubCommodities = Commodities::where('parent_id', $innerSubCommodity['id'])->whereRaw('FIND_IN_SET(?, port_id)', [$userData->port_id])->get()->toArray();
 
                         foreach ($innerMostSubCommodities as $innerMostSubCommodity) {
                             $innerSubCommodityItem['innermostsub'][] = $innerMostSubCommodity;
@@ -196,17 +196,17 @@ class CommodityController extends Controller
 
             // $impPortId = implode(',',$portIdArr);
             // dd($impPortId);
-            $parentId = Commodities::where('parent_id',$commodityData->parent_id)->where('id','!=',$id)->whereRaw("FIND_IN_SET(?, port_id)", [$user->port_id])->count();
+            $parentId = Commodities::where('parent_id', $commodityData->parent_id)->where('id', '!=', $id)->whereRaw("FIND_IN_SET(?, port_id)", [$user->port_id])->count();
             // $checkParentId = Commodities::whereRaw("FIND_IN_SET(?, port_id)", [$parentId->id])->count();
             // if($checkParentId == 0){
             //     $impPortId = $impPortIdarray.','.$parentId->id;
             // }
-            $subParent = Commodities::where('id',$commodityData->parent_id)->first();
+            $subParent = Commodities::where('id', $commodityData->parent_id)->first();
 
-            $checkSubParent = Commodities::where('id',$subParent->parent_id)->whereRaw("FIND_IN_SET(?, port_id)", [$user->port_id])->first();
+            $checkSubParent = Commodities::where('id', $subParent->parent_id)->whereRaw("FIND_IN_SET(?, port_id)", [$user->port_id])->first();
             // dd($)
-            if(isset($checkSubParent)){
-                Commodities::where('id',$checkSubParent->id)->update([
+            if (isset($checkSubParent)) {
+                Commodities::where('id', $checkSubParent->id)->update([
                     'port_id' => $impPortIdarray
                 ]);
             }
@@ -214,13 +214,11 @@ class CommodityController extends Controller
             Commodities::where('id', $id)->update([
                 'port_id' => $impPortIdarray
             ]);
-            if($parentId == 0){
-                Commodities::where('id',$commodityData->parent_id)->update([
+            if ($parentId == 0) {
+                Commodities::where('id', $commodityData->parent_id)->update([
                     'port_id' => $impPortIdarray
                 ]);
             }
-
-
         } else {
 
             $userPortIdArr[] = $user->port_id;
@@ -228,17 +226,17 @@ class CommodityController extends Controller
 
             $impPortId = implode(',', $portIdArr);
             // dd($impPortId);
-            $parentId = Commodities::where('id',$commodityData->parent_id)->whereRaw("FIND_IN_SET(?, port_id)", [$user->port_id])->count();
+            $parentId = Commodities::where('id', $commodityData->parent_id)->whereRaw("FIND_IN_SET(?, port_id)", [$user->port_id])->count();
             // $checkParentId = Commodities::whereRaw("FIND_IN_SET(?, port_id)", [$user->port_id])->count();
             // dd($checkParentId);
-            $checkSubParent = Commodities::where('id',$commodityData->parent_id)->first();
+            $checkSubParent = Commodities::where('id', $commodityData->parent_id)->first();
 
-            if(isset($checkSubParent)){
-                Commodities::where('id',$checkSubParent->parent_id)->update([
+            if (isset($checkSubParent)) {
+                Commodities::where('id', $checkSubParent->parent_id)->update([
                     'port_id' => $impPortId
                 ]);
             }
-            if($parentId == 0){
+            if ($parentId == 0) {
                 Commodities::where('id', $commodityData->parent_id)->update([
                     'port_id' => $impPortId
                 ]);

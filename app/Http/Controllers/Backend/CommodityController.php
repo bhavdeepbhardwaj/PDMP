@@ -107,7 +107,7 @@ class CommodityController extends Controller
         try {
             // Your logic goes here..
             $userData = User::where('id', Auth::User()->id)->first();
-
+            $port_id = $userData->port_id ?? '';
             // Return the view with data
             $commodityArr = [];
 
@@ -157,13 +157,15 @@ class CommodityController extends Controller
             // Return the view with Commodities Form Major Port details
             return view('backend.addCommoditiesForm', [
                 "userData" => $userData,
-                "commodityArr" => $commodityArr
+                "commodityArr" => $commodityArr,
+                'port_id' => $port_id
             ]);
         } catch (\Exception $e) {
             // Return an error response
             return response()->json(['error' => 'An error occurred: ' . $e->getMessage()]);
         }
     }
+
 
     //Commodity Allocate
 
