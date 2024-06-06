@@ -166,6 +166,13 @@ class CommodityController extends Controller
         }
     }
 
+    // Store Data in Commodity Table
+
+    public function storeCommodity(Request $request) 
+    {
+        dd($request->all());
+    }
+
 
     //Commodity Allocate
 

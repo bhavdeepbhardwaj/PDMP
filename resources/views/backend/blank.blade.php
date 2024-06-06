@@ -1,6 +1,24 @@
 @extends('layouts.master')
 
 @section('css')
+    {{--  --}}
+    <style>
+        .h4,
+        h4 {
+            font-size: 18px;
+        }
+
+        .h5,
+        h5 {
+            font-size: 14px;
+        }
+
+        .h6,
+        h6 {
+            font-size: 12px;
+        }
+    </style>
+    {{--  --}}
 @endsection
 
 @section('content')
@@ -32,6 +50,899 @@
                         <h3 class="card-title">Major-Nom Major Ports and Capacities</h3>
                     </div>
                     <div class="card-body">
+                        <div class="box-body table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead class="bg-blue">
+                                    <tr>
+                                        <th width="4%" rowspan="3">S.No.</th>
+                                        <th style="text-align: center" rowspan="3">Commodity</th>
+                                        <th colspan="5">
+                                            <center>Overseas (in Tonnes)</center>
+                                        </th>
+                                        <th colspan="5">
+                                            <center>Coastal (in Tonnes)</center>
+                                        </th>
+                                        <th rowspan="3">Grand <br> Total <br>(in Tonnes)</th>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="2">
+                                            <center>Unloaded</center>
+                                        </th>
+                                        <th colspan="2">
+                                            <center>Loaded</center>
+                                        </th>
+                                        <th rowspan="2">
+                                            <center>Total</center>
+                                        </th>
+                                        <th colspan="2">
+                                            <center>Unloaded</center>
+                                        </th>
+                                        <th colspan="2">
+                                            <center>Loaded</center>
+                                        </th>
+                                        <th rowspan="2">
+                                            <center>Total</center>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th style="text-align: center">IF<span class="asteriskLine text-red">*</span></th>
+                                        <th style="text-align: center">FF<span class="asteriskLine text-red">*</span></th>
+                                        <th style="text-align: center">IF<span class="asteriskLine text-red">*</span></th>
+                                        <th style="text-align: center">FF<span class="asteriskLine text-red">*</span></th>
+                                        <th style="text-align: center">IF<span class="asteriskLine text-red">*</span></th>
+                                        <th style="text-align: center">FF<span class="asteriskLine text-red">*</span></th>
+                                        <th style="text-align: center">IF<span class="asteriskLine text-red">*</span></th>
+                                        <th style="text-align: center">FF<span class="asteriskLine text-red">*</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="records">
+                                    
+                                    <tr class="2">
+                                        <td class="text-center text-bold h4">
+                                            A </td>
+                                        <td class="text-bold h4"> Liquid Bulk</td>
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+                                    </tr>
+
+                                    <tr class="2">
+                                        <td class="text-center">
+                                            1 </td>
+                                            <td class=""> POL-Crude <input type="" name="commodity_id[]" id="commodity_id" placeholder="commodity_id">
+                                            </td>
+
+                                        <td class="text-center">
+                                            <div class="form-group">
+                                                <div class="" aria-required="true">
+                                                    <input type="text" name="ov_ul_if[]" class="form-control" required="required" placeholder="O_U_IF" id="ov_ul_if">
+                                                </div>
+                                            </div>
+
+                                        </td>
+                                        <td class="text-center">
+
+                                            <div class="form-group">
+                                                <div class="">
+                                                    <input type="text" name="ov_ul_ff[]" class="form-control" required="required" placeholder="O_U_FF" id="ov_ul_ff">
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
+
+                                            <div class="form-group">
+                                                <div class="">
+                                                    <input type="text" name="ov_l_if[]" class="form-control" required="required" placeholder="O_L_IF" id="ov_l_if">
+                                                </div>
+                                            </div>
+
+                                        </td>
+                                        <td class="text-center">
+
+                                            <div class="form-group">
+                                                <div class="">
+                                                    <input type="text" name="ov_l_ff[]" class="form-control" required="required" placeholder="O_L_FF" id="ov_l_ff">
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
+
+                                            <div class="form-group">
+                                                <div class="">
+                                                    <input type="text" name="ov_total[]" class="form-control" required="required" placeholder="O_Total" id="ov_total">
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
+
+                                            <div class="form-group ">
+                                                <div class="">
+                                                    <input type="text" name="co_ul_if[]" class="form-control" required="required" placeholder="C_U_IF" id="co_ul_if">
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
+
+                                            <div class="form-group">
+                                                <div class="">
+                                                    <input type="text" name="co_ul_ff[]" class="form-control" required="required" placeholder="C_U_FF" id="co_ul_ff">
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
+
+                                            <div class="form-group">
+                                                <div class="">
+                                                    <input type="text" name="co_l_if[]" class="form-control" required="required" placeholder="C_L_IF" id="co_l_if">
+                                                </div>
+                                            </div>
+
+                                        </td>
+                                        <td class="text-center">
+
+                                            <div class="form-group ">
+                                                <div class="">
+                                                    <input type="text" name="co_l_ff[]" class="form-control" required="required" placeholder="C_L_FF" id="co_l_ff">
+                                                </div>
+                                            </div>
+
+                                        </td>
+
+                                        <td class="text-center">
+
+                                            <div class="form-group">
+                                                <div class="">
+                                                    <input type="text" name="co_total[]" class="form-control" required="required" placeholder="C_Total" id="co_total">
+                                                </div>
+                                            </div>
+
+                                        </td>
+                                        <td class="text-center h6">
+
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true">
+                                                    <input type="text" name="grand_total[]" class="form-control" required="required" placeholder="Grand_Total" id="grand_total" readonly>
+                                                </div>
+                                            </div>
+                                            <input type="" name="state_id" id="state_id" placeholder="state_id">
+                                            <input type="" name="port_type" id="port_type" placeholder="port_type">
+                                            <input type="" name="state_board" id="state_board" placeholder="state_board">
+                                            <input type="" name="port_id" id="port_id" placeholder="port_id"> 
+                                            <input type="" name="created_by" id="created_by" placeholder="created_by"> 
+                                            <input type="" name="data_table_type_id" id="data_table_type_id">
+                                        </td>
+                                    </tr>
+
+                                    <tr class="3">
+                                        <td class="text-center text-bold h4">
+                                            B </td>
+                                        <td class="text-bold h4"> Dry Bulk</td>
+
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+                                    </tr>
+
+                                    <tr class="3">
+                                        <td class="text-center h5">
+                                            1 </td>
+                                        <td class="h5"> Iron Ore All</td>
+
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+                                    </tr>
+
+                                    <tr class="3">
+                                        <td class="text-right h6">
+                                            (a) </td>
+                                        <td class="h6"> Pellets</td>
+
+                                        <td class="text-center h6">
+                                            <input type="hidden" name="data[CommoditiesData][5][commodity_id]"
+                                                value="14" id="CommoditiesData5CommodityId">
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][5][ov_ul_if]"
+                                                        class="form-control section1" rel="6"
+                                                        required="required" number="1" placeholder="O_U_IF"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData5OvUlIf"
+                                                        aria-required="true"></div>
+                                            </div>
+
+                                        </td>
+                                        <td class="text-center h6">
+
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][5][ov_ul_ff]"
+                                                        class="form-control section1" rel="6"
+                                                        required="required" number="1" placeholder="O_U_FF"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData5OvUlFf"
+                                                        aria-required="true"></div>
+                                            </div>
+                                        </td>
+                                        <td class="text-center h6">
+
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][5][ov_l_if]"
+                                                        class="form-control section1" rel="6"
+                                                        required="required" number="1" placeholder="O_L_IF"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData5OvLIf"
+                                                        aria-required="true"></div>
+                                            </div>
+
+                                        </td>
+                                        <td class="text-center h6">
+
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][5][ov_l_ff]"
+                                                        class="form-control section1" rel="6"
+                                                        required="required" number="1" placeholder="O_L_FF"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData5OvLFf"
+                                                        aria-required="true"></div>
+                                            </div>
+                                        </td>
+                                        <td class="text-center h6">
+
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][5][ov_total]"
+                                                        class="form-control total-section1" rel="6"
+                                                        required="required" number="1" placeholder="O_Total"
+                                                        readonly="1"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData5OvTotal"
+                                                        aria-required="true"></div>
+                                            </div>
+                                        </td>
+                                        <td class="text-center h6">
+
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][5][co_ul_if]"
+                                                        class="form-control section2" rel="6"
+                                                        required="required" number="1" placeholder="C_U_IF"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData5CoUlIf"
+                                                        aria-required="true"></div>
+                                            </div>
+                                        </td>
+                                        <td class="text-center h6">
+
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][5][co_ul_ff]"
+                                                        class="form-control section2" rel="6"
+                                                        required="required" number="1" placeholder="C_U_FF"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData5CoUlFf"
+                                                        aria-required="true"></div>
+                                            </div>
+                                        </td>
+                                        <td class="text-center h6">
+
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][5][co_l_if]"
+                                                        class="form-control section2" rel="6"
+                                                        required="required" number="1" placeholder="C_L_IF"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData5CoLIf"
+                                                        aria-required="true"></div>
+                                            </div>
+
+                                        </td>
+                                        <td class="text-center h6">
+
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][5][co_l_ff]"
+                                                        class="form-control section2" rel="6"
+                                                        required="required" number="1" placeholder="C_L_FF"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData5CoLFf"
+                                                        aria-required="true"></div>
+                                            </div>
+
+                                        </td>
+
+                                        <td class="text-center h6">
+
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][5][co_total]"
+                                                        class="form-control total-section2" rel="6"
+                                                        required="required" number="1" placeholder="C_Total"
+                                                        readonly="1"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData5CoTotal"
+                                                        aria-required="true"></div>
+                                            </div>
+
+                                        </td>
+                                        <td class="text-center h6">
+
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][5][grand_total]"
+                                                        class="form-control grand-total" rel="6"
+                                                        required="required" number="1" placeholder="Grand"
+                                                        readonly="1"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData5GrandTotal"
+                                                        aria-required="true"></div>
+                                            </div>
+                                            <input type="hidden" name="data[CommoditiesData][5][state_board_id]"
+                                                id="CommoditiesData5StateBoardId">
+                                            <input type="hidden" name="data[CommoditiesData][5][port_board_id]"
+                                                value="10" id="CommoditiesData5PortBoardId"> <input type="hidden"
+                                                name="data[CommoditiesData][5][created_by_user_id]" value="60"
+                                                id="CommoditiesData5CreatedByUserId"> <input type="hidden"
+                                                name="data[CommoditiesData][5][data_table_type_id]" value="1"
+                                                id="CommoditiesData5DataTableTypeId">
+                                        </td>
+                                    </tr>
+
+                                    <tr class="3">
+                                        <td class="text-center h5">
+                                            2 </td>
+                                        <td class="h5"> Other Ores</td>
+
+                                        <td class="text-center h6">
+                                            <input type="hidden" name="data[CommoditiesData][7][commodity_id]"
+                                                value="16" id="CommoditiesData7CommodityId">
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][7][ov_ul_if]"
+                                                        class="form-control section1" rel="8"
+                                                        required="required" number="1" placeholder="O_U_IF"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData7OvUlIf"
+                                                        aria-required="true"></div>
+                                            </div>
+
+                                        </td>
+                                        <td class="text-center h6">
+
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][7][ov_ul_ff]"
+                                                        class="form-control section1" rel="8"
+                                                        required="required" number="1" placeholder="O_U_FF"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData7OvUlFf"
+                                                        aria-required="true"></div>
+                                            </div>
+                                        </td>
+                                        <td class="text-center h6">
+
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][7][ov_l_if]"
+                                                        class="form-control section1" rel="8"
+                                                        required="required" number="1" placeholder="O_L_IF"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData7OvLIf"
+                                                        aria-required="true"></div>
+                                            </div>
+
+                                        </td>
+                                        <td class="text-center h6">
+
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][7][ov_l_ff]"
+                                                        class="form-control section1" rel="8"
+                                                        required="required" number="1" placeholder="O_L_FF"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData7OvLFf"
+                                                        aria-required="true"></div>
+                                            </div>
+                                        </td>
+                                        <td class="text-center h6">
+
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][7][ov_total]"
+                                                        class="form-control total-section1" rel="8"
+                                                        required="required" number="1" placeholder="O_Total"
+                                                        readonly="1"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData7OvTotal"
+                                                        aria-required="true"></div>
+                                            </div>
+                                        </td>
+                                        <td class="text-center h6">
+
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][7][co_ul_if]"
+                                                        class="form-control section2" rel="8"
+                                                        required="required" number="1" placeholder="C_U_IF"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData7CoUlIf"
+                                                        aria-required="true"></div>
+                                            </div>
+                                        </td>
+                                        <td class="text-center h6">
+
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][7][co_ul_ff]"
+                                                        class="form-control section2" rel="8"
+                                                        required="required" number="1" placeholder="C_U_FF"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData7CoUlFf"
+                                                        aria-required="true"></div>
+                                            </div>
+                                        </td>
+                                        <td class="text-center h6">
+
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][7][co_l_if]"
+                                                        class="form-control section2" rel="8"
+                                                        required="required" number="1" placeholder="C_L_IF"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData7CoLIf"
+                                                        aria-required="true"></div>
+                                            </div>
+
+                                        </td>
+                                        <td class="text-center h6">
+
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][7][co_l_ff]"
+                                                        class="form-control section2" rel="8"
+                                                        required="required" number="1" placeholder="C_L_FF"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData7CoLFf"
+                                                        aria-required="true"></div>
+                                            </div>
+
+                                        </td>
+
+                                        <td class="text-center h6">
+
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][7][co_total]"
+                                                        class="form-control total-section2" rel="8"
+                                                        required="required" number="1" placeholder="C_Total"
+                                                        readonly="1"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData7CoTotal"
+                                                        aria-required="true"></div>
+                                            </div>
+
+                                        </td>
+                                        <td class="text-center h6">
+
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][7][grand_total]"
+                                                        class="form-control grand-total" rel="8"
+                                                        required="required" number="1" placeholder="Grand"
+                                                        readonly="1"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData7GrandTotal"
+                                                        aria-required="true"></div>
+                                            </div>
+                                            <input type="hidden" name="data[CommoditiesData][7][state_board_id]"
+                                                id="CommoditiesData7StateBoardId">
+                                            <input type="hidden" name="data[CommoditiesData][7][port_board_id]"
+                                                value="10" id="CommoditiesData7PortBoardId"> <input type="hidden"
+                                                name="data[CommoditiesData][7][created_by_user_id]" value="60"
+                                                id="CommoditiesData7CreatedByUserId"> <input type="hidden"
+                                                name="data[CommoditiesData][7][data_table_type_id]" value="1"
+                                                id="CommoditiesData7DataTableTypeId">
+                                        </td>
+                                    </tr>
+
+                                    <tr class="4">
+                                        <td class="text-center text-bold h4">
+                                            C </td>
+                                        <td class="text-bold h4"> Break Bulk</td>
+
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+                                    </tr>
+
+                                    <tr class="4">
+                                        <td class="text-center h5">
+                                            1 </td>
+                                        <td class="h5"> Iron and Steel</td>
+
+                                        <td class="text-center h6">
+                                            <input type="hidden" name="data[CommoditiesData][13][commodity_id]"
+                                                value="20" id="CommoditiesData13CommodityId">
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][13][ov_ul_if]"
+                                                        class="form-control section1" rel="14"
+                                                        required="required" number="1" placeholder="O_U_IF"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData13OvUlIf"
+                                                        aria-required="true"></div>
+                                            </div>
+
+                                        </td>
+                                        <td class="text-center h6">
+
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][13][ov_ul_ff]"
+                                                        class="form-control section1" rel="14"
+                                                        required="required" number="1" placeholder="O_U_FF"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData13OvUlFf"
+                                                        aria-required="true"></div>
+                                            </div>
+                                        </td>
+                                        <td class="text-center h6">
+
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][13][ov_l_if]"
+                                                        class="form-control section1" rel="14"
+                                                        required="required" number="1" placeholder="O_L_IF"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData13OvLIf"
+                                                        aria-required="true"></div>
+                                            </div>
+
+                                        </td>
+                                        <td class="text-center h6">
+
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][13][ov_l_ff]"
+                                                        class="form-control section1" rel="14"
+                                                        required="required" number="1" placeholder="O_L_FF"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData13OvLFf"
+                                                        aria-required="true"></div>
+                                            </div>
+                                        </td>
+                                        <td class="text-center h6">
+
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][13][ov_total]"
+                                                        class="form-control total-section1" rel="14"
+                                                        required="required" number="1" placeholder="O_Total"
+                                                        readonly="1"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData13OvTotal"
+                                                        aria-required="true"></div>
+                                            </div>
+                                        </td>
+                                        <td class="text-center h6">
+
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][13][co_ul_if]"
+                                                        class="form-control section2" rel="14"
+                                                        required="required" number="1" placeholder="C_U_IF"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData13CoUlIf"
+                                                        aria-required="true"></div>
+                                            </div>
+                                        </td>
+                                        <td class="text-center h6">
+
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][13][co_ul_ff]"
+                                                        class="form-control section2" rel="14"
+                                                        required="required" number="1" placeholder="C_U_FF"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData13CoUlFf"
+                                                        aria-required="true"></div>
+                                            </div>
+                                        </td>
+                                        <td class="text-center h6">
+
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][13][co_l_if]"
+                                                        class="form-control section2" rel="14"
+                                                        required="required" number="1" placeholder="C_L_IF"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData13CoLIf"
+                                                        aria-required="true"></div>
+                                            </div>
+
+                                        </td>
+                                        <td class="text-center h6">
+
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][13][co_l_ff]"
+                                                        class="form-control section2" rel="14"
+                                                        required="required" number="1" placeholder="C_L_FF"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData13CoLFf"
+                                                        aria-required="true"></div>
+                                            </div>
+
+                                        </td>
+
+                                        <td class="text-center h6">
+
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][13][co_total]"
+                                                        class="form-control total-section2" rel="14"
+                                                        required="required" number="1" placeholder="C_Total"
+                                                        readonly="1"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData13CoTotal"
+                                                        aria-required="true"></div>
+                                            </div>
+
+                                        </td>
+                                        <td class="text-center h6">
+
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][13][grand_total]"
+                                                        class="form-control grand-total" rel="14"
+                                                        required="required" number="1" placeholder="Grand"
+                                                        readonly="1"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData13GrandTotal"
+                                                        aria-required="true"></div>
+                                            </div>
+                                            <input type="hidden" name="data[CommoditiesData][13][state_board_id]"
+                                                id="CommoditiesData13StateBoardId">
+                                            <input type="hidden" name="data[CommoditiesData][13][port_board_id]"
+                                                value="10" id="CommoditiesData13PortBoardId"> <input
+                                                type="hidden" name="data[CommoditiesData][13][created_by_user_id]"
+                                                value="60" id="CommoditiesData13CreatedByUserId"> <input
+                                                type="hidden" name="data[CommoditiesData][13][data_table_type_id]"
+                                                value="1" id="CommoditiesData13DataTableTypeId">
+                                        </td>
+                                    </tr>
+
+                                    <tr class="5">
+                                        <td class="text-center text-bold h4">
+                                            D </td>
+                                        <td class="text-bold h4"> Container</td>
+
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+
+                                        <td class="text-center h6"></td>
+                                        <td class="text-center h6"></td>
+                                    </tr>
+
+                                    <tr class="5">
+                                        <td class="text-center h5">
+                                            1 </td>
+                                        <td class="h5"> TEUs</td>
+
+                                        <td class="text-center h6">
+                                            <input type="" name="data[CommoditiesData][15][commodity_id]"
+                                                value="22" id="CommoditiesData15CommodityId">
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][15][ov_ul_if]"
+                                                        class="form-control section1" rel="16"
+                                                        required="required" number="1" placeholder="O_U_IF"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData15OvUlIf"
+                                                        aria-required="true"></div>
+                                            </div>
+
+                                        </td>
+                                        <td class="text-center h6">
+
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][15][ov_ul_ff]"
+                                                        class="form-control section1" rel="16"
+                                                        required="required" number="1" placeholder="O_U_FF"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData15OvUlFf"
+                                                        aria-required="true"></div>
+                                            </div>
+                                        </td>
+                                        <td class="text-center h6">
+
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][15][ov_l_if]"
+                                                        class="form-control section1" rel="16"
+                                                        required="required" number="1" placeholder="O_L_IF"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData15OvLIf"
+                                                        aria-required="true"></div>
+                                            </div>
+
+                                        </td>
+                                        <td class="text-center h6">
+
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][15][ov_l_ff]"
+                                                        class="form-control section1" rel="16"
+                                                        required="required" number="1" placeholder="O_L_FF"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData15OvLFf"
+                                                        aria-required="true"></div>
+                                            </div>
+                                        </td>
+                                        <td class="text-center h6">
+
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][15][ov_total]"
+                                                        class="form-control total-section1" rel="16"
+                                                        required="required" number="1" placeholder="O_Total"
+                                                        readonly="1"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData15OvTotal"
+                                                        aria-required="true"></div>
+                                            </div>
+                                        </td>
+                                        <td class="text-center h6">
+
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][15][co_ul_if]"
+                                                        class="form-control section2" rel="16"
+                                                        required="required" number="1" placeholder="C_U_IF"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData15CoUlIf"
+                                                        aria-required="true"></div>
+                                            </div>
+                                        </td>
+                                        <td class="text-center h6">
+
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][15][co_ul_ff]"
+                                                        class="form-control section2" rel="16"
+                                                        required="required" number="1" placeholder="C_U_FF"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData15CoUlFf"
+                                                        aria-required="true"></div>
+                                            </div>
+                                        </td>
+                                        <td class="text-center h6">
+
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][15][co_l_if]"
+                                                        class="form-control section2" rel="16"
+                                                        required="required" number="1" placeholder="C_L_IF"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData15CoLIf"
+                                                        aria-required="true"></div>
+                                            </div>
+
+                                        </td>
+                                        <td class="text-center h6">
+
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][15][co_l_ff]"
+                                                        class="form-control section2" rel="16"
+                                                        required="required" number="1" placeholder="C_L_FF"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData15CoLFf"
+                                                        aria-required="true"></div>
+                                            </div>
+
+                                        </td>
+
+                                        <td class="text-center h6">
+
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][15][co_total]"
+                                                        class="form-control total-section2" rel="16"
+                                                        required="required" number="1" placeholder="C_Total"
+                                                        readonly="1"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData15CoTotal"
+                                                        aria-required="true"></div>
+                                            </div>
+
+                                        </td>
+                                        <td class="text-center h6">
+
+                                            <div class="form-group ">
+                                                <div class="input text required" aria-required="true"><input
+                                                        name="data[CommoditiesData][15][grand_total]"
+                                                        class="form-control grand-total" rel="16"
+                                                        required="required" number="1" placeholder="Grand"
+                                                        readonly="1"
+                                                        data-validate="{&quot;messages&quot;:{&quot;number&quot;:&quot;This should be numeric.&quot;},&quot;required&quot;:true,&quot;number&quot;:true}"
+                                                        type="text" id="CommoditiesData15GrandTotal"
+                                                        aria-required="true"></div>
+                                            </div>
+                                            <input type="hidden" name="data[CommoditiesData][15][state_board_id]"
+                                                id="CommoditiesData15StateBoardId">
+                                            <input type="hidden" name="data[CommoditiesData][15][port_board_id]"
+                                                value="10" id="CommoditiesData15PortBoardId"> <input
+                                                type="hidden" name="data[CommoditiesData][15][created_by_user_id]"
+                                                value="60" id="CommoditiesData15CreatedByUserId"> <input
+                                                type="hidden" name="data[CommoditiesData][15][data_table_type_id]"
+                                                value="1" id="CommoditiesData15DataTableTypeId">
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                            <div class="col-md-4 pull-right">
+                                <div class="form-group ">
+                                    <label class="text-light-blue">Enter Any Remarks</label>
+                                    <div>
+                                        <label>Words Left : </label><span class="text-red safe" id="counter1">50</span>
+                                    </div><label>
+
+                                        <div class="input textarea">
+                                            <textarea name="data[CommoditiesData][comm_remarks]" alphanumericpunc="1" empty="Enter Remarks"
+                                                class="form-control section1" data-validate="[]" cols="30" rows="6"
+                                                id="CommoditiesDataCommRemarks"></textarea>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
                         {{-- Form Respone --}}
                         @include('backend.component.flush')
 

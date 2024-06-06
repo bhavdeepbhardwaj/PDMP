@@ -67,7 +67,7 @@ class UsersTableSeeder extends Seeder
 
         User::create([
             'name' => 'Chennai Port Authority Port Nodal Officer',
-            'state_id' => 0,
+            'state_id' => 31,
             'port_type' => 1,
             'state_board' => 0,
             'port_id' => 1,
@@ -84,7 +84,7 @@ class UsersTableSeeder extends Seeder
 
         User::create([
             'name' => 'Chennai Port Authority Port Manager',
-            'state_id' => 0,
+            'state_id' => 31,
             'port_type' => 1,
             'state_board' => 0,
             'port_id' => 1,
@@ -101,7 +101,7 @@ class UsersTableSeeder extends Seeder
 
         User::create([
             'name' => 'Chennai Port Authority Data Entry Officer',
-            'state_id' => 0,
+            'state_id' => 31,
             'port_type' => 1,
             'state_board' => 0,
             'port_id' => 1,
@@ -118,7 +118,7 @@ class UsersTableSeeder extends Seeder
 
         User::create([
             'name' => 'Cochin Port Authority Port Nodal Office',
-            'state_id' => 0,
+            'state_id' => 18,
             'port_type' => 1,
             'state_board' => 0,
             'port_id' => 2,
@@ -135,7 +135,7 @@ class UsersTableSeeder extends Seeder
 
         User::create([
             'name' => 'Cochin Port Authority Port Manager',
-            'state_id' => 0,
+            'state_id' => 18,
             'port_type' => 1,
             'state_board' => 0,
             'port_id' => 2,
@@ -152,7 +152,7 @@ class UsersTableSeeder extends Seeder
 
         User::create([
             'name' => 'Cochin Port Authority Data Entry Officer',
-            'state_id' => 0,
+            'state_id' => 18,
             'port_type' => 1,
             'state_board' => 0,
             'port_id' => 2,
@@ -169,7 +169,7 @@ class UsersTableSeeder extends Seeder
 
         User::create([
             'name' => 'Deendayal Port Authority Port Nodal Officer',
-            'state_id' => 0,
+            'state_id' => 12,
             'port_type' => 1,
             'state_board' => 0,
             'port_id' => 3,
@@ -186,7 +186,7 @@ class UsersTableSeeder extends Seeder
 
         User::create([
             'name' => 'Deendayal Port Authority Port Manager',
-            'state_id' => 0,
+            'state_id' => 12,
             'port_type' => 1,
             'state_board' => 0,
             'port_id' => 3,
@@ -203,7 +203,7 @@ class UsersTableSeeder extends Seeder
 
         User::create([
             'name' => 'Deendayal Port Authority Data Entry Officer',
-            'state_id' => 0,
+            'state_id' => 12,
             'port_type' => 1,
             'state_board' => 0,
             'port_id' => 3,
@@ -220,7 +220,7 @@ class UsersTableSeeder extends Seeder
 
         User::create([
             'name' => 'Haldia Dock Complex Port Nodal Officer',
-            'state_id' => 0,
+            'state_id' => 37,
             'port_type' => 1,
             'state_board' => 0,
             'port_id' => 4,
@@ -237,7 +237,7 @@ class UsersTableSeeder extends Seeder
 
         User::create([
             'name' => 'Haldia Dock Complex Port Manager',
-            'state_id' => 0,
+            'state_id' => 37,
             'port_type' => 1,
             'state_board' => 0,
             'port_id' => 4,
@@ -254,7 +254,7 @@ class UsersTableSeeder extends Seeder
 
         User::create([
             'name' => 'Haldia Dock Complex Data Entry Officer',
-            'state_id' => 0,
+            'state_id' => 37,
             'port_type' => 1,
             'state_board' => 0,
             'port_id' => 4,
@@ -271,7 +271,7 @@ class UsersTableSeeder extends Seeder
 
         User::create([
             'name' => 'Jawaharlal Nehru Port Authority Port Nodal Officer',
-            'state_id' => 0,
+            'state_id' => 21,
             'port_type' => 1,
             'state_board' => 0,
             'port_id' => 5,
@@ -288,7 +288,7 @@ class UsersTableSeeder extends Seeder
 
         User::create([
             'name' => 'Jawaharlal Nehru Port Authority Port Manager',
-            'state_id' => 0,
+            'state_id' => 21,
             'port_type' => 1,
             'state_board' => 0,
             'port_id' => 5,
@@ -305,7 +305,7 @@ class UsersTableSeeder extends Seeder
 
         User::create([
             'name' => 'Jawaharlal Nehru Port Authority Data Entry Officer',
-            'state_id' => 0,
+            'state_id' => 21,
             'port_type' => 1,
             'state_board' => 0,
             'port_id' => 5,
@@ -322,7 +322,7 @@ class UsersTableSeeder extends Seeder
 
         User::create([
             'name' => 'Kamarajar Port Authority Port Nodal Officer',
-            'state_id' => 0,
+            'state_id' => 31,
             'port_type' => 1,
             'state_board' => 0,
             'port_id' => 6,
@@ -339,7 +339,7 @@ class UsersTableSeeder extends Seeder
 
         User::create([
             'name' => 'Kamarajar Port Authority Port Manager',
-            'state_id' => 0,
+            'state_id' => 31,
             'port_type' => 1,
             'state_board' => 0,
             'port_id' => 6,
@@ -356,7 +356,7 @@ class UsersTableSeeder extends Seeder
 
         User::create([
             'name' => 'Kamarajar Port Authority Data Entry Officer',
-            'state_id' => 0,
+            'state_id' => 31,
             'port_type' => 1,
             'state_board' => 0,
             'port_id' => 6,
@@ -373,7 +373,7 @@ class UsersTableSeeder extends Seeder
 
         User::create([
             'name' => 'Mormugao Port Authority Port Nodal Officer',
-            'state_id' => 0,
+            'state_id' => 11,
             'port_type' => 1,
             'state_board' => 0,
             'port_id' => 7,
@@ -390,7 +390,7 @@ class UsersTableSeeder extends Seeder
 
         User::create([
             'name' => 'Mormugao Port Authority Port Manager',
-            'state_id' => 0,
+            'state_id' => 11,
             'port_type' => 1,
             'state_board' => 0,
             'port_id' => 7,
@@ -407,7 +407,7 @@ class UsersTableSeeder extends Seeder
 
         User::create([
             'name' => 'Mormugao Port Authority Data Entry Officer',
-            'state_id' => 0,
+            'state_id' => 11,
             'port_type' => 1,
             'state_board' => 0,
             'port_id' => 7,
@@ -424,7 +424,7 @@ class UsersTableSeeder extends Seeder
 
         User::create([
             'name' => 'Mumbai Port Authority Port Nodal Officer',
-            'state_id' => 0,
+            'state_id' => 21,
             'port_type' => 1,
             'state_board' => 0,
             'port_id' => 8,
@@ -441,7 +441,7 @@ class UsersTableSeeder extends Seeder
 
         User::create([
             'name' => 'Mumbai Port Authority Port Manager',
-            'state_id' => 0,
+            'state_id' => 21,
             'port_type' => 1,
             'state_board' => 0,
             'port_id' => 8,
@@ -458,7 +458,7 @@ class UsersTableSeeder extends Seeder
 
         User::create([
             'name' => 'Mumbai Port Authority Data Entry Officer',
-            'state_id' => 0,
+            'state_id' => 21,
             'port_type' => 1,
             'state_board' => 0,
             'port_id' => 8,
@@ -475,7 +475,7 @@ class UsersTableSeeder extends Seeder
 
         User::create([
             'name' => 'New Mangalore Port Authority Port Nodal Officer',
-            'state_id' => 0,
+            'state_id' => 17,
             'port_type' => 1,
             'state_board' => 0,
             'port_id' => 9,
@@ -492,7 +492,7 @@ class UsersTableSeeder extends Seeder
 
         User::create([
             'name' => 'New Mangalore Port Authority Port Manager',
-            'state_id' => 0,
+            'state_id' => 17,
             'port_type' => 1,
             'state_board' => 0,
             'port_id' => 9,
@@ -509,7 +509,7 @@ class UsersTableSeeder extends Seeder
 
         User::create([
             'name' => 'New Mangalore Port Authority Data Entry Officer',
-            'state_id' => 0,
+            'state_id' => 17,
             'port_type' => 1,
             'state_board' => 0,
             'port_id' => 9,
@@ -526,7 +526,7 @@ class UsersTableSeeder extends Seeder
 
         User::create([
             'name' => 'Paradip Port Authority Port Nodal Officer',
-            'state_id' => 0,
+            'state_id' => 26,
             'port_type' => 1,
             'state_board' => 0,
             'port_id' => 10,
@@ -543,7 +543,7 @@ class UsersTableSeeder extends Seeder
 
         User::create([
             'name' => 'Paradip Port Authority Port Manager',
-            'state_id' => 0,
+            'state_id' => 26,
             'port_type' => 1,
             'state_board' => 0,
             'port_id' => 10,
@@ -560,7 +560,7 @@ class UsersTableSeeder extends Seeder
 
         User::create([
             'name' => 'Paradip Port Authority Data Entry Officer',
-            'state_id' => 0,
+            'state_id' => 26,
             'port_type' => 1,
             'state_board' => 0,
             'port_id' => 10,
@@ -577,7 +577,7 @@ class UsersTableSeeder extends Seeder
 
         User::create([
             'name' => 'Syama Prasad Mookerjee Kolkata Port Nodal Officer',
-            'state_id' => 0,
+            'state_id' => 37,
             'port_type' => 1,
             'state_board' => 0,
             'port_id' => 11,
@@ -594,7 +594,7 @@ class UsersTableSeeder extends Seeder
 
         User::create([
             'name' => 'Syama Prasad Mookerjee Kolkata Port Manager',
-            'state_id' => 0,
+            'state_id' => 37,
             'port_type' => 1,
             'state_board' => 0,
             'port_id' => 11,
@@ -611,7 +611,7 @@ class UsersTableSeeder extends Seeder
 
         User::create([
             'name' => 'Syama Prasad Mookerjee Kolkata Data Entry Officer',
-            'state_id' => 0,
+            'state_id' => 37,
             'port_type' => 1,
             'state_board' => 0,
             'port_id' => 11,
@@ -628,7 +628,7 @@ class UsersTableSeeder extends Seeder
 
         User::create([
             'name' => 'V O Chidambaranar Port Authority Port Nodal Officer',
-            'state_id' => 0,
+            'state_id' => 31,
             'port_type' => 1,
             'state_board' => 0,
             'port_id' => 12,
@@ -645,7 +645,7 @@ class UsersTableSeeder extends Seeder
 
         User::create([
             'name' => 'V O Chidambaranar Port Authority Port Manager',
-            'state_id' => 0,
+            'state_id' => 31,
             'port_type' => 1,
             'state_board' => 0,
             'port_id' => 12,
@@ -662,7 +662,7 @@ class UsersTableSeeder extends Seeder
 
         User::create([
             'name' => 'V O Chidambaranar Port Authority Data Entry Officer',
-            'state_id' => 0,
+            'state_id' => 31,
             'port_type' => 1,
             'state_board' => 0,
             'port_id' => 12,
@@ -679,7 +679,7 @@ class UsersTableSeeder extends Seeder
 
         User::create([
             'name' => 'Visakhapatnam Port Authority Port Nodal Officer',
-            'state_id' => 0,
+            'state_id' => 1,
             'port_type' => 1,
             'state_board' => 0,
             'port_id' => 13,
@@ -696,7 +696,7 @@ class UsersTableSeeder extends Seeder
 
         User::create([
             'name' => 'Visakhapatnam Port Authority Port Manager',
-            'state_id' => 0,
+            'state_id' => 1,
             'port_type' => 1,
             'state_board' => 0,
             'port_id' => 13,
@@ -713,7 +713,7 @@ class UsersTableSeeder extends Seeder
 
         User::create([
             'name' => 'Visakhapatnam Port Authority Data Entry Officer',
-            'state_id' => 0,
+            'state_id' => 1,
             'port_type' => 1,
             'state_board' => 0,
             'port_id' => 13,
