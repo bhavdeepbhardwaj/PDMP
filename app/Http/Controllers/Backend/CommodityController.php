@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Models\Commodities;
+use App\Models\CommoditiesData;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
+use DateTime;
 
 
 class CommodityController extends Controller
@@ -168,9 +171,101 @@ class CommodityController extends Controller
 
     // Store Data in Commodity Table
 
-    public function storeCommodity(Request $request) 
+    public function storeCommodity(Request $request)
     {
-        dd($request->all());
+        try {
+            dd($request->all());
+
+            // Validation rules
+            $rules = [
+                'select_year' => 'required|regex:/^\d{4}-\d{2}$/',
+                'select_month' => 'required|numeric|between:1,12',
+                'state_id' => 'required',
+                'port_type' => 'required',
+                'state_board' => 'required',
+                'port_id' => 'required',
+                'commodity_id' => 'required',
+
+                'ov_ul_if' => 'required|array',
+                'ov_ul_ff' => 'required|array',
+                'ov_l_if' => 'required|array',
+                'ov_l_ff' => 'required|array',
+                'ov_total' => 'required|array',
+                'co_ul_if' => 'required|array',
+                'co_ul_ff' => 'required|array',
+                'co_l_if' => 'required|array',
+                'co_l_ff' => 'required|array',
+                'co_total' => 'required|array',
+                'grand_total' => 'required|array',
+
+                'comm_remarks' => 'required',
+                'created_by' => 'required',
+
+                'ov_ul_if.*' => 'required|numeric',
+                'ov_ul_ff.*' => 'required|numeric',
+                'ov_l_if.*' => 'required|numeric',
+                'ov_l_ff.*' => 'required|numeric',
+                'ov_total.*' => 'required|numeric',
+                'co_ul_if.*' => 'required|numeric',
+                'co_ul_ff.*' => 'required|numeric',
+                'co_l_if.*' => 'required|numeric',
+                'co_l_ff.*' => 'required|numeric',
+                'co_total.*' => 'required|numeric',
+                'grand_total.*' => 'required|numeric',
+
+            ];
+
+            // Custom error messages
+            $customMessages = [];
+
+            // Validate the request data
+            $validator = Validator::make($request->all(), $rules, $customMessages);
+
+            // Check for validation failure
+            if ($validator->fails()) {
+                return redirect()->back()
+                    ->withErrors($validator)  // Flash the validation errors to the session
+                    ->withInput();  // Flash the input data to the session
+            }
+
+            // Check if a record with the specified year and month already exists
+            $recordExists = Commodities::where('select_year', $request->input('select_year'))
+                ->where('select_month', $request->input('select_month'))
+                ->where('port_type', $request->input('port_type'))
+                ->where('state_board', $request->input('state_board'))
+                ->where('port_id', $request->input('port_id'))
+                ->exists();
+
+            // If record exists, notify the user and redirect back
+            if ($recordExists) {
+                // Map numeric month value to month name using DateTime
+                $monthName = DateTime::createFromFormat('!m', $request->input('select_month'))->format('F');
+                $message = 'A record with the selected ' . $request->input('select_year') . ' and selected ' . $monthName . ' already exists.';
+                return redirect()->back()->with('warning', $message);
+            }
+
+
+            $createdResponse = CommoditiesData::create([
+                // 'select_year' => $request->input('select_year'),
+            ]);
+
+            // Check if the Create was successful
+            // if ($createdResponse) {
+            //     $message = ($createdResponse->status === 1 || $createdResponse->status === 2) ?
+            //         'Record Created successfully' :
+            //         'Record is Drafted successfully';
+
+            //     return redirect()->route('backend.view-employment-major-ports')->with('success', $message);
+            // } else {
+            //     return redirect()->route('backend.view-employment-major-ports')->with('error', 'Failed to create record');
+            // }
+        } catch (\Exception $e) {
+            // Log the error for further investigation
+            Log::error('Error in saveEmploymentMajorPort method: ' . $e->getMessage());
+
+            // Return an error response
+            return response()->json(['error' => 'An error occurred while processing the request.']);
+        }
     }
 
 

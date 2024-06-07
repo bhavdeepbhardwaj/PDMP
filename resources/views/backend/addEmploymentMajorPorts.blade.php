@@ -433,6 +433,19 @@
 
             // Display the total in the 'total' input field
             document.getElementById('total').value = total;
+            ov_ul_if
+            ov_ul_ff
+            ov_l_if
+            ov_l_ff
+            ov_total
+
+            co_ul_if
+            co_ul_ff
+            co_l_if
+            co_l_ff
+            co_total
+
+            grand_total
         }
 
         // Attach the calculateTotal function to the 'keyup' event of each input field
