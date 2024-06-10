@@ -4,7 +4,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>CAPEX </title>
+
+    <title>{{ config('app.name', 'PDMP 2.0') }}</title>
+
+    {{-- <link rel="shortcut icon" href="{{ asset('{{ asset('backend/images/favicon.png') }}" type="text/css"> --}}
+    <link rel="apple-touch-icon" sizes="32x32" href="{{ asset('backend/images/favicon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('backend/images/favicon.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('backend/images/favicon.png') }}">
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">

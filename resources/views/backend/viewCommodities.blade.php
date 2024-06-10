@@ -1,15 +1,7 @@
 @extends('layouts.master')
 
 @section('css')
-    {{-- <!-- DataTables -->
-    <link rel="stylesheet" href="{{ asset('backend/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css ') }}">
-    <link rel="stylesheet" href="{{ asset('backend/plugins/datatables-responsive/css/responsive.bootstrap4.min.css ') }}">
-    <link rel="stylesheet" href="{{ asset('backend/plugins/datatables-buttons/css/buttons.bootstrap4.min.css  ') }}">
-
-    <!-- Select2 -->
-    <link rel="stylesheet" href="{{ asset('backend/plugins/select2/css/select2.min.css ') }}">
-    <link rel="stylesheet" href="{{ asset('backend/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css ') }}"> --}}
-    {{-- <link rel="stylesheet" href="http://localhost/pdmp/css/fancytree/skin-win8/ui.fancytree.min.css"> --}}
+    <!-- DataTables -->
     <link rel="stylesheet" href="{{ asset('backend/fancytree/skin-win8/ui.fancytree.min.css  ') }}">
 @endsection
 
@@ -43,21 +35,42 @@
                                 <div class="table-responsive">
                                     <table class="table table-responsive">
                                         <tbody>
+                                            @php
+                                                // Port Category
+                                                $portCat = \App\Models\PortCategory::where('id', $userData->port_type)
+                                                    ->select('category_name')
+                                                    ->first();
+
+                                                // State ID
+                                                $portState = \App\Models\State::where('id', $userData->state_id)
+                                                    ->select('name')
+                                                    ->first();
+
+                                                // State Board ID
+                                                $portStateBoard = \App\Models\StateBoard::where(
+                                                    'id',
+                                                    $userData->state_board,
+                                                )
+                                                    ->select('name')
+                                                    ->first();
+
+                                                // Port Category
+                                                $port = \App\Models\Port::where('id', $userData->port_id)
+                                                    ->select('port_name')
+                                                    ->first();
+                                            @endphp
                                             <tr>
-                                                {{-- <th>Report:</th>
-                                                <td>M1</td> --}}
-        
+                                                <th>State Name:</th>
+                                                <td>{{ $portState ? $portState->name : 'N/A' }}</td>
+
                                                 <th>Port Type:</th>
-                                                <td>{{$userData->port_type}}</td>
-        
+                                                <td>{{ $portCat ? $portCat->category_name : 'N/A' }}</td>
+
                                                 <th>State Board</th>
-                                                <td>{{$userData->state_board}}</td>
-        
+                                                <td>{{ $portStateBoard ? $portStateBoard->name : 'N/A' }}</td>
+
                                                 <th>Port Name:</th>
-                                                <td>{{$userData->port_id}}</td>
-        
-                                                {{-- <th>Month &amp; Year:</th>
-                                                <td>Apr-2017</td> --}}
+                                                <td>{{ $port ? $port->port_name : 'N/A' }}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -77,6 +90,7 @@
                                         <h4 class="box-title">Select Commodity<span class="asterisk">* </span></h4>
                                     </div>
                                     <div class="box-body">
+                                        {{-- Form Respone --}}
                                         <div id="tree" class="fancytree">
                                             <ul class="ui-fancytree fancytree-container" tabindex="0">
 
@@ -97,19 +111,37 @@
                                                                             <ul>
                                                                                 @foreach ($innerSubData['innermostsub'] as $innerSubMostData)
                                                                                     @php
-                                                                                    if($innerSubMostData['port_id'] != 0){
-                                                                                        $expPortIdArr = explode(',', $innerSubMostData['port_id']);
-                                                                                        $userPortId = auth()->user()->port_id;
-                                                                                        $portProvide = 0;
-                                                                                        if(in_array($userPortId,$expPortIdArr)){
-                                                                                            $portProvide = 1;
+                                                                                        if (
+                                                                                            $innerSubMostData[
+                                                                                                'port_id'
+                                                                                            ] != 0
+                                                                                        ) {
+                                                                                            $expPortIdArr = explode(
+                                                                                                ',',
+                                                                                                $innerSubMostData[
+                                                                                                    'port_id'
+                                                                                                ],
+                                                                                            );
+                                                                                            $userPortId = auth()->user()
+                                                                                                ->port_id;
+                                                                                            $portProvide = 0;
+                                                                                            if (
+                                                                                                in_array(
+                                                                                                    $userPortId,
+                                                                                                    $expPortIdArr,
+                                                                                                )
+                                                                                            ) {
+                                                                                                $portProvide = 1;
+                                                                                            }
                                                                                         }
-                                                                                    }
                                                                                     @endphp
-                                                                                    <li class="" onClick="CommodityAllocate('{{$innerSubMostData['id']}}');"><span
+                                                                                    <li class=""
+                                                                                        onClick="CommodityAllocate('{{ $innerSubMostData['id'] }}');">
+                                                                                        <span
                                                                                             class="fancytree-node fancytree-expanded fancytree-selected fancytree-exp-n fancytree-ico-e"><span
                                                                                                 class="fancytree-expander fancytree-expander-fixed"></span><input
-                                                                                                type="checkbox" @if(isset($portProvide) && ($portProvide ==1)) checked @endif><span
+                                                                                                type="checkbox"
+                                                                                                @if (isset($portProvide) && $portProvide == 1) checked @endif><span
                                                                                                 class="fancytree-icon"></span><span
                                                                                                 class="fancytree-title">{{ $innerSubMostData['name'] }}</span></span>
                                                                                     </li>
@@ -123,19 +155,32 @@
 
                                                                     @if (empty($innerSubData['innermostsub']))
                                                                         @php
-                                                                        if($innerSubData['innersub']['port_id'] != 0){
-                                                                            $expPortIdArr = explode(',', $innerSubData['innersub']['port_id']);
-                                                                            $userPortId = auth()->user()->port_id;
-                                                                            $portProvide = 0;
-                                                                            if(in_array($userPortId,$expPortIdArr)){
-                                                                                $portProvide = 1;
+                                                                            if (
+                                                                                $innerSubData['innersub']['port_id'] !=
+                                                                                0
+                                                                            ) {
+                                                                                $expPortIdArr = explode(
+                                                                                    ',',
+                                                                                    $innerSubData['innersub'][
+                                                                                        'port_id'
+                                                                                    ],
+                                                                                );
+                                                                                $userPortId = auth()->user()->port_id;
+                                                                                $portProvide = 0;
+                                                                                if (
+                                                                                    in_array($userPortId, $expPortIdArr)
+                                                                                ) {
+                                                                                    $portProvide = 1;
+                                                                                }
                                                                             }
-                                                                        }
                                                                         @endphp
-                                                                        <li class="" onClick="CommodityAllocate('{{$innerSubData['innersub']['id']}}');"><span
+                                                                        <li class=""
+                                                                            onClick="CommodityAllocate('{{ $innerSubData['innersub']['id'] }}');">
+                                                                            <span
                                                                                 class="fancytree-node fancytree-expanded fancytree-selected fancytree-exp-n fancytree-ico-e"><span
                                                                                     class="fancytree-expander fancytree-expander-fixed"></span>
-                                                                                <input type="checkbox" @if(isset($portProvide) && ($portProvide ==1)) checked @endif><span
+                                                                                <input type="checkbox"
+                                                                                    @if (isset($portProvide) && $portProvide == 1) checked @endif><span
                                                                                     class="fancytree-icon"></span><span
                                                                                     class="fancytree-title">{{ $innerSubData['innersub']['name'] }}</span></span>
                                                                         </li>
@@ -157,12 +202,9 @@
                         </div>
                         <!-- /.card -->
                     </div>
-                    <div class="col-6">
-                        <!-- /.card -->
+                    {{-- <div class="col-6">
                         <div class="card">
-                            <!-- /.card-header -->
                             <div class="card-body">
-                                {{-- Form Respone --}}
                                 <div class="box box-info">
                                     <div class="row">
                                         <div class="col-md-12">
@@ -200,10 +242,8 @@
                                 </div>
 
                             </div>
-                            <!-- /.card-body -->
                         </div>
-                        <!-- /.card -->
-                    </div>
+                    </div> --}}
                     <!-- /.col -->
                 </div>
                 <!-- /.row -->
@@ -219,47 +259,36 @@
 @endsection
 
 @section(' js')
-    {{-- <!-- jQuery -->
-    <script src="{{ asset('backend/plugins/jquery/jquery.min.js ') }}"></script>
-    <!-- Bootstrap 4 -->
-    <script src="{{ asset('backend/plugins/bootstrap/js/bootstrap.bundle.min.js ') }}"></script>
-    <!-- DataTables  & Plugins -->
-    <script src="{{ asset('backend/plugins/datatables/jquery.dataTables.min.js ') }}"></script>
-    <script src="{{ asset('backend/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js ') }}"></script>
-    <script src="{{ asset('backend/plugins/datatables-responsive/js/dataTables.responsive.min.js ') }}"></script>
-    <script src="{{ asset('backend/plugins/datatables-responsive/js/responsive.bootstrap4.min.js ') }}"></script>
-    <script src="{{ asset('backend/plugins/datatables-buttons/js/dataTables.buttons.min.js ') }}"></script>
-    <script src="{{ asset('backend/plugins/datatables-buttons/js/buttons.bootstrap4.min.js ') }}"></script>
-    <script src="{{ asset('backend/plugins/jszip/jszip.min.js ') }}"></script>
-    <script src="{{ asset('backend/plugins/pdfmake/pdfmake.min.js ') }}"></script>
-    <script src="{{ asset('backend/plugins/pdfmake/vfs_fonts.js ') }}"></script>
-    <script src="{{ asset('backend/plugins/datatables-buttons/js/buttons.html5.min.js ') }}"></script>
-    <script src="{{ asset('backend/plugins/datatables-buttons/js/buttons.print.min.js ') }}"></script>
-    <script src="{{ asset('backend/plugins/datatables-buttons/js/buttons.colVis.min.js ') }}"></script>
-    <!-- AdminLTE App -->
-    <script src="{{ asset('backend/dist/js/adminlte.min.js ') }}"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="{{ asset('backend/dist/js/demo.js ') }}"></script> --}}
+    <!-- jQuery -->
     <script src="{{ asset('backend/fancytree/js/jquery.fancytree-all.min.js ') }}"></script>
+    {{-- <script src="{{ asset('backend/js/commodityAllocate.js ') }}"></script>
     <!-- Page specific script -->
-    {{-- <script>
-        $(function() {
-            $("#example1").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
+    <script>
+        function CommodityAllocate(id){
+            // alert(id);
+            $.ajax({
+                type: "GET",
+                url: "/commodity-allocate/" + id,
+                // If you need to pass additional data, you can use the data property like this:
+                // data: { key1: value1, key2: value2 },
+                success: function(response) {
+                    alert(response);
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                    // Handle errors here
+                }
             });
+        }
+    </script> --}}
+    {{-- <!-- Your custom JavaScript code -->
+    <script>
+        $(document).ready(function() {
+            var successMessage = '{{ session('success') }}';
+            if (successMessage) {
+                // Display success message using alert or any other UI component
+                alert(successMessage);
+            }
         });
     </script> --}}
-    
 @endsection

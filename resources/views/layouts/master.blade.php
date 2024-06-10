@@ -10,9 +10,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     {{-- <link rel="shortcut icon" href="{{ asset('{{ asset('backend/images/favicon.png') }}" type="text/css"> --}}
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('backend/images//apple-touch-icon.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('backend/images//favicon-32x32.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('backend/images//favicon-16x16.png') }}">
+    <link rel="apple-touch-icon" sizes="32x32" href="{{ asset('backend/images/favicon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('backend/images/favicon.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('backend/images/favicon.png') }}">
 
 
     <title>{{ config('app.name', 'PDMP 2.0') }}</title>
@@ -35,7 +35,8 @@
 </head>
 
 {{-- <body class="hold-transition sidebar-mini layout-fixed text-sm layout-footer-fixed layout-navbar-fixed" data-panel-auto-height-mode="height"> --}}
-    <body class="hold-transition sidebar-mini layout-fixed text-sm layout-footer-fixed layout-navbar-fixed" >
+
+<body class="hold-transition sidebar-mini layout-fixed text-sm layout-footer-fixed layout-navbar-fixed">
     <div class="wrapper">
         <!-- Navbar -->
         @include('partials.header')
@@ -105,15 +106,31 @@
     @yield('js')
 
     <script>
-        function CommodityAllocate(id){
-            // alert(id);
+        function CommodityAllocate(id) {
+            // Create an audio element for the notification sound
+            // var audioElement = new Audio('/backend/audio/notification.wav'); // Adjust the path as needed
+
             $.ajax({
                 type: "GET",
                 url: "/commodity-allocate/" + id,
-                // If you need to pass additional data, you can use the data property like this:
-                // data: { key1: value1, key2: value2 },
                 success: function(response) {
-                    // alert(response);
+                    if (response.message) {
+                        // Play the notification sound
+                        // audioElement.play();
+
+                        // Show a SweetAlert2 toast notification
+                        Swal.fire({
+                            title: 'Success',
+                            text: response.message,
+                            icon: 'success',
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 5000 // Set the timer for 5 seconds
+                        });
+                    } else {
+                        alert('Error: ' + response.error);
+                    }
                 },
                 error: function(xhr, status, error) {
                     console.error(xhr.responseText);

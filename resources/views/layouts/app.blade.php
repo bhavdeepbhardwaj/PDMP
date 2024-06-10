@@ -10,10 +10,10 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    {{-- <link rel="shortcut icon" href="{{ asset('backend/images/favicon.png') }}" type="text/css"> --}}
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('backend/images//apple-touch-icon.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('backend/images//favicon-32x32.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('backend/images//favicon-16x16.png') }}">
+    {{-- <link rel="shortcut icon" href="{{ asset('{{ asset('backend/images/favicon.png') }}" type="text/css"> --}}
+    <link rel="apple-touch-icon" sizes="32x32" href="{{ asset('backend/images/favicon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('backend/images/favicon.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('backend/images/favicon.png') }}">
 
 
     <title>{{ config('app.name', 'CAPEX') }}</title>
