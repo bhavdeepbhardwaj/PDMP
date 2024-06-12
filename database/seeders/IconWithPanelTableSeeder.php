@@ -248,8 +248,8 @@ class IconWithPanelTableSeeder extends Seeder
             'parent_id' => '0',
             'module' => 'mod_26',
             'module_name' => 'Report',
-            'url' => 'view-report',
-            'mod_list_name' => 'view-report',
+            'url' => 'view-commodities-data-report',
+            'mod_list_name' => 'view-commodities-data-report',
             'icon' => 'fa-ship',
         ]);
     }

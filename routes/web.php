@@ -70,7 +70,7 @@ Route::group(['prefix' => 'portal', 'middleware' => ['auth', 'user-access', 'rol
 
 
 
-    Route::get('view-report', [App\Http\Controllers\Backend\FormController::class, 'viewReport'])->name('view-report');
+    Route::get('view-commodities-data-report', [App\Http\Controllers\Backend\FormController::class, 'viewReport'])->name('view-commodities-data-report');
     // Route::get('view-report', [App\Http\Controllers\Backend\CommodityController::class, 'viewReport'])->name('view-report');
 
 });

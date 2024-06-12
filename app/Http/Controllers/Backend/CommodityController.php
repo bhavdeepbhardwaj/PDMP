@@ -293,7 +293,7 @@ class CommodityController extends Controller
             }
 
             foreach ($request['grand_total'] as $key => $commodityId) {
-                $commodity = new CommoditiesData; // Assuming your model is named Commodity
+                $commodity = new CommoditiesData;
 
                 // Set the values for the Commodity model attributes
                 $commodity->select_year = $request['select_year'];
@@ -321,21 +321,21 @@ class CommodityController extends Controller
                 // Save the Commodity record
                 $createdResponse = $commodity->save();
                 // $commodity->save();
+                // Check if the Create was successful
+                if ($createdResponse) {
+                    $message = ($createdResponse->status === 1 || $createdResponse->status === 2) ?
+                        'Record Created successfully' :
+                        'Record is Drafted successfully';
+
+                    return redirect()->back()->with('success', $message);
+                } else {
+                    return redirect()->back()->with('error', 'Failed to create record');
+                }
             }
 
+            // dd($commodity->save());
 
-            dd($commodity->save());
 
-            // Check if the Create was successful
-            if ($createdResponse) {
-                $message = ($createdResponse->status === 1 || $createdResponse->status === 2) ?
-                    'Record Created successfully' :
-                    'Record is Drafted successfully';
-
-                return redirect()->route('backend.view-employment-major-ports')->with('success', $message);
-            } else {
-                return redirect()->route('backend.view-employment-major-ports')->with('error', 'Failed to create record');
-            }
         } catch (\Exception $e) {
             // Log the error for further investigation
             Log::error('Error in storeCommodityData method: ' . $e->getMessage());
