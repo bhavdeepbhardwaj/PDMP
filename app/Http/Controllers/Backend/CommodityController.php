@@ -7,6 +7,7 @@ use App\Models\CommoditiesData;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
@@ -174,9 +175,8 @@ class CommodityController extends Controller
     public function storeCommodity(Request $request)
     {
         try {
-            // dd($request->all());
-
             // Validation rules
+            // dd($request->commodity_id);
             $rules = [
                 'select_year' => 'required|numeric',
                 'select_month' => 'required|numeric|between:1,12',
@@ -198,7 +198,6 @@ class CommodityController extends Controller
                 'co_total' => 'required|array',
                 'grand_total' => 'required|array',
 
-                // 'comm_remarks' => 'required',
                 'created_by' => 'required',
 
                 'ov_ul_if.*' => 'required|numeric',
@@ -212,7 +211,6 @@ class CommodityController extends Controller
                 'co_l_ff.*' => 'required|numeric',
                 'co_total.*' => 'required|numeric',
                 'grand_total.*' => 'required|numeric',
-
             ];
 
             // Custom error messages
@@ -238,8 +236,6 @@ class CommodityController extends Controller
                 'co_l_ff.required' => 'The field is required.',
                 'co_total.required' => 'The field is required.',
                 'grand_total.required' => 'The field is required.',
-                // 'comm_remarks.required' => 'The commodity remarks field is required.',
-                // 'created_by.required' => 'The created by field is required.',
                 'ov_ul_if.*.required' => 'Each item is required.',
                 'ov_ul_ff.*.required' => 'Each item is required.',
                 'ov_l_if.*.required' => 'Each item is required.',
@@ -253,11 +249,10 @@ class CommodityController extends Controller
                 'grand_total.*.required' => 'Each item is required.',
             ];
 
-
             // Validate the request data
             $validator = Validator::make($request->all(), $rules, $customMessages);
 
-            // // Check for validation failure
+            // Check for validation failure
             if ($validator->fails()) {
                 return redirect()->back()
                     ->withErrors($validator)  // Flash the validation errors to the session
@@ -292,6 +287,9 @@ class CommodityController extends Controller
                 $statusID = 3; // Default status
             }
 
+            // Variable to track if all records are created successfully
+            $allCreated = true;
+
             foreach ($request['grand_total'] as $key => $commodityId) {
                 $commodity = new CommoditiesData;
 
@@ -303,7 +301,7 @@ class CommodityController extends Controller
                 $commodity->state_board = $request['state_board'];
                 $commodity->port_id = $request['port_id'];
                 $commodity->created_by = $request['created_by'];
-                $commodity->commodity_id = $commodityId;
+                $commodity->commodity_id = $request['commodity_id'][$key];
                 $commodity->ov_ul_if = $request['ov_ul_if'][$key];
                 $commodity->ov_ul_ff = $request['ov_ul_ff'][$key];
                 $commodity->ov_l_if = $request['ov_l_if'][$key];
@@ -319,29 +317,157 @@ class CommodityController extends Controller
                 $commodity->status = $statusID;
 
                 // Save the Commodity record
-                $createdResponse = $commodity->save();
-                // $commodity->save();
-                // Check if the Create was successful
-                if ($createdResponse) {
-                    $message = ($createdResponse->status === 1 || $createdResponse->status === 2) ?
-                        'Record Created successfully' :
-                        'Record is Drafted successfully';
-
-                    return redirect()->back()->with('success', $message);
-                } else {
-                    return redirect()->back()->with('error', 'Failed to create record');
+                if (!$commodity->save()) {
+                    $allCreated = false;
                 }
             }
 
-            // dd($commodity->save());
-
+            // Check if all records were created successfully
+            if ($allCreated) {
+                $message = ($statusID === 1 || $statusID === 2) ? 'Record Created successfully' : 'Record is Drafted successfully';
+                return redirect()->back()->with('success', $message);
+            } else {
+                return redirect()->back()->with('error', 'Failed to create one or more records');
+            }
 
         } catch (\Exception $e) {
             // Log the error for further investigation
-            Log::error('Error in storeCommodityData method: ' . $e->getMessage());
+            Log::error('Error in storeCommodity method: ' . $e->getMessage());
 
             // Return an error response
             return response()->json(['error' => 'An error occurred while processing the request.']);
+        }
+    }
+
+    //Commodity Allocate
+
+    public function commodityAllocate($id)
+    {
+        try {
+            // Find the commodity data by ID
+            $commodityData = Commodities::findOrFail($id);
+
+            // Extract the port IDs from the commodity data and fetch the user's port ID
+            $expPortId = explode(',', $commodityData->port_id);
+            $user = User::findOrFail(Auth::id(), ['port_id']);
+
+            // Check if the user's port ID is in the commodity's port IDs and the commodity's port ID is not 0
+            if (in_array($user->port_id, $expPortId) && $commodityData->port_id != 0) {
+                // Remove the user's port ID from the commodity's port IDs
+                $array = array_filter($expPortId, function ($item) use ($user) {
+                    return $item !== $user->port_id;
+                });
+                $impPortIdarray = implode(',', $array);
+
+                // Update the commodity's port IDs without the user's port ID
+                Commodities::where('id', $id)->update(['port_id' => $impPortIdarray]);
+
+                // Return a success JSON response
+                return response()->json(['message' => 'Commodity removed successfully']);
+            } else {
+                // Add the user's port ID to the commodity's port IDs
+                $userPortIdArr[] = $user->port_id;
+                $portIdArr = array_merge($expPortId, $userPortIdArr);
+                $impPortId = implode(',', $portIdArr);
+
+                // Update the commodity's port IDs with the user's port ID
+                Commodities::where('id', $id)->update(['port_id' => $impPortId]);
+
+                // Set success message in session flash for display in frontend
+                $message = 'Commodity allocated successfully';
+                session()->flash('success', $message);
+
+                // Return a success JSON response with the success message
+                return response()->json(['message' => $message]);
+            }
+        } catch (\Exception $e) {
+            // Handle any exceptions and return an error JSON response
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+    // 
+    public function viewReportFilter(Request $request)
+    {
+        try {
+            // dd($request->startmonthYear, $request->endmonthYear);
+            // Validation rules
+            $rules = [
+                'port_type' => 'required',
+                'state_board' => 'required',
+                'port_name' => 'required',
+                'startmonthYear' => 'required',
+                'endmonthYear' => 'required',
+            ];
+
+            // Custom error messages
+            $customMessages = [
+                'port_type.required' => 'The port type field is required.',
+                'state_board.required' => 'The state board field is required.',
+                'port_name.required' => 'The port field is required.',
+                'startmonthYear.required' => 'The Select Start Month and Year field is required.',
+                'endmonthYear.required' => 'The Select End Month and Year field is required.',
+            ];
+
+            // Validate the request data
+            $validator = Validator::make($request->all(), $rules, $customMessages);
+
+            // Check for validation failure
+            if ($validator->fails()) {
+                return redirect()->back()
+                    ->withErrors($validator)  // Flash the validation errors to the session
+                    ->withInput();  // Flash the input data to the session
+            }
+
+            // Get the start month and year from the input
+            $startMonthYear = $request->startmonthYear;
+            $startMonthYearArray = explode(' - ', $startMonthYear);
+
+            // Get the end month and year from the input
+            $endMonthYear = $request->endmonthYear;
+            $endMonthYearArray = explode(' - ', $endMonthYear);
+
+            // Example usage
+            $startMonth = $startMonthYearArray[0]; // Example: 'Feb'
+            $startYear = $startMonthYearArray[1]; // Example: '2024'
+
+            $endMonth = $endMonthYearArray[0]; // Example: 'Dec'
+            $endYear = $endMonthYearArray[1]; // Example: '2025'
+
+            // Convert month names to numbers
+            $months = [
+                'Jan' => '01',
+                'Feb' => '02',
+                'Mar' => '03',
+                'Apr' => '04',
+                'May' => '05',
+                'Jun' => '06',
+                'Jul' => '07',
+                'Aug' => '08',
+                'Sep' => '09',
+                'Oct' => '10',
+                'Nov' => '11',
+                'Dec' => '12'
+            ];
+
+            $startMonth = $months[$startMonth];
+            $endMonth = $months[$endMonth];
+
+            // dd($startYear, $endYear, $startMonth, $endMonth);
+            // Query to fetch data
+            $getData = CommoditiesData::where('is_deleted', '0')
+                ->where('port_type', $request->port_type)
+                ->where('port_id', $request->port_name)
+                ->get()->toArray();
+
+            // Debugging: Output the retrieved data
+            dd($getData);
+
+            // $getData = CommoditiesData::where('port_type', $request->port_type)->where('port_id', $request->port_name)->where('year', $request->)->get()->toArray();
+
+
+        } catch (\Exception $e) {
+
         }
     }
 
@@ -516,51 +642,177 @@ class CommodityController extends Controller
     //     // Redirect or return a response indicating successful data saving
     // }
 
+    // public function storeCommodity(Request $request)
+    // {
+    //     try {
+    //         // dd($request->all());
 
-    //Commodity Allocate
+    //         // Validation rules
+    //         $rules = [
+    //             'select_year' => 'required|numeric',
+    //             'select_month' => 'required|numeric|between:1,12',
+    //             'state_id' => 'required',
+    //             'port_type' => 'required',
+    //             'state_board' => 'required',
+    //             'port_id' => 'required',
+    //             'commodity_id' => 'required',
 
-    public function commodityAllocate($id)
-    {
-        try {
-            // Find the commodity data by ID
-            $commodityData = Commodities::findOrFail($id);
+    //             'ov_ul_if' => 'required|array',
+    //             'ov_ul_ff' => 'required|array',
+    //             'ov_l_if' => 'required|array',
+    //             'ov_l_ff' => 'required|array',
+    //             'ov_total' => 'required|array',
+    //             'co_ul_if' => 'required|array',
+    //             'co_ul_ff' => 'required|array',
+    //             'co_l_if' => 'required|array',
+    //             'co_l_ff' => 'required|array',
+    //             'co_total' => 'required|array',
+    //             'grand_total' => 'required|array',
 
-            // Extract the port IDs from the commodity data and fetch the user's port ID
-            $expPortId = explode(',', $commodityData->port_id);
-            $user = User::findOrFail(Auth::id(), ['port_id']);
+    //             // 'comm_remarks' => 'required',
+    //             'created_by' => 'required',
 
-            // Check if the user's port ID is in the commodity's port IDs and the commodity's port ID is not 0
-            if (in_array($user->port_id, $expPortId) && $commodityData->port_id != 0) {
-                // Remove the user's port ID from the commodity's port IDs
-                $array = array_filter($expPortId, function ($item) use ($user) {
-                    return $item !== $user->port_id;
-                });
-                $impPortIdarray = implode(',', $array);
+    //             'ov_ul_if.*' => 'required|numeric',
+    //             'ov_ul_ff.*' => 'required|numeric',
+    //             'ov_l_if.*' => 'required|numeric',
+    //             'ov_l_ff.*' => 'required|numeric',
+    //             'ov_total.*' => 'required|numeric',
+    //             'co_ul_if.*' => 'required|numeric',
+    //             'co_ul_ff.*' => 'required|numeric',
+    //             'co_l_if.*' => 'required|numeric',
+    //             'co_l_ff.*' => 'required|numeric',
+    //             'co_total.*' => 'required|numeric',
+    //             'grand_total.*' => 'required|numeric',
 
-                // Update the commodity's port IDs without the user's port ID
-                Commodities::where('id', $id)->update(['port_id' => $impPortIdarray]);
+    //         ];
 
-                // Return a success JSON response
-                return response()->json(['message' => 'Commodity removed successfully']);
-            } else {
-                // Add the user's port ID to the commodity's port IDs
-                $userPortIdArr[] = $user->port_id;
-                $portIdArr = array_merge($expPortId, $userPortIdArr);
-                $impPortId = implode(',', $portIdArr);
+    //         // Custom error messages
+    //         $customMessages = [
+    //             'select_year.required' => 'The select year field is required.',
+    //             'select_year.numeric' => 'The select year must be in the format YYYY',
+    //             'select_month.required' => 'The select month field is required.',
+    //             'select_month.numeric' => 'The select month must be a number.',
+    //             'select_month.between' => 'The select month must be between 1 and 12.',
+    //             'state_id.required' => 'The state field is required.',
+    //             'port_type.required' => 'The port type field is required.',
+    //             'state_board.required' => 'The state board field is required.',
+    //             'port_id.required' => 'The port field is required.',
+    //             'commodity_id.required' => 'The commodity field is required.',
+    //             'ov_ul_if.required' => 'The field is required.',
+    //             'ov_ul_ff.required' => 'The field is required.',
+    //             'ov_l_if.required' => 'The field is required.',
+    //             'ov_l_ff.required' => 'The field is required.',
+    //             'ov_total.required' => 'The field is required.',
+    //             'co_ul_if.required' => 'The field is required.',
+    //             'co_ul_ff.required' => 'The field is required.',
+    //             'co_l_if.required' => 'The field is required.',
+    //             'co_l_ff.required' => 'The field is required.',
+    //             'co_total.required' => 'The field is required.',
+    //             'grand_total.required' => 'The field is required.',
+    //             // 'comm_remarks.required' => 'The commodity remarks field is required.',
+    //             // 'created_by.required' => 'The created by field is required.',
+    //             'ov_ul_if.*.required' => 'Each item is required.',
+    //             'ov_ul_ff.*.required' => 'Each item is required.',
+    //             'ov_l_if.*.required' => 'Each item is required.',
+    //             'ov_l_ff.*.required' => 'Each item is required.',
+    //             'ov_total.*.required' => 'Each item is required.',
+    //             'co_ul_if.*.required' => 'Each item is required.',
+    //             'co_ul_ff.*.required' => 'Each item is required.',
+    //             'co_l_if.*.required' => 'Each item is required.',
+    //             'co_l_ff.*.required' => 'Each item is required.',
+    //             'co_total.*.required' => 'Each item is required.',
+    //             'grand_total.*.required' => 'Each item is required.',
+    //         ];
 
-                // Update the commodity's port IDs with the user's port ID
-                Commodities::where('id', $id)->update(['port_id' => $impPortId]);
 
-                // Set success message in session flash for display in frontend
-                $message = 'Commodity allocated successfully';
-                session()->flash('success', $message);
+    //         // Validate the request data
+    //         $validator = Validator::make($request->all(), $rules, $customMessages);
 
-                // Return a success JSON response with the success message
-                return response()->json(['message' => $message]);
-            }
-        } catch (\Exception $e) {
-            // Handle any exceptions and return an error JSON response
-            return response()->json(['error' => $e->getMessage()], 500);
-        }
-    }
+    //         // // Check for validation failure
+    //         if ($validator->fails()) {
+    //             return redirect()->back()
+    //                 ->withErrors($validator)  // Flash the validation errors to the session
+    //                 ->withInput();  // Flash the input data to the session
+    //         }
+
+    //         // Check if a record with the specified year and month already exists
+    //         $recordExists = CommoditiesData::where('select_year', $request->input('select_year'))
+    //             ->where('select_month', $request->input('select_month'))
+    //             ->where('port_type', $request->input('port_type'))
+    //             ->where('state_board', $request->input('state_board'))
+    //             ->where('port_id', $request->input('port_id'))
+    //             ->exists();
+
+    //         // If record exists, notify the user and redirect back
+    //         if ($recordExists) {
+    //             // Map numeric month value to month name using DateTime
+    //             $monthName = DateTime::createFromFormat('!m', $request->input('select_month'))->format('F');
+    //             $message = 'A record with the selected ' . $request->input('select_year') . ' and selected ' . $monthName . ' already exists.';
+    //             return redirect()->back()->with('warning', $message);
+    //         }
+
+    //         // Get the authenticated user's role ID
+    //         $userRoleID = Auth::user()->role_id;
+
+    //         // Assign the appropriate status ID based on the user's role and status
+    //         if (in_array($userRoleID, [4, 5])) {
+    //             $statusID = 1;
+    //         } elseif ($userRoleID == 6) {
+    //             $statusID = 3;
+    //         } else {
+    //             $statusID = 3; // Default status
+    //         }
+
+    //         foreach ($request['grand_total'] as $key => $commodityId) {
+    //             $commodity = new CommoditiesData;
+
+    //             // Set the values for the Commodity model attributes
+    //             $commodity->select_year = $request['select_year'];
+    //             $commodity->select_month = $request['select_month'];
+    //             $commodity->state_id = $request['state_id'];
+    //             $commodity->port_type = $request['port_type'];
+    //             $commodity->state_board = $request['state_board'];
+    //             $commodity->port_id = $request['port_id'];
+    //             $commodity->created_by = $request['created_by'];
+    //             $commodity->commodity_id = $commodityId;
+    //             $commodity->ov_ul_if = $request['ov_ul_if'][$key];
+    //             $commodity->ov_ul_ff = $request['ov_ul_ff'][$key];
+    //             $commodity->ov_l_if = $request['ov_l_if'][$key];
+    //             $commodity->ov_l_ff = $request['ov_l_ff'][$key];
+    //             $commodity->ov_total = $request['ov_total'][$key];
+    //             $commodity->co_ul_if = $request['co_ul_if'][$key];
+    //             $commodity->co_ul_ff = $request['co_ul_ff'][$key];
+    //             $commodity->co_l_if = $request['co_l_if'][$key];
+    //             $commodity->co_l_ff = $request['co_l_ff'][$key];
+    //             $commodity->co_total = $request['co_total'][$key];
+    //             $commodity->grand_total = $request['grand_total'][$key];
+    //             $commodity->comm_remarks = $request['comm_remarks'];
+    //             $commodity->status = $statusID;
+
+    //             // Save the Commodity record
+    //             $createdResponse = $commodity->save();
+    //             // $commodity->save();
+    //             // Check if the Create was successful
+    //             if ($createdResponse) {
+    //                 $message = ($createdResponse->status === 1 || $createdResponse->status === 2) ?
+    //                     'Record Created successfully' :
+    //                     'Record is Drafted successfully';
+
+    //                 return redirect()->back()->with('success', $message);
+    //             } else {
+    //                 return redirect()->back()->with('error', 'Failed to create record');
+    //             }
+    //         }
+
+    //         // dd($commodity->save());
+
+
+    //     } catch (\Exception $e) {
+    //         // Log the error for further investigation
+    //         Log::error('Error in storeCommodityData method: ' . $e->getMessage());
+
+    //         // Return an error response
+    //         return response()->json(['error' => 'An error occurred while processing the request.']);
+    //     }
+    // }
 }

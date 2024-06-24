@@ -238,3 +238,4 @@ Route::get('/chart-data', [App\Http\Controllers\Backend\DashboardController::cla
 Route::get('/commodity-allocate/{id}', [App\Http\Controllers\Backend\CommodityController::class, 'commodityAllocate']);
 // Route::get('/commodity-allocate/{id}',[App\Http\Controllers\Backend\FormController::class,'commodityAllocate']);
 Route::post('storeCommodity', [\App\Http\Controllers\Backend\CommodityController::class, 'storeCommodity'])->name('backend.storeCommodity');
+Route::get('viewReportFilter', [App\Http\Controllers\Backend\CommodityController::class,'viewReportFilter'])->name('viewReportFilter');

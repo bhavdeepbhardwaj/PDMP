@@ -18,7 +18,7 @@
             font-size: 12px;
         }
         .dropdown-menu {
-            width: 300px;
+            width: 250px;
         }
         .year-nav {
             display: flex;
@@ -27,27 +27,30 @@
             background-color: #f0ad4e;
             padding: 10px;
             color: white;
-            border-radius: 5px;
+            border-radius: 0px;
             margin-bottom: 10px;
         }
         .months-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            padding: 10px;
+            gap: 5px;
+            padding: 5px;
         }
         .month-item {
-            padding: 10px;
+            padding: 5px;
             text-align: center;
             background-color: #f7f7f7;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+            border: 0px solid #ddd;
+            border-radius: 1px;
             cursor: pointer;
         }
         .month-item:hover, .month-item.active {
             background-color: #ffd700;
             color: black;
             font-weight: bold;
+        }
+        .dropdown-menu {
+            padding: 0 0;
         }
     </style>
     {{-- --}}
@@ -83,6 +86,7 @@
                         </h3>
                     </div>
                     <div class="card-body">
+                        <form method="get" action="{{ route('viewReportFilter')}}">
                         <div class="row">
                             <div class="col-md-2">
                                 <div class="form-group">
@@ -127,57 +131,80 @@
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
-                                    <label for="monthYearSelect">Select Month and Year:</label>
+                                    <label for="monthYearSelectStart">Select Start Month and Year <span style="color: red;">*</span></label>
                                     <div class="dropdown">
-                                        <button class="btn btn-primary dropdown-toggle" type="button" id="monthYearDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Select Month and Year
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="monthYearDropdown">
+                                        <input class="dropdown-toggle form-control @error('startmonthYear') is-invalid @enderror" type="text" name="startmonthYear" id="monthYearDropdownStart" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" readonly placeholder="Month and Year" />
+                                        <div class="dropdown-menu" aria-labelledby="monthYearDropdownStart">
                                             <div class="year-nav">
-                                                <button id="prevYear" class="btn btn-link text-white">❮</button>
-                                                <span id="currentYear">Year 2024</span>
-                                                <button id="nextYear" class="btn btn-link text-white">❯</button>
+                                                <a id="prevYearStart" class="btn btn-link text-white">❮</a>
+                                                <span id="currentYearStart">Year 2024</span>
+                                                <a id="nextYearStart" class="btn btn-link text-white">❯</a>
                                             </div>
-                                            <div class="months-grid">
-                                                <div class="month-item" data-month="01">Jan.</div>
-                                                <div class="month-item" data-month="02">Feb.</div>
-                                                <div class="month-item" data-month="03">Mar.</div>
-                                                <div class="month-item" data-month="04">Apr.</div>
+                                            <div class="months-grid" id="monthsGridStart">
+                                                <div class="month-item" data-month="01">Jan</div>
+                                                <div class="month-item" data-month="02">Feb</div>
+                                                <div class="month-item" data-month="03">Mar</div>
+                                                <div class="month-item" data-month="04">Apr</div>
                                                 <div class="month-item" data-month="05">May</div>
                                                 <div class="month-item" data-month="06">June</div>
                                                 <div class="month-item" data-month="07">July</div>
-                                                <div class="month-item" data-month="08">Aug.</div>
-                                                <div class="month-item" data-month="09">Sep.</div>
-                                                <div class="month-item" data-month="10">Oct.</div>
-                                                <div class="month-item" data-month="11">Nov.</div>
-                                                <div class="month-item" data-month="12">Dec.</div>
+                                                <div class="month-item" data-month="08">Aug</div>
+                                                <div class="month-item" data-month="09">Sep</div>
+                                                <div class="month-item" data-month="10">Oct</div>
+                                                <div class="month-item" data-month="11">Nov</div>
+                                                <div class="month-item" data-month="12">Dec</div>
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- Error handling example (assuming Laravel blade syntax) -->
-                                    @error('port_name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label for="port_name">Port Name <span style="color: red;">*</span></label>
-                                    <select class="form-control @error('port_name') is-invalid @enderror"
-                                        name="port_name" id="port_name" value="{{ old('port_name') }}">
-                                        <option value='' selected disabled>All Port</option>
-                                    </select>
-                                    @error('port_name')
+                                    @error('startmonthYear')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
                             </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="monthYearSelectEnd">Select End Month and Year <span style="color: red;">*</span></label>
+                                    <div class="dropdown">
+                                        <input class="dropdown-toggle form-control @error('endmonthYear') is-invalid @enderror" type="text" name="endmonthYear" id="monthYearDropdownEnd" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" readonly placeholder="Month and Year" />
+                                        <div class="dropdown-menu" aria-labelledby="monthYearDropdownEnd">
+                                            <div class="year-nav">
+                                                <a id="prevYearEnd" class="btn btn-link text-white">❮</a>
+                                                <span id="currentYearEnd">Year 2024</span>
+                                                <a id="nextYearEnd" class="btn btn-link text-white">❯</a>
+                                            </div>
+                                            <div class="months-grid" id="monthsGridEnd">
+                                                <div class="month-item" data-month="01">Jan</div>
+                                                <div class="month-item" data-month="02">Feb</div>
+                                                <div class="month-item" data-month="03">Mar</div>
+                                                <div class="month-item" data-month="04">Apr</div>
+                                                <div class="month-item" data-month="05">May</div>
+                                                <div class="month-item" data-month="06">June</div>
+                                                <div class="month-item" data-month="07">July</div>
+                                                <div class="month-item" data-month="08">Aug</div>
+                                                <div class="month-item" data-month="09">Sep</div>
+                                                <div class="month-item" data-month="10">Oct</div>
+                                                <div class="month-item" data-month="11">Nov</div>
+                                                <div class="month-item" data-month="12">Dec</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @error('endmonthYear')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-2">
+                                <br/>
+                                <button type="submit" class="btn btn-primary mt-2"
+                                        id="">Submit</button>
+                            </div>
                         </div>
+                    </form>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="box-body table-responsive">
@@ -831,41 +858,54 @@
 @section('js')
     <!-- jQuery -->
     <script src="{{ asset('backend/js/port.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const currentYearElement = document.getElementById('currentYear');
-            const monthItems = document.querySelectorAll('.month-item');
-            const dropdownToggle = document.getElementById('monthYearDropdown');
+    <script defer>
+        function initMonthYearPicker(startOrEnd) {
+            const currentYearElement = document.getElementById(`currentYear${startOrEnd}`);
+            const monthItems = document.querySelectorAll(`#monthsGrid${startOrEnd} .month-item`);
+            const dropdownToggle = document.getElementById(`monthYearDropdown${startOrEnd}`);
             let currentYear = new Date().getFullYear();
-            
+    
             function updateYearDisplay() {
                 currentYearElement.textContent = `Year ${currentYear}`;
             }
-            
-            document.getElementById('prevYear').addEventListener('click', function() {
+    
+            function handleClick(event) {
+                event.stopPropagation(); // Prevents the dropdown from closing
+            }
+    
+            document.getElementById(`prevYear${startOrEnd}`).addEventListener('click', function(event) {
+                handleClick(event);
                 currentYear--;
                 updateYearDisplay();
             });
-            
-            document.getElementById('nextYear').addEventListener('click', function() {
+    
+            document.getElementById(`nextYear${startOrEnd}`).addEventListener('click', function(event) {
+                handleClick(event);
                 currentYear++;
                 updateYearDisplay();
             });
-            
+    
             monthItems.forEach(item => {
                 item.addEventListener('click', function() {
-                    document.querySelector('.month-item.active')?.classList.remove('active');
+                    document.querySelector(`#monthsGrid${startOrEnd} .month-item.active`)?.classList.remove('active');
                     this.classList.add('active');
                     const selectedMonth = this.getAttribute('data-month');
                     const selectedYear = currentYear;
-                    dropdownToggle.textContent = `${this.textContent} ${selectedYear}`;
-                    // You can perform further actions with selectedMonth and selectedYear, e.g., send to server via AJAX
+                    dropdownToggle.value = `${this.textContent} - ${selectedYear}`;
                 });
             });
-            
+    
             updateYearDisplay();
+        }
+    
+        document.addEventListener('DOMContentLoaded', function() {
+            initMonthYearPicker('Start');
+            initMonthYearPicker('End');
         });
     </script>
+    
+    
     
 @endsection
