@@ -244,6 +244,9 @@
                                 </div>
                             </div>
                         </div>
+
+
+
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="box-body table-responsive">
@@ -291,6 +294,7 @@
                                                 <th style="text-align: center">FF</th>
                                             </tr>
                                         </thead>
+
                                         <tbody id="records">
                                             <tr class="2">
                                                 <td class="text-center text-bold h4">
@@ -308,15 +312,7 @@
                                                 <td class="text-center h6"></td>
                                                 <td class="text-center h6">
                                                 </td>
-
-
-
-
                                             </tr>
-
-
-
-
 
                                             <tr class="2">
                                                 <td class="text-center h5">
@@ -332,21 +328,11 @@
                                                 <td class="text-center h6">0</td>
                                                 <td class="text-center h6">0</td>
                                                 <td class="text-center h6">49759</td>
-                                                <td class="text-center h6">
-                                                    49759 </td>
-
-
-
-
+                                                <td class="text-center h6"> 49759</td>
                                             </tr>
 
-
-
-
-
                                             <tr class="2">
-                                                <td class="text-center h5">
-                                                    2 </td>
+                                                <td class="text-center h5">2</td>
                                                 <td class="h5"> Edible Oil</td>
                                                 <td class="text-center h6">0</td>
                                                 <td class="text-center h6">0</td>
@@ -358,12 +344,7 @@
                                                 <td class="text-center h6">0</td>
                                                 <td class="text-center h6">0</td>
                                                 <td class="text-center h6">0</td>
-                                                <td class="text-center h6">
-                                                    0 </td>
-
-
-
-
+                                                <td class="text-center h6">0</td>
                                             </tr>
 
 
@@ -880,6 +861,8 @@
                                 </div><!-- /.box-body -->
                             </div>
                         </div>
+
+                        
                     </div>
                 </div>
             </div>

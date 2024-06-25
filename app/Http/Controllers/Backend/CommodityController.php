@@ -461,6 +461,7 @@ class CommodityController extends Controller
                 ->where('port_type', $request->port_type)
                 ->where('port_id', $request->port_name)
                 ->whereRaw("CONCAT(select_year, LPAD(select_month, 2, '0')) BETWEEN ? AND ?", [$startDate, $endDate])
+                ->where("status", 1)
                 ->get()
                 ->toArray();
 
