@@ -329,7 +329,6 @@ class CommodityController extends Controller
             } else {
                 return redirect()->back()->with('error', 'Failed to create one or more records');
             }
-
         } catch (\Exception $e) {
             // Log the error for further investigation
             Log::error('Error in storeCommodity method: ' . $e->getMessage());
@@ -386,11 +385,10 @@ class CommodityController extends Controller
         }
     }
 
-    // 
+    //
     public function viewReportFilter(Request $request)
     {
         try {
-            // dd($request->startmonthYear, $request->endmonthYear);
             // Validation rules
             $rules = [
                 'port_type' => 'required',
@@ -415,8 +413,8 @@ class CommodityController extends Controller
             // Check for validation failure
             if ($validator->fails()) {
                 return redirect()->back()
-                    ->withErrors($validator)  // Flash the validation errors to the session
-                    ->withInput();  // Flash the input data to the session
+                    ->withErrors($validator)
+                    ->withInput();
             }
 
             // Get the start month and year from the input
@@ -453,23 +451,27 @@ class CommodityController extends Controller
             $startMonth = $months[$startMonth];
             $endMonth = $months[$endMonth];
 
-            // dd($startYear, $endYear, $startMonth, $endMonth);
+            // Combine year and month into a single string
+            $startDate = $startYear . $startMonth;
+            $endDate = $endYear . $endMonth;
+            // dd($startDate, $endDate);
+
             // Query to fetch data
             $getData = CommoditiesData::where('is_deleted', '0')
                 ->where('port_type', $request->port_type)
                 ->where('port_id', $request->port_name)
-                ->get()->toArray();
+                ->whereRaw("CONCAT(select_year, LPAD(select_month, 2, '0')) BETWEEN ? AND ?", [$startDate, $endDate])
+                ->get()
+                ->toArray();
 
             // Debugging: Output the retrieved data
             dd($getData);
-
-            // $getData = CommoditiesData::where('port_type', $request->port_type)->where('port_id', $request->port_name)->where('year', $request->)->get()->toArray();
-
-
         } catch (\Exception $e) {
-
+            // Handle the exception
+            return redirect()->back()->with('error', 'An error occurred while processing your request.');
         }
     }
+
 
     // public function storeCommodity(Request $request)
     // {
