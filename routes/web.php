@@ -49,6 +49,10 @@ Route::group(['prefix' => 'portal', 'middleware' => ['auth', 'user-access', 'rol
     Route::get('role', [App\Http\Controllers\Backend\RoleController::class, 'roleList'])->name('role');
     Route::get('port', [App\Http\Controllers\Backend\PortController::class, 'portList'])->name('port');
     Route::get('port-category', [App\Http\Controllers\Backend\PortCategoryController::class, 'portCategoryList'])->name('port-category');
+    // State
+    Route::get('state', [App\Http\Controllers\Backend\StateController::class, 'stateList'])->name('state');
+    // City
+    Route::get('city', [App\Http\Controllers\Backend\CityController::class, 'cityList'])->name('city');
 
     Route::get('view-major-non-major-port-capacity', [App\Http\Controllers\Backend\MajorNonMajorPortCapacityController::class, 'viewMajorNonMajorPortCapacity'])->name('view-major-non-major-port-capacity');
     Route::get('view-berth-related-information', [App\Http\Controllers\Backend\BerthRelatedInformationController::class, 'viewBerthRelatedInformation'])->name('view-berth-related-information');

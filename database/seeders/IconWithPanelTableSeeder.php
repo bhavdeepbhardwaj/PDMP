@@ -148,15 +148,64 @@ class IconWithPanelTableSeeder extends Seeder
         IconWithPanel::create([
             'parent_id' => '0',
             'module' => 'mod_15',
-            'module_name' => 'Major Non Major Ports and Capacities',
-            'url' => 'view-major-non-major-port-capacity',
-            'mod_list_name' => 'view-major-non-major-port-capacity',
+            'module_name' => 'State',
+            'url' => 'state',
+            'mod_list_name' => 'state',
+            'icon' => 'fa-ship',
+        ]);
+
+        // Add Port
+        IconWithPanel::create([
+            'parent_id' => '15',
+            'module' => 'mod_16',
+            'module_name' => 'Add State',
+            'url' => 'add-state',
+            'mod_list_name' => 'add-state',
+            'icon' => 'fa-ship',
+        ]);
+
+        // Edit Port
+        IconWithPanel::create([
+            'parent_id' => '15',
+            'module' => 'mod_17',
+            'module_name' => 'Edit State',
+            'url' => 'edit-state',
+            'mod_list_name' => 'edit-state',
             'icon' => 'fa-ship',
         ]);
 
         IconWithPanel::create([
             'parent_id' => '0',
-            'module' => 'mod_16',
+            'module' => 'mod_18',
+            'module_name' => 'City',
+            'url' => 'city',
+            'mod_list_name' => 'city',
+            'icon' => 'fa-ship',
+        ]);
+
+        // Add Port
+        IconWithPanel::create([
+            'parent_id' => '18',
+            'module' => 'mod_19',
+            'module_name' => 'Add City',
+            'url' => 'add-city',
+            'mod_list_name' => 'add-city',
+            'icon' => 'fa-ship',
+        ]);
+
+        // Edit Port
+        IconWithPanel::create([
+            'parent_id' => '18',
+            'module' => 'mod_20',
+            'module_name' => 'Edit City',
+            'url' => 'edit-city',
+            'mod_list_name' => 'edit-city',
+            'icon' => 'fa-ship',
+        ]);
+
+        IconWithPanel::create([
+            'parent_id' => '0',
+            'module' => 'mod_21',
             'module_name' => 'Berth Related Information',
             'url' => 'view-berth-related-information',
             'mod_list_name' => 'view-berth-related-information',
@@ -165,7 +214,7 @@ class IconWithPanelTableSeeder extends Seeder
 
         IconWithPanel::create([
             'parent_id' => '0',
-            'module' => 'mod_17',
+            'module' => 'mod_22',
             'module_name' => 'Direct Port Entry Delivery Related Containers',
             'url' => 'view-direct-port-entry-delivery-related-containers',
             'mod_list_name' => 'view-direct-port-entry-delivery-related-containers',
@@ -174,7 +223,7 @@ class IconWithPanelTableSeeder extends Seeder
 
         IconWithPanel::create([
             'parent_id' => '0',
-            'module' => 'mod_18',
+            'module' => 'mod_23',
             'module_name' => 'Employment Major Ports',
             'url' => 'view-employment-major-ports',
             'mod_list_name' => 'view-employment-major-ports',
@@ -183,7 +232,7 @@ class IconWithPanelTableSeeder extends Seeder
 
         IconWithPanel::create([
             'parent_id' => '0',
-            'module' => 'mod_19',
+            'module' => 'mod_24',
             'module_name' => 'Employment Dock Labour Boards Major Port',
             'url' => 'view-employment-dock-labour-boards-major-port',
             'mod_list_name' => 'view-employment-dock-labour-boards-major-port',
@@ -192,7 +241,7 @@ class IconWithPanelTableSeeder extends Seeder
 
         IconWithPanel::create([
             'parent_id' => '0',
-            'module' => 'mod_20',
+            'module' => 'mod_25',
             'module_name' => 'Cruise Tourism',
             'url' => 'view-cruise-tourism',
             'mod_list_name' => 'view-cruise-tourism',
@@ -201,7 +250,7 @@ class IconWithPanelTableSeeder extends Seeder
 
         IconWithPanel::create([
             'parent_id' => '0',
-            'module' => 'mod_21',
+            'module' => 'mod_26',
             'module_name' => 'National Waterways Information',
             'url' => 'view-national-waterways-information',
             'mod_list_name' => 'view-national-waterways-information',
@@ -210,7 +259,7 @@ class IconWithPanelTableSeeder extends Seeder
 
         IconWithPanel::create([
             'parent_id' => '0',
-            'module' => 'mod_22',
+            'module' => 'mod_27',
             'module_name' => 'Indian Tonnage',
             'url' => 'view-indian-tonnage',
             'mod_list_name' => 'view-indian-tonnage',
@@ -219,7 +268,7 @@ class IconWithPanelTableSeeder extends Seeder
 
         IconWithPanel::create([
             'parent_id' => '0',
-            'module' => 'mod_23',
+            'module' => 'mod_28',
             'module_name' => 'Seafarers Information',
             'url' => 'view-seafarers-information',
             'mod_list_name' => 'view-seafarers-information',
@@ -228,7 +277,7 @@ class IconWithPanelTableSeeder extends Seeder
 
         IconWithPanel::create([
             'parent_id' => '0',
-            'module' => 'mod_24',
+            'module' => 'mod_29',
             'module_name' => 'Commodities List',
             'url' => 'view-commodities',
             'mod_list_name' => 'view-commodities',
@@ -237,7 +286,7 @@ class IconWithPanelTableSeeder extends Seeder
 
         IconWithPanel::create([
             'parent_id' => '0',
-            'module' => 'mod_25',
+            'module' => 'mod_30',
             'module_name' => 'Commodities List Form Add',
             'url' => 'add-commodities-form',
             'mod_list_name' => 'add-commodities-form',
@@ -246,7 +295,7 @@ class IconWithPanelTableSeeder extends Seeder
 
         IconWithPanel::create([
             'parent_id' => '0',
-            'module' => 'mod_26',
+            'module' => 'mod_31',
             'module_name' => 'Report',
             'url' => 'view-commodities-data-report',
             'mod_list_name' => 'view-commodities-data-report',

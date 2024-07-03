@@ -155,9 +155,9 @@
                                     <div class="form-group">
                                         <label for="cargo_moved">Cargo Moved (000 Tonnes)</label>
                                         <input type="text"
-                                            class="form-control @error('cargo_moved') is-invalid @enderror"
-                                            id="cargo_moved" placeholder="Enter Cargo Moved (000 Tonnes)"
-                                            name="cargo_moved" value="{{ $editData['cargo_moved'] }}">
+                                            class="form-control @error('cargo_moved') is-invalid @enderror" id="cargo_moved"
+                                            placeholder="Enter Cargo Moved (000 Tonnes)" name="cargo_moved"
+                                            value="{{ $editData['cargo_moved'] }}">
                                         @error('cargo_moved')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -167,8 +167,7 @@
                                 </div>
                             </div>
                             <div class="d-flex pb-2 justify-content-center align-items-center">
-                                <button type="submit" class="btn btn-primary waves-effect waves-light"
-                                    id="">Add
+                                <button type="submit" class="btn btn-primary waves-effect waves-light" id="">Add
                                     Records</button>
                             </div>
                         </form>
