@@ -456,17 +456,88 @@ class CommodityController extends Controller
             $endDate = $endYear . $endMonth;
             // dd($startDate, $endDate);
 
+            $ptype = $request->port_type;
+            $pid = $request->port_name;
+
             // Query to fetch data
             $getData = CommoditiesData::where('is_deleted', '0')
-                ->where('port_type', $request->port_type)
-                ->where('port_id', $request->port_name)
-                ->whereRaw("CONCAT(select_year, LPAD(select_month, 2, '0')) BETWEEN ? AND ?", [$startDate, $endDate])
-                ->where("status", 1)
-                ->get()
-                ->toArray();
+                    ->where('port_type', $request->port_type)
+                    ->where('port_id', $request->port_name)
+                    ->whereRaw("CONCAT(select_year, LPAD(select_month, 2, '0')) BETWEEN ? AND ?", [$startDate, $endDate])
+                    ->where("status", 1)
+                    ->select('commodities_data.*')
+                    ->get()
+                    ->groupBy(['commodity_id', 'port_id'])
+                    ->toArray();
+
+            $fields_to_sum = ["ov_ul_if", "ov_ul_ff", "ov_l_if", "ov_l_ff", "ov_total", "co_ul_if", "co_ul_ff", "co_l_if", "co_l_ff", "co_total", "grand_total"];
+            $merged_array=[];
+
+            foreach ($getData as $key => $commodity_port_group) {
+                foreach ($commodity_port_group as $data_group) {
+                    $sums = array_fill_keys($fields_to_sum, 0);
+                    foreach ($data_group as $data) {
+                        foreach ($fields_to_sum as $field) {
+                            $sums[$field] += $data[$field];
+                        }
+                    }
+                    $merged_array[$key] = $sums;
+                }
+            }
+
+            $commodityArr = [];
+
+            $commodityParents = Commodities::where('parent_id', 0)->get()->toArray();
+
+            foreach ($commodityParents as $parent) {
+                $commodityItem = [
+                    'parent' => $parent,
+                    'sub' => [], // Initialize an empty array for sub-commodities
+                ];
+
+                $subCommodities = Commodities::where('parent_id', $parent['id'])->get()->toArray();
+
+                foreach ($subCommodities as $subCommodity) {
+                    $subCommodityItem = [
+                        'sub' => $subCommodity,
+                        'innersub' => [], // Initialize an empty array for inner sub-commodities
+                    ];
+
+                    $innerSubCommodities = Commodities::where('parent_id', $subCommodity['id'])->get()->toArray();
+
+                    foreach ($innerSubCommodities as $innerSubCommodity) {
+                        $innerSubCommodityItem = [
+                            'innersub' => $innerSubCommodity,
+                            'innermostsub' => [], // Initialize an empty array for innermost sub-commodities
+                        ];
+
+                        $innerMostSubCommodities = Commodities::where('parent_id', $innerSubCommodity['id'])->get()->toArray();
+
+                        foreach ($innerMostSubCommodities as $innerMostSubCommodity) {
+                            $innerSubCommodityItem['innermostsub'][] = $innerMostSubCommodity;
+                        }
+
+                        $subCommodityItem['innersub'][] = $innerSubCommodityItem;
+                    }
+
+                    $commodityItem['sub'][] = $subCommodityItem;
+                }
+
+                $commodityArr[] = $commodityItem;
+            }
+
 
             // Debugging: Output the retrieved data
-            dd($getData);
+            // dd($merged_array,'==',$getData);
+
+            return view('backend.viewReport', [
+                'merged_array' => $merged_array,
+                'commodityArr' => $commodityArr,
+                'startDate' => $startDate,
+                'endDate' => $endDate,
+                'ptype' => $ptype,
+                'pid' => $pid
+            ]);
         } catch (\Exception $e) {
             // Handle the exception
             return redirect()->back()->with('error', 'An error occurred while processing your request.');

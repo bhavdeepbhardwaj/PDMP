@@ -224,6 +224,12 @@
                         </form>
                         {{-- Filter Form End --}}
                         <div class="row p-2">
+                            
+                        </div>
+
+
+                        @if(!empty($merged_array))
+                        <div class="row">
                             <div class="col-md-12">
                                 <div class="row bg-green p-2">
                                     <div class="col-md-12">
@@ -238,16 +244,12 @@
                                     <div class="col-md-6" style="background-color: #db8b0b !important; padding:10px;">
                                         <b>Port : CHENNAI PORT AUTHORITY</b>
                                     </div>
-                                    <div class="col-md-6  text-right" style="background-color: #00c0ef !important; padding:10px;">
-                                        <b>Period : Jan-2023 - Dec-2024 </b>
+                                    <div class="col-md-6  text-right"
+                                        style="background-color: #00c0ef !important; padding:10px;">
+                                        <b>Period : Jan-2024 - Dec-2024 </b>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-
-
-                        <div class="row">
                             <div class="col-md-12">
                                 <div class="box-body table-responsive">
                                     <table class="table table-bordered table-hover dataTable table-striped">
@@ -296,559 +298,97 @@
                                         </thead>
 
                                         <tbody id="records">
-                                            <tr class="2">
-                                                <td class="text-center text-bold h4">
-                                                    A </td>
-                                                <td class="text-bold h4"> Liquid Bulk</td>
-                                                <td class="text-center h6"></td>
-                                                <td class="text-center h6"></td>
-                                                <td class="text-center h6"></td>
-                                                <td class="text-center h6"></td>
-                                                <td class="text-center h6"></td>
-                                                <td class="text-center h6"></td>
-                                                <td class="text-center h6"></td>
-                                                <td class="text-center h6"></td>
-                                                <td class="text-center h6"></td>
-                                                <td class="text-center h6"></td>
-                                                <td class="text-center h6">
-                                                </td>
-                                            </tr>
-
-                                            <tr class="2">
-                                                <td class="text-center h5">
-                                                    1 </td>
-                                                <td class="h5"> POL-Products</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">49759</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">49759</td>
-                                                <td class="text-center h6"> 49759</td>
-                                            </tr>
-
-                                            <tr class="2">
-                                                <td class="text-center h5">2</td>
-                                                <td class="h5"> Edible Oil</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                            </tr>
-
-
-
-
-
-                                            <tr class="2">
-                                                <td class="text-center h5">
-                                                    3 </td>
-                                                <td class="h5"> FRM-Liquid</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">42231</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">42231</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">
-                                                    42231 </td>
-
-
-
-
-                                            </tr>
-
-
-
-
-
-                                            <tr class="2">
-                                                <td class="text-center h5">
-                                                    4 </td>
-                                                <td class="h5"> Other Liquids</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">6501</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">6501</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">
-                                                    6501 </td>
-
-
-
-
-                                            </tr>
-
-
-
-
-
-                                            <tr class="3">
-                                                <td class="text-center text-bold h4">
-                                                    B </td>
-                                                <td class="text-bold h4"> Dry Bulk</td>
-                                                <td class="text-center h6"></td>
-                                                <td class="text-center h6"></td>
-                                                <td class="text-center h6"></td>
-                                                <td class="text-center h6"></td>
-                                                <td class="text-center h6"></td>
-                                                <td class="text-center h6"></td>
-                                                <td class="text-center h6"></td>
-                                                <td class="text-center h6"></td>
-                                                <td class="text-center h6"></td>
-                                                <td class="text-center h6"></td>
-                                                <td class="text-center h6">
-                                                </td>
-
-
-
-
-                                            </tr>
-
-
-
-
-
-                                            <tr class="3">
-                                                <td class="text-center h5">
-                                                    1 </td>
-                                                <td class="h5"> Iron Ore All</td>
-                                                <td class="text-center h6"></td>
-                                                <td class="text-center h6"></td>
-                                                <td class="text-center h6"></td>
-                                                <td class="text-center h6"></td>
-                                                <td class="text-center h6"></td>
-                                                <td class="text-center h6"></td>
-                                                <td class="text-center h6"></td>
-                                                <td class="text-center h6"></td>
-                                                <td class="text-center h6"></td>
-                                                <td class="text-center h6"></td>
-                                                <td class="text-center h6">
-                                                </td>
-
-
-
-
-                                            </tr>
-
-
-
-
-
-                                            <tr class="3">
-                                                <td class="text-right h6">
-                                                    (a) </td>
-                                                <td class="h6"> Pellets</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">
-                                                    0 </td>
-
-
-
-
-                                            </tr>
-
-
-
-
-
-                                            <tr class="3">
-                                                <td class="text-right h6">
-                                                    (b) </td>
-                                                <td class="h6"> Fine</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">151701</td>
-                                                <td class="text-center h6">1981534</td>
-                                                <td class="text-center h6">2133235</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">
-                                                    2133235 </td>
-
-
-
-
-                                            </tr>
-
-
-
-
-
-                                            <tr class="3">
-                                                <td class="text-center h5">
-                                                    2 </td>
-                                                <td class="h5"> Other Ores</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">
-                                                    0 </td>
-
-
-
-
-                                            </tr>
-
-
-
-
-
-                                            <tr class="3">
-                                                <td class="text-center h5">
-                                                    3 </td>
-                                                <td class="h5"> Thermal Coal</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">199232</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">199232</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">
-                                                    199232 </td>
-
-
-
-
-                                            </tr>
-
-
-
-
-
-                                            <tr class="3">
-                                                <td class="text-center h5">
-                                                    4 </td>
-                                                <td class="h5"> Coking Coal</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">777857</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">777857</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">
-                                                    777857 </td>
-
-
-
-
-                                            </tr>
-
-
-
-
-
-                                            <tr class="3">
-                                                <td class="text-center h5">
-                                                    5 </td>
-                                                <td class="h5"> Fertilizer</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">1472</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">1472</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">
-                                                    1472 </td>
-
-
-
-
-                                            </tr>
-
-
-
-
-
-                                            <tr class="3">
-                                                <td class="text-center h5">
-                                                    6 </td>
-                                                <td class="h5"> Sugar</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">
-                                                    0 </td>
-
-
-
-
-                                            </tr>
-
-
-
-
-
-                                            <tr class="3">
-                                                <td class="text-center h5">
-                                                    7 </td>
-                                                <td class="h5"> Other Dry Bulk</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">158912</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">38817</td>
-                                                <td class="text-center h6">197729</td>
-                                                <td class="text-center h6">1800</td>
-                                                <td class="text-center h6">6903</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">8703</td>
-                                                <td class="text-center h6">
-                                                    206432 </td>
-
-
-
-
-                                            </tr>
-
-
-
-
-
-                                            <tr class="4">
-                                                <td class="text-center text-bold h4">
-                                                    C </td>
-                                                <td class="text-bold h4"> Break Bulk</td>
-                                                <td class="text-center h6"></td>
-                                                <td class="text-center h6"></td>
-                                                <td class="text-center h6"></td>
-                                                <td class="text-center h6"></td>
-                                                <td class="text-center h6"></td>
-                                                <td class="text-center h6"></td>
-                                                <td class="text-center h6"></td>
-                                                <td class="text-center h6"></td>
-                                                <td class="text-center h6"></td>
-                                                <td class="text-center h6"></td>
-                                                <td class="text-center h6">
-                                                </td>
-
-
-
-
-                                            </tr>
-
-
-
-
-
-                                            <tr class="4">
-                                                <td class="text-center h5">
-                                                    1 </td>
-                                                <td class="h5"> Iron and Steel</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">35493</td>
-                                                <td class="text-center h6">35493</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">
-                                                    35493 </td>
-
-
-
-
-                                            </tr>
-
-
-
-
-
-                                            <tr class="4">
-                                                <td class="text-center h5">
-                                                    2 </td>
-                                                <td class="h5"> Other Break Bulk</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">138092</td>
-                                                <td class="text-center h6">138092</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">7888</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">7888</td>
-                                                <td class="text-center h6">
-                                                    145980 </td>
-
-
-
-
-                                            </tr>
-
-
-
-
-
-                                            <tr class="5">
-                                                <td class="text-center text-bold h4">
-                                                    D </td>
-                                                <td class="text-bold h4"> Container</td>
-                                                <td class="text-center h6"></td>
-                                                <td class="text-center h6"></td>
-                                                <td class="text-center h6"></td>
-                                                <td class="text-center h6"></td>
-                                                <td class="text-center h6"></td>
-                                                <td class="text-center h6"></td>
-                                                <td class="text-center h6"></td>
-                                                <td class="text-center h6"></td>
-                                                <td class="text-center h6"></td>
-                                                <td class="text-center h6"></td>
-                                                <td class="text-center h6">
-                                                </td>
-
-
-
-
-                                            </tr>
-
-
-
-
-
-                                            <tr class="5">
-                                                <td class="text-center h5">
-                                                    1 </td>
-                                                <td class="h5"> TEUs</td>
-                                                <td class="text-center h6">34</td>
-                                                <td class="text-center h6">919</td>
-                                                <td class="text-center h6">117</td>
-                                                <td class="text-center h6">771</td>
-                                                <td class="text-center h6">1841</td>
-                                                <td class="text-center h6">109</td>
-                                                <td class="text-center h6">103</td>
-                                                <td class="text-center h6">1</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">213</td>
-                                                <td class="text-center h6">
-                                                    2054 </td>
-
-
-
-
-                                            </tr>
-
-
-
-
-
-                                            <tr class="5">
-                                                <td class="text-center h5">
-                                                    2 </td>
-                                                <td class="h5"> Tonnes</td>
-                                                <td class="text-center h6">363</td>
-                                                <td class="text-center h6">15699</td>
-                                                <td class="text-center h6">431</td>
-                                                <td class="text-center h6">8763</td>
-                                                <td class="text-center h6">25256</td>
-                                                <td class="text-center h6">3272</td>
-                                                <td class="text-center h6">3080</td>
-                                                <td class="text-center h6">24</td>
-                                                <td class="text-center h6">0</td>
-                                                <td class="text-center h6">6376</td>
-                                                <td class="text-center h6">
-                                                    31632 </td>
-
-
-
-
-                                            </tr>
-
-
-
-
-
-                                            <tr>
-                                                <td class="text-center">
-
-                                                </td>
-                                                <td class="text-bold">
-                                                    Total (in Tonnes)
-                                                </td>
-                                                <td class="text-center text-bold">
-                                                    363 </td>
-                                                <td class="text-center text-bold">
-                                                    1201904 </td>
-                                                <td class="text-center text-bold">
-                                                    152132 </td>
-                                                <td class="text-center text-bold">
-                                                    2202699 </td>
-                                                <td class="text-center text-bold">
-                                                    3557098 </td>
-                                                <td class="text-center text-bold">
-                                                    54831 </td>
-                                                <td class="text-center text-bold">
-                                                    9983 </td>
-                                                <td class="text-center text-bold">
-                                                    7912 </td>
-                                                <td class="text-center text-bold">
-                                                    0 </td>
-                                                <td class="text-center text-bold">
-                                                    72726 </td>
-                                                <td class="text-center text-bold">
-                                                    3629824 </td>
-                                            </tr>
+                                            {{-- @if(!empty($merged_array)) --}}
+                                            @foreach ($commodityArr as $commodityData)
+                                                @foreach ($commodityData['sub'] as $subCommodity)
+                                                    <tr class="2">
+                                                        <td class="text-center text-bold h4">
+                                                            A </td>
+                                                        <td class="text-bold h4"> {{ $subCommodity['sub']['name'] }}</td>
+                                                        <td class="text-center h6"></td>
+                                                        <td class="text-center h6"></td>
+                                                        <td class="text-center h6"></td>
+                                                        <td class="text-center h6"></td>
+                                                        <td class="text-center h6"></td>
+                                                        <td class="text-center h6"></td>
+                                                        <td class="text-center h6"></td>
+                                                        <td class="text-center h6"></td>
+                                                        <td class="text-center h6"></td>
+                                                        <td class="text-center h6"></td>
+                                                        <td class="text-center h6"></td>
+                                                    </tr>
+                                                    @foreach ($subCommodity['innersub'] as $innerKey => $innerSubData)
+                                                        <tr class="3">
+                                                            <td class="text-center h5">
+                                                                1 </td>
+                                                            <td class="h5"> {{ $innerSubData['innersub']['name'] }} <strong>= ID {{ $innerSubData['innersub']['id'] }}</strong></td>
+                                                            <td class="text-center h6">@if(!empty($merged_array) && (in_array($innerSubData['innersub']['id'],array_keys($merged_array)))) {{ $merged_array[$innerSubData['innersub']['id']]['ov_ul_if']}} @else 0 @endif </td>
+                                                            <td class="text-center h6">@if(!empty($merged_array) && (in_array($innerSubData['innersub']['id'],array_keys($merged_array)))) {{ $merged_array[$innerSubData['innersub']['id']]['ov_ul_ff']}} @else 0 @endif </td>
+                                                            <td class="text-center h6">@if(!empty($merged_array) && (in_array($innerSubData['innersub']['id'],array_keys($merged_array)))) {{ $merged_array[$innerSubData['innersub']['id']]['ov_l_if']}} @else 0 @endif </td>
+                                                            <td class="text-center h6">@if(!empty($merged_array) && (in_array($innerSubData['innersub']['id'],array_keys($merged_array)))) {{ $merged_array[$innerSubData['innersub']['id']]['ov_l_ff']}} @else 0 @endif </td>
+                                                            <td class="text-center h6">@if(!empty($merged_array) && (in_array($innerSubData['innersub']['id'],array_keys($merged_array)))) {{ $merged_array[$innerSubData['innersub']['id']]['ov_total']}} @else 0 @endif </td>
+                                                            <td class="text-center h6">@if(!empty($merged_array) && (in_array($innerSubData['innersub']['id'],array_keys($merged_array)))) {{ $merged_array[$innerSubData['innersub']['id']]['co_ul_if']}} @else 0 @endif </td>
+                                                            <td class="text-center h6">@if(!empty($merged_array) && (in_array($innerSubData['innersub']['id'],array_keys($merged_array)))) {{ $merged_array[$innerSubData['innersub']['id']]['co_ul_ff']}} @else 0 @endif </td>
+                                                            <td class="text-center h6">@if(!empty($merged_array) && (in_array($innerSubData['innersub']['id'],array_keys($merged_array)))) {{ $merged_array[$innerSubData['innersub']['id']]['co_l_if']}} @else 0 @endif </td>
+                                                            <td class="text-center h6">@if(!empty($merged_array) && (in_array($innerSubData['innersub']['id'],array_keys($merged_array)))) {{ $merged_array[$innerSubData['innersub']['id']]['co_l_ff']}} @else 0 @endif </td>
+                                                            <td class="text-center h6">@if(!empty($merged_array) && (in_array($innerSubData['innersub']['id'],array_keys($merged_array)))) {{ $merged_array[$innerSubData['innersub']['id']]['co_total']}} @else 0 @endif </td>
+                                                            <td class="text-center h6">@if(!empty($merged_array) && (in_array($innerSubData['innersub']['id'],array_keys($merged_array)))) {{ $merged_array[$innerSubData['innersub']['id']]['grand_total']}} @else 0 @endif </td>
+                                                        </tr>
+
+                                                        @foreach ($innerSubData['innermostsub'] as $innerSubMostData)
+                                                            <tr class="3">
+                                                                <td class="text-center h5">
+                                                                    1 </td>
+                                                                <td class="h5">{{ $innerSubMostData['name'] }}</td>
+                                                                <td class="text-center h6">@if(!empty($merged_array) && (in_array($innerSubMostData['id'],array_keys($merged_array)))) {{ $merged_array[$innerSubMostData['id']]['ov_ul_if']}} @else 0 @endif </td>
+                                                                <td class="text-center h6">@if(!empty($merged_array) && (in_array($innerSubMostData['id'],array_keys($merged_array)))) {{ $merged_array[$innerSubMostData['id']]['ov_ul_ff']}} @else 0 @endif </td>
+                                                                <td class="text-center h6">@if(!empty($merged_array) && (in_array($innerSubMostData['id'],array_keys($merged_array)))) {{ $merged_array[$innerSubMostData['id']]['ov_l_if']}} @else 0 @endif </td>
+                                                                <td class="text-center h6">@if(!empty($merged_array) && (in_array($innerSubMostData['id'],array_keys($merged_array)))) {{ $merged_array[$innerSubMostData['id']]['ov_l_ff']}} @else 0 @endif </td>
+                                                                <td class="text-center h6">@if(!empty($merged_array) && (in_array($innerSubMostData['id'],array_keys($merged_array)))) {{ $merged_array[$innerSubMostData['id']]['ov_total']}} @else 0 @endif </td>
+                                                                <td class="text-center h6">@if(!empty($merged_array) && (in_array($innerSubMostData['id'],array_keys($merged_array)))) {{ $merged_array[$innerSubMostData['id']]['co_ul_if']}} @else 0 @endif </td>
+                                                                <td class="text-center h6">@if(!empty($merged_array) && (in_array($innerSubMostData['id'],array_keys($merged_array)))) {{ $merged_array[$innerSubMostData['id']]['co_ul_ff']}} @else 0 @endif </td>
+                                                                <td class="text-center h6">@if(!empty($merged_array) && (in_array($innerSubMostData['id'],array_keys($merged_array)))) {{ $merged_array[$innerSubMostData['id']]['co_l_if']}} @else 0 @endif </td>
+                                                                <td class="text-center h6">@if(!empty($merged_array) && (in_array($innerSubMostData['id'],array_keys($merged_array)))) {{ $merged_array[$innerSubMostData['id']]['co_l_ff']}} @else 0 @endif </td>
+                                                                <td class="text-center h6">@if(!empty($merged_array) && (in_array($innerSubMostData['id'],array_keys($merged_array)))) {{ $merged_array[$innerSubMostData['id']]['co_total']}} @else 0 @endif </td>
+                                                                <td class="text-center h6">@if(!empty($merged_array) && (in_array($innerSubMostData['id'],array_keys($merged_array)))) {{ $merged_array[$innerSubMostData['id']]['grand_total']}} @else 0 @endif </td>
+                                                            </tr>
+                                                        @endforeach
+                                                    @endforeach
+
+
+                                                    {{-- <tr>
+                                                        <td class="text-center">
+
+                                                        </td>
+                                                        <td class="text-bold">
+                                                            Total (in Tonnes)
+                                                        </td>
+                                                        <td class="text-center text-bold">
+                                                            363 </td>
+                                                        <td class="text-center text-bold">
+                                                            1201904 </td>
+                                                        <td class="text-center text-bold">
+                                                            152132 </td>
+                                                        <td class="text-center text-bold">
+                                                            2202699 </td>
+                                                        <td class="text-center text-bold">
+                                                            3557098 </td>
+                                                        <td class="text-center text-bold">
+                                                            54831 </td>
+                                                        <td class="text-center text-bold">
+                                                            9983 </td>
+                                                        <td class="text-center text-bold">
+                                                            7912 </td>
+                                                        <td class="text-center text-bold">
+                                                            0 </td>
+                                                        <td class="text-center text-bold">
+                                                            72726 </td>
+                                                        <td class="text-center text-bold">
+                                                            3629824 </td>
+                                                    </tr> --}}
+                                                @endforeach
+                                            @endforeach
+                                            {{-- @endif --}}
                                         </tbody>
                                     </table>
                                     <div class="col-md-4 pull-right">
@@ -861,8 +401,10 @@
                                 </div><!-- /.box-body -->
                             </div>
                         </div>
+                        @endif
 
-                        
+
+
                     </div>
                 </div>
             </div>

@@ -1163,12 +1163,54 @@ class FormController extends Controller
     {
         try {
             // dd("Report Page");
-            // Fetch Report that are not deleted
-            $getData = SeafarersInformation::where('is_deleted', 0)->get()->toArray();
-            // $getData = Report::where('is_deleted', 0)->get()->toArray();
-            // dd($getData);
+            $commodityArr = [];
+
+            $commodityParents = Commodities::where('parent_id', 0)->get()->toArray();
+
+            foreach ($commodityParents as $parent) {
+                $commodityItem = [
+                    'parent' => $parent,
+                    'sub' => [], // Initialize an empty array for sub-commodities
+                ];
+
+                $subCommodities = Commodities::where('parent_id', $parent['id'])->get()->toArray();
+
+                foreach ($subCommodities as $subCommodity) {
+                    $subCommodityItem = [
+                        'sub' => $subCommodity,
+                        'innersub' => [], // Initialize an empty array for inner sub-commodities
+                    ];
+
+                    $innerSubCommodities = Commodities::where('parent_id', $subCommodity['id'])->get()->toArray();
+
+                    foreach ($innerSubCommodities as $innerSubCommodity) {
+                        $innerSubCommodityItem = [
+                            'innersub' => $innerSubCommodity,
+                            'innermostsub' => [], // Initialize an empty array for innermost sub-commodities
+                        ];
+
+                        $innerMostSubCommodities = Commodities::where('parent_id', $innerSubCommodity['id'])->get()->toArray();
+
+                        foreach ($innerMostSubCommodities as $innerMostSubCommodity) {
+                            $innerSubCommodityItem['innermostsub'][] = $innerMostSubCommodity;
+                        }
+
+                        $subCommodityItem['innersub'][] = $innerSubCommodityItem;
+                    }
+
+                    $commodityItem['sub'][] = $subCommodityItem;
+                }
+
+                $commodityArr[] = $commodityItem;
+            }
             // Return the view with data
-            return view('backend.viewReport', ['getData' => $getData]);
+
+
+
+            $merged_array=[];
+
+
+            return view('backend.viewReport', ['commodityArr' => $commodityArr,'merged_array' => $merged_array]);
         } catch (\Exception $e) {
             // Handle exceptions and show an error page or log the error
             // It's a good practice to log errors for further investigation
