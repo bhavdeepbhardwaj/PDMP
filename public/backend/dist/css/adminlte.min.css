@@ -2312,16 +2312,17 @@ pre code {
 .form-control {
     display: block;
     width: 100%;
-    height: calc(2.25rem + 2px);
-    padding: .375rem .75rem;
-    font-size: 1rem;
+    height: calc(2.25rem + 0px);
+    /* padding: .375rem .75rem; */
+    padding: 8px;
+    /* font-size: 1rem; */
     font-weight: 400;
     line-height: 1.5;
     color: #495057;
     background-color: #fff;
     background-clip: padding-box;
     border: 1px solid #ced4da;
-    border-radius: .25rem;
+    /* border-radius: .25rem; */
     box-shadow: inset 0 0 0 transparent;
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out
 }
@@ -2468,7 +2469,7 @@ textarea.form-control {
 }
 
 .form-group {
-    margin-bottom: 1rem
+    margin-bottom: 7px;
 }
 
 .form-text {
@@ -2875,10 +2876,11 @@ textarea.form-control.is-invalid {
     user-select: none;
     background-color: transparent;
     border: 1px solid transparent;
-    padding: .375rem .75rem;
+    /* padding: .375rem .75rem; */
+    padding: 7px;
     font-size: 1rem;
     line-height: 1.5;
-    border-radius: .25rem;
+    /* border-radius: .25rem; */
     transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out
 }
 

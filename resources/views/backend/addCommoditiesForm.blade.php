@@ -48,16 +48,16 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Add Commodities Form</h3>
+                        <div class="float-right">
+                            <a href="{{ route('draft-overview-data') }}" class="btn btn-primary">
+                                <i class="fas fa-plus"></i> Draft Data </a>
+                        </div>
                     </div>
                     <div class="card-body">
                         {{-- Form Respone --}}
                         @include('backend.component.flush')
 
                         <div class="box box-primary">
-                            <div class="box-header">
-                                {{-- <h3 class="box-title">View Approved Data For</h3> --}}
-
-                            </div><!-- /.box-header -->
                             <div class="col-xs-12">
                                 <div class="table-responsive">
                                     <table class="table table-responsive">

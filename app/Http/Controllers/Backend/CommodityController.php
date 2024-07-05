@@ -544,6 +544,26 @@ class CommodityController extends Controller
         }
     }
 
+    // Drafted Data Overview
+    public function draftOverviewData()
+    {
+        // dd($request->all());
+        $getData = CommoditiesData::where('is_deleted', '0')
+                    ->where('port_type', 1)
+                    ->where('port_id', 1)
+                    ->where("status", 3)
+                    ->select('select_month', 'select_year')
+                    ->distinct()
+                    ->get()
+                    ->toArray();
+
+        dd($getData);
+
+        return view('backend.draftOverviewData', [
+            'getData' => $getData
+        ]);
+    }
+
 
     // public function storeCommodity(Request $request)
     // {
