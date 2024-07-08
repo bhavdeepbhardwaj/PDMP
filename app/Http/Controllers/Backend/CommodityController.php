@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Backend;
 
 use App\Models\Commodities;
 use App\Models\CommoditiesData;
+use App\Models\Port;
+use App\Models\PortCategory;
+use App\Models\StateBoard;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -12,7 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use DateTime;
-
+use Illuminate\Support\Facades\DB;
 
 class CommodityController extends Controller
 {
@@ -176,7 +179,7 @@ class CommodityController extends Controller
     {
         try {
             // Validation rules
-            // dd($request->commodity_id);
+            // dd($request->all());
             $rules = [
                 'select_year' => 'required|numeric',
                 'select_month' => 'required|numeric|between:1,12',
@@ -388,12 +391,13 @@ class CommodityController extends Controller
     //
     public function viewReportFilter(Request $request)
     {
+        // dd($request->all());
         try {
             // Validation rules
             $rules = [
                 'port_type' => 'required',
-                'state_board' => 'required',
-                'port_name' => 'required',
+                'state_board' => 'nullable',
+                // 'port_name' => 'required',
                 'startmonthYear' => 'required',
                 'endmonthYear' => 'required',
             ];
@@ -402,7 +406,7 @@ class CommodityController extends Controller
             $customMessages = [
                 'port_type.required' => 'The port type field is required.',
                 'state_board.required' => 'The state board field is required.',
-                'port_name.required' => 'The port field is required.',
+                // 'port_name.required' => 'The port field is required.',
                 'startmonthYear.required' => 'The Select Start Month and Year field is required.',
                 'endmonthYear.required' => 'The Select End Month and Year field is required.',
             ];
@@ -412,6 +416,7 @@ class CommodityController extends Controller
 
             // Check for validation failure
             if ($validator->fails()) {
+
                 return redirect()->back()
                     ->withErrors($validator)
                     ->withInput();
@@ -420,7 +425,7 @@ class CommodityController extends Controller
             // Get the start month and year from the input
             $startMonthYear = $request->startmonthYear;
             $startMonthYearArray = explode(' - ', $startMonthYear);
-
+            // dd($startMonthYearArray);
             // Get the end month and year from the input
             $endMonthYear = $request->endmonthYear;
             $endMonthYearArray = explode(' - ', $endMonthYear);
@@ -461,17 +466,20 @@ class CommodityController extends Controller
 
             // Query to fetch data
             $getData = CommoditiesData::where('is_deleted', '0')
-                    ->where('port_type', $request->port_type)
-                    ->where('port_id', $request->port_name)
-                    ->whereRaw("CONCAT(select_year, LPAD(select_month, 2, '0')) BETWEEN ? AND ?", [$startDate, $endDate])
-                    ->where("status", 1)
-                    ->select('commodities_data.*')
-                    ->get()
-                    ->groupBy(['commodity_id', 'port_id'])
-                    ->toArray();
-
+                        ->where('port_type', $request->port_type)
+                        // ->when(isset($request->port_name), function ($query) use ($request) {
+                        //     $query->where('port_id', $request->port_name);
+                        // })
+                        ->where('port_id', $request->port_name) // This line will only execute if $request->port_id is not empty
+                        ->whereRaw("CONCAT(select_year, LPAD(select_month, 2, '0')) BETWEEN ? AND ?", [$startDate, $endDate])
+                        ->where("status", 1)
+                        ->select('commodities_data.*')
+                        ->get()
+                        ->groupBy(['commodity_id', 'port_id'])
+                        ->toArray();
+            // dd($getData);
             $fields_to_sum = ["ov_ul_if", "ov_ul_ff", "ov_l_if", "ov_l_ff", "ov_total", "co_ul_if", "co_ul_ff", "co_l_if", "co_l_ff", "co_total", "grand_total"];
-            $merged_array=[];
+            $merged_array = [];
 
             foreach ($getData as $key => $commodity_port_group) {
                 foreach ($commodity_port_group as $data_group) {
@@ -526,17 +534,30 @@ class CommodityController extends Controller
                 $commodityArr[] = $commodityItem;
             }
 
+            $allPortsType = PortCategory::where('id',$request->port_type)->first();
 
+            $portAssigned = Port::where('id',$request->port_name)->first();
+            // dd($portAssigned);
+            if($portAssigned->state_board_id != 0){
+                $allStartBoards = StateBoard::where('id',$request->port_type)->get();
+            }
             // Debugging: Output the retrieved data
             // dd($merged_array,'==',$getData);
-
             return view('backend.viewReport', [
                 'merged_array' => $merged_array,
                 'commodityArr' => $commodityArr,
                 'startDate' => $startDate,
                 'endDate' => $endDate,
                 'ptype' => $ptype,
-                'pid' => $pid
+                'pid' => $pid,
+                'startMonth' => $startMonthYearArray[0] ?? '',
+                'endMonth' => $endMonthYearArray[0] ??'',
+                'startYear' => $startYear ?? '',
+                'endYear' => $endYear ?? '',
+                'allPortsType' => $allPortsType,
+                'allStartBoards' => $allStartBoards ?? '',
+                'portAssigned' => $portAssigned,
+                'yearpass' => '2024'
             ]);
         } catch (\Exception $e) {
             // Handle the exception
@@ -544,25 +565,483 @@ class CommodityController extends Controller
         }
     }
 
+    // public function viewReportFilter(Request $request)
+    // {
+    //     try {
+    //         $this->validateRequest111($request);
+
+    //         $startDate = $this->formatDate($request->startmonthYear);
+    //         $endDate = $this->formatDate($request->endmonthYear);
+
+    //         $getData = $this->fetchCommoditiesData($request->port_type, $request->port_name, $startDate, $endDate);
+    //         $mergedArray = $this->mergeCommodityData($getData);
+
+    //         $commodityArr = $this->getCommodityHierarchy();
+
+    //         return view('backend.viewReport', [
+    //             'merged_array' => $mergedArray,
+    //             'commodityArr' => $commodityArr,
+    //             'startDate' => $startDate,
+    //             'endDate' => $endDate,
+    //             'ptype' => $request->port_type,
+    //             'pid' => $request->port_name
+    //         ]);
+    //     } catch (\Exception $e) {
+    //         // \Log::error('Error in viewReportFilter: ' . $e->getMessage());
+    //         return redirect()->back()->with('error', 'An error occurred while processing your request.');
+    //     }
+    // }
+
+    // private function validateRequest111(Request $request)
+    // {
+    //     // dd($request->all());
+    //     $rules = [
+    //         'port_type' => 'required',
+    //         'state_board' => 'required',
+    //         'port_name' => 'required',
+    //         'startmonthYear' => 'required',
+    //         'endmonthYear' => 'required',
+    //     ];
+
+    //     $customMessages = [
+    //         'port_type.required' => 'The port type field is required.',
+    //         'state_board.required' => 'The state board field is required.',
+    //         'port_name.required' => 'The port field is required.',
+    //         'startmonthYear.required' => 'The Select Start Month and Year field is required.',
+    //         'endmonthYear.required' => 'The Select End Month and Year field is required.',
+    //     ];
+
+    //     $validator = Validator::make($request->all(), $rules, $customMessages);
+
+    //     if ($validator->fails()) {
+    //         return redirect()->back()->withErrors($validator)->withInput();
+    //     }
+    //     // if ($validator->fails()) {
+    //     //     throw new \Exception($validator->errors()->first());
+    //     // }
+    // }
+
+    // private function formatDate($monthYear)
+    // {
+    //     $monthYearArray = explode(' - ', $monthYear);
+    //     $month = $this->convertMonthToNumber($monthYearArray[0]);
+    //     $year = $monthYearArray[1];
+
+    //     return $year . $month;
+    // }
+
+    // private function convertMonthToNumber($month)
+    // {
+    //     $months = [
+    //         'Jan' => '01',
+    //         'Feb' => '02',
+    //         'Mar' => '03',
+    //         'Apr' => '04',
+    //         'May' => '05',
+    //         'Jun' => '06',
+    //         'Jul' => '07',
+    //         'Aug' => '08',
+    //         'Sep' => '09',
+    //         'Oct' => '10',
+    //         'Nov' => '11',
+    //         'Dec' => '12'
+    //     ];
+
+    //     return $months[$month];
+    // }
+
+    // private function fetchCommoditiesData($portType, $portName, $startDate, $endDate)
+    // {
+    //     return CommoditiesData::where('is_deleted', '0')
+    //         ->where('port_type', $portType)
+    //         ->where('port_id', $portName)
+    //         ->whereRaw("CONCAT(select_year, LPAD(select_month, 2, '0')) BETWEEN ? AND ?", [$startDate, $endDate])
+    //         ->where("status", 1)
+    //         ->select('commodities_data.*')
+    //         ->get()
+    //         ->groupBy(['commodity_id', 'port_id'])
+    //         ->toArray();
+    // }
+
+    // private function mergeCommodityData($getData)
+    // {
+    //     $fieldsToSum = ["ov_ul_if", "ov_ul_ff", "ov_l_if", "ov_l_ff", "ov_total", "co_ul_if", "co_ul_ff", "co_l_if", "co_l_ff", "co_total", "grand_total"];
+    //     $mergedArray = [];
+
+    //     foreach ($getData as $key => $commodityPortGroup) {
+    //         foreach ($commodityPortGroup as $dataGroup) {
+    //             $sums = array_fill_keys($fieldsToSum, 0);
+    //             foreach ($dataGroup as $data) {
+    //                 foreach ($fieldsToSum as $field) {
+    //                     $sums[$field] += $data[$field];
+    //                 }
+    //             }
+    //             $mergedArray[$key] = $sums;
+    //         }
+    //     }
+
+    //     return $mergedArray;
+    // }
+
+    // private function getCommodityHierarchy()
+    // {
+    //     $commodityArr = [];
+    //     $commodityParents = Commodities::where('parent_id', 0)->get()->toArray();
+
+    //     foreach ($commodityParents as $parent) {
+    //         $commodityItem = [
+    //             'parent' => $parent,
+    //             'sub' => $this->getSubCommodities($parent['id']),
+    //         ];
+    //         $commodityArr[] = $commodityItem;
+    //     }
+
+    //     return $commodityArr;
+    // }
+
+    // private function getSubCommodities($parentId)
+    // {
+    //     $subCommodities = Commodities::where('parent_id', $parentId)->get()->toArray();
+    //     $subCommodityArr = [];
+
+    //     foreach ($subCommodities as $subCommodity) {
+    //         $subCommodityArr[] = [
+    //             'sub' => $subCommodity,
+    //             'innersub' => $this->getInnerSubCommodities($subCommodity['id']),
+    //         ];
+    //     }
+
+    //     return $subCommodityArr;
+    // }
+
+    // private function getInnerSubCommodities($subCommodityId)
+    // {
+    //     $innerSubCommodities = Commodities::where('parent_id', $subCommodityId)->get()->toArray();
+    //     $innerSubCommodityArr = [];
+
+    //     foreach ($innerSubCommodities as $innerSubCommodity) {
+    //         $innerSubCommodityArr[] = [
+    //             'innersub' => $innerSubCommodity,
+    //             'innermostsub' => Commodities::where('parent_id', $innerSubCommodity['id'])->get()->toArray(),
+    //         ];
+    //     }
+
+    //     return $innerSubCommodityArr;
+    // }
+
+
     // Drafted Data Overview
     public function draftOverviewData()
     {
-        // dd($request->all());
-        $getData = CommoditiesData::where('is_deleted', '0')
-                    ->where('port_type', 1)
-                    ->where('port_id', 1)
-                    ->where("status", 3)
-                    ->select('select_month', 'select_year')
-                    ->distinct()
+        try {
+            // Attempt to get the data
+            if (Auth::user()->role_id == 6) {
+                // dd('Data Entry Officer');
+                $getData = CommoditiesData::where('is_deleted', '0')
+                    ->where('port_type', Auth::user()->port_type)
+                    ->where('port_id', Auth::user()->port_id)
+                    ->where('status', 3)
+                    ->select('id', 'select_year', 'select_month', 'state_id', 'port_type', 'state_board', 'port_id', 'commodity_id', 'ov_ul_if', 'ov_ul_ff', 'ov_l_if', 'ov_l_ff', 'ov_total', 'co_ul_if', 'co_ul_ff', 'co_l_if', 'co_l_ff', 'co_total', 'grand_total', 'status', 'comm_remarks', 'created_by', 'updated_by', 'is_deleted', 'created_at', 'updated_at')
+                    ->whereIn('id', function ($query) {
+                        $query->select(DB::raw('MAX(id)'))
+                            ->from('commodities_data')
+                            ->where('is_deleted', '0')
+                            ->where('port_type', Auth::user()->port_type)
+                            ->where('port_id', Auth::user()->port_id)
+                            ->where('status', 3)
+                            ->groupBy('select_year', 'select_month');
+                    })
                     ->get()
                     ->toArray();
+            } else {
+                $getData = CommoditiesData::where('is_deleted', '0')
+                    ->where('port_type', Auth::user()->port_type)
+                    ->where('port_id', Auth::user()->port_id)
+                    ->where('status', 2)
+                    ->select('id', 'select_year', 'select_month', 'state_id', 'port_type', 'state_board', 'port_id', 'commodity_id', 'ov_ul_if', 'ov_ul_ff', 'ov_l_if', 'ov_l_ff', 'ov_total', 'co_ul_if', 'co_ul_ff', 'co_l_if', 'co_l_ff', 'co_total', 'grand_total', 'status', 'comm_remarks', 'created_by', 'updated_by', 'is_deleted', 'created_at', 'updated_at')
+                    ->whereIn('id', function ($query) {
+                        $query->select(DB::raw('MAX(id)'))
+                            ->from('commodities_data')
+                            ->where('is_deleted', '0')
+                            ->where('port_type', Auth::user()->port_type)
+                            ->where('port_id', Auth::user()->port_id)
+                            ->where('status', 2)
+                            ->groupBy('select_year', 'select_month');
+                    })
+                    ->get()
+                    ->toArray();
+                // dd('Port Manager');
+            }
 
-        dd($getData);
-
-        return view('backend.draftOverviewData', [
-            'getData' => $getData
-        ]);
+            return view('backend.draftOverviewData', [
+                'getData' => $getData
+            ]);
+        } catch (\Exception $e) {
+            // Optionally, you can display a user-friendly message
+            return redirect()->back()->with('error', 'An error occurred while fetching the data. Please try again later.');
+        }
     }
+
+    // View Drafted Data For
+
+    public function viewDraftedData(Request $request, $id)
+    {
+        try {
+            // Your logic goes here..
+            $getData = CommoditiesData::findOrFail($id);
+            // dd($getData);
+            if($getData->status == 3){
+                $status = 3;
+            }else{
+                $status = 2;
+            }
+            $userData = User::where('id', Auth::User()->id)->first();
+            $port_id = $userData->port_id ?? '';
+            // Return the view with data
+            $commodityArr = [];
+
+            $commodityParents = Commodities::where('parent_id', 0)->get()->toArray();
+
+            foreach ($commodityParents as $parent) {
+                $commodityItem = [
+                    'parent' => $parent,
+                    'sub' => [], // Initialize an empty array for sub-commodities
+                ];
+
+                $subCommodities = Commodities::where('parent_id', $parent['id'])->get()->toArray();
+
+                foreach ($subCommodities as $subCommodity) {
+                    $subCommodityItem = [
+                        'sub' => $subCommodity,
+                        'innersub' => [], // Initialize an empty array for inner sub-commodities
+                    ];
+
+                    $innerSubCommodities = Commodities::where('parent_id', $subCommodity['id'])->get()->toArray();
+                    // dd($innerSubCommodities);
+                    foreach ($innerSubCommodities as $innerSubCommodity) {
+                        // dd($innerSubCommodity);
+                        // Query the CommoditiesData table with the specified conditions
+                        $draftDatainnerSubCommodity = CommoditiesData::where('is_deleted', '0')
+                            ->where('port_type', $getData->port_type)
+                            ->where('port_id', $getData->port_id)
+                            ->where('commodity_id', $innerSubCommodity['id'])
+                            ->where('select_month', $getData->select_month)
+                            ->where('select_year', $getData->select_year)
+                            ->where('status', $status)
+                            ->get()
+                            ->toArray();
+
+                        // dd($draftDatainnerSubCommodity);
+
+                        // Assign the result to the 'id' key
+
+                        $innerSubCommodityItem = [
+                            'innersub' => $innerSubCommodity,
+                            'draftDatainnerSubCommodity' => $draftDatainnerSubCommodity,
+                            'innermostsub' => [], // Initialize an empty array for innermost sub-commodities
+                        ];
+
+                        $innerMostSubCommodities = Commodities::where('parent_id', $innerSubCommodity['id'])->get()->toArray();
+
+                        foreach ($innerMostSubCommodities as $innerMostSubCommodity) {
+
+                            $draftDatainnermostsub = CommoditiesData::where('is_deleted', '0')
+                                ->where('port_type', $getData->port_type)
+                                ->where('port_id', $getData->port_id)
+                                ->where('commodity_id', $innerMostSubCommodity['id'])
+                                ->where('select_month', $getData->select_month)
+                                ->where('select_year', $getData->select_year)
+                                ->where('status', $status)
+                                ->get()
+                                ->toArray();
+                            // dd($draftDatainnermostsub);
+                            $innerSubCommodityItem['innermostsub'][] = $innerMostSubCommodity;
+                            $innerSubCommodityItem['draftDatainnermostsub'][] = $draftDatainnermostsub;
+                        }
+
+                        $subCommodityItem['innersub'][] = $innerSubCommodityItem;
+                    }
+
+                    $commodityItem['sub'][] = $subCommodityItem;
+                }
+
+                $commodityArr[] = $commodityItem;
+            }
+
+            // dd($commodityArr);
+
+            // Attempt to get the data
+            // $draftData = CommoditiesData::where('is_deleted', '0')
+            //     ->where('port_type', $getData->port_type)
+            //     ->where('port_id', $getData->port_id)
+            //     ->where('select_month', $getData->select_month)
+            //     ->where('select_year', $getData->select_year)
+            //     ->where('status', 3)
+            //     ->get()
+            //     ->toArray();
+
+            // dd($draftData);
+
+            return view('backend.viewDraftedData', [
+                'getData' => $getData,
+                // 'draftData' => $draftData,
+                'commodityArr' => $commodityArr,
+                'port_id' => $port_id
+            ]);
+        } catch (\Exception $e) {
+            // Optionally, you can display a user-friendly message
+            dd($e);
+            return redirect()->back()->with('error', 'An error occurred while fetching the data. Please try again later.');
+        }
+    }
+
+    //
+    public function updateDraftedData(Request $request)
+    {
+        // Get the authenticated user's role ID
+        $userRoleID = Auth::user()->role_id;
+
+        // Assign the appropriate status ID based on the user's role and status
+        if (in_array($userRoleID, [4, 5])) {
+            $statusID = 1;
+        } elseif ($userRoleID == 6) {
+            $statusID = 2;
+        }
+
+        // Variable to track if all records are created successfully
+        $allCreated = true;
+
+        foreach ($request['grand_total'] as $key => $grandTotal) {
+            $commodity = CommoditiesData::where('port_type', $request->port_type)
+                ->where('port_id', $request->port_id)
+                ->where('select_month', $request->select_month)
+                ->where('select_year', $request->select_year)
+                ->where('commodity_id', $request['commodity_id'][$key])
+                ->first();
+
+            // Update existing record
+            $commodity->update([
+                'select_year' => $request['select_year'],
+                'select_month' => $request['select_month'],
+                'state_id' => $request['state_id'],
+                'port_type' => $request['port_type'],
+                'state_board' => $request['state_board'],
+                'port_id' => $request['port_id'],
+                'updated_by' => $request['updated_by'],
+                'ov_ul_if' => $request['ov_ul_if'][$key],
+                'ov_ul_ff' => $request['ov_ul_ff'][$key],
+                'ov_l_if' => $request['ov_l_if'][$key],
+                'ov_l_ff' => $request['ov_l_ff'][$key],
+                'ov_total' => $request['ov_total'][$key],
+                'co_ul_if' => $request['co_ul_if'][$key],
+                'co_ul_ff' => $request['co_ul_ff'][$key],
+                'co_l_if' => $request['co_l_if'][$key],
+                'co_l_ff' => $request['co_l_ff'][$key],
+                'co_total' => $request['co_total'][$key],
+                'grand_total' => $grandTotal,
+                'comm_remarks' => $request['comm_remarks'],
+                'status' => $statusID,
+            ]);
+            if (!$commodity->save()) {
+                $allCreated = false;
+            }
+        }
+
+        // Check if all records were created successfully
+        if ($allCreated) {
+            $message = ($statusID === 2 || $statusID === 3) ? 'Drafted Data For Approval' : 'Record is Drafted successfully';
+            return redirect()->back()->with('success', $message);
+        } else {
+            return redirect()->back()->with('error', 'Failed to create one or more records');
+        }
+    }
+
+
+    // public function viewDraftedData(Request $request, $id)
+    // {
+    //     try {
+    //         $userData = Auth::user();
+    //         $port_id = $userData->port_id ?? '';
+
+    //         $commodityArr = $this->getCommodityHierarchy();
+
+    //         $getData = CommoditiesData::findOrFail($id);
+
+    //         $draftData = $this->fetchDraftData($getData);
+
+    //         // Debugging: Output the retrieved data
+    //         // dd($draftData, $commodityArr);
+
+    //         return view('backend.viewDraftedData', [
+    //             'getData' => $getData,
+    //             'draftData' => $draftData,
+    //             'commodityArr' => $commodityArr,
+    //             'port_id' => $port_id
+    //         ]);
+    //     } catch (\Exception $e) {
+    //         // \Log::error('Error in viewDraftedData: ' . $e->getMessage());
+    //         return redirect()->back()->with('error', 'An error occurred while fetching the data. Please try again later.');
+    //     }
+    // }
+
+    // private function fetchDraftData($getData)
+    // {
+    //     return CommoditiesData::where('is_deleted', '0')
+    //         ->where('port_type', $getData->port_type)
+    //         ->where('port_id', $getData->port_id)
+    //         ->where('select_month', $getData->select_month)
+    //         ->where('select_year', $getData->select_year)
+    //         ->where('status', 3)
+    //         ->get()
+    //         ->toArray();
+    // }
+
+    // private function getCommodityHierarchy()
+    // {
+    //     $commodityArr = [];
+    //     $commodityParents = Commodities::where('parent_id', 0)->get()->toArray();
+
+    //     foreach ($commodityParents as $parent) {
+    //         $commodityArr[] = [
+    //             'parent' => $parent,
+    //             'sub' => $this->getSubCommodities($parent['id']),
+    //         ];
+    //     }
+
+    //     return $commodityArr;
+    // }
+
+    // private function getSubCommodities($parentId)
+    // {
+    //     $subCommodities = Commodities::where('parent_id', $parentId)->get()->toArray();
+    //     $subCommodityArr = [];
+
+    //     foreach ($subCommodities as $subCommodity) {
+    //         $subCommodityArr[] = [
+    //             'sub' => $subCommodity,
+    //             'innersub' => $this->getInnerSubCommodities($subCommodity['id']),
+    //         ];
+    //     }
+
+    //     return $subCommodityArr;
+    // }
+
+    // private function getInnerSubCommodities($subCommodityId)
+    // {
+    //     $innerSubCommodities = Commodities::where('parent_id', $subCommodityId)->get()->toArray();
+    //     $innerSubCommodityArr = [];
+
+    //     foreach ($innerSubCommodities as $innerSubCommodity) {
+    //         $innerSubCommodityArr[] = [
+    //             'innersub' => $innerSubCommodity,
+    //             'innermostsub' => Commodities::where('parent_id', $innerSubCommodity['id'])->get()->toArray(),
+    //         ];
+    //     }
+
+    //     return $innerSubCommodityArr;
+    // }
+
+
 
 
     // public function storeCommodity(Request $request)

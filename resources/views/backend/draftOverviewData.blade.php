@@ -57,12 +57,15 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($getData as $key => $value)
                                         <tr>
-                                            <td>1</td>
-                                            <td>1</td>
-                                            <td>1</td>
-                                            <td>1</td>
+                                            <td>{{ $loop->index + 1 }}</td>
+                                            <td>{{ $value['select_month'] }}</td>
+                                            <td>{{ $value['select_year'] }}</td>
+                                            <td><a href="{{ route('view-drafted-data', $value['id']) }}">
+                                                <i class="far fa-edit" aria-hidden="true"></i> View</a></td>
                                         </tr>
+                                        @endforeach
                                     </tbody>
                                     <tfoot>
                                         <tr>

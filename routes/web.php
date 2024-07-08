@@ -244,6 +244,9 @@ Route::get('/commodity-allocate/{id}', [App\Http\Controllers\Backend\CommodityCo
 Route::post('storeCommodity', [\App\Http\Controllers\Backend\CommodityController::class, 'storeCommodity'])->name('backend.storeCommodity');
 Route::get('viewReportFilter', [App\Http\Controllers\Backend\CommodityController::class,'viewReportFilter'])->name('viewReportFilter');
 
-// draft-overview-data
+// Draft Overview Data
 Route::get('draft-overview-data', [App\Http\Controllers\Backend\CommodityController::class, 'draftOverviewData'])->name('draft-overview-data');
-
+// View Drafted Data
+Route::get('view-drafted-data/{id?}', [App\Http\Controllers\Backend\CommodityController::class, 'viewDraftedData'])->name('view-drafted-data');
+// update Drafted Data
+Route::post('update-drafted-data', [App\Http\Controllers\Backend\CommodityController::class, 'updateDraftedData'])->name('update-drafted-data');

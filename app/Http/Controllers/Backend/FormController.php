@@ -1210,7 +1210,13 @@ class FormController extends Controller
             $merged_array=[];
 
 
-            return view('backend.viewReport', ['commodityArr' => $commodityArr,'merged_array' => $merged_array]);
+            return view('backend.viewReport', ['commodityArr' => $commodityArr,'merged_array' => $merged_array,'startMonth' => $startMonth ?? '',
+                'endMonth' => $endMonth ??'',
+                'startYear' => $startYear ?? '',
+                'endYear' => $endYear ?? '',
+            'allPortsType' => $allPortsType?? '',
+                'allStartBoards' => $allStartBoards ?? '',
+                'portAssigned' => $portAssigned ?? '']);
         } catch (\Exception $e) {
             // Handle exceptions and show an error page or log the error
             // It's a good practice to log errors for further investigation

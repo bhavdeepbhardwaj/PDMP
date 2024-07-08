@@ -100,7 +100,11 @@
                                     <div class="form-group">
                                         <label for="port_type">Port Type <span style="color: red;">*</span></label>
                                         <select class="form-control @error('port_type') is-invalid @enderror"
-                                            name="port_type" id="port_type">
+                                            name="port_type" @if(empty($allPortsType)) id="port_type" @endif>
+                                            <option value="">Select Port Type</option>
+                                            @if(!empty($allPortsType))
+                                            <option value="{{$allPortsType->id}}" selected>{{$allPortsType->category_name}}</option>
+                                            @endif
                                         </select>
                                         @error('port_type')
                                             <span class="invalid-feedback" role="alert">
@@ -109,6 +113,7 @@
                                         @enderror
                                     </div>
                                 </div>
+                                @if(!empty($allStartBoards))
                                 <div class="col-md-2" id="startBoard_div">
                                     <div class="form-group">
                                         <label for="state_board">State Board <span style="color: red;">*</span></label>
@@ -123,12 +128,16 @@
                                         @enderror
                                     </div>
                                 </div>
+                                @endif
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label for="port_name">Port Name <span style="color: red;">*</span></label>
                                         <select class="form-control @error('port_name') is-invalid @enderror"
-                                            name="port_name" id="port_name" value="{{ old('port_name') }}">
-                                            <option value='' selected disabled>All Port</option>
+                                            name="port_name" value="{{ old('port_name') }}" @if(empty($portAssigned)) id="port_name" @endif>
+                                            <option value=''>All Port</option>
+                                            @if(!empty($portAssigned))
+                                            <option value="{{$portAssigned->id}}" selected>{{$portAssigned->port_name}}</option>
+                                            @endif
                                         </select>
                                         @error('port_name')
                                             <span class="invalid-feedback" role="alert">
@@ -242,11 +251,11 @@
                                 </div>
                                 <div class="row pt-2">
                                     <div class="col-md-6" style="background-color: #db8b0b !important; padding:10px;">
-                                        <b>Port : CHENNAI PORT AUTHORITY</b>
+                                        <b>Port : {{$portAssigned->port_name}}</b>
                                     </div>
                                     <div class="col-md-6  text-right"
                                         style="background-color: #00c0ef !important; padding:10px;">
-                                        <b>Period : Jan-2024 - Dec-2024 </b>
+                                        <b>Period : {{$startMonth}}-{{$startYear}} - {{$endMonth}}-{{$endYear}} </b>
                                     </div>
                                 </div>
                             </div>
@@ -453,6 +462,7 @@
 
             monthItems.forEach(item => {
                 item.addEventListener('click', function() {
+                    
                     document.querySelector(`#monthsGrid${startOrEnd} .month-item.active`)?.classList.remove(
                         'active');
                     this.classList.add('active');
@@ -466,6 +476,19 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
+            var startmonth = '{{ $startMonth }}';
+            var startyear = '{{ $startYear }}';
+            var startmonthyear = startmonth + ' - ' + startyear;
+
+            var endmonth = '{{ $endMonth }}';
+            var endyear = '{{ $endYear }}';
+            var endmonthyear = endmonth + ' - ' + endyear;
+            if(startmonth !== ''){
+                document.getElementById(`monthYearDropdownStart`).value = startmonthyear;
+            }
+            if(endmonth !== ''){
+                document.getElementById(`monthYearDropdownEnd`).value = endmonthyear;
+            }
             initMonthYearPicker('Start');
             initMonthYearPicker('End');
         });
