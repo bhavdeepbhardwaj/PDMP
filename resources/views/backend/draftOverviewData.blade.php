@@ -19,12 +19,20 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Draft Data</h1>
+                        @if (Auth::user()->role_id != 6)
+                            <h1>Drafted Data For Approval</h1>
+                        @else
+                            <h1>Draft Data</h1>
+                        @endif
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Draft Data</li>
+                            @if (Auth::user()->role_id != 6)
+                                <li class="breadcrumb-item active">Drafted Data For Approval</li>
+                            @else
+                                <li class="breadcrumb-item active">Draft Data</li>
+                            @endif
                         </ol>
                     </div>
                 </div>
@@ -58,13 +66,13 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($getData as $key => $value)
-                                        <tr>
-                                            <td>{{ $loop->index + 1 }}</td>
-                                            <td>{{ $value['select_month'] }}</td>
-                                            <td>{{ $value['select_year'] }}</td>
-                                            <td><a href="{{ route('view-drafted-data', $value['id']) }}">
-                                                <i class="far fa-edit" aria-hidden="true"></i> View</a></td>
-                                        </tr>
+                                            <tr>
+                                                <td>{{ $loop->index + 1 }}</td>
+                                                <td>{{ date('F', mktime(0, 0, 0, $value['select_month'], 10)) }}</td>
+                                                <td>{{ $value['select_year'] }}</td>
+                                                <td><a href="{{ route('view-drafted-data', $value['id']) }}">
+                                                        <i class="far fa-edit" aria-hidden="true"></i> View</a></td>
+                                            </tr>
                                         @endforeach
                                     </tbody>
                                     <tfoot>

@@ -48,90 +48,102 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Edit & Submit Drafted Data For Approval</h3>
-                        {{-- <div class="float-right">
-                            <a href="{{ route('draft-overview-data') }}" class="btn btn-primary">
-                                <i class="fas fa-plus"></i> Draft Data </a>
-                        </div> --}}
                     </div>
                     <div class="card-body">
                         {{-- Form Respone --}}
                         @include('backend.component.flush')
 
-                        <div class="box box-primary">
-                            <div class="col-xs-12">
-                                <div class="table-responsive">
-                                    <table class="table table-responsive">
-                                        <tbody>
-                                            @php
-                                                // Port Category
-                                                $portCat = \App\Models\PortCategory::where('id', $getData->port_type)
-                                                    ->select('category_name')
-                                                    ->first();
+                        <div class="row p-2">
+                            @php
+                                // Port Category
+                                $portCat = \App\Models\PortCategory::where('id', $getData->port_type)
+                                    ->select('category_name')
+                                    ->first();
 
-                                                // State ID
-                                                $portState = \App\Models\State::where('id', $getData->state_id)
-                                                    ->select('name')
-                                                    ->first();
+                                // State ID
+                                $portState = \App\Models\State::where('id', $getData->state_id)
+                                    ->select('name')
+                                    ->first();
 
-                                                // State Board ID
-                                                $portStateBoard = \App\Models\StateBoard::where(
-                                                    'id',
-                                                    $getData->state_board,
-                                                )
-                                                    ->select('name')
-                                                    ->first();
+                                // State Board ID
+                                $portStateBoard = \App\Models\StateBoard::where('id', $getData->state_board)
+                                    ->select('name')
+                                    ->first();
 
-                                                // Port Category
-                                                $port = \App\Models\Port::where('id', $getData->port_id)
-                                                    ->select('port_name')
-                                                    ->first();
-                                            @endphp
-                                            <tr>
-                                                <th>State Name:</th>
-                                                <td>{{ $portState ? $portState->name : 'N/A' }}</td>
-
-                                                <th>Port Type:</th>
-                                                <td>{{ $portCat ? $portCat->category_name : 'N/A' }}</td>
-
-                                                <th>State Board</th>
-                                                <td>{{ $portStateBoard ? $portStateBoard->name : 'N/A' }}</td>
-
-                                                <th>Port Name:</th>
-                                                <td>{{ $port ? $port->port_name : 'N/A' }}</td>
-
-                                                <th>Month:</th>
-                                                <td>{{ $getData->select_month ? date('F', mktime(0, 0, 0, $getData->select_month, 1)) : 'N/A' }}</td>
-
-                                                <th>Year:</th>
-                                                <td>{{ $getData->select_year ?? 'N/A' }}</td>
-
-                                                <th>Year:</th>
-                                                <td>{{ $getData->status ?? 'N/A' }}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                                // Port Category
+                                $port = \App\Models\Port::where('id', $getData->port_id)
+                                    ->select('port_name')
+                                    ->first();
+                            @endphp
+                            <div class="col-md-2">
+                                <p>
+                                    <strong>State Name :</strong> {{ $portState ? $portState->name : 'N/A' }}
+                                </p>
                             </div>
+                            <div class="col-md-2">
+                                <p>
+                                    <strong>State Board :</strong> {{ $portStateBoard ? $portStateBoard->name : 'N/A' }}
+                                </p>
+                            </div>
+                            <div class="col-md-2">
+                                <p>
+                                    <strong>Port Type :</strong> {{ $portCat ? $portCat->category_name : 'N/A' }}
+                                </p>
+                            </div>
+                            <div class="col-md-2">
+                                <p>
+                                    <strong>Port Name :</strong> {{ $port ? $port->port_name : 'N/A' }}
+                                </p>
+                            </div>
+                            <div class="col-md-2">
+                                <p>
+                                    <strong>Month & Year :</strong>
+                                    {{ date('F', mktime(0, 0, 0, $getData->select_month, 10)) ?? 'N/A' }} -
+                                    {{ $getData->select_year ?? 'N/A' }}
+                                </p>
+                            </div>
+                            <div class="col-md-2">
+                                @php
+                                    if ($getData->status == 1) {
+                                        $statusText = 'Approved';
+                                    } elseif ($getData->status == 2) {
+                                        $statusText = 'Drafted Data For Approval';
+                                    } elseif ($getData->status == 3) {
+                                        $statusText = 'Drafted';
+                                    } else {
+                                        $statusText = 'N/A';
+                                    }
+                                @endphp
+                                <p>
+                                    <strong>Status:</strong> {{ $statusText }}
+                                </p>
+                            </div>                            
                         </div>
 
                         <div class="box-body table-responsive">
-                            <form method="POST" action="{{ route('update-drafted-data') }}"
-                                enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('update-drafted-data') }}" enctype="multipart/form-data">
                                 @csrf
                                 {{-- state_id --}}
-                                <input type="" name="state_id" value="{{ $getData->state_id }}" placeholder="state_id" readonly>
+                                <input type="hidden" name="state_id" value="{{ $getData->state_id }}"
+                                    placeholder="state_id" readonly>
                                 {{-- port_type --}}
-                                <input type="" name="port_type" value="{{ $getData->port_type }}" placeholder="port_type" readonly>
+                                <input type="hidden" name="port_type" value="{{ $getData->port_type }}"
+                                    placeholder="port_type" readonly>
                                 {{-- state_board --}}
-                                <input type="" name="state_board" value="{{ $getData->state_board }}" placeholder="state_board" readonly>
+                                <input type="hidden" name="state_board" value="{{ $getData->state_board }}"
+                                    placeholder="state_board" readonly>
                                 {{-- port_id --}}
-                                <input type="" name="port_id" value="{{ $getData->port_id }}" placeholder="port_id" readonly>
+                                <input type="hidden" name="port_id" value="{{ $getData->port_id }}" placeholder="port_id"
+                                    readonly>
                                 {{-- Select Year --}}
-                                <input type="" name="select_year" value="{{ $getData->select_year }}" placeholder="select_year" readonly>
+                                <input type="hidden" name="select_year" value="{{ $getData->select_year }}"
+                                    placeholder="select_year" readonly>
                                 {{-- Select Month --}}
-                                <input type="" name="select_month" value="{{ $getData->select_month }}" placeholder="select_month" readonly>
+                                <input type="hidden" name="select_month" value="{{ $getData->select_month }}"
+                                    placeholder="select_month" readonly>
                                 {{-- created_by --}}
-                                <input type="" name="updated_by" value="{{ Auth::user()->id }}" placeholder="updated_by" readonly>
+                                <input type="hidden" name="updated_by" value="{{ Auth::user()->id }}"
+                                    placeholder="updated_by" readonly>
 
                                 <table class="table table-bordered table-striped">
                                     <thead class="bg-blue">
@@ -217,7 +229,6 @@
                                                         <td class="text-center h6"></td>
                                                     </tr>
                                                     @if (isset($subCommodity['innersub']) && !empty($subCommodity['innersub']))
-                                                    
                                                         @foreach ($subCommodity['innersub'] as $innerKey => $innerSubData)
                                                             @if (isset($innerSubData['innermostsub']) && empty($innerSubData['innermostsub']))
                                                                 @php
@@ -468,7 +479,6 @@
                                                             @endif
 
                                                             @if (isset($innerSubData['innermostsub']) && !empty($innerSubData['innermostsub']))
-                                                                    
                                                                 @php
                                                                     $innerMostSubHeading = \App\Models\Commodities::where(
                                                                         'parent_id',
@@ -504,9 +514,7 @@
                                                                 @endif
                                                             @endif
                                                             @if (isset($innerSubData['innermostsub']) && !empty($innerSubData['innermostsub']))
-                                                                    
                                                                 @foreach ($innerSubData['innermostsub'] as $key => $innermostsub)
-                                                                
                                                                     @php
                                                                         $innerMostSub = \App\Models\Commodities::where(
                                                                             'id',
@@ -540,7 +548,7 @@
                                                                                 <div class="form-group">
                                                                                     <div class=""
                                                                                         aria-required="true">
-                                                                                        
+
                                                                                         <input type="text"
                                                                                             name="ov_ul_if[]"
                                                                                             class="form-control @error('ov_ul_if.' . $key) is-invalid @enderror numeric_input ov_ul_if"
@@ -778,7 +786,8 @@
                                         </div><label>
 
                                             <div class="">
-                                                <textarea name="comm_remarks" class="form-control" cols="30" rows="6" id="comm_remarks" value="{{ $getData->comm_remarks }}">{{ $getData->comm_remarks }}</textarea>
+                                                <textarea name="comm_remarks" class="form-control" cols="30" rows="6" id="comm_remarks"
+                                                    value="{{ $getData->comm_remarks }}">{{ $getData->comm_remarks }}</textarea>
                                             </div>
                                         </label>
                                     </div>

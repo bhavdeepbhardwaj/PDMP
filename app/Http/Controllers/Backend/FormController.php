@@ -1163,6 +1163,8 @@ class FormController extends Controller
     {
         try {
             // dd("Report Page");
+            $userData = User::where('id', Auth::User()->id)->first();
+            $port_id = $userData->port_id ?? '';
             $commodityArr = [];
 
             $commodityParents = Commodities::where('parent_id', 0)->get()->toArray();
@@ -1207,20 +1209,26 @@ class FormController extends Controller
 
 
 
-            $merged_array=[];
+            $merged_array = [];
 
 
-            return view('backend.viewReport', ['commodityArr' => $commodityArr,'merged_array' => $merged_array,'startMonth' => $startMonth ?? '',
-                'endMonth' => $endMonth ??'',
+            return view('backend.viewReport', [
+                'commodityArr' => $commodityArr,
+                'port_id' => $port_id,
+                'merged_array' => $merged_array,
+                'startMonth' => $startMonth ?? '',
+                'endMonth' => $endMonth ?? '',
                 'startYear' => $startYear ?? '',
                 'endYear' => $endYear ?? '',
-            'allPortsType' => $allPortsType?? '',
+                'allPortsType' => $allPortsType ?? '',
                 'allStartBoards' => $allStartBoards ?? '',
-                'portAssigned' => $portAssigned ?? '']);
+                'portAssigned' => $portAssigned ?? ''
+            ]);
         } catch (\Exception $e) {
             // Handle exceptions and show an error page or log the error
             // It's a good practice to log errors for further investigation
-            Log::error('Error in viewReport method: ' . $e->getMessage());
+            // Log::error('Error in viewReport method: ' . $e->getMessage());
+            dd($e);
 
             // Return a view with an error message
             return view('backend.error')->with('error', 'An error occurred: ' . $e->getMessage());

@@ -93,6 +93,8 @@
                         </h3>
                     </div>
                     <div class="card-body">
+                        {{-- Form Respone --}}
+                        @include('backend.component.flush')
                         {{-- Filter Form Start --}}
                         <form method="get" action="{{ route('viewReportFilter') }}">
                             <div class="row">
@@ -100,10 +102,11 @@
                                     <div class="form-group">
                                         <label for="port_type">Port Type <span style="color: red;">*</span></label>
                                         <select class="form-control @error('port_type') is-invalid @enderror"
-                                            name="port_type" @if(empty($allPortsType)) id="port_type" @endif>
+                                            name="port_type" @if (empty($allPortsType)) id="port_type" @endif>
                                             <option value="">Select Port Type</option>
-                                            @if(!empty($allPortsType))
-                                            <option value="{{$allPortsType->id}}" selected>{{$allPortsType->category_name}}</option>
+                                            @if (!empty($allPortsType))
+                                                <option value="{{ $allPortsType->id }}" selected>
+                                                    {{ $allPortsType->category_name }}</option>
                                             @endif
                                         </select>
                                         @error('port_type')
@@ -113,30 +116,32 @@
                                         @enderror
                                     </div>
                                 </div>
-                                @if(!empty($allStartBoards))
-                                <div class="col-md-2" id="startBoard_div">
-                                    <div class="form-group">
-                                        <label for="state_board">State Board <span style="color: red;">*</span></label>
-                                        <select class="form-control @error('state_board') is-invalid @enderror"
-                                            name="state_board" id="state_board" value="{{ old('state_board') }}">
-                                            <option value='' selected disabled>All State</option>
-                                        </select>
-                                        @error('state_board')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
+                                @if (!empty($allStartBoards))
+                                    <div class="col-md-2" id="startBoard_div">
+                                        <div class="form-group">
+                                            <label for="state_board">State Board <span style="color: red;">*</span></label>
+                                            <select class="form-control @error('state_board') is-invalid @enderror"
+                                                name="state_board" id="state_board" value="{{ old('state_board') }}">
+                                                <option value='' selected disabled>All State</option>
+                                            </select>
+                                            @error('state_board')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
                                     </div>
-                                </div>
                                 @endif
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label for="port_name">Port Name <span style="color: red;">*</span></label>
                                         <select class="form-control @error('port_name') is-invalid @enderror"
-                                            name="port_name" value="{{ old('port_name') }}" @if(empty($portAssigned)) id="port_name" @endif>
+                                            name="port_name" value="{{ old('port_name') }}"
+                                            @if (empty($portAssigned)) id="port_name" @endif>
                                             <option value=''>All Port</option>
-                                            @if(!empty($portAssigned))
-                                            <option value="{{$portAssigned->id}}" selected>{{$portAssigned->port_name}}</option>
+                                            @if (!empty($portAssigned))
+                                                <option value="{{ $portAssigned->id }}" selected>
+                                                    {{ $portAssigned->port_name }}</option>
                                             @endif
                                         </select>
                                         @error('port_name')
@@ -232,184 +237,395 @@
                             </div>
                         </form>
                         {{-- Filter Form End --}}
-                        <div class="row p-2">
-                            
-                        </div>
 
 
-                        @if(!empty($merged_array))
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="row bg-green p-2">
-                                    <div class="col-md-12">
-                                        <center><!--p class="lead text-bold">Report Details</p-->
-                                            <h4>
-                                                Cargo Traffic Handled At Major Ports
-                                            </h4>
-                                        </center>
-                                    </div>
-                                </div>
-                                <div class="row pt-2">
-                                    <div class="col-md-6" style="background-color: #db8b0b !important; padding:10px;">
-                                        <b>Port : {{$portAssigned->port_name}}</b>
-                                    </div>
-                                    <div class="col-md-6  text-right"
-                                        style="background-color: #00c0ef !important; padding:10px;">
-                                        <b>Period : {{$startMonth}}-{{$startYear}} - {{$endMonth}}-{{$endYear}} </b>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="box-body table-responsive">
-                                    <table class="table table-bordered table-hover dataTable table-striped">
-                                        <thead class="bg-blue">
-                                            <tr>
-                                                <th width="4%" rowspan="3">S.No.</th>
-                                                <th style="text-align: center" rowspan="3">Commodity Name</th>
-                                                <th colspan="5">
-                                                    <center>Overseas (in Tonnes)</center>
-                                                </th>
-                                                <th colspan="5">
-                                                    <center>Coastal (in Tonnes)</center>
-                                                </th>
-                                                <th rowspan="3">Grand <br> Total <br>(in Tonnes)</th>
-                                            </tr>
-                                            <tr>
-                                                <th colspan="2">
-                                                    <center>Unloaded</center>
-                                                </th>
-                                                <th colspan="2">
-                                                    <center>Loaded</center>
-                                                </th>
-                                                <th rowspan="2">
-                                                    <center>Total</center>
-                                                </th>
-                                                <th colspan="2">
-                                                    <center>Unloaded</center>
-                                                </th>
-                                                <th colspan="2">
-                                                    <center>Loaded</center>
-                                                </th>
-                                                <th rowspan="2">
-                                                    <center>Total</center>
-                                                </th>
-                                            </tr>
-                                            <tr>
-                                                <th style="text-align: center">IF</th>
-                                                <th style="text-align: center">FF</th>
-                                                <th style="text-align: center">IF</th>
-                                                <th style="text-align: center">FF</th>
-                                                <th style="text-align: center">IF</th>
-                                                <th style="text-align: center">FF</th>
-                                                <th style="text-align: center">IF</th>
-                                                <th style="text-align: center">FF</th>
-                                            </tr>
-                                        </thead>
-
-                                        <tbody id="records">
-                                            {{-- @if(!empty($merged_array)) --}}
-                                            @foreach ($commodityArr as $commodityData)
-                                                @foreach ($commodityData['sub'] as $subCommodity)
-                                                    <tr class="2">
-                                                        <td class="text-center text-bold h4">
-                                                            A </td>
-                                                        <td class="text-bold h4"> {{ $subCommodity['sub']['name'] }}</td>
-                                                        <td class="text-center h6"></td>
-                                                        <td class="text-center h6"></td>
-                                                        <td class="text-center h6"></td>
-                                                        <td class="text-center h6"></td>
-                                                        <td class="text-center h6"></td>
-                                                        <td class="text-center h6"></td>
-                                                        <td class="text-center h6"></td>
-                                                        <td class="text-center h6"></td>
-                                                        <td class="text-center h6"></td>
-                                                        <td class="text-center h6"></td>
-                                                        <td class="text-center h6"></td>
-                                                    </tr>
-                                                    @foreach ($subCommodity['innersub'] as $innerKey => $innerSubData)
-                                                        <tr class="3">
-                                                            <td class="text-center h5">
-                                                                1 </td>
-                                                            <td class="h5"> {{ $innerSubData['innersub']['name'] }} <strong>= ID {{ $innerSubData['innersub']['id'] }}</strong></td>
-                                                            <td class="text-center h6">@if(!empty($merged_array) && (in_array($innerSubData['innersub']['id'],array_keys($merged_array)))) {{ $merged_array[$innerSubData['innersub']['id']]['ov_ul_if']}} @else 0 @endif </td>
-                                                            <td class="text-center h6">@if(!empty($merged_array) && (in_array($innerSubData['innersub']['id'],array_keys($merged_array)))) {{ $merged_array[$innerSubData['innersub']['id']]['ov_ul_ff']}} @else 0 @endif </td>
-                                                            <td class="text-center h6">@if(!empty($merged_array) && (in_array($innerSubData['innersub']['id'],array_keys($merged_array)))) {{ $merged_array[$innerSubData['innersub']['id']]['ov_l_if']}} @else 0 @endif </td>
-                                                            <td class="text-center h6">@if(!empty($merged_array) && (in_array($innerSubData['innersub']['id'],array_keys($merged_array)))) {{ $merged_array[$innerSubData['innersub']['id']]['ov_l_ff']}} @else 0 @endif </td>
-                                                            <td class="text-center h6">@if(!empty($merged_array) && (in_array($innerSubData['innersub']['id'],array_keys($merged_array)))) {{ $merged_array[$innerSubData['innersub']['id']]['ov_total']}} @else 0 @endif </td>
-                                                            <td class="text-center h6">@if(!empty($merged_array) && (in_array($innerSubData['innersub']['id'],array_keys($merged_array)))) {{ $merged_array[$innerSubData['innersub']['id']]['co_ul_if']}} @else 0 @endif </td>
-                                                            <td class="text-center h6">@if(!empty($merged_array) && (in_array($innerSubData['innersub']['id'],array_keys($merged_array)))) {{ $merged_array[$innerSubData['innersub']['id']]['co_ul_ff']}} @else 0 @endif </td>
-                                                            <td class="text-center h6">@if(!empty($merged_array) && (in_array($innerSubData['innersub']['id'],array_keys($merged_array)))) {{ $merged_array[$innerSubData['innersub']['id']]['co_l_if']}} @else 0 @endif </td>
-                                                            <td class="text-center h6">@if(!empty($merged_array) && (in_array($innerSubData['innersub']['id'],array_keys($merged_array)))) {{ $merged_array[$innerSubData['innersub']['id']]['co_l_ff']}} @else 0 @endif </td>
-                                                            <td class="text-center h6">@if(!empty($merged_array) && (in_array($innerSubData['innersub']['id'],array_keys($merged_array)))) {{ $merged_array[$innerSubData['innersub']['id']]['co_total']}} @else 0 @endif </td>
-                                                            <td class="text-center h6">@if(!empty($merged_array) && (in_array($innerSubData['innersub']['id'],array_keys($merged_array)))) {{ $merged_array[$innerSubData['innersub']['id']]['grand_total']}} @else 0 @endif </td>
-                                                        </tr>
-
-                                                        @foreach ($innerSubData['innermostsub'] as $innerSubMostData)
-                                                            <tr class="3">
-                                                                <td class="text-center h5">
-                                                                    1 </td>
-                                                                <td class="h5">{{ $innerSubMostData['name'] }}</td>
-                                                                <td class="text-center h6">@if(!empty($merged_array) && (in_array($innerSubMostData['id'],array_keys($merged_array)))) {{ $merged_array[$innerSubMostData['id']]['ov_ul_if']}} @else 0 @endif </td>
-                                                                <td class="text-center h6">@if(!empty($merged_array) && (in_array($innerSubMostData['id'],array_keys($merged_array)))) {{ $merged_array[$innerSubMostData['id']]['ov_ul_ff']}} @else 0 @endif </td>
-                                                                <td class="text-center h6">@if(!empty($merged_array) && (in_array($innerSubMostData['id'],array_keys($merged_array)))) {{ $merged_array[$innerSubMostData['id']]['ov_l_if']}} @else 0 @endif </td>
-                                                                <td class="text-center h6">@if(!empty($merged_array) && (in_array($innerSubMostData['id'],array_keys($merged_array)))) {{ $merged_array[$innerSubMostData['id']]['ov_l_ff']}} @else 0 @endif </td>
-                                                                <td class="text-center h6">@if(!empty($merged_array) && (in_array($innerSubMostData['id'],array_keys($merged_array)))) {{ $merged_array[$innerSubMostData['id']]['ov_total']}} @else 0 @endif </td>
-                                                                <td class="text-center h6">@if(!empty($merged_array) && (in_array($innerSubMostData['id'],array_keys($merged_array)))) {{ $merged_array[$innerSubMostData['id']]['co_ul_if']}} @else 0 @endif </td>
-                                                                <td class="text-center h6">@if(!empty($merged_array) && (in_array($innerSubMostData['id'],array_keys($merged_array)))) {{ $merged_array[$innerSubMostData['id']]['co_ul_ff']}} @else 0 @endif </td>
-                                                                <td class="text-center h6">@if(!empty($merged_array) && (in_array($innerSubMostData['id'],array_keys($merged_array)))) {{ $merged_array[$innerSubMostData['id']]['co_l_if']}} @else 0 @endif </td>
-                                                                <td class="text-center h6">@if(!empty($merged_array) && (in_array($innerSubMostData['id'],array_keys($merged_array)))) {{ $merged_array[$innerSubMostData['id']]['co_l_ff']}} @else 0 @endif </td>
-                                                                <td class="text-center h6">@if(!empty($merged_array) && (in_array($innerSubMostData['id'],array_keys($merged_array)))) {{ $merged_array[$innerSubMostData['id']]['co_total']}} @else 0 @endif </td>
-                                                                <td class="text-center h6">@if(!empty($merged_array) && (in_array($innerSubMostData['id'],array_keys($merged_array)))) {{ $merged_array[$innerSubMostData['id']]['grand_total']}} @else 0 @endif </td>
-                                                            </tr>
-                                                        @endforeach
-                                                    @endforeach
-
-
-                                                    {{-- <tr>
-                                                        <td class="text-center">
-
-                                                        </td>
-                                                        <td class="text-bold">
-                                                            Total (in Tonnes)
-                                                        </td>
-                                                        <td class="text-center text-bold">
-                                                            363 </td>
-                                                        <td class="text-center text-bold">
-                                                            1201904 </td>
-                                                        <td class="text-center text-bold">
-                                                            152132 </td>
-                                                        <td class="text-center text-bold">
-                                                            2202699 </td>
-                                                        <td class="text-center text-bold">
-                                                            3557098 </td>
-                                                        <td class="text-center text-bold">
-                                                            54831 </td>
-                                                        <td class="text-center text-bold">
-                                                            9983 </td>
-                                                        <td class="text-center text-bold">
-                                                            7912 </td>
-                                                        <td class="text-center text-bold">
-                                                            0 </td>
-                                                        <td class="text-center text-bold">
-                                                            72726 </td>
-                                                        <td class="text-center text-bold">
-                                                            3629824 </td>
-                                                    </tr> --}}
-                                                @endforeach
-                                            @endforeach
-                                            {{-- @endif --}}
-                                        </tbody>
-                                    </table>
-                                    <div class="col-md-4 pull-right">
-                                        <div class="form-group">
-                                            <label class="text-light-blue">Remarks</label><span class="asterisk text-red">
-                                            </span><label>
-                                            </label>
+                        @if (!empty($merged_array))
+                            <div class="row p-2">
+                                <div class="col-md-12">
+                                    <div class="row bg-green p-2">
+                                        <div class="col-md-12">
+                                            <center>
+                                                <h4>Cargo Traffic Handled At Major Ports</h4>
+                                            </center>
                                         </div>
                                     </div>
-                                </div><!-- /.box-body -->
+                                    <div class="row pt-2">
+                                        <div class="col-md-6" style="background-color: #db8b0b !important; padding:10px;">
+                                            <b>Port : {{ $portAssigned->port_name }}</b>
+                                        </div>
+                                        <div class="col-md-6 text-right"
+                                            style="background-color: #00c0ef !important; padding:10px;">
+                                            <b>Period : {{ $startMonth }}-{{ $startYear }} -
+                                                {{ $endMonth }}-{{ $endYear }} </b>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="box-body table-responsive">
+                                        <table class="table table-bordered table-hover dataTable table-striped">
+                                            <thead class="bg-blue">
+                                                <tr>
+                                                    <th width="4%" rowspan="3">S.No.</th>
+                                                    <th style="text-align: center" rowspan="3">Commodity Name</th>
+                                                    <th colspan="5">
+                                                        <center>Overseas (in Tonnes)</center>
+                                                    </th>
+                                                    <th colspan="5">
+                                                        <center>Coastal (in Tonnes)</center>
+                                                    </th>
+                                                    <th rowspan="3">Grand <br> Total <br>(in Tonnes)</th>
+                                                </tr>
+                                                <tr>
+                                                    <th colspan="2">
+                                                        <center>Unloaded</center>
+                                                    </th>
+                                                    <th colspan="2">
+                                                        <center>Loaded</center>
+                                                    </th>
+                                                    <th rowspan="2">
+                                                        <center>Total</center>
+                                                    </th>
+                                                    <th colspan="2">
+                                                        <center>Unloaded</center>
+                                                    </th>
+                                                    <th colspan="2">
+                                                        <center>Loaded</center>
+                                                    </th>
+                                                    <th rowspan="2">
+                                                        <center>Total</center>
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <th style="text-align: center">IF</th>
+                                                    <th style="text-align: center">FF</th>
+                                                    <th style="text-align: center">IF</th>
+                                                    <th style="text-align: center">FF</th>
+                                                    <th style="text-align: center">IF</th>
+                                                    <th style="text-align: center">FF</th>
+                                                    <th style="text-align: center">IF</th>
+                                                    <th style="text-align: center">FF</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody id="records">
+                                                {{-- @if (!empty($merged_array)) --}}
+                                                @foreach ($commodityArr as $commodityData)
+                                                    @foreach ($commodityData['sub'] as $subKey => $subCommodity)
+                                                        @php
+                                                            $mainSub = \App\Models\Commodities::where(
+                                                                'parent_id',
+                                                                $subCommodity['sub']['id'],
+                                                            )
+                                                                ->whereRaw('FIND_IN_SET(?, port_id)', [$port_id])
+                                                                ->count();
+                                                            $azRange = range('A', 'Z');
+                                                            // Ensure $subKey is within the valid range for letters
+                                                            $letter = $azRange[$subKey % 26];
+                                                        @endphp
+                                                        @if ($mainSub > 0)
+                                                            <tr class="1">
+                                                                <td class="text-center text-bold h4">
+                                                                    {{ $letter }} </td>
+                                                                <td class="text-bold h4">
+                                                                    {{ $subCommodity['sub']['name'] }}</td>
+                                                                <td class="text-center h6"></td>
+                                                                <td class="text-center h6"></td>
+                                                                <td class="text-center h6"></td>
+                                                                <td class="text-center h6"></td>
+                                                                <td class="text-center h6"></td>
+                                                                <td class="text-center h6"></td>
+                                                                <td class="text-center h6"></td>
+                                                                <td class="text-center h6"></td>
+                                                                <td class="text-center h6"></td>
+                                                                <td class="text-center h6"></td>
+                                                                <td class="text-center h6"></td>
+                                                            </tr>
+                                                            @if (isset($subCommodity['innersub']) && !empty($subCommodity['innersub']))
+                                                                @foreach ($subCommodity['innersub'] as $innerKey => $innerSubData)
+                                                                    @if (isset($innerSubData['innermostsub']) && empty($innerSubData['innermostsub']))
+                                                                        @php
+                                                                            $innerSub = \App\Models\Commodities::where(
+                                                                                'id',
+                                                                                $innerSubData['innersub']['id'],
+                                                                            )
+                                                                                ->whereRaw('FIND_IN_SET(?, port_id)', [
+                                                                                    $port_id,
+                                                                                ])
+                                                                                ->count();
+                                                                            // Ensure $innerKey is within the valid range for letters
+                                                                            $azRange = range('a', 'z');
+                                                                            $letter = $azRange[$innerKey % 26];
+                                                                        @endphp
+                                                                        @if ($innerSub > 0)
+                                                                            <tr class="1.2">
+                                                                                <td class="text-center h5">
+                                                                                    {{ ++$innerKey }}
+                                                                                </td>
+
+                                                                                <td class="h5">
+                                                                                    {{ $innerSubData['innersub']['name'] }}
+                                                                                    {{-- <strong>= ID
+                                                                                        {{ $innerSubData['innersub']['id'] }}</strong> --}}
+                                                                                    <br />
+                                                                                    {{-- commodity_id --}}
+                                                                                </td>
+
+                                                                                <td class="text-center">
+                                                                                    @if (!empty($merged_array) && in_array($innerSubData['innersub']['id'], array_keys($merged_array)))
+                                                                                        {{ $merged_array[$innerSubData['innersub']['id']]['ov_ul_if'] }}
+                                                                                    @else
+                                                                                        0
+                                                                                    @endif
+                                                                                </td>
+
+                                                                                <td class="text-center">
+                                                                                    @if (!empty($merged_array) && in_array($innerSubData['innersub']['id'], array_keys($merged_array)))
+                                                                                        {{ $merged_array[$innerSubData['innersub']['id']]['ov_ul_ff'] }}
+                                                                                    @else
+                                                                                        0
+                                                                                    @endif
+                                                                                </td>
+                                                                                <td class="text-center">
+                                                                                    @if (!empty($merged_array) && in_array($innerSubData['innersub']['id'], array_keys($merged_array)))
+                                                                                        {{ $merged_array[$innerSubData['innersub']['id']]['ov_l_if'] }}
+                                                                                    @else
+                                                                                        0
+                                                                                    @endif
+                                                                                </td>
+                                                                                <td class="text-center">
+                                                                                    @if (!empty($merged_array) && in_array($innerSubData['innersub']['id'], array_keys($merged_array)))
+                                                                                        {{ $merged_array[$innerSubData['innersub']['id']]['ov_l_ff'] }}
+                                                                                    @else
+                                                                                        0
+                                                                                    @endif
+                                                                                </td>
+                                                                                <td class="text-center">
+                                                                                    @if (!empty($merged_array) && in_array($innerSubData['innersub']['id'], array_keys($merged_array)))
+                                                                                        <strong>{{ $merged_array[$innerSubData['innersub']['id']]['ov_total'] }}</strong>
+                                                                                    @else
+                                                                                        <strong>0</strong>
+                                                                                    @endif
+                                                                                </td>
+                                                                                <td class="text-center">
+                                                                                    @if (!empty($merged_array) && in_array($innerSubData['innersub']['id'], array_keys($merged_array)))
+                                                                                        {{ $merged_array[$innerSubData['innersub']['id']]['co_ul_if'] }}
+                                                                                    @else
+                                                                                        0
+                                                                                    @endif
+                                                                                </td>
+                                                                                <td class="text-center">
+                                                                                    @if (!empty($merged_array) && in_array($innerSubData['innersub']['id'], array_keys($merged_array)))
+                                                                                        {{ $merged_array[$innerSubData['innersub']['id']]['co_ul_ff'] }}
+                                                                                    @else
+                                                                                        0
+                                                                                    @endif
+                                                                                </td>
+                                                                                <td class="text-center">
+                                                                                    @if (!empty($merged_array) && in_array($innerSubData['innersub']['id'], array_keys($merged_array)))
+                                                                                        {{ $merged_array[$innerSubData['innersub']['id']]['co_l_if'] }}
+                                                                                    @else
+                                                                                        0
+                                                                                    @endif
+                                                                                </td>
+                                                                                <td class="text-center">
+                                                                                    @if (!empty($merged_array) && in_array($innerSubData['innersub']['id'], array_keys($merged_array)))
+                                                                                        {{ $merged_array[$innerSubData['innersub']['id']]['co_l_ff'] }}
+                                                                                    @else
+                                                                                        0
+                                                                                    @endif
+                                                                                </td>
+
+                                                                                <td class="text-center">
+                                                                                    @if (!empty($merged_array) && in_array($innerSubData['innersub']['id'], array_keys($merged_array)))
+                                                                                        <strong>{{ $merged_array[$innerSubData['innersub']['id']]['co_total'] }}</strong>
+                                                                                    @else
+                                                                                        <strong>0</strong>
+                                                                                    @endif
+                                                                                </td>
+
+                                                                                <td class="text-center h6">
+                                                                                    @if (!empty($merged_array) && in_array($innerSubData['innersub']['id'], array_keys($merged_array)))
+                                                                                        <strong>{{ $merged_array[$innerSubData['innersub']['id']]['grand_total'] }}</strong>
+                                                                                    @else
+                                                                                        <strong>0</strong>
+                                                                                    @endif
+                                                                                </td>
+                                                                            </tr>
+                                                                        @endif
+                                                                    @endif
+
+                                                                    @if (isset($innerSubData['innermostsub']) && !empty($innerSubData['innermostsub']))
+                                                                        @php
+                                                                            $innerMostSubHeading = \App\Models\Commodities::where(
+                                                                                'parent_id',
+                                                                                $innerSubData['innersub']['id'],
+                                                                            )
+                                                                                ->whereRaw('FIND_IN_SET(?, port_id)', [
+                                                                                    $port_id,
+                                                                                ])
+                                                                                ->count();
+                                                                        @endphp
+
+                                                                        @if ($innerMostSubHeading > 0)
+                                                                            <tr class="2">
+                                                                                <td class="text-center h5">
+                                                                                    (a)
+                                                                                </td>
+                                                                                <td class="h5">
+                                                                                    {{ $innerSubData['innersub']['name'] }}
+                                                                                </td>
+
+                                                                                <td class="text-center h6"></td>
+                                                                                <td class="text-center h6"></td>
+                                                                                <td class="text-center h6"></td>
+                                                                                <td class="text-center h6"></td>
+                                                                                <td class="text-center h6"></td>
+                                                                                <td class="text-center h6"></td>
+                                                                                <td class="text-center h6"></td>
+                                                                                <td class="text-center h6"></td>
+                                                                                <td class="text-center h6"></td>
+
+                                                                                <td class="text-center h6"></td>
+                                                                                <td class="text-center h6"></td>
+                                                                            </tr>
+                                                                        @endif
+                                                                    @endif
+                                                                    @if (isset($innerSubData['innermostsub']) && !empty($innerSubData['innermostsub']))
+                                                                        @foreach ($innerSubData['innermostsub'] as $key => $innermostsub)
+                                                                            @php
+                                                                                $innerMostSub = \App\Models\Commodities::where(
+                                                                                    'id',
+                                                                                    $innermostsub['id'],
+                                                                                )
+                                                                                    ->whereRaw(
+                                                                                        'FIND_IN_SET(?, port_id)',
+                                                                                        [$port_id],
+                                                                                    )
+                                                                                    ->count();
+                                                                                // Ensure $key is within the valid range for letters
+                                                                                $azRange = range('a', 'z');
+                                                                                $letter = $azRange[$key % 26];
+                                                                            @endphp
+                                                                            @if ($innerMostSub > 0)
+                                                                                <tr class="2.2">
+                                                                                    <td class="text-right h6">
+                                                                                        ({{ $letter }})
+                                                                                    </td>
+                                                                                    <td class="h6">
+                                                                                        {{ $innermostsub['name'] }}
+                                                                                        {{-- <strong>= ID
+                                                                                            {{ $innermostsub['id'] }}</strong> --}}
+                                                                                        <br />
+                                                                                        {{-- commodity_id --}}
+                                                                                    </td>
+
+                                                                                    <td class="text-center">
+                                                                                        @if (!empty($merged_array) && in_array($innermostsub['id'], array_keys($merged_array)))
+                                                                                            {{ $merged_array[$innermostsub['id']]['ov_ul_if'] }}
+                                                                                        @else
+                                                                                            0
+                                                                                        @endif
+
+                                                                                    </td>
+                                                                                    <td class="text-center">
+                                                                                        @if (!empty($merged_array) && in_array($innermostsub['id'], array_keys($merged_array)))
+                                                                                            {{ $merged_array[$innermostsub['id']]['ov_ul_ff'] }}
+                                                                                        @else
+                                                                                            0
+                                                                                        @endif
+                                                                                    </td>
+                                                                                    <td class="text-center">
+                                                                                        @if (!empty($merged_array) && in_array($innermostsub['id'], array_keys($merged_array)))
+                                                                                            {{ $merged_array[$innermostsub['id']]['ov_l_if'] }}
+                                                                                        @else
+                                                                                            0
+                                                                                        @endif
+                                                                                    </td>
+                                                                                    <td class="text-center">
+                                                                                        @if (!empty($merged_array) && in_array($innermostsub['id'], array_keys($merged_array)))
+                                                                                            {{ $merged_array[$innermostsub['id']]['ov_l_ff'] }}
+                                                                                        @else
+                                                                                            0
+                                                                                        @endif
+                                                                                    </td>
+                                                                                    <td class="text-center">
+                                                                                        @if (!empty($merged_array) && in_array($innermostsub['id'], array_keys($merged_array)))
+                                                                                            <strong>{{ $merged_array[$innermostsub['id']]['ov_total'] }}</strong>
+                                                                                        @else
+                                                                                            <strong>0</strong>
+                                                                                        @endif
+                                                                                    </td>
+                                                                                    <td class="text-center">
+                                                                                        @if (!empty($merged_array) && in_array($innermostsub['id'], array_keys($merged_array)))
+                                                                                            {{ $merged_array[$innermostsub['id']]['co_ul_if'] }}
+                                                                                        @else
+                                                                                            0
+                                                                                        @endif
+                                                                                    </td>
+                                                                                    <td class="text-center">
+                                                                                        @if (!empty($merged_array) && in_array($innermostsub['id'], array_keys($merged_array)))
+                                                                                            {{ $merged_array[$innermostsub['id']]['co_ul_ff'] }}
+                                                                                        @else
+                                                                                            0
+                                                                                        @endif
+                                                                                    </td>
+                                                                                    <td class="text-center">
+                                                                                        @if (!empty($merged_array) && in_array($innermostsub['id'], array_keys($merged_array)))
+                                                                                            {{ $merged_array[$innermostsub['id']]['co_l_if'] }}
+                                                                                        @else
+                                                                                            0
+                                                                                        @endif
+                                                                                    </td>
+                                                                                    <td class="text-center">
+                                                                                        @if (!empty($merged_array) && in_array($innermostsub['id'], array_keys($merged_array)))
+                                                                                            {{ $merged_array[$innermostsub['id']]['co_l_ff'] }}
+                                                                                        @else
+                                                                                            0
+                                                                                        @endif
+                                                                                    </td>
+
+                                                                                    <td class="text-center">
+                                                                                        @if (!empty($merged_array) && in_array($innermostsub['id'], array_keys($merged_array)))
+                                                                                            <strong>{{ $merged_array[$innermostsub['id']]['co_total'] }}</strong>
+                                                                                        @else
+                                                                                            <strong>0</strong>
+                                                                                        @endif
+                                                                                    </td>
+
+                                                                                    <td class="text-center h6">
+                                                                                        @if (!empty($merged_array) && in_array($innermostsub['id'], array_keys($merged_array)))
+                                                                                            <strong>{{ $merged_array[$innermostsub['id']]['grand_total'] }}</strong>
+                                                                                        @else
+                                                                                            <strong>0</strong>
+                                                                                        @endif
+                                                                                    </td>
+
+                                                                                </tr>
+                                                                            @endif
+                                                                        @endforeach
+                                                                    @endif
+                                                                @endforeach
+                                                            @endif
+                                                        @endif
+                                                    @endforeach
+                                                @endforeach
+                                                {{-- @endif --}}
+                                            </tbody>
+                                        </table>
+                                        <div class="col-md-4 pull-right">
+                                            <div class="form-group">
+                                                <label class="text-light-blue">Remarks</label><span
+                                                    class="asterisk text-red">
+                                                </span><label>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div><!-- /.box-body -->
+                                </div>
+                            </div>
                         @endif
 
 
@@ -462,7 +678,7 @@
 
             monthItems.forEach(item => {
                 item.addEventListener('click', function() {
-                    
+
                     document.querySelector(`#monthsGrid${startOrEnd} .month-item.active`)?.classList.remove(
                         'active');
                     this.classList.add('active');
@@ -483,10 +699,10 @@
             var endmonth = '{{ $endMonth }}';
             var endyear = '{{ $endYear }}';
             var endmonthyear = endmonth + ' - ' + endyear;
-            if(startmonth !== ''){
+            if (startmonth !== '') {
                 document.getElementById(`monthYearDropdownStart`).value = startmonthyear;
             }
-            if(endmonth !== ''){
+            if (endmonth !== '') {
                 document.getElementById(`monthYearDropdownEnd`).value = endmonthyear;
             }
             initMonthYearPicker('Start');

@@ -393,8 +393,6 @@ class CommodityController extends Controller
     {
         // dd($request->all());
         try {
-            $userData = User::where('id', Auth::User()->id)->first();
-            $port_id = $userData->port_id ?? '';
             // Validation rules
             $rules = [
                 'port_type' => 'required',
@@ -559,11 +557,10 @@ class CommodityController extends Controller
                 'allPortsType' => $allPortsType,
                 'allStartBoards' => $allStartBoards ?? '',
                 'portAssigned' => $portAssigned,
-                'port_id' => $port_id
+                'yearpass' => '2024'
             ]);
         } catch (\Exception $e) {
             // Handle the exception
-            dd($e);
             return redirect()->back()->with('error', 'An error occurred while processing your request.');
         }
     }
@@ -893,7 +890,7 @@ class CommodityController extends Controller
             ]);
         } catch (\Exception $e) {
             // Optionally, you can display a user-friendly message
-            // dd($e);
+            dd($e);
             return redirect()->back()->with('error', 'An error occurred while fetching the data. Please try again later.');
         }
     }
@@ -952,9 +949,8 @@ class CommodityController extends Controller
 
         // Check if all records were created successfully
         if ($allCreated) {
-            $message = ($statusID === 2 || $statusID === 3) ? 'Drafted Data For Approval' : 'Record is Approved successfully';
-            // return redirect()->back()->with('success', $message);
-            return redirect()->route('backend.view-commodities-data-report')->with('success', $message);
+            $message = ($statusID === 2 || $statusID === 3) ? 'Drafted Data For Approval' : 'Record is Drafted successfully';
+            return redirect()->back()->with('success', $message);
         } else {
             return redirect()->back()->with('error', 'Failed to create one or more records');
         }

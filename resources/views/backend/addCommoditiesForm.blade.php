@@ -17,6 +17,11 @@
         h6 {
             font-size: 12px;
         }
+
+        .table-responsive {
+            overflow-x: hidden;
+
+        }
     </style>
     {{--  --}}
 @endsection
@@ -43,65 +48,70 @@
 
         <!-- Main content -->
         <section class="content">
-            {{-- <form> --}}
             <div class="container-fluid">
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Add Commodities Form</h3>
-                        <div class="float-right">
-                            <a href="{{ route('draft-overview-data') }}" class="btn btn-primary">
-                                <i class="fas fa-plus"></i> Draft Data </a>
-                        </div>
+                        @if (Auth::user()->role_id != 6)
+                            <div class="float-right">
+                                <a href="{{ route('draft-overview-data') }}" class="btn btn-primary">
+                                    <i class="fas fa-plus"></i> Drafted Data For Approval
+                                </a>
+                            </div>
+                        @else
+                            <div class="float-right">
+                                <a href="{{ route('draft-overview-data') }}" class="btn btn-primary">
+                                    <i class="fas fa-plus"></i> Draft Data
+                                </a>
+                            </div>
+                        @endif
                     </div>
+
                     <div class="card-body">
                         {{-- Form Respone --}}
                         @include('backend.component.flush')
 
-                        <div class="box box-primary">
-                            <div class="col-xs-12">
-                                <div class="table-responsive">
-                                    <table class="table table-responsive">
-                                        <tbody>
-                                            @php
-                                                // Port Category
-                                                $portCat = \App\Models\PortCategory::where('id', $userData->port_type)
-                                                    ->select('category_name')
-                                                    ->first();
+                        <div class="row p-2">
+                            @php
+                                // Port Category
+                                $portCat = \App\Models\PortCategory::where('id', $userData->port_type)
+                                    ->select('category_name')
+                                    ->first();
 
-                                                // State ID
-                                                $portState = \App\Models\State::where('id', $userData->state_id)
-                                                    ->select('name')
-                                                    ->first();
+                                // State ID
+                                $portState = \App\Models\State::where('id', $userData->state_id)
+                                    ->select('name')
+                                    ->first();
 
-                                                // State Board ID
-                                                $portStateBoard = \App\Models\StateBoard::where(
-                                                    'id',
-                                                    $userData->state_board,
-                                                )
-                                                    ->select('name')
-                                                    ->first();
+                                // State Board ID
+                                $portStateBoard = \App\Models\StateBoard::where('id', $userData->state_board)
+                                    ->select('name')
+                                    ->first();
 
-                                                // Port Category
-                                                $port = \App\Models\Port::where('id', $userData->port_id)
-                                                    ->select('port_name')
-                                                    ->first();
-                                            @endphp
-                                            <tr>
-                                                <th>State Name:</th>
-                                                <td>{{ $portState ? $portState->name : 'N/A' }}</td>
-
-                                                <th>Port Type:</th>
-                                                <td>{{ $portCat ? $portCat->category_name : 'N/A' }}</td>
-
-                                                <th>State Board</th>
-                                                <td>{{ $portStateBoard ? $portStateBoard->name : 'N/A' }}</td>
-
-                                                <th>Port Name:</th>
-                                                <td>{{ $port ? $port->port_name : 'N/A' }}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                                // Port Category
+                                $port = \App\Models\Port::where('id', $userData->port_id)
+                                    ->select('port_name')
+                                    ->first();
+                            @endphp
+                            <div class="col-md-3 bg-green p-2">
+                                <h5>
+                                    <stong>State Name :</stong> {{ $portState ? $portState->name : 'N/A' }}
+                                </h5>
+                            </div>
+                            <div class="col-md-3 bg-primary p-2">
+                                <h5>
+                                    <stong>State Board :</stong> {{ $portStateBoard ? $portStateBoard->name : 'N/A' }}
+                                </h5>
+                            </div>
+                            <div class="col-md-3 bg-secondary p-2">
+                                <h5>
+                                    <stong>Port Type :</stong> {{ $portCat ? $portCat->category_name : 'N/A' }}
+                                </h5>
+                            </div>
+                            <div class="col-md-3 bg-info p-2">
+                                <h5>
+                                    <stong>Port Name :</stong> {{ $port ? $port->port_name : 'N/A' }}
+                                </h5>
                             </div>
                         </div>
 
@@ -124,9 +134,9 @@
                                 {{-- created_by --}}
                                 <input type="hidden" name="created_by" value="{{ Auth::user()->id }}"
                                     placeholder="created_by" readonly>
-                                    
+
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="select_year">Year <span style="color: red;">*</span></label>
                                             <select name="select_year" id="select_year"
@@ -157,7 +167,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="select_month">Month <span style="color: red;">*</span></label>
                                             <select name="select_month" id="select_month"
@@ -280,13 +290,14 @@
                                                                         ])
                                                                         ->count();
                                                                     // Ensure $innerKey is within the valid range for letters
-                                                                    $azRange = range('a', 'z');
-                                                                    $letter = $azRange[$innerKey % 26];
+                                                                    $numRange = range(1, 100);
+                                                                    $number = $numRange[$innerKey % 100];
                                                                 @endphp
+
                                                                 @if ($innerSub > 0)
                                                                     <tr class="1.2">
                                                                         <td class="text-center h5">
-                                                                            {{ ++$innerKey }}
+                                                                            {{ $number }}
                                                                         </td>
 
                                                                         <td class="h5">
@@ -527,12 +538,14 @@
                                                                             $port_id,
                                                                         ])
                                                                         ->count();
+                                                                        $azRange = range(1,100);
+                                                                    $letter = $azRange[$innerKey % 26];
                                                                 @endphp
 
                                                                 @if ($innerMostSubHeading > 0)
                                                                     <tr class="2">
                                                                         <td class="text-center h5">
-                                                                            (a)
+                                                                            {{ $letter }}
                                                                         </td>
                                                                         <td class="h5">
                                                                             {{ $innerSubData['innersub']['name'] }}</td>
@@ -814,6 +827,7 @@
                                         @endforeach
                                     </tbody>
                                 </table>
+
                                 <div class="col-md-4 pull-right">
                                     <div class="form-group ">
                                         <label class="text-light-blue">Enter Any Remarks</label>
@@ -828,21 +842,18 @@
                                         </label>
                                     </div>
                                 </div>
+
                                 <div class="d-flex pb-2 justify-content-center align-items-center">
                                     <button type="submit" class="btn btn-primary waves-effect waves-light"
                                         id="">Add
                                         Records</button>
                                 </div>
+
                             </form>
                         </div>
-
                     </div>
-
                 </div>
             </div>
-            {{--
-        </form> --}}
-
         </section>
         <!--  -->
     </div>
