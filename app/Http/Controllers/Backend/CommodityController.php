@@ -393,7 +393,10 @@ class CommodityController extends Controller
     {
         // dd($request->all());
         try {
-            // Validation rules
+            // Validation rules\
+            $userData = User::where('id', Auth::User()->id)->first();
+            $port_id = $userData->port_id ?? '';
+
             $rules = [
                 'port_type' => 'required',
                 'state_board' => 'nullable',
@@ -537,7 +540,7 @@ class CommodityController extends Controller
             $allPortsType = PortCategory::where('id',$request->port_type)->first();
 
             $portAssigned = Port::where('id',$request->port_name)->first();
-            // dd($portAssigned);
+            // dd($commodityArr);
             if($portAssigned->state_board_id != 0){
                 $allStartBoards = StateBoard::where('id',$request->port_type)->get();
             }
@@ -557,7 +560,8 @@ class CommodityController extends Controller
                 'allPortsType' => $allPortsType,
                 'allStartBoards' => $allStartBoards ?? '',
                 'portAssigned' => $portAssigned,
-                'yearpass' => '2024'
+                'port_id' => $port_id,
+
             ]);
         } catch (\Exception $e) {
             // Handle the exception

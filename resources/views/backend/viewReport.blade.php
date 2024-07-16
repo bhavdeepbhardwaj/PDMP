@@ -615,14 +615,20 @@
                                                 {{-- @endif --}}
                                             </tbody>
                                         </table>
-                                        <div class="col-md-4 pull-right">
-                                            <div class="form-group">
-                                                <label class="text-light-blue">Remarks</label><span
-                                                    class="asterisk text-red">
-                                                </span><label>
+                                        {{-- <div class="col-md-4 pull-right">
+                                            <div class="form-group ">
+                                                <label class="text-light-blue">Enter Any Remarks</label>
+                                                <div>
+                                                    <label>Words Left : </label><span class="text-red safe"
+                                                        id="counter1">50</span>
+                                                </div><label>
+        
+                                                    <div class="">
+                                                        <textarea name="comm_remarks" class="form-control" cols="30" rows="6" id="comm_remarks"></textarea>
+                                                    </div>
                                                 </label>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     </div><!-- /.box-body -->
                                 </div>
                             </div>
