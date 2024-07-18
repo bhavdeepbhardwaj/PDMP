@@ -16,25 +16,10 @@ return new class extends Migration
             $table->text('port_id')->default(0);
             $table->text('name')->default(0);
             $table->text('parent_id')->default(0);
-            $table->text('type')->default(0);
-            // $table->text('state_id')->default(0);
+            $table->text('data_entry_req')->default(0);
             $table->tinyInteger('status')->default(0);
             $table->text('created_by')->default(0)->comment('Create User ID');
             $table->text('updated_by')->default(0)->comment('Admin ID');
-            $table->tinyInteger('is_deleted')->default(0)->comment('Soft Deleted');
-            $table->timestamps();
-        });
-
-        Schema::create('vesselwise_items', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('port_id')->default(0);
-            $table->unsignedBigInteger('parent_id')->default(0);
-            $table->string('name')->default('');
-            $table->string('type')->default('');
-            // $table->unsignedBigInteger('state_id')->default(0);
-            $table->tinyInteger('status')->default(0);
-            $table->unsignedBigInteger('created_by')->default(0)->comment('Create User ID');
-            $table->unsignedBigInteger('updated_by')->default(0)->comment('Admin ID');
             $table->tinyInteger('is_deleted')->default(0)->comment('Soft Deleted');
             $table->timestamps();
         });

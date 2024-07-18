@@ -9,4 +9,14 @@ class VesselwiseItem extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    protected $fillable = [
+        'port_id',
+        'name',
+        'parent_id',
+        'type',
+        'status',
+        'created_by',
+        'updated_by',
+    ];
 }
