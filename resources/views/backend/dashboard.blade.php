@@ -471,9 +471,9 @@
     <!-- ChartJS -->
     <script src="{{ asset('backend/plugins/chart.js/Chart.min.js ') }}"></script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="{{ asset('backend/js/jquery.min.js ') }}"></script>
+    <script src="{{ asset('backend/js/highcharts.js ') }}"></script>
+    <script src="{{ asset('backend/js/exporting.js ') }}"></script>
 
     <script>
         $(function() {

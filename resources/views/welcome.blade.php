@@ -15,9 +15,7 @@
         rel="{{ asset('frontend/apple-touch-icon ') }}">
 
     <!-- Google Fonts -->
-    <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-        rel="stylesheet">
+    <link href="{{ asset('frontend/assets/fonts/homefonts.css ') }}" rel="stylesheet">
 
     <!-- Vendor CSS Files -->
     <link href="{{ asset('frontend/assets/vendor/aos/aos.css ') }}" rel="stylesheet">
@@ -31,9 +29,7 @@
     <link href="{{ asset('frontend/assets/css/style.css ') }}" rel="stylesheet">
 
     <!-- Datatable -->
-    <link
-        href="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-2.0.3/b-3.0.1/b-colvis-3.0.1/b-html5-3.0.1/datatables.min.css"
-        rel="stylesheet">
+    <link href="{{ asset('frontend/assets/css/datatables.min.css ') }}" rel="stylesheet">
 
     <style>
         .logo-md-text {
@@ -805,7 +801,7 @@
                             Parliament Street New Delhi <br>
                             India<br><br>
                             <strong>Phone:</strong> +91- <br>
-                            <strong>Email:</strong> info@trw.com<br>
+                            <strong>Email:</strong> info@pdmp.com<br>
                         </p>
                     </div>
 
@@ -836,14 +832,14 @@
 
             <div class="me-lg-auto text-center text-lg-start">
                 <div class="copyright">
-                    &copy; Copyright <strong><span>MoPSW 2023</span></strong>. All Rights Reserved
+                    &copy; Copyright <strong><span>MoPSW 2024</span></strong>. All Rights Reserved
                 </div>
                 <div class="credits">
                     <!-- All the links in the footer should remain intact. -->
                     <!-- You can delete the links only if you purchased the pro version. -->
                     <!-- Licensing information: https://bootstrapmade.com/license/ -->
                     <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/flexor-free-multipurpose-bootstrap-template/ -->
-                    Designed by <a href=""><strong><span>NTCPWC,IITM</span></strong></a>
+                    Designed by <a href=""><strong><span>NIC</span></strong></a>
                 </div>
             </div>
             <div class="social-links text-center text-lg-right pt-3 pt-lg-0">
@@ -866,18 +862,16 @@
     <script src="{{ asset('frontend/assets/vendor/isotope-layout/isotope.pkgd.min.js ') }}"></script>
     <script src="{{ asset('frontend/assets/vendor/swiper/swiper-bundle.min.js ') }}"></script>
     <script src="{{ asset('frontend/assets/vendor/php-email-form/validate.js ') }}"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="{{ asset('frontend/assets/js/jquery-3.7.1.min.js ') }}"></script>
 
     <!-- Datatable -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
-    <script
-        src="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-2.0.3/b-3.0.1/b-colvis-3.0.1/b-html5-3.0.1/datatables.min.js">
-    </script>
+    <script src="{{ asset('frontend/assets/js/pdfmake.min.js ') }}"></script>
+    <script src="{{ asset('frontend/assets/js/vfs_fonts.js ') }}"></script>
+    <script src="{{ asset('frontend/assets/js/datatables.min.js ') }}"></script>
 
-    <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
-    <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
-    <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+    <script src="{{ asset('frontend/assets/js/core.js ') }}"></script>
+    <script src="{{ asset('frontend/assets/js/charts.js ') }}"></script>
+    <script src="{{ asset('frontend/assets/js/animated.js ') }}"></script>
 
     <!-- Template Main JS File -->
     <script src="{{ asset('frontend/assets/js/main.js ') }}"></script>
@@ -886,6 +880,8 @@
     <script src="{{ asset('frontend/assets/js/columnChart.js ') }}"></script>
     <script src="{{ asset('frontend/assets/js/table.js ') }}"></script>
     <script src="{{ asset('frontend/assets/js/chart.js ') }}"></script>
+
+
 
 </body>
 

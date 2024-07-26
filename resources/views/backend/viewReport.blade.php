@@ -653,7 +653,9 @@
 @section('js')
     <!-- jQuery -->
     <script src="{{ asset('backend/js/port.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script> --}}
+    <script src="{{ asset('backend/js/bootstrap5.bundle.min.js ') }}"></script>
+
 
     <script defer>
         function initMonthYearPicker(startOrEnd) {
